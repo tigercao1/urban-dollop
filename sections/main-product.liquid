@@ -423,18 +423,24 @@
             {%- when 'variant_picker' -%}
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
             {%- when 'buy_buttons' -%}
-              {% if product.type contains 'Membership' %}
-                {% if customer.tags contains 'Member' %}
-                  You are already a part of the community. Thanks for being a member!
+              {% if customer %}
+                {% if product.type contains 'Membership' %}
+                  {% if customer.tags contains 'Member' %}
+                    <p style="text-align: center;">感谢您的加入!</p>
+                  {% else %}
+                    <p style="text-align: center;">请您在购买会员之前填写以下免责声明，您的会员将在填写免责申明之后生效</p>
+                    {% include 'jotform' %}
+                    {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                  {% endif %}
                 {% else %}
-                  {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                  {% if customer.tags contains 'Member' %}
+                    {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                  {% else %}
+                    <p style="text-align: center;">会员专享</p>
+                  {% endif %}
                 {% endif %}
               {% else %}
-                {% if customer.tags contains 'Member' %}
-                  {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
-                {% else %}
-                  This is an Member only item
-                {% endif %}
+                <p style="text-align: center;">您还尚未<a href="{{routes.account_login_url}}">登陆</a></p>
               {% endif %}
             {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}

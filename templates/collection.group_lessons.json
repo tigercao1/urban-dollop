@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": false,
+        "show_collection_image": false,
+        "color_scheme": "background-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 12,
+        "columns_desktop": 3,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 60
+      }
+    },
+    "9f7f2b1b-121f-4fa0-a975-8ab7831e449f": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--20531901169686__9f7f2b1b-121f-4fa0-a975-8ab7831e449f-collapsible_row-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "关于我们",
+            "icon": "none",
+            "row_content": "<p><strong>Q: S Snow有认证的保险吗？</strong></p><p>A: S Snow有高规格的行业保险支持俱乐部的运作。我们也非常紧密的与保险公司合作来降低每一步可能会出现的风险来保证我们会员和教练的安全。</p><p><br/><strong>Q: 我们的教练团队是怎么样的？</strong></p><p>A: S Snow致力于提供最高质量的教学，因此我们招募并管理一只小规模的高质量教练团队。所有团课教练均持有2级及以上专业教练证(CSIA or CASI)。每个团课教练平均有500小时教学经验。</p>",
+            "page": ""
+          }
+        },
+        "template--20531901169686__9f7f2b1b-121f-4fa0-a975-8ab7831e449f-collapsible_row-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "关于团课",
+            "icon": "none",
+            "row_content": "<p><strong>Q: 团课有没有年龄限制？</strong></p><p>A: 我们接受5岁到12岁的小朋友，以及13-17岁的青少年<br/></p><p><strong>Q: 团课如何平衡学生的水平？</strong></p><p>A: 我们的团课分为初级和进阶。雪季开始前俱乐部会分配教练来给每个学生分级。</p><p>课程开始后我们会根据学生的水平和需要，灵活调整分级。<br/><br/><strong>Q: 一节课几个学生？</strong></p><p>A: 4个学生。但根据当日人数有可能会上下波动。<br/><br/><strong>Q: 我可以从课上得到什么？</strong><br/>A: 专业教练的指导</p><p>体会到滑雪的快乐</p><p>小朋友之间的认识与交友</p><p>家长之间的社交<br/><br/><strong>Q: 时间安排？</strong><br/>A: 我们的团课有周六和周日两个选择，分别可以选择上午，下午或者全天。</p><p>每次的全天团课共有4个小时。半天团课分为上午和下午，上午10-12，下午1-3，中间午休由家长带着孩子用餐。</p><p><strong>Q: 价格？</strong><br/>A: 我们儿团课低至$200一天（四小时）</p><p>我们的团课仅提供给会员。如果自己成团，我们会免去团员的会员费。<br/><br/><br/><br/></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--20531901169686__9f7f2b1b-121f-4fa0-a975-8ab7831e449f-collapsible_row-1",
+        "template--20531901169686__9f7f2b1b-121f-4fa0-a975-8ab7831e449f-collapsible_row-2"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "团课常见问题",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "background-1",
+        "container_color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["banner", "product-grid", "9f7f2b1b-121f-4fa0-a975-8ab7831e449f"]
+}
