@@ -1,1 +1,27 @@
-{"sections":{"main":{"type":"main-account","settings":{"padding_top":36,"padding_bottom":72}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-account",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 72
+      }
+    },
+    "fdfb5c17-083e-473e-b95b-aa39626ba4e4": {
+      "type": "custom-liquid",
+      "custom_css": [
+
+      ],
+      "settings": {
+        "custom_liquid": "<div class='section'>\n{% if customer.tags contains 'Member' %}\n<h1>会员信息<\/h1>\n{% endif %}\n<\/div>",
+        "color_scheme": "",
+        "padding_top": 24,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "fdfb5c17-083e-473e-b95b-aa39626ba4e4"
+  ]
+}
