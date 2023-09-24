@@ -9,9 +9,7 @@
     },
     "fdfb5c17-083e-473e-b95b-aa39626ba4e4": {
       "type": "custom-liquid",
-      "custom_css": [
-
-      ],
+      "disabled": true,
       "settings": {
         "custom_liquid": "<div class='section'>\n{% if customer.tags contains 'Member' %}\n<h1>会员信息<\/h1>\n{% endif %}\n<\/div>",
         "color_scheme": "",
