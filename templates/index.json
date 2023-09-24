@@ -29,7 +29,7 @@
         "slide-0": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/revy.jpg",
+            "image": "shopify:\/\/shop_images\/ssnow-welcome-footer.jpg",
             "heading": "",
             "heading_size": "medium",
             "subheading": "",
@@ -107,11 +107,58 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "18554820-68c3-46fc-b8f8-75be69ccc18e": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群，点击按钮关注我们的小红书<\/p>",
+            "text_style": "body"
+          }
+        },
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1": {
+          "type": "button",
+          "settings": {
+            "button_label": "S Snow Club🎿",
+            "button_link": "https:\/\/hongshu.com\/user\/profile\/5f28c8c90000000001008ce3",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1",
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1",
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/ssnow-wechat-qr-only.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-75fd9060-1077-43e8-bf69-70a4515b584b",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
     }
   },
   "order": [
     "rich-text",
     "slideshow",
-    "92537f7a-0ac8-4f05-91d5-3fd28713f47e"
+    "92537f7a-0ac8-4f05-91d5-3fd28713f47e",
+    "18554820-68c3-46fc-b8f8-75be69ccc18e"
   ]
 }
