@@ -143,7 +143,7 @@
         "image": "shopify:\/\/shop_images\/ssnow-wechat-qr-only.jpg",
         "height": "adapt",
         "desktop_image_width": "medium",
-        "layout": "image_first",
+        "layout": "text_first",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "content_layout": "no-overlap",
