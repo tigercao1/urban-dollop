@@ -1,28 +1,5 @@
 {
   "sections": {
-    "rich-text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "S Snow是基于多伦多的年轻人滑雪俱乐部，我们拥有95%的单双二级&三级教练，我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅",
-            "heading_size": "h2"
-          }
-        }
-      },
-      "block_order": [
-        "heading"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 20,
-        "padding_bottom": 52
-      }
-    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
@@ -57,6 +34,29 @@
         "image_behavior": "none",
         "show_text_below": false,
         "accessibility_info": "Slideshow about our brand."
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "S Snow是基于多伦多的年轻人滑雪俱乐部，我们拥有95%的单双二级&三级教练，我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 20,
+        "padding_bottom": 52
       }
     },
     "92537f7a-0ac8-4f05-91d5-3fd28713f47e": {
@@ -156,8 +156,8 @@
     }
   },
   "order": [
-    "rich-text",
     "slideshow",
+    "rich-text",
     "92537f7a-0ac8-4f05-91d5-3fd28713f47e",
     "18554820-68c3-46fc-b8f8-75be69ccc18e"
   ]
