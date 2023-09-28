@@ -13,7 +13,7 @@
         "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>机票，酒店，雪场票，大巴，购物，您想要的这里都有<\/p>"
+            "text": "<p>机票，酒店，雪场票，大巴，购物，灵活组合，安心舒适，您想要的这里都有！<\/p>"
           }
         },
         "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-button-1": {
@@ -34,6 +34,7 @@
         "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-text-1",
         "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-button-1"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
