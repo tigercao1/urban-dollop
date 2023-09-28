@@ -46,6 +46,7 @@
     },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 0
@@ -171,6 +172,7 @@
         "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-4",
         "77570aa1-0a02-469c-8603-1f9ff6b5fe8d"
       ],
+      "disabled": true,
       "settings": {
         "caption": "",
         "heading": "",
