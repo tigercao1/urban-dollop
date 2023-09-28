@@ -1,8 +1,51 @@
 {
   "sections": {
+    "4a1b5a07-aecf-436b-9b43-00869f6369cf": {
+      "type": "rich-text",
+      "blocks": {
+        "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "大山Trip",
+            "heading_size": "h1"
+          }
+        },
+        "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>机票，酒店，雪场票，大巴，购物，您想要的这里都有<\/p>"
+          }
+        },
+        "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-button-1": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-heading-1",
+        "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-text-1",
+        "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-button-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "main": {
       "type": "main-page",
-      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 0
@@ -128,7 +171,6 @@
         "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-4",
         "77570aa1-0a02-469c-8603-1f9ff6b5fe8d"
       ],
-      "disabled": true,
       "settings": {
         "caption": "",
         "heading": "",
@@ -146,6 +188,7 @@
     }
   },
   "order": [
+    "4a1b5a07-aecf-436b-9b43-00869f6369cf",
     "main",
     "4f63a186-f2f3-4bfd-91e2-97cb17025ade",
     "39001418-fe7d-4499-8988-8da0e556e416"
