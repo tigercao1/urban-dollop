@@ -56,6 +56,7 @@
       "blocks": {
         "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-1": {
           "type": "collapsible_row",
+          "disabled": true,
           "settings": {
             "heading": "Banff 02.18-02.23",
             "icon": "plane",
