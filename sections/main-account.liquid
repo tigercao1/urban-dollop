@@ -148,6 +148,14 @@
       </a>
     </div>
   </div>
+  {% if customer.tags contains 'Member' %}
+    <h2>会员已激活，欢迎您！</h2>
+    {% comment %} <script>console.log({{ customer.orders }});</script>
+    {% for single_order in customer.orders -%}
+      - {{ single_order }}
+    {%- endfor %}
+    his {% endcomment %}
+  {% endif %}
 </div>
 
 {% schema %}
