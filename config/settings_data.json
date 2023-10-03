@@ -135,6 +135,14 @@
     "content_for_index": [
 
     ],
+    "blocks": {
+      "11003615419907091477": {
+        "type": "shopify:\/\/apps\/shopwaive-credit-and-rewards\/blocks\/app-embed\/24775a13-6342-4373-8236-0a0c7c431eb3",
+        "disabled": false,
+        "settings": {
+        }
+      }
+    },
     "color_schemes": {
       "background-1": {
         "settings": {
