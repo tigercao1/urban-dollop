@@ -3,16 +3,33 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "title": { "type": "title", "settings": {} },
-        "description": { "type": "description", "settings": {} },
-        "price": { "type": "price", "settings": {} },
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
-          "settings": { "picker_type": "button" }
+          "settings": {
+            "picker_type": "button"
+          }
         },
         "c53b056b-2ec4-4623-893f-4e9d806b8b8a": {
           "type": "text",
-          "settings": { "text": "此套餐仅对会员开放", "text_style": "body" }
+          "settings": {
+            "text": "此套餐仅对会员开放",
+            "text_style": "body"
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -21,14 +38,18 @@
             "show_gift_card_recipient": true
           }
         },
-        "share": { "type": "share", "settings": { "share_label": "Share" } }
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
       },
       "block_order": [
         "title",
         "description",
         "price",
         "variant_picker",
-        "quantity_selector",
         "c53b056b-2ec4-4623-893f-4e9d806b8b8a",
         "buy_buttons",
         "share"
@@ -50,6 +71,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "You may also like",
         "heading_size": "h1",
@@ -67,5 +89,8 @@
       }
     }
   },
-  "order": ["main", "related-products"]
+  "order": [
+    "main",
+    "related-products"
+  ]
 }
