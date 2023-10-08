@@ -147,6 +147,12 @@
         "disabled": false,
         "settings": {
         }
+      },
+      "1850493961649900144": {
+        "type": "shopify:\/\/apps\/appointly-appointment-booking\/blocks\/main-app-embed\/17a520a2-4844-483a-826a-11cb5dd0370d",
+        "disabled": false,
+        "settings": {
+        }
       }
     },
     "color_schemes": {
