@@ -507,5 +507,19 @@
       "expanded": "礼品卡收件人表单已展开",
       "collapsed": "礼品卡收件人表单已折叠"
     }
+  },
+  "custom_liquid": {
+    "membership": {
+      "thank_you_message": "感谢您的加入！",
+      "member_only_message_html": "会员专享，点击<a href=\"{{ link }}\">此处</a>购买会员",
+      "login_message_html": "您还尚未<a href=\"{{ link }}\">登录</a>"
+    },
+    "product": {
+      "waiver": "免责申明",
+      "sign_waiver": "请您在购买之前填写以下免责声明"
+    },
+    "lesson": {
+      "lesson_only": "私课预定仅对购买了私课的会员开放"
+    }
   }
 }
