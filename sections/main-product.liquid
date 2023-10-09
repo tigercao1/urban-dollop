@@ -426,21 +426,34 @@
               {% if customer %}
                 {% if product.type contains 'Membership' %}
                   {% if customer.tags contains 'Member' %}
-                    <p style="text-align: center;">感谢您的加入!</p>
+                    <p style="text-align: center;">{{ 'custom_liquid.membership.thank_you_message' | t }}</p>
                   {% else %}
-                    <p style="text-align: center;">请您在购买会员之前填写以下免责声明，您的会员将在填写免责申明之后生效</p>
-                    {% include 'jotform' %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
                   {% endif %}
-                {% else %}
-                  {% if customer.tags contains 'Member' %}
+                {% elsif product.tags contains 'PrivateLesson' %}
+                  {% if customer.tags contains 'PrivateLessonPurchased' and customer.tags contains '1to1' %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
                   {% else %}
-                    <p style="text-align: center;">会员专享</p>
+                    <p style="text-align: center;">{{ "custom_liquid.lesson.lesson_only" | t }}</p>
+                {% else %}
+                  {% if customer.tags contains 'Member' %}
+                    <p style="text-align: center;">{{ "custom_liquid.product.sign_waiver" | t }}</p>
+                    {% render 'jotform' %}
+                    {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+                  {% else %}
+                    {% liquid
+                      assign membership_link = routes.root_url
+                      if request.locale.iso_code == 'zh-CN'
+                        assign membership_link = routes.root_url | append: "products/membership"
+                      else
+                        assign membership_link = routes.root_url | append: "/products/membership"
+                      endif
+                    %}
+                    <p style="text-align: center;">{{ "custom_liquid.membership.member_only_message_html" | t: link: membership_link }}</p>
                   {% endif %}
                 {% endif %}
               {% else %}
-                <p style="text-align: center;">您还尚未<a href="{{routes.account_login_url}}">登陆</a></p>
+                <p style="text-align: center;">{{ "custom_liquid.membership.login_message_html" | t: link: routes.account_login_url }}</p>
               {% endif %}
             {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}

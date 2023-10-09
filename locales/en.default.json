@@ -508,5 +508,19 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
+  },
+  "custom_liquid": {
+    "membership": {
+      "thank_you_message": "Thank you for being a member!",
+      "member_only_message_html": "Member only item, click <a href=\"{{ link }}\">here</a> to purchase a membership",
+      "login_message_html": "Please <a href=\"{{ link }}\">log in</a> to purchase"
+    },
+    "product": {
+      "waiver": "Release of liability, waiver of claims and assumption of risks agreement",
+      "sign_waiver": "Please sign the release of liability, waiver of claims and assumption of risks agreement for each participant prior to purchasing this package"
+    },
+    "lesson": {
+      "lesson_only": "Private lesson booking is only available for members who had purchased private lessons"
+    }
   }
 }
