@@ -430,7 +430,7 @@
                   {% else %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
                   {% endif %}
-                {% elsif product.tags contains 'PrivateLesson' %}
+                {% elsif product.tags contains 'PrivateLessonBooking' %}
                   {% if customer.tags contains 'PrivateLessonPurchased' and customer.tags contains '1to1' %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
                   {% else %}
