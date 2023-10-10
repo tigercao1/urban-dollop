@@ -136,12 +136,6 @@
 
     ],
     "blocks": {
-      "11003615419907091477": {
-        "type": "shopify:\/\/apps\/shopwaive-credit-and-rewards\/blocks\/app-embed\/24775a13-6342-4373-8236-0a0c7c431eb3",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "9278379683843197553": {
         "type": "shopify:\/\/apps\/appointo\/blocks\/app-embed\/8e9086b8-9c22-4cd3-b1d1-0967727a5d97",
         "disabled": false,

@@ -53,7 +53,7 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 40,
-        "padding_bottom": 0
+        "padding_bottom": 40
       }
     },
     "related-products": {
