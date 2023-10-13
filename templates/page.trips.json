@@ -45,75 +45,9 @@
     },
     "main": {
       "type": "main-page",
-      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 0
-      }
-    },
-    "4f63a186-f2f3-4bfd-91e2-97cb17025ade": {
-      "type": "collapsible-content",
-      "blocks": {
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-1": {
-          "type": "collapsible_row",
-          "disabled": true,
-          "settings": {
-            "heading": "Banff 02.18-02.23",
-            "icon": "plane",
-            "row_content": "",
-            "page": "trip"
-          }
-        },
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-2": {
-          "type": "collapsible_row",
-          "disabled": true,
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-3": {
-          "type": "collapsible_row",
-          "disabled": true,
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-4": {
-          "type": "collapsible_row",
-          "disabled": true,
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-1",
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-2",
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-3",
-        "template--20539033255958__4f63a186-f2f3-4bfd-91e2-97cb17025ade-collapsible_row-4"
-      ],
-      "settings": {
-        "caption": "",
-        "heading": "",
-        "heading_size": "h1",
-        "heading_alignment": "center",
-        "layout": "none",
-        "color_scheme": "",
-        "container_color_scheme": "",
-        "open_first_collapsible_row": false,
-        "image_ratio": "adapt",
-        "desktop_layout": "image_second",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "39001418-fe7d-4499-8988-8da0e556e416": {
@@ -204,21 +138,11 @@
             "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群<\/p>",
             "text_style": "body"
           }
-        },
-        "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-button-1": {
-          "type": "button",
-          "disabled": true,
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false
-          }
         }
       },
       "block_order": [
         "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-heading-1",
-        "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-text-1",
-        "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-button-1"
+        "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-text-1"
       ],
       "settings": {
         "image": "shopify:\/\/shop_images\/ssnow-wechat-qr-only_efa4110c-2364-40e2-ae9c-46cbb1bcdf2b.jpg",
@@ -239,7 +163,6 @@
   "order": [
     "4a1b5a07-aecf-436b-9b43-00869f6369cf",
     "main",
-    "4f63a186-f2f3-4bfd-91e2-97cb17025ade",
     "39001418-fe7d-4499-8988-8da0e556e416",
     "ec7217c7-2dde-4b7e-827f-00595b8ab273"
   ]
