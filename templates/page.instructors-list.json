@@ -18,7 +18,7 @@
             "image": "{{ block.repeater.picture.value }}",
             "caption": "{{ block.repeater.certification.value }}",
             "heading": "{{ block.repeater.name.value }}",
-            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p><p>擅长教学人群：{{ block.repeater.client_groups.value }}<\/p>",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
             "button_label": "了解更多",
             "button_link": "{{ block.repeater.system.url }}"
           }
