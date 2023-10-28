@@ -8,44 +8,24 @@
         "padding_bottom": 0
       }
     },
-    "885207b9-aaa7-47f3-86f5-5c96855cdd93": {
+    "fc5107c4-cded-40b9-8700-1dae25e2768d": {
       "type": "multirow",
       "blocks": {
-        "template--21452043714582__885207b9-aaa7-47f3-86f5-5c96855cdd93-row-1": {
+        "template--21452043714582__fc5107c4-cded-40b9-8700-1dae25e2768d-row-1": {
           "type": "row",
+          "repeater": "{{ page.metafields.custom.our_team.value }}",
           "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "template--21452043714582__885207b9-aaa7-47f3-86f5-5c96855cdd93-row-2": {
-          "type": "row",
-          "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "template--21452043714582__885207b9-aaa7-47f3-86f5-5c96855cdd93-row-3": {
-          "type": "row",
-          "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "button_label": "Button label",
+            "image": "{{ block.repeater.picture.value }}",
+            "caption": "{{ block.repeater.certification.value }}",
+            "heading": "{{ block.repeater.name.value }}",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p><p>擅长教学人群：{{ block.repeater.client_groups.value }}<\/p>",
+            "button_label": "",
             "button_link": ""
           }
         }
       },
       "block_order": [
-        "template--21452043714582__885207b9-aaa7-47f3-86f5-5c96855cdd93-row-1",
-        "template--21452043714582__885207b9-aaa7-47f3-86f5-5c96855cdd93-row-2",
-        "template--21452043714582__885207b9-aaa7-47f3-86f5-5c96855cdd93-row-3"
+        "template--21452043714582__fc5107c4-cded-40b9-8700-1dae25e2768d-row-1"
       ],
       "settings": {
         "image_height": "medium",
@@ -66,6 +46,6 @@
   },
   "order": [
     "main",
-    "885207b9-aaa7-47f3-86f5-5c96855cdd93"
+    "fc5107c4-cded-40b9-8700-1dae25e2768d"
   ]
 }
