@@ -43,7 +43,7 @@
         "image_behavior": "none",
         "mobile_content_alignment": "left",
         "padding_top": 52,
-        "padding_bottom": 36
+        "padding_bottom": 16
       }
     },
     "27b2b0d8-2676-41cc-96a2-9d393d91f4b5": {
@@ -80,14 +80,14 @@
         "image_width": "full",
         "image_ratio": "adapt",
         "columns_desktop": 2,
-        "column_alignment": "left",
+        "column_alignment": "center",
         "background_style": "none",
         "button_label": "",
         "button_link": "",
         "color_scheme": "",
         "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 0,
+        "swipe_on_mobile": true,
+        "padding_top": 32,
         "padding_bottom": 36
       }
     }
