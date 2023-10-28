@@ -42,21 +42,37 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "S Snow是基于多伦多的年轻人滑雪俱乐部，滑雪已然成为我们在加拿大冬天的生活方式，我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅",
+            "heading": "<strong>S Snow<\/strong>是位于多伦多的年轻人滑雪俱乐部",
+            "heading_size": "h2"
+          }
+        },
+        "d14bd64d-c954-4c8f-886b-8fb6cdb400bb": {
+          "type": "heading",
+          "settings": {
+            "heading": "滑雪已然成为我们在加拿大冬天的<strong>生活方式<\/strong>",
+            "heading_size": "h2"
+          }
+        },
+        "24d9b205-08a7-4b1a-adc5-bf53af4f8368": {
+          "type": "heading",
+          "settings": {
+            "heading": "我们欢迎<strong>想学滑雪<\/strong>的，<strong>热爱滑雪<\/strong>的，想<strong>找寻滑雪组织<\/strong>的朋友们加入我们的会员，一起共赴白雪之旅",
             "heading_size": "h2"
           }
         }
       },
       "block_order": [
-        "heading"
+        "heading",
+        "d14bd64d-c954-4c8f-886b-8fb6cdb400bb",
+        "24d9b205-08a7-4b1a-adc5-bf53af4f8368"
       ],
       "settings": {
         "desktop_content_position": "center",
-        "content_alignment": "center",
+        "content_alignment": "left",
         "color_scheme": "background-1",
         "full_width": true,
-        "padding_top": 20,
-        "padding_bottom": 52
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "92537f7a-0ac8-4f05-91d5-3fd28713f47e": {
