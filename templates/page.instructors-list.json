@@ -16,7 +16,7 @@
           "repeater": "{{ page.metafields.custom.our_team.value }}",
           "settings": {
             "image": "{{ block.repeater.picture.value }}",
-            "caption": "{{ block.repeater.certification.value }}{{ block.repeater.type.value }}",
+            "caption": "{{ block.repeater.certification.value }} | {{ block.repeater.type.value }}",
             "heading": "{{ block.repeater.name.value }}",
             "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
             "button_label": "了解更多",
