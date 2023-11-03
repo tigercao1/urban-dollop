@@ -66,8 +66,8 @@
         "template--20546470346774__2cbd4434-c214-416a-a3d5-1b0db0f683c4-collapsible_row-2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
+            "heading": "Mont-Tremblant",
+            "icon": "plane",
             "row_content": "",
             "page": ""
           }
@@ -99,7 +99,7 @@
       ],
       "settings": {
         "caption": "",
-        "heading": "Collapsible content",
+        "heading": "",
         "heading_size": "h1",
         "heading_alignment": "center",
         "layout": "none",
