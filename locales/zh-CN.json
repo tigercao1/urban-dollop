@@ -122,7 +122,7 @@
         "note": "查看数量规则"
       },
       "price": {
-        "from_price_html": "来自 {{ price }}",
+        "from_price_html": "{{ price }} 起",
         "regular_price": "常规价格",
         "sale_price": "促销价",
         "unit_price": "单价"
