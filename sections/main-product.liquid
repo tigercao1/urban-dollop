@@ -437,7 +437,7 @@
                     <p style="text-align: center;">{{ "custom_liquid.lesson.lesson_only" | t }}</p>
                   {% endif %}
                 {% else %}
-                  {% if customer.tags contains 'Member' %}
+                  {% if customer.tags contains 'Member' or product.tags contains 'Public' %}
                     <p style="text-align: center;">{{ "custom_liquid.product.sign_waiver" | t }}</p>
                     {% render 'jotform' %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
@@ -640,7 +640,7 @@
         const msie = ua.indexOf('MSIE ');
         const trident = ua.indexOf('Trident/');
 
-        return msie > 0 || trident > 0;
+        return msie > 0 `||` trident > 0;
       }
 
       if (!isIE()) return;
