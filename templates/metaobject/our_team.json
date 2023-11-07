@@ -13,7 +13,7 @@
         "55d775da-e436-4a5a-95b3-6df673b6db2b": {
           "type": "caption",
           "settings": {
-            "caption": "{{ metaobject.certification.value }}{{ metaobject.type.value }}",
+            "caption": "{{ metaobject.certification.value }} | {{ metaobject.type.value }}",
             "text_style": "subtitle",
             "text_size": "medium"
           }
