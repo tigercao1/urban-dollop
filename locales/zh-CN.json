@@ -7,7 +7,7 @@
       "login_form_password_placeholder": "您的密码",
       "login_form_error": "密码错误！",
       "login_form_submit": "输入",
-      "admin_link_html": "您是否为店主？<a href=\"/admin\" class=\"link underlined-link\">在此处登录</a>",
+      "admin_link_html": "您是否为店主？<a href=\"\/admin\" class=\"link underlined-link\">在此处登录<\/a>",
       "powered_by_shopify_html": "此商店由 {{ shopify }} 提供支持"
     },
     "social": {
@@ -51,7 +51,7 @@
       "close": "关闭分享"
     },
     "slider": {
-      "of": "/",
+      "of": "\/",
       "next_slide": "向右滑动",
       "previous_slide": "向左滑动",
       "name": "滑块"
@@ -76,7 +76,7 @@
     "loading": "正在加载…",
     "skip_to_product_info": "跳至产品信息",
     "total_reviews": "总评论数",
-    "star_reviews_info": "{{ rating_value }}/{{ rating_max }} 星",
+    "star_reviews_info": "{{ rating_value }}\/{{ rating_max }} 星",
     "collapsible_content_title": "可折叠内容",
     "complementary_products": "互补产品"
   },
@@ -118,7 +118,7 @@
         "minimum_of": "最小值为 {{ quantity }}",
         "maximum_of": "最大值为 {{ quantity }}",
         "multiples_of": "增量为 {{ quantity }}",
-        "in_cart_html": "购物车中 <span class=\"quantity-cart\">{{ quantity }}</span> 件",
+        "in_cart_html": "购物车中 <span class=\"quantity-cart\">{{ quantity }}<\/span> 件",
         "note": "查看数量规则"
       },
       "price": {
@@ -138,8 +138,8 @@
         "view_store_info": "查看商店信息",
         "check_other_stores": "查看在其他商店的可用情况",
         "pick_up_available": "提供取货服务",
-        "pick_up_available_at_html": "<span class=\"color-foreground\">{{ location_name }}</span> 提供取货服务",
-        "pick_up_unavailable_at_html": "<span class=\"color-foreground\">{{ location_name }}</span> 目前不提供取货服务",
+        "pick_up_available_at_html": "<span class=\"color-foreground\">{{ location_name }}<\/span> 提供取货服务",
+        "pick_up_unavailable_at_html": "<span class=\"color-foreground\">{{ location_name }}<\/span> 目前不提供取货服务",
         "unavailable": "无法加载取货服务可用情况",
         "refresh": "刷新"
       },
@@ -155,7 +155,7 @@
       },
       "view_full_details": "查看完整详细信息",
       "include_taxes": "含税费。",
-      "shipping_policy_html": "结账时计算的<a href=\"{{ link }}\">运费</a>。",
+      "shipping_policy_html": "结账时计算的<a href=\"{{ link }}\">运费<\/a>。",
       "choose_options": "选择选项",
       "choose_product_options": "选择用于 {{ product_name }} 的选项",
       "value_unavailable": "{{ option_value }} - 不可用",
@@ -171,7 +171,7 @@
         "title": "批量定价",
         "note": "提供批量定价",
         "minimum": "{{ quantity }}+",
-        "price_at_each": "{{ price }}/件",
+        "price_at_each": "{{ price }}\/件",
         "price_range": "{{ minimum }} - {{ maximum }}"
       }
     },
@@ -192,8 +192,8 @@
       },
       "max_price": "最高价格为 {{ price }}",
       "product_count": {
-        "one": "{{ product_count }}/{{ count }} 件产品",
-        "other": "{{ product_count }}/{{ count }} 件产品"
+        "one": "{{ product_count }}\/{{ count }} 件产品",
+        "other": "{{ product_count }}\/{{ count }} 件产品"
       },
       "product_count_simple": {
         "one": "{{ count }} 件产品",
@@ -277,9 +277,9 @@
       "empty": "您的购物车为空",
       "cart_error": "更新购物车时出错。请重试。",
       "cart_quantity_error_html": "您只能向购物车添加 {{ quantity }} 件此商品。",
-      "taxes_and_shipping_policy_at_checkout_html": "结账时计算的税费、折扣和<a href=\"{{ link }}\">运费</a>",
+      "taxes_and_shipping_policy_at_checkout_html": "结账时计算的税费、折扣和<a href=\"{{ link }}\">运费<\/a>",
       "taxes_included_but_shipping_at_checkout": "含税费以及结账时计算的运费和折扣",
-      "taxes_included_and_shipping_policy_html": "含税费。结账时计算的<a href=\"{{ link }}\">运费</a>和折扣。",
+      "taxes_included_and_shipping_policy_html": "含税费。结账时计算的<a href=\"{{ link }}\">运费<\/a>和折扣。",
       "taxes_and_shipping_at_checkout": "结账时计算的税费、折扣和运费",
       "headings": {
         "product": "产品",
@@ -291,7 +291,7 @@
       "update": "更新",
       "login": {
         "title": "已有账户？",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">登录</a>以快速结账。"
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">登录<\/a>以快速结账。"
       },
       "estimated_total": "预计总额",
       "new_estimated_total": "没有预计总额"
@@ -314,7 +314,7 @@
     "collection_template": {
       "title": "收藏",
       "empty": "未找到产品",
-      "use_fewer_filters_html": "减少使用的筛选条件数量或<a class=\"{{ class }}\" href=\"{{ link }}\">删除所有筛选条件</a>"
+      "use_fewer_filters_html": "减少使用的筛选条件数量或<a class=\"{{ class }}\" href=\"{{ link }}\">删除所有筛选条件<\/a>"
     },
     "video": {
       "load_video": "加载视频：{{ description }}"
@@ -341,7 +341,7 @@
     "quick_order_list": {
       "product_total": "产品小计",
       "view_cart": "查看购物车",
-      "each": "{{ money }}/件",
+      "each": "{{ money }}\/件",
       "product": "产品",
       "variant": "多属性",
       "variant_total": "多属性总计",
@@ -361,10 +361,10 @@
     }
   },
   "localization": {
-    "country_label": "国家/地区",
+    "country_label": "国家\/地区",
     "language_label": "语言",
     "update_language": "更新语言",
-    "update_country": "更新国家/地区"
+    "update_country": "更新国家\/地区"
   },
   "customer": {
     "account": {
@@ -393,7 +393,7 @@
       "address1": "地址 1",
       "address2": "地址 2",
       "city": "城市",
-      "country": "国家/地区",
+      "country": "国家\/地区",
       "province": "省",
       "zip": "邮政编码",
       "phone": "电话",
@@ -513,8 +513,8 @@
       "active_status": "会员已激活 💚",
       "inactive_status": "非会员 🔴",
       "thank_you_message": "感谢您的加入！",
-      "member_only_message_html": "会员专享，点击<a href=\"{{ link }}\">此处</a>购买会员",
-      "login_message_html": "您还尚未<a href=\"{{ link }}\">登录</a>"
+      "member_only_message_html": "会员专享，点击<a href=\"{{ link }}\">此处<\/a>购买会员",
+      "login_message_html": "您还尚未<a href=\"{{ link }}\">登录<\/a>"
     },
     "product": {
       "waiver": "免责申明",
@@ -522,6 +522,13 @@
     },
     "lesson": {
       "lesson_only": "私课预定仅对购买了私课的会员开放"
+    }
+  },
+  "shopify": {
+    "checkout": {
+      "marketing": {
+        "accept_marketing_checkbox_label": "接收俱乐部最新资讯"
+      }
     }
   }
 }
