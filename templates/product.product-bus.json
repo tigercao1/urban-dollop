@@ -20,9 +20,22 @@
           "settings": {
           }
         },
+        "488d5704-31c7-4300-b4ca-877c35729ea7": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
         "price": {
           "type": "price",
           "settings": {
+          }
+        },
+        "514a7912-432d-4a48-9355-ae4d456fe3ae": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
           }
         },
         "variant_picker": {
@@ -49,7 +62,9 @@
         "vendor",
         "title",
         "description",
+        "488d5704-31c7-4300-b4ca-877c35729ea7",
         "price",
+        "514a7912-432d-4a48-9355-ae4d456fe3ae",
         "variant_picker",
         "buy_buttons",
         "share"
