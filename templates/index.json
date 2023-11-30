@@ -132,55 +132,6 @@
         "padding_bottom": 72
       }
     },
-    "92537f7a-0ac8-4f05-91d5-3fd28713f47e": {
-      "type": "featured-product",
-      "blocks": {
-        "template--20531901202454__92537f7a-0ac8-4f05-91d5-3fd28713f47e-title-1": {
-          "type": "title",
-          "settings": {
-            "heading_size": "h2"
-          }
-        },
-        "de1f1de3-d70c-4598-9c97-d76ba43eca05": {
-          "type": "text",
-          "settings": {
-            "text": "不论是新手还是大神，这里就是你最温暖的大家庭，找到有相同热爱的伙伴，与专业的教练一起探索滑雪，在安全提升技术的同时真切地享受滑雪",
-            "text_style": "body"
-          }
-        },
-        "template--20531901202454__92537f7a-0ac8-4f05-91d5-3fd28713f47e-price-1": {
-          "type": "price",
-          "settings": {
-          }
-        },
-        "template--20531901202454__92537f7a-0ac8-4f05-91d5-3fd28713f47e-variant_picker-1": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button"
-          }
-        }
-      },
-      "block_order": [
-        "template--20531901202454__92537f7a-0ac8-4f05-91d5-3fd28713f47e-title-1",
-        "de1f1de3-d70c-4598-9c97-d76ba43eca05",
-        "template--20531901202454__92537f7a-0ac8-4f05-91d5-3fd28713f47e-price-1",
-        "template--20531901202454__92537f7a-0ac8-4f05-91d5-3fd28713f47e-variant_picker-1"
-      ],
-      "settings": {
-        "product": "membership",
-        "color_scheme": "",
-        "secondary_background": true,
-        "media_size": "medium",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": false,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "18554820-68c3-46fc-b8f8-75be69ccc18e": {
       "type": "image-with-text",
       "blocks": {
@@ -231,7 +182,6 @@
   "order": [
     "slideshow",
     "rich-text",
-    "92537f7a-0ac8-4f05-91d5-3fd28713f47e",
     "18554820-68c3-46fc-b8f8-75be69ccc18e"
   ]
 }
