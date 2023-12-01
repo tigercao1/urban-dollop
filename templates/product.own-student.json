@@ -71,6 +71,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "您可能还会感兴趣",
         "heading_size": "h1",
@@ -86,10 +87,27 @@
         "padding_top": 56,
         "padding_bottom": 56
       }
+    },
+    "1701461026f7793dc2": {
+      "type": "apps",
+      "blocks": {
+        "53764811-08ef-44d4-b77f-df3a5a61c314": {
+          "type": "shopify:\/\/apps\/infinite-options\/blocks\/app-block\/7e73b6f9-82b0-45f5-9b9b-04f446ba1a9b",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "53764811-08ef-44d4-b77f-df3a5a61c314"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "1701461026f7793dc2"
   ]
 }
