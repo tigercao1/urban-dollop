@@ -57,10 +57,10 @@
             "text_alignment_mobile": "center"
           }
         },
-        "834e1360-80a4-431a-8936-360d87cb49c9": {
+        "04057a84-6700-44c1-b81f-667cc2f9db2e": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34681704431962_.pic.jpg",
+            "image": "shopify:\/\/shop_images\/34661704431889_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -75,10 +75,10 @@
             "text_alignment_mobile": "center"
           }
         },
-        "04057a84-6700-44c1-b81f-667cc2f9db2e": {
+        "a18addf3-a8d1-42cd-a056-e1fd3ff1d418": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34661704431889_.pic.jpg",
+            "image": "shopify:\/\/shop_images\/34671704431890_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -98,8 +98,8 @@
         "1132b7c7-4b5a-46f8-9a6c-3ba1592a3cd7",
         "daa05d72-8d5c-424a-9235-7a57ae741e02",
         "6fa51626-838a-4961-a3a9-921ba3b60f8b",
-        "834e1360-80a4-431a-8936-360d87cb49c9",
-        "04057a84-6700-44c1-b81f-667cc2f9db2e"
+        "04057a84-6700-44c1-b81f-667cc2f9db2e",
+        "a18addf3-a8d1-42cd-a056-e1fd3ff1d418"
       ],
       "settings": {
         "layout": "full_bleed",
@@ -149,6 +149,44 @@
         "full_width": true,
         "padding_top": 72,
         "padding_bottom": 72
+      }
+    },
+    "9c4ac763-8063-4732-ab82-33042f353aec": {
+      "type": "collage",
+      "blocks": {
+        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/34681704431962_.pic.jpg"
+          }
+        },
+        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WechatIMG1165.jpg"
+          }
+        },
+        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WechatIMG36.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1",
+        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9",
+        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "18554820-68c3-46fc-b8f8-75be69ccc18e": {
@@ -201,6 +239,7 @@
   "order": [
     "slideshow",
     "rich-text",
+    "9c4ac763-8063-4732-ab82-33042f353aec",
     "18554820-68c3-46fc-b8f8-75be69ccc18e"
   ]
 }
