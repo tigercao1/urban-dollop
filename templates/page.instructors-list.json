@@ -42,10 +42,46 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "multirow_aTUYQL": {
+      "type": "multirow",
+      "blocks": {
+        "row_ehq4Wy": {
+          "type": "row",
+          "repeater": "{{ page.metafields.custom.our_team_2.value }}",
+          "settings": {
+            "image": "{{ block.repeater.image_1.value }}",
+            "caption": "{{ block.repeater.certification.value }}|{{ block.repeater.type.value }}",
+            "heading": "{{ block.repeater.name.value }}",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
+            "button_label": "了解更多",
+            "button_link": "{{ block.repeater.system.url }}"
+          }
+        }
+      },
+      "block_order": [
+        "row_ehq4Wy"
+      ],
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
-    "fc5107c4-cded-40b9-8700-1dae25e2768d"
+    "fc5107c4-cded-40b9-8700-1dae25e2768d",
+    "multirow_aTUYQL"
   ]
 }
