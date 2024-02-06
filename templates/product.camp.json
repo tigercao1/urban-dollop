@@ -43,6 +43,11 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "infinite_options_app_block_CrpF94": {
+          "type": "shopify:\/\/apps\/infinite-options\/blocks\/app-block\/7e73b6f9-82b0-45f5-9b9b-04f446ba1a9b",
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -52,7 +57,8 @@
         "price",
         "variant_picker",
         "buy_buttons",
-        "share"
+        "share",
+        "infinite_options_app_block_CrpF94"
       ],
       "settings": {
         "enable_sticky_info": true,
