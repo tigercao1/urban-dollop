@@ -31,6 +31,11 @@
             "picker_type": "button"
           }
         },
+        "infinite_options_app_block_CrpF94": {
+          "type": "shopify:\/\/apps\/infinite-options\/blocks\/app-block\/7e73b6f9-82b0-45f5-9b9b-04f446ba1a9b",
+          "settings": {
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -43,11 +48,6 @@
           "settings": {
             "share_label": "Share"
           }
-        },
-        "infinite_options_app_block_CrpF94": {
-          "type": "shopify:\/\/apps\/infinite-options\/blocks\/app-block\/7e73b6f9-82b0-45f5-9b9b-04f446ba1a9b",
-          "settings": {
-          }
         }
       },
       "block_order": [
@@ -56,9 +56,9 @@
         "description",
         "price",
         "variant_picker",
+        "infinite_options_app_block_CrpF94",
         "buy_buttons",
-        "share",
-        "infinite_options_app_block_CrpF94"
+        "share"
       ],
       "settings": {
         "enable_sticky_info": true,
