@@ -58,7 +58,7 @@
           "type": "collapsible_row",
           "settings": {
             "heading": "12.8-12.11 Mont-Tremblant",
-            "icon": "plane",
+            "icon": "map_pin",
             "row_content": "",
             "page": "mont-tremblant"
           }
@@ -74,12 +74,11 @@
         },
         "template--20546470346774__2cbd4434-c214-416a-a3d5-1b0db0f683c4-collapsible_row-3": {
           "type": "collapsible_row",
-          "disabled": true,
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
+            "heading": "3.15-3.18 Mont-Tremblant",
+            "icon": "map_pin",
             "row_content": "",
-            "page": ""
+            "page": "march-mont-tremblant"
           }
         },
         "template--20546470346774__2cbd4434-c214-416a-a3d5-1b0db0f683c4-collapsible_row-4": {
