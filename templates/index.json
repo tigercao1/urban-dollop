@@ -262,7 +262,7 @@
         "column_HPTHia": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/WechatIMG3766.png",
+            "image": "shopify:\/\/shop_images\/2018-09-02_IK_Logo_Navy.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -279,10 +279,10 @@
             "link": ""
           }
         },
-        "column_McPB69": {
+        "column_A8aUN6": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/2018-09-02_IK_Logo_Navy.png",
+            "image": "shopify:\/\/shop_images\/logo.webp",
             "title": "",
             "text": "",
             "link_label": "",
@@ -293,7 +293,7 @@
       "block_order": [
         "column_HPTHia",
         "column_WzQD9j",
-        "column_McPB69"
+        "column_A8aUN6"
       ],
       "settings": {
         "title": "",
@@ -318,17 +318,7 @@
         "column_xq4Ut3": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/logo.webp",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_gYKP7L": {
-          "type": "column",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/26650057.png",
+            "image": "shopify:\/\/shop_images\/WechatIMG3766.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -344,25 +334,46 @@
             "link_label": "",
             "link": ""
           }
+        },
+        "column_e79HkK": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WechatIMG3769.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_gYKP7L": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/26650057.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
         }
       },
       "block_order": [
         "column_xq4Ut3",
-        "column_gYKP7L",
-        "column_Q3zLdP"
+        "column_Q3zLdP",
+        "column_e79HkK",
+        "column_gYKP7L"
       ],
       "settings": {
         "title": "",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
         "button_label": "",
         "button_link": "",
         "color_scheme": "",
-        "columns_mobile": "1",
+        "columns_mobile": "2",
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 72
