@@ -189,14 +189,193 @@
         "padding_bottom": 36
       }
     },
+    "multicolumn_xKLVqW": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VJV6Mq": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1x1.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_yLQLgj": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/onqpmpbjv2m07fhwfgih.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_rwTAQ9": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/631768dac5dae2d449929837_Asset_1Logo.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_bN7Hkf": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/MagicPow_logo.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_VJV6Mq",
+        "column_yLQLgj",
+        "column_rwTAQ9",
+        "column_bN7Hkf"
+      ],
+      "settings": {
+        "title": "合作伙伴",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_NydTHa": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_HPTHia": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WechatIMG3766.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WzQD9j": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bracelayer-logo-with-tag.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_McPB69": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2018-09-02_IK_Logo_Navy.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_HPTHia",
+        "column_WzQD9j",
+        "column_McPB69"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_k4LHdc": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_xq4Ut3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_gYKP7L": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/26650057.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Q3zLdP": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ede063081e00ae436465a43ced33994e.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_xq4Ut3",
+        "column_gYKP7L",
+        "column_Q3zLdP"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 72
+      }
+    },
     "18554820-68c3-46fc-b8f8-75be69ccc18e": {
       "type": "image-with-text",
       "blocks": {
         "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1": {
           "type": "heading",
           "settings": {
-            "heading": "",
-            "heading_size": "h1"
+            "heading": "联系我们",
+            "heading_size": "h2"
           }
         },
         "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1": {
@@ -240,6 +419,9 @@
     "slideshow",
     "rich-text",
     "9c4ac763-8063-4732-ab82-33042f353aec",
+    "multicolumn_xKLVqW",
+    "multicolumn_NydTHa",
+    "multicolumn_k4LHdc",
     "18554820-68c3-46fc-b8f8-75be69ccc18e"
   ]
 }
