@@ -64,7 +64,7 @@
             "heading": "{{ block.repeater.name.value }}",
             "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
             "button_label": "了解更多",
-            "button_link": "{{ block.repeater.collection_url.value }}"
+            "button_link": "{{ block.repeater.system.url }}"
           }
         }
       },
