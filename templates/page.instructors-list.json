@@ -59,7 +59,7 @@
           "type": "row",
           "repeater": "{{ page.metafields.custom.our_team_2.value }}",
           "settings": {
-            "image": "{{ block.repeater.image_1.value }}",
+            "image": "{{ block.repeater.picture.value }}",
             "caption": "{{ block.repeater.certification.value }}",
             "heading": "{{ block.repeater.name.value }}",
             "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
