@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "main": {
@@ -42,46 +51,10 @@
         "padding_top": 36,
         "padding_bottom": 0
       }
-    },
-    "multirow_aTUYQL": {
-      "type": "multirow",
-      "blocks": {
-        "row_ehq4Wy": {
-          "type": "row",
-          "repeater": "{{ page.metafields.custom.our_team_2.value }}",
-          "settings": {
-            "image": "{{ block.repeater.picture.value }}",
-            "caption": "{{ block.repeater.certification.value }} | {{ block.repeater.type.value }}",
-            "heading": "{{ block.repeater.name.value }}",
-            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
-            "button_label": "了解更多",
-            "button_link": "{{ block.repeater.system.url }}"
-          }
-        }
-      },
-      "block_order": [
-        "row_ehq4Wy"
-      ],
-      "settings": {
-        "image_height": "medium",
-        "desktop_image_width": "medium",
-        "heading_size": "h1",
-        "text_style": "body",
-        "button_style": "secondary",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "image_layout": "alternate-left",
-        "section_color_scheme": "",
-        "row_color_scheme": "",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
     "main",
-    "fc5107c4-cded-40b9-8700-1dae25e2768d",
-    "multirow_aTUYQL"
+    "fc5107c4-cded-40b9-8700-1dae25e2768d"
   ]
 }
