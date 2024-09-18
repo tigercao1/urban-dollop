@@ -168,8 +168,8 @@
           "background_gradient": "",
           "text": "#103948",
           "button": "#dd1d1d",
-          "button_label": "#fff100",
-          "secondary_button_label": "#fff100",
+          "button_label": "#fcfcfc",
+          "secondary_button_label": "#fcfcfc",
           "shadow": "#103948"
         }
       },
