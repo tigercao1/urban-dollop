@@ -11,6 +11,9 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "custom_css": [
+
+      ],
       "settings": {
         "padding_top": 28,
         "padding_bottom": 0
@@ -31,7 +34,7 @@
           "settings": {
             "button_label": "Ski Safety Canada",
             "button_link": "{{ page.metafields.custom.safety_page_v1.value.url_1.value }}",
-            "button_style_secondary": true
+            "button_style_secondary": false
           }
         }
       },
