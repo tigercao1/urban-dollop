@@ -16,51 +16,50 @@
         "padding_bottom": 0
       }
     },
-    "rich_text_qBkWJQ": {
-      "type": "rich-text",
+    "image_with_text_4gHjyw": {
+      "type": "image-with-text",
       "blocks": {
-        "heading_X74pR7": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text_Hj6F3i": {
+        "text_h9KLhe": {
           "type": "text",
           "settings": {
-            "text": "{{ page.metafields.custom.safety_page_v1.value.content | metafield_tag }}"
+            "text": "{{ page.metafields.custom.safety_page_v1.value.content | metafield_tag }}",
+            "text_style": "body"
           }
         },
-        "button_TgKyLx": {
+        "button_4AiKct": {
           "type": "button",
           "settings": {
             "button_label": "Button label",
             "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_style_secondary": false
           }
         }
       },
       "block_order": [
-        "heading_X74pR7",
-        "text_Hj6F3i",
-        "button_TgKyLx"
+        "text_h9KLhe",
+        "button_4AiKct"
+      ],
+      "custom_css": [
+        "img {height: auto;}"
       ],
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
+        "image": "{{ page.metafields.custom.safety_page_v1.value.image_1.value }}",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
         "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
     "main",
-    "rich_text_qBkWJQ"
+    "image_with_text_4gHjyw"
   ]
 }
