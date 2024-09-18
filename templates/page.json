@@ -29,9 +29,9 @@
         "button_4AiKct": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false
+            "button_label": "Ski Safety Canada",
+            "button_link": "{{ page.metafields.custom.safety_page_v1.value.url_1.value }}",
+            "button_style_secondary": true
           }
         }
       },
