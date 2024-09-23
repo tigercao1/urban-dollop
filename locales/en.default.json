@@ -526,7 +526,7 @@
       "login_message_html": "Please <a href=\"{{ link }}\">log in<\/a> to purchase"
     },
     "product": {
-      "waiver": "Release of liability, waiver of claims and assumption of risks agreement",
+      "waiver": "Release Agreement",
       "sign_waiver": "All participants\/members\/guests must sign the waiver below as a condition of registration and participation"
     },
     "lesson": {
