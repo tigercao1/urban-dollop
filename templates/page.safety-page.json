@@ -39,8 +39,8 @@
         "button_b7xrew": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "Ski Safety Canada",
+            "button_link": "{{ page.metafields.custom.safety_page_v1.value.url_1.value }}",
             "button_style_secondary": false
           }
         }
@@ -51,7 +51,7 @@
         "button_b7xrew"
       ],
       "custom_css": [
-        "img {height: auto}"
+        "img {height: auto;}"
       ],
       "settings": {
         "image": "{{ page.metafields.custom.safety_page_v1.value.image_1.value }}",
@@ -61,7 +61,7 @@
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "content_layout": "no-overlap",
-        "color_scheme": "",
+        "color_scheme": "scheme-75fd9060-1077-43e8-bf69-70a4515b584b",
         "image_behavior": "none",
         "mobile_content_alignment": "left",
         "padding_top": 36,
