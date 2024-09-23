@@ -39,7 +39,7 @@
         "button_b7xrew": {
           "type": "button",
           "settings": {
-            "button_label": "Ski Safety Canada",
+            "button_label": "加拿大滑雪安全",
             "button_link": "{{ page.metafields.custom.safety_page_v1.value.url_1.value }}",
             "button_style_secondary": false
           }
