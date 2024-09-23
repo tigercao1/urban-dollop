@@ -526,7 +526,7 @@
       "login_message_html": "您还尚未<a href=\"{{ link }}\">登录<\/a>"
     },
     "product": {
-      "waiver": "免责申明",
+      "waiver": "免责协议",
       "sign_waiver": "作为注册和参与的条件，所有参与者\/会员\/嘉宾都必须签署以下免责协议"
     },
     "lesson": {
