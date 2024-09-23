@@ -50,6 +50,9 @@
         "text_xcEeG7",
         "button_b7xrew"
       ],
+      "custom_css": [
+        "img {height: auto}"
+      ],
       "settings": {
         "image": "{{ page.metafields.custom.safety_page_v1.value.image_1.value }}",
         "height": "adapt",
