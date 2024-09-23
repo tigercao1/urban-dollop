@@ -19,8 +19,8 @@
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {% if customer.metafields.status.is_waiver_signed != true %}
-      <div style="margin-bottom: 20px;">
+    {% if page.metafields.custom.waiver_enforced == true %}
+      <div style="margin-bottom: 40px;">
         {% render 'jotform' %}
       </div>
     {% endif %}
