@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin language editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "general": {
     "password_page": {
@@ -518,7 +527,7 @@
     },
     "product": {
       "waiver": "免责申明",
-      "sign_waiver": "请您在购买之前填写以下免责声明"
+      "sign_waiver": "作为注册和参与的条件，所有参与者\/会员\/嘉宾都必须签署以下免责协议"
     },
     "lesson": {
       "lesson_only": "私课预定仅对购买了私课的会员开放"
