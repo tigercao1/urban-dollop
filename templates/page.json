@@ -12,7 +12,7 @@
     "main": {
       "type": "main-page",
       "custom_css": [
-
+        "h1{margin-bottom: 20px}"
       ],
       "settings": {
         "padding_top": 16,
