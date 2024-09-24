@@ -1,12 +1,226 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
+    "image_banner_WzxzwU": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_wXVbjL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Serendipity Snow Club",
+            "heading_size": "h0"
+          }
+        },
+        "text_QcCgYp": {
+          "type": "text",
+          "settings": {
+            "text": "多伦多滑雪俱乐部",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wXVbjL",
+        "text_QcCgYp"
+      ],
+      "custom_css": [
+        "p {font-size: 120%;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/75DE73FE-A394-4540-B111-EF9002B6CB79.png",
+        "image_overlay_opacity": 60,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-1",
+        "image_behavior": "zoom-in",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "image_with_text_4MdyHY": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_nJa8QB": {
+          "type": "heading",
+          "settings": {
+            "heading": "跟我们一起享受冬季❄️",
+            "heading_size": "h2"
+          }
+        },
+        "text_BaPBzY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>S Snow是位于多伦多的年轻人滑雪俱乐部，滑雪已然成为我们在加拿大冬天的生活方式。我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅</p>",
+            "text_style": "body"
+          }
+        },
+        "button_JAfdFV": {
+          "type": "button",
+          "settings": {
+            "button_label": "加入我们",
+            "button_link": "shopify://products/membership",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_nJa8QB",
+        "text_BaPBzY",
+        "button_JAfdFV"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/IMG_6641.heic",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_X8LMzc": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Tabrdw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_size": "h1"
+          }
+        },
+        "text_93Cwqq": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Tabrdw",
+        "text_93Cwqq"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/34681704431962_.pic.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_PhV9xF": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Rkj6iR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_size": "h1"
+          }
+        },
+        "text_EJhTrG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Rkj6iR",
+        "text_EJhTrG"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/IMG_6417.png",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "18554820-68c3-46fc-b8f8-75be69ccc18e": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "联系我们",
+            "heading_size": "h2"
+          }
+        },
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群，点击按钮关注我们的小红书</p>",
+            "text_style": "body"
+          }
+        },
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1": {
+          "type": "button",
+          "settings": {
+            "button_label": "S Snow Club🎿",
+            "button_link": "https://xiaohongshu.com/user/profile/5f28c8c90000000001008ce3",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1",
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1",
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DD5C83B9-3E87-4400-AA4A-830766016B0D.jpg",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-75fd9060-1077-43e8-bf69-70a4515b584b",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
         "1132b7c7-4b5a-46f8-9a6c-3ba1592a3cd7": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34631704431885_.pic.jpg",
+            "image": "shopify://shop_images/34631704431885_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -24,7 +238,7 @@
         "daa05d72-8d5c-424a-9235-7a57ae741e02": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34641704431886_.pic.jpg",
+            "image": "shopify://shop_images/34641704431886_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -42,7 +256,7 @@
         "6fa51626-838a-4961-a3a9-921ba3b60f8b": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34651704431888_.pic.jpg",
+            "image": "shopify://shop_images/34651704431888_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -60,7 +274,7 @@
         "04057a84-6700-44c1-b81f-667cc2f9db2e": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34661704431889_.pic.jpg",
+            "image": "shopify://shop_images/34661704431889_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -78,7 +292,7 @@
         "a18addf3-a8d1-42cd-a056-e1fd3ff1d418": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/34671704431890_.pic.jpg",
+            "image": "shopify://shop_images/34671704431890_.pic.jpg",
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
@@ -101,6 +315,7 @@
         "04057a84-6700-44c1-b81f-667cc2f9db2e",
         "a18addf3-a8d1-42cd-a056-e1fd3ff1d418"
       ],
+      "disabled": true,
       "settings": {
         "layout": "full_bleed",
         "slide_height": "large",
@@ -118,21 +333,21 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>S Snow<\/strong>是位于多伦多的年轻人滑雪俱乐部",
+            "heading": "<strong>S Snow</strong>是位于多伦多的年轻人滑雪俱乐部",
             "heading_size": "h2"
           }
         },
         "d14bd64d-c954-4c8f-886b-8fb6cdb400bb": {
           "type": "heading",
           "settings": {
-            "heading": "滑雪已然成为我们在加拿大冬天的<strong>生活方式<\/strong>",
+            "heading": "滑雪已然成为我们在加拿大冬天的<strong>生活方式</strong>",
             "heading_size": "h2"
           }
         },
         "24d9b205-08a7-4b1a-adc5-bf53af4f8368": {
           "type": "heading",
           "settings": {
-            "heading": "我们欢迎<strong>想学滑雪<\/strong>的，<strong>热爱滑雪<\/strong>的，想<strong>找寻滑雪组织<\/strong>的朋友们加入我们的会员，一起共赴白雪之旅",
+            "heading": "我们欢迎<strong>想学滑雪</strong>的，<strong>热爱滑雪</strong>的，想<strong>找寻滑雪组织</strong>的朋友们加入我们的会员，一起共赴白雪之旅",
             "heading_size": "h2"
           }
         }
@@ -142,6 +357,7 @@
         "d14bd64d-c954-4c8f-886b-8fb6cdb400bb",
         "24d9b205-08a7-4b1a-adc5-bf53af4f8368"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -151,51 +367,13 @@
         "padding_bottom": 72
       }
     },
-    "9c4ac763-8063-4732-ab82-33042f353aec": {
-      "type": "collage",
-      "blocks": {
-        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/34681704431962_.pic.jpg"
-          }
-        },
-        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/WechatIMG1165.jpg"
-          }
-        },
-        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/WechatIMG36.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1",
-        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9",
-        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8"
-      ],
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "desktop_layout": "left",
-        "mobile_layout": "column",
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "multicolumn_xKLVqW": {
       "type": "multicolumn",
       "blocks": {
         "column_VJV6Mq": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/1x1.jpg",
+            "image": "shopify://shop_images/1x1.jpg",
             "title": "",
             "text": "",
             "link_label": "",
@@ -205,7 +383,7 @@
         "column_yLQLgj": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/onqpmpbjv2m07fhwfgih.webp",
+            "image": "shopify://shop_images/onqpmpbjv2m07fhwfgih.webp",
             "title": "",
             "text": "",
             "link_label": "",
@@ -215,7 +393,7 @@
         "column_rwTAQ9": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/631768dac5dae2d449929837_Asset_1Logo.png",
+            "image": "shopify://shop_images/631768dac5dae2d449929837_Asset_1Logo.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -225,7 +403,7 @@
         "column_bN7Hkf": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/MagicPow_logo.jpg",
+            "image": "shopify://shop_images/MagicPow_logo.jpg",
             "title": "",
             "text": "",
             "link_label": "",
@@ -256,69 +434,13 @@
         "padding_bottom": 36
       }
     },
-    "multicolumn_NydTHa": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_HPTHia": {
-          "type": "column",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/2018-09-02_IK_Logo_Navy.png",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_WzQD9j": {
-          "type": "column",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/bracelayer-logo-with-tag.png",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_A8aUN6": {
-          "type": "column",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/logo.webp",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_HPTHia",
-        "column_WzQD9j",
-        "column_A8aUN6"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "multicolumn_k4LHdc": {
       "type": "multicolumn",
       "blocks": {
         "column_xq4Ut3": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/WechatIMG3766.png",
+            "image": "shopify://shop_images/WechatIMG3766.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -328,7 +450,7 @@
         "column_Q3zLdP": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/ede063081e00ae436465a43ced33994e.png",
+            "image": "shopify://shop_images/ede063081e00ae436465a43ced33994e.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -338,7 +460,7 @@
         "column_e79HkK": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/WechatIMG3769.jpg",
+            "image": "shopify://shop_images/WechatIMG3769.jpg",
             "title": "",
             "text": "",
             "link_label": "",
@@ -348,7 +470,7 @@
         "column_gYKP7L": {
           "type": "column",
           "settings": {
-            "image": "shopify:\/\/shop_images\/26650057.png",
+            "image": "shopify://shop_images/26650057.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -379,60 +501,113 @@
         "padding_bottom": 72
       }
     },
-    "18554820-68c3-46fc-b8f8-75be69ccc18e": {
-      "type": "image-with-text",
+    "multicolumn_NydTHa": {
+      "type": "multicolumn",
       "blocks": {
-        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1": {
-          "type": "heading",
+        "column_HPTHia": {
+          "type": "column",
           "settings": {
-            "heading": "联系我们",
-            "heading_size": "h2"
+            "image": "shopify://shop_images/2018-09-02_IK_Logo_Navy.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
           }
         },
-        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1": {
-          "type": "text",
+        "column_WzQD9j": {
+          "type": "column",
           "settings": {
-            "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群，点击按钮关注我们的小红书<\/p>",
-            "text_style": "body"
+            "image": "shopify://shop_images/bracelayer-logo-with-tag.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
           }
         },
-        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1": {
-          "type": "button",
+        "column_A8aUN6": {
+          "type": "column",
           "settings": {
-            "button_label": "S Snow Club🎿",
-            "button_link": "https:\/\/xiaohongshu.com\/user\/profile\/5f28c8c90000000001008ce3",
-            "button_style_secondary": false
+            "image": "shopify://shop_images/logo.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1",
-        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1",
-        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1"
+        "column_HPTHia",
+        "column_WzQD9j",
+        "column_A8aUN6"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/DD5C83B9-3E87-4400-AA4A-830766016B0D.jpg",
-        "height": "adapt",
-        "desktop_image_width": "small",
-        "layout": "text_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "scheme-75fd9060-1077-43e8-bf69-70a4515b584b",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "padding_top": 8,
-        "padding_bottom": 8
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    },
+    "9c4ac763-8063-4732-ab82-33042f353aec": {
+      "type": "collage",
+      "blocks": {
+        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/34681704431962_.pic.jpg"
+          }
+        },
+        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WechatIMG1165.jpg"
+          }
+        },
+        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WechatIMG36.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1",
+        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9",
+        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
+    "image_banner_WzxzwU",
+    "image_with_text_4MdyHY",
+    "image_with_text_X8LMzc",
+    "image_with_text_PhV9xF",
+    "18554820-68c3-46fc-b8f8-75be69ccc18e",
     "slideshow",
     "rich-text",
-    "9c4ac763-8063-4732-ab82-33042f353aec",
     "multicolumn_xKLVqW",
-    "multicolumn_NydTHa",
     "multicolumn_k4LHdc",
-    "18554820-68c3-46fc-b8f8-75be69ccc18e"
+    "multicolumn_NydTHa",
+    "9c4ac763-8063-4732-ab82-33042f353aec"
   ]
 }
