@@ -100,8 +100,8 @@
         "heading_Tabrdw": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
+            "heading": "我们的团课",
+            "heading_size": "h2"
           }
         },
         "text_93Cwqq": {
@@ -110,11 +110,20 @@
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "text_style": "body"
           }
+        },
+        "button_N6iLK3": {
+          "type": "button",
+          "settings": {
+            "button_label": "了解详情",
+            "button_link": "shopify://collections/group-lessons",
+            "button_style_secondary": false
+          }
         }
       },
       "block_order": [
         "heading_Tabrdw",
-        "text_93Cwqq"
+        "text_93Cwqq",
+        "button_N6iLK3"
       ],
       "settings": {
         "image": "shopify://shop_images/34681704431962_.pic.jpg",
@@ -137,8 +146,8 @@
         "heading_Rkj6iR": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
+            "heading": "私人定制课程",
+            "heading_size": "h2"
           }
         },
         "text_EJhTrG": {
@@ -147,17 +156,72 @@
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "text_style": "body"
           }
+        },
+        "button_jz4BjT": {
+          "type": "button",
+          "settings": {
+            "button_label": "了解更多",
+            "button_link": "shopify://collections/private-packages",
+            "button_style_secondary": false
+          }
         }
       },
       "block_order": [
         "heading_Rkj6iR",
-        "text_EJhTrG"
+        "text_EJhTrG",
+        "button_jz4BjT"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/WechatIMG36.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_rEgLqa": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8kcPAP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_size": "h2"
+          }
+        },
+        "text_wkrKwH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_JVDRHq": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_8kcPAP",
+        "text_wkrKwH",
+        "button_JVDRHq"
       ],
       "settings": {
         "image": "shopify://shop_images/IMG_6417.png",
         "height": "medium",
         "desktop_image_width": "medium",
-        "layout": "image_first",
+        "layout": "text_first",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "content_layout": "no-overlap",
@@ -602,6 +666,7 @@
     "image_with_text_4MdyHY",
     "image_with_text_X8LMzc",
     "image_with_text_PhV9xF",
+    "image_with_text_rEgLqa",
     "18554820-68c3-46fc-b8f8-75be69ccc18e",
     "slideshow",
     "rich-text",
