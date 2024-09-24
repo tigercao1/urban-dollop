@@ -9,9 +9,9 @@
 */
 {
   "current": {
-    "logo": "shopify:\/\/shop_images\/No_spacing_logo.svg",
+    "logo": "shopify://shop_images/No_spacing_logo.svg",
     "logo_width": 120,
-    "favicon": "shopify:\/\/shop_images\/Slogo_with_less_spacing_transparent.png",
+    "favicon": "shopify://shop_images/Slogo_with_less_spacing_transparent.png",
     "type_header_font": "electra_n4",
     "heading_scale": 105,
     "type_body_font": "electra_n4",
@@ -108,7 +108,7 @@
     "sale_badge_color_scheme": "inverse",
     "sold_out_badge_color_scheme": "inverse",
     "brand_headline": "",
-    "brand_description": "<p><\/p>",
+    "brand_description": "<p></p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
     "social_instagram_link": "",
@@ -145,19 +145,19 @@
 
     ],
     "blocks": {
-      "9278379683843197553": {
-        "type": "shopify:\/\/apps\/appointo\/blocks\/app-embed\/8e9086b8-9c22-4cd3-b1d1-0967727a5d97",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "16250556887416161327": {
-        "type": "shopify:\/\/apps\/easy-appointment-booking\/blocks\/select_time\/cc7b690c-65b5-4bb4-a46c-1e4bd73e1c12",
+        "type": "shopify://apps/easy-appointment-booking/blocks/select_time/cc7b690c-65b5-4bb4-a46c-1e4bd73e1c12",
         "disabled": false,
         "settings": {
           "buttonTextAlign": "center",
           "classNames": "button",
           "buttonWidth": 100
+        }
+      },
+      "9278379683843197553": {
+        "type": "shopify://apps/app-ointo/blocks/app-embed/8e9086b8-9c22-4cd3-b1d1-0967727a5d97",
+        "disabled": true,
+        "settings": {
         }
       }
     },
@@ -168,7 +168,7 @@
           "background_gradient": "",
           "text": "#103948",
           "button": "#103948",
-          "button_label": "#fff",
+          "button_label": "#ffffff",
           "secondary_button_label": "#103948",
           "shadow": "#103948"
         }
@@ -386,7 +386,7 @@
       "sale_badge_color_scheme": "inverse",
       "sold_out_badge_color_scheme": "inverse",
       "brand_headline": "",
-      "brand_description": "<p><\/p>",
+      "brand_description": "<p></p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
