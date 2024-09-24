@@ -22,7 +22,7 @@
         "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>机票，酒店，雪场票，大巴，购物，灵活组合，安心舒适，您想要的这里都有！<\/p>"
+            "text": "<p>机票，酒店，雪场票，大巴，购物，灵活组合，安心舒适，您想要的这里都有！</p>"
           }
         },
         "template--20539033255958__4a1b5a07-aecf-436b-9b43-00869f6369cf-button-1": {
@@ -107,7 +107,6 @@
         "template--20546470346774__2cbd4434-c214-416a-a3d5-1b0db0f683c4-collapsible_row-3",
         "template--20546470346774__2cbd4434-c214-416a-a3d5-1b0db0f683c4-collapsible_row-4"
       ],
-      "disabled": true,
       "settings": {
         "caption": "",
         "heading": "",
@@ -129,7 +128,7 @@
         "heading_hAUpFY": {
           "type": "heading",
           "settings": {
-            "heading": "Coming soon for the 2024\/2025 winter season!",
+            "heading": "Coming soon for the 2024/2025 winter season!",
             "heading_size": "h1"
           }
         }
@@ -159,7 +158,7 @@
         "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群<\/p>",
+            "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群</p>",
             "text_style": "body"
           }
         }
@@ -169,7 +168,7 @@
         "template--20546470346774__ec7217c7-2dde-4b7e-827f-00595b8ab273-text-1"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/ssnow-wechat-qr-only_efa4110c-2364-40e2-ae9c-46cbb1bcdf2b.jpg",
+        "image": "shopify://shop_images/ssnow-wechat-qr-only_efa4110c-2364-40e2-ae9c-46cbb1bcdf2b.jpg",
         "height": "adapt",
         "desktop_image_width": "small",
         "layout": "image_first",
@@ -187,8 +186,8 @@
   "order": [
     "4a1b5a07-aecf-436b-9b43-00869f6369cf",
     "main",
-    "2cbd4434-c214-416a-a3d5-1b0db0f683c4",
     "rich_text_HJEgAg",
+    "2cbd4434-c214-416a-a3d5-1b0db0f683c4",
     "ec7217c7-2dde-4b7e-827f-00595b8ab273"
   ]
 }

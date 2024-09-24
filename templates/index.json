@@ -42,10 +42,10 @@
         "show_text_box": true,
         "desktop_content_alignment": "center",
         "color_scheme": "accent-1",
-        "image_behavior": "zoom-in",
+        "image_behavior": "fixed",
         "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
+        "stack_images_on_mobile": false,
+        "show_text_below": false
       }
     },
     "image_with_text_4MdyHY": {
@@ -61,7 +61,7 @@
         "text_BaPBzY": {
           "type": "text",
           "settings": {
-            "text": "<p>S Snow是位于多伦多的年轻人滑雪俱乐部，滑雪已然成为我们在加拿大冬天的生活方式。我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅</p>",
+            "text": "<p>S Snow是位于多伦多的年轻人滑雪俱乐部，滑雪已然成为我们在加拿大冬天的生活方式。</p><p>S Snow会员尊享七大福利，我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅！</p>",
             "text_style": "body"
           }
         },
@@ -107,7 +107,7 @@
         "text_93Cwqq": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>我们提供孩子们的单双周末团课，圣诞假期团课，元旦假期团课，精品小班，明星教练带队，时刻保障孩子们的安全。</p><p>上课地点：MSL</p>",
             "text_style": "body"
           }
         },
@@ -153,14 +153,14 @@
         "text_EJhTrG": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>精品单双二级/三级教练定制一对一，一对多课程，针对性专业教学，从基础到进阶，高效提升学员水平，安全有保障。</p><p>地点：MSL、蓝山等</p>",
             "text_style": "body"
           }
         },
         "button_jz4BjT": {
           "type": "button",
           "settings": {
-            "button_label": "了解更多",
+            "button_label": "了解详情",
             "button_link": "shopify://collections/private-packages",
             "button_style_secondary": false
           }
@@ -192,22 +192,22 @@
         "heading_8kcPAP": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
+            "heading": "我们的外滑旅行",
             "heading_size": "h2"
           }
         },
         "text_wkrKwH": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>翠湖山庄(Mont-Tremblant)一站式滑雪旅行，吃住玩行以及导滑，全包式服务，每月发车。</p><p>24/25雪季更有Revelstoke团、Banff Big3团，敬请期待！</p>",
             "text_style": "body"
           }
         },
         "button_JVDRHq": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "了解详情",
+            "button_link": "shopify://pages/banff",
             "button_style_secondary": false
           }
         }
