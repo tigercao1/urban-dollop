@@ -275,10 +275,10 @@
         "show_text_box": true,
         "desktop_content_alignment": "center",
         "color_scheme": "accent-1",
-        "image_behavior": "fixed",
+        "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": true,
-        "show_text_below": true
+        "show_text_below": false
       }
     },
     "18554820-68c3-46fc-b8f8-75be69ccc18e": {
