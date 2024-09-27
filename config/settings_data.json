@@ -200,9 +200,9 @@
           "background": "rgba(0,0,0,0)",
           "background_gradient": "",
           "text": "#ffffff",
-          "button": "#fcfcfc",
-          "button_label": "#e5043b",
-          "secondary_button_label": "#fff",
+          "button": "#103948",
+          "button_label": "#fff",
+          "secondary_button_label": "#103948",
           "shadow": "#1a4e60"
         }
       },
