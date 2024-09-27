@@ -68,7 +68,7 @@
         "button_JAfdFV": {
           "type": "button",
           "settings": {
-            "button_label": "加入我们",
+            "button_label": "加入我们的会员",
             "button_link": "shopify://products/membership",
             "button_style_secondary": false
           }
@@ -230,6 +230,55 @@
         "mobile_content_alignment": "left",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "image_banner_rxCxwk": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_39GaUX": {
+          "type": "heading",
+          "settings": {
+            "heading": "加入我们的教练团队",
+            "heading_size": "h2"
+          }
+        },
+        "text_eHGHQE": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_RFa6gU": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "点击申请",
+            "button_link_1": "https://forms.gle/QsvAXCDWUdssKv8S9",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_39GaUX",
+        "text_eHGHQE",
+        "buttons_RFa6gU"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Image_20240927134023.jpg",
+        "image_overlay_opacity": 60,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-1",
+        "image_behavior": "fixed",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
       }
     },
     "18554820-68c3-46fc-b8f8-75be69ccc18e": {
@@ -667,6 +716,7 @@
     "image_with_text_X8LMzc",
     "image_with_text_PhV9xF",
     "image_with_text_rEgLqa",
+    "image_banner_rxCxwk",
     "18554820-68c3-46fc-b8f8-75be69ccc18e",
     "slideshow",
     "rich-text",

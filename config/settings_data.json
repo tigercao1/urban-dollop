@@ -201,9 +201,9 @@
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#fcfcfc",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#fcfcfc",
-          "shadow": "#103948"
+          "button_label": "#e5043b",
+          "secondary_button_label": "#fff",
+          "shadow": "#1a4e60"
         }
       },
       "accent-2": {
