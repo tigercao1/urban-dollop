@@ -425,7 +425,7 @@
             {%- when 'buy_buttons' -%}
               {% if customer %}
                 {% if product.type contains 'Membership' %}
-                  {% if customer.metafields.status.member == true %}
+                  {% if customer.metafields.status.twnetyfive_member == true %}
                     <p style="text-align: center;">{{ 'custom_liquid.membership.thank_you_message' | t }}</p>
                   {% else %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
@@ -437,7 +437,7 @@
                     <p style="text-align: center;">{{ "custom_liquid.lesson.lesson_only" | t }}</p>
                   {% endif %}
                 {% else %}
-                  {% if customer.metafields.status.member == true or product.tags contains 'Public' %}
+                  {% if customer.metafields.status.twnetyfive_member == true or product.tags contains 'Public' %}
                     <p style="text-align: center;">{{ "custom_liquid.product.sign_waiver" | t }}</p>
                     {% render 'jotform' %}
                     {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
