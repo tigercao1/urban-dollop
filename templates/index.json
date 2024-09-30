@@ -294,7 +294,7 @@
         "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>扫一扫微信二维码咨询S Snow小客服，加入我们的微信群，点击按钮关注我们的小红书</p>",
+            "text": "<p>扫一扫微信二维码咨询S Snow小客服，点击按钮即可直接对话</p>",
             "text_style": "body"
           }
         },
@@ -320,7 +320,7 @@
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "content_layout": "no-overlap",
-        "color_scheme": "scheme-75fd9060-1077-43e8-bf69-70a4515b584b",
+        "color_scheme": "background-1",
         "image_behavior": "none",
         "mobile_content_alignment": "center",
         "padding_top": 8,
