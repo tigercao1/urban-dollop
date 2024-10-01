@@ -159,6 +159,12 @@
         "disabled": true,
         "settings": {
         }
+      },
+      "15914998778720525373": {
+        "type": "shopify://apps/crisp-live-chat-chatbot/blocks/app-embed/5c3cfd5f-01d4-496a-891b-f98ecf27ff08",
+        "disabled": false,
+        "settings": {
+        }
       }
     },
     "color_schemes": {
