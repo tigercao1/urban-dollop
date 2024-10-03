@@ -35,8 +35,8 @@
         "buttons"
       ],
       "settings": {
-        "agree_with_waiver_text": "l have read, agreed, signed and submitted the <a href=\"/pages/waiver\" title=\"免责协议\">Release of liability, waiver of claims and assumption of risks agreement</a>.",
-        "agree_with_refund_policy_text": "I have read and agreed to the <a href=\"/policies/refund-policy\" title=\"Refund Policy\">Refund Policy</a>.",
+        "agree_with_waiver_text": "我已阅读、同意、签署并提交了<a href=\"/pages/waiver\" title=\"免责协议\">《免除责任、免除索赔和风险承担协议》</a>。",
+        "agree_with_refund_policy_text": "我已阅读并同意<a href=\"/policies/refund-policy\" title=\"Refund Policy\">退款政策</a>。",
         "agree_with_photography_text": "通过购买SSnow的服务，我同意使用我的照片和视频用于宣传目的。如果我不希望提供此同意，我将在接受服务之前通知客服。",
         "padding_top": 20,
         "padding_bottom": 40
