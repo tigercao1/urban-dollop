@@ -3506,5 +3506,5 @@ details-disclosure > details {
 
 .ssnow-terms-checkboxes {
   display: flex;
-  flex-direction: horizontal;
+  flex-direction: column;
 }
