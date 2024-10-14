@@ -147,6 +147,7 @@
     const message = document.querySelector(".terms_reminder_text--text");
 
     waiverCheckbox.addEventListener("change", function() {
+      message.style.display = 'none'
       // If the checkbox is checked, store the agreement time as its value
       if (waiverCheckbox.checked) {
         waiverCheckbox.value = "Customer indicated they have signed waiver " + (new Date()).toLocaleString();
@@ -154,6 +155,7 @@
     });
 
     refundPolicyCheckbox.addEventListener("change", function() {
+      message.style.display = 'none'
       // If the checkbox is checked, store the agreement time as its value
       if (refundPolicyCheckbox.checked) {
         refundPolicyCheckbox.value = "Agreed to refund policy on " + (new Date()).toLocaleString();
