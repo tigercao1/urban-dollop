@@ -98,6 +98,8 @@
                 <div>
                   {{ section.settings.agree_with_photography_text }}
                 </div>
+
+                <div class="terms_reminder_text--text">{{ section.settings.terms_reminder_text }}</div>
               </div>
 
               <div class="cart__ctas" {{ block.shopify_attributes }}>
@@ -137,6 +139,34 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    const checkoutButton = document.querySelector(".cart__checkout-button");
+    const waiverCheckbox = document.getElementById("agree_with_waiver_text");
+    const refundPolicyCheckbox = document.getElementById("agree_with_refund_policy_text");
+    const message = document.querySelector(".terms_reminder_text--text");
+
+    waiverCheckbox.addEventListener("change", function() {
+      // If the checkbox is checked, store the agreement time as its value
+      if (waiverCheckbox.checked) {
+        waiverCheckbox.value = "Customer indicated they have signed waiver " + (new Date()).toLocaleString();
+      }
+    });
+
+    refundPolicyCheckbox.addEventListener("change", function() {
+      // If the checkbox is checked, store the agreement time as its value
+      if (refundPolicyCheckbox.checked) {
+        refundPolicyCheckbox.value = "Agreed to refund policy on " + (new Date()).toLocaleString();
+      }
+    });
+
+    checkoutButton.addEventListener("click", function(event) {
+      if (!waiverCheckbox.checked || !refundPolicyCheckbox.checked) {
+        event.preventDefault(); // Prevent the checkout process
+        message.style.display = 'block'; // Show reminder text
+      } else {
+        message.style.display = 'none'; // Hide the reminder message if the checkbox is checked
+      }
+    });
+    
     function isIE() {
       const ua = window.navigator.userAgent;
       const msie = ua.indexOf('MSIE ');
@@ -178,6 +208,12 @@
       "id": "agree_with_photography_text",
       "label": "Agree with photography text",
       "default": "I consent to photographs and/or video be taken of me during my participation in the activities in the controlled recreational area and to publication of the photographs by the Releasess Serendipity Snow Club for advertising, promotional and marketing purposes."
+    },
+    {
+      "type": "text",
+      "id": "terms_reminder_text",
+      "label": "Terms reminder text",
+      "default": "Please accept the terms and conditions to proceed."
     },
     {
       "type": "range",
