@@ -3511,3 +3511,8 @@ details-disclosure > details {
   margin-bottom: 2rem;
   font-size: 70%
 }
+
+.terms_reminder_text--text {
+  color: red;
+  display: none;
+}
