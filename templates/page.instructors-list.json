@@ -111,7 +111,7 @@
         "title": "教练团队",
         "heading_size": "h1",
         "image_width": "full",
-        "image_ratio": "square",
+        "image_ratio": "portrait",
         "columns_desktop": 5,
         "column_alignment": "left",
         "background_style": "none",
