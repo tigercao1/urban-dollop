@@ -100,7 +100,7 @@
             "title": "{{ block.repeater.name.value }}",
             "text": "<h5>{{ block.repeater.type.value }}</h5><h6>{{ block.repeater.certification.value }}</h6>",
             "link_label": "了解更多",
-            "link": "{{ block.repeater.collection_url.value }}"
+            "link": "{{ block.repeater.system.url }}"
           }
         }
       },
