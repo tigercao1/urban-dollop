@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -27,7 +27,7 @@
             "image": "{{ block.repeater.picture.value }}",
             "caption": "{{ block.repeater.certification.value }} | {{ block.repeater.type.value }}",
             "heading": "{{ block.repeater.name.value }}",
-            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}</p>",
             "button_label": "了解更多",
             "button_link": "{{ block.repeater.system.url }}"
           }
@@ -36,6 +36,7 @@
       "block_order": [
         "template--21452043714582__fc5107c4-cded-40b9-8700-1dae25e2768d-row-1"
       ],
+      "disabled": true,
       "settings": {
         "image_height": "medium",
         "desktop_image_width": "medium",
@@ -62,7 +63,7 @@
             "image": "{{ block.repeater.picture.value }}",
             "caption": "{{ block.repeater.certification.value }} | {{ block.repeater.type.value }}",
             "heading": "{{ block.repeater.name.value }}",
-            "text": "<p>{{ block.repeater.introduction | metafield_tag }}<\/p>",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}</p>",
             "button_label": "了解更多",
             "button_link": "{{ block.repeater.system.url }}"
           }
@@ -71,8 +72,9 @@
       "block_order": [
         "row_E3RNkT"
       ],
+      "disabled": true,
       "settings": {
-        "image_height": "medium",
+        "image_height": "large",
         "desktop_image_width": "medium",
         "heading_size": "h1",
         "text_style": "body",
@@ -86,11 +88,47 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "multicolumn_R4MqcL": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_djdwPW": {
+          "type": "column",
+          "repeater": "{{ page.metafields.custom.our_team.value }}",
+          "settings": {
+            "image": "{{ block.repeater.picture.value }}",
+            "title": "{{ block.repeater.name.value }}",
+            "text": "<p>{{ block.repeater.certification.value }}</p>",
+            "link_label": "了解更多",
+            "link": "{{ block.repeater.collection_url.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "column_djdwPW"
+      ],
+      "settings": {
+        "title": "教练团队",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "square",
+        "columns_desktop": 5,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "fc5107c4-cded-40b9-8700-1dae25e2768d",
-    "multirow_fNT7Mh"
+    "multirow_fNT7Mh",
+    "multicolumn_R4MqcL"
   ]
 }
