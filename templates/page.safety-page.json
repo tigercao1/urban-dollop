@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -25,7 +25,7 @@
         "heading_wFMiKm": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>阿尔卑斯责任守则<\/strong>",
+            "heading": "<strong>阿尔卑斯责任守则</strong>",
             "heading_size": "h1"
           }
         },
@@ -51,7 +51,8 @@
         "button_b7xrew"
       ],
       "custom_css": [
-        "img {height: auto;}"
+        "img {height: auto;}",
+        ".button {border-color: #da3831; outline: 2px solid #da3831; background: #FCEC52; color: black; font-weight: 600;}"
       ],
       "settings": {
         "image": "{{ page.metafields.custom.safety_page_v1.value.image_1.value }}",
