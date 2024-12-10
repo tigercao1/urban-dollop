@@ -15,7 +15,7 @@
         "h1 {margin-bottom: 20px;}"
       ],
       "settings": {
-        "padding_top": 16,
+        "padding_top": 32,
         "padding_bottom": 40
       }
     },
@@ -27,10 +27,10 @@
           "repeater": "{{ page.metafields.custom.partnership.value }}",
           "settings": {
             "image": "{{ block.repeater.logo.value }}",
-            "caption": "{{ block.repeater.title.value }}",
-            "heading": "",
+            "caption": "",
+            "heading": "{{ block.repeater.title.value }}",
             "text": "{{ block.repeater.description_in_rich_text | metafield_tag }}",
-            "button_label": "Button label",
+            "button_label": "了解更多",
             "button_link": "{{ block.repeater.link.value }}"
           }
         }
@@ -39,7 +39,7 @@
         "row_qnhVWq"
       ],
       "custom_css": [
-        "img {height: auto; width: 100%; top: 20%;}"
+        "img {height: auto; width: 100%; top: 15%;}"
       ],
       "settings": {
         "image_height": "adapt",
@@ -53,7 +53,7 @@
         "section_color_scheme": "",
         "row_color_scheme": "",
         "mobile_content_alignment": "left",
-        "padding_top": 36,
+        "padding_top": 0,
         "padding_bottom": 36
       }
     }
