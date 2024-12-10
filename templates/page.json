@@ -39,15 +39,15 @@
         "row_qnhVWq"
       ],
       "custom_css": [
-        "img {height: auto; width: 100%; top: 15%;}"
+        "img {height: auto; width: 100%; top: 12%;}"
       ],
       "settings": {
         "image_height": "adapt",
         "desktop_image_width": "medium",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "text_style": "body",
-        "button_style": "primary",
-        "desktop_content_position": "middle",
+        "button_style": "secondary",
+        "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "image_layout": "alternate-left",
         "section_color_scheme": "",
