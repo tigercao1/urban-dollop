@@ -40,7 +40,7 @@
       ],
       "custom_css": [
         "img {height: auto; width: 100%;}",
-        ".image-with-text {align-items: center}"
+        ".image-with-text {top: 20%;}"
       ],
       "settings": {
         "image_height": "adapt",
