@@ -39,8 +39,7 @@
         "row_qnhVWq"
       ],
       "custom_css": [
-        "img {height: auto; width: 100%;}",
-        ".image-with-text {top: 20%;}"
+        "img {height: auto; width: 100%; top: 20%;}"
       ],
       "settings": {
         "image_height": "adapt",
