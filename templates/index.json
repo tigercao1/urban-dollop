@@ -493,30 +493,20 @@
             "link": ""
           }
         },
-        "column_yLQLgj": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/onqpmpbjv2m07fhwfgih.webp",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_rwTAQ9": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/631768dac5dae2d449929837_Asset_1Logo.png",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
         "column_bN7Hkf": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/MagicPow_logo.jpg",
+            "image": "shopify://shop_images/IMG-9098.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_4Cigtn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/26650057.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -526,16 +516,15 @@
       },
       "block_order": [
         "column_VJV6Mq",
-        "column_yLQLgj",
-        "column_rwTAQ9",
-        "column_bN7Hkf"
+        "column_bN7Hkf",
+        "column_4Cigtn"
       ],
       "settings": {
         "title": "合作伙伴",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
         "button_label": "",
@@ -580,10 +569,10 @@
             "link": ""
           }
         },
-        "column_gYKP7L": {
+        "column_jExkk9": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/26650057.png",
+            "image": "shopify://shop_images/631768dac5dae2d449929837_Asset_1Logo.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -595,7 +584,7 @@
         "column_xq4Ut3",
         "column_Q3zLdP",
         "column_e79HkK",
-        "column_gYKP7L"
+        "column_jExkk9"
       ],
       "settings": {
         "title": "",

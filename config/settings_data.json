@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "logo": "shopify://shop_images/No_spacing_logo.svg",
@@ -141,9 +141,7 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "16250556887416161327": {
         "type": "shopify://apps/easy-appointment-booking/blocks/select_time/cc7b690c-65b5-4bb4-a46c-1e4bd73e1c12",
@@ -154,17 +152,10 @@
           "buttonWidth": 100
         }
       },
-      "9278379683843197553": {
-        "type": "shopify://apps/app-ointo/blocks/app-embed/8e9086b8-9c22-4cd3-b1d1-0967727a5d97",
-        "disabled": true,
-        "settings": {
-        }
-      },
       "15914998778720525373": {
         "type": "shopify://apps/crisp-live-chat-chatbot/blocks/app-embed/5c3cfd5f-01d4-496a-891b-f98ecf27ff08",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       }
     },
     "color_schemes": {
