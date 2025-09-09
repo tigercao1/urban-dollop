@@ -516,7 +516,7 @@
         "column_4Cigtn": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/ede063081e00ae436465a43ced33994e.png",
+            "image": "shopify://shop_images/26650057.png",
             "title": "",
             "text": "",
             "link_label": "",
@@ -535,7 +535,7 @@
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
         "button_label": "",
@@ -555,16 +555,6 @@
           "disabled": true,
           "settings": {
             "image": "shopify://shop_images/WechatIMG3766.png",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_GD6yNK": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/bc549c409f81dd6a9711d6b6144c33c7.jpg",
             "title": "",
             "text": "",
             "link_label": "",
@@ -625,7 +615,6 @@
       },
       "block_order": [
         "column_xq4Ut3",
-        "column_GD6yNK",
         "column_RU3WgA",
         "column_KmNdWE",
         "column_Q3zLdP",
