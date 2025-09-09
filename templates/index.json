@@ -493,6 +493,16 @@
             "link": ""
           }
         },
+        "column_nGrkdA": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Image_20250909134142.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
         "column_bN7Hkf": {
           "type": "column",
           "settings": {
@@ -516,6 +526,7 @@
       },
       "block_order": [
         "column_VJV6Mq",
+        "column_nGrkdA",
         "column_bN7Hkf",
         "column_4Cigtn"
       ],
@@ -541,8 +552,29 @@
       "blocks": {
         "column_xq4Ut3": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/WechatIMG3766.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_RU3WgA": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Balo2.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_KmNdWE": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/station.webp",
             "title": "",
             "text": "",
             "link_label": "",
@@ -571,6 +603,7 @@
         },
         "column_jExkk9": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/631768dac5dae2d449929837_Asset_1Logo.png",
             "title": "",
@@ -582,6 +615,8 @@
       },
       "block_order": [
         "column_xq4Ut3",
+        "column_RU3WgA",
+        "column_KmNdWE",
         "column_Q3zLdP",
         "column_e79HkK",
         "column_jExkk9"
