@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -24,7 +24,7 @@
           "settings": {
             "heading": "关于我们的俱乐部",
             "icon": "none",
-            "row_content": "<p><strong>Q: 会员加入有什么条件？<\/strong><\/p><p>A: 如果您是CSIA或者CASI认证的教练的话可以联系我们免费成为会员，或者也可以在官网上购买加入我们的会员。<\/p><p><strong>Q: 不加入会员可以参与活动or上课吗？<\/strong><\/p><p>A: 不加入会员一样可以上课哦，但是无法享受会员的折扣与福利，部分会员专属活动也需要会员身份才能参加。<\/p><p><strong>Q: S Snow有认证的保险吗？<\/strong><\/p><p>A: S Snow有高规格的行业保险支持俱乐部的运作。我们也非常紧密的与保险公司合作来降低每一步可能会出现的风险来保证我们会员和教练的安全。<\/p><p><strong>Q: 我们的教练团队是什么构造？<\/strong><\/p><p>A: 我们的教练团队单双板都由三级带头定期对教练展开教学及滑行培训。所有执教的教练都拥有二级以上的滑行和教学水平。<\/p><p><strong>Q: 我必须要签署一份免责协议吗？<\/strong><\/p><p>A: 是的，作为注册和参与的条件,所有参与者\/会员\/嘉宾都必须签署免责协议。点击<a href=\"https:\/\/form.jotform.com\/242658653833264\" target=\"_blank\" title=\"Link to waiver\"><strong>此处<\/strong><\/a>查看免责协议。<\/p>",
+            "row_content": "<p><strong>Q: 会员加入有什么条件？</strong></p><p>A: 您可以在官网上购买加入我们的会员。</p><p><strong>Q: 不加入会员可以参与活动or上课吗？</strong></p><p>A: 不加入会员一样可以上课哦，但是无法享受会员的折扣与福利，部分会员专属活动也需要会员身份才能参加。</p><p><strong>Q: S Snow有认证的保险吗？</strong></p><p>A: S Snow有高规格的行业保险支持俱乐部的运作。我们也非常紧密的与保险公司合作来降低每一步可能会出现的风险来保证我们会员和教练的安全。</p><p><strong>Q: 我们的教练团队是什么构造？</strong></p><p>A: 我们的教练团队单双板都由三级带头定期对教练展开教学及滑行培训。所有执教的教练都拥有二级以上的滑行和教学水平。</p><p><strong>Q: 我必须要签署一份免责协议吗？</strong></p><p>A: 是的，作为注册和参与的条件,所有参与者/会员/嘉宾都必须签署免责协议。点击<a href=\"https://form.jotform.com/242658653833264\" target=\"_blank\" title=\"Link to waiver\"><strong>此处</strong></a>查看免责协议。</p>",
             "page": ""
           }
         },
@@ -33,7 +33,7 @@
           "settings": {
             "heading": "关于我们的课程",
             "icon": "none",
-            "row_content": "<p><strong>Q: 是否有年龄限制？<\/strong><\/p><p>A: 5周岁及以上的学员都可以参与我们设计的课程及活动，部分活动未成年则需要成年人陪同进行。<\/p><p><strong>Q: 我可以从课上得到什么？<\/strong><\/p><p>A: 如果是第一次参加S Snow的课程我们会对学员进行视频滑行分析，再由专业的教练针对性的设计课程，上课过程中我们也会为学员进行视频的拍摄并且会做课后的分析记录。<\/p>",
+            "row_content": "<p><strong>Q: 是否有年龄限制？</strong></p><p>A: 5周岁及以上的学员都可以参与我们设计的课程及活动，部分活动未成年则需要成年人陪同进行。</p><p><strong>Q: 我可以从课上得到什么？</strong></p><p>A: 如果是第一次参加S Snow的课程我们会对学员进行视频滑行分析，再由专业的教练针对性的设计课程，上课过程中我们也会为学员进行视频的拍摄并且会做课后的分析记录。</p>",
             "page": ""
           }
         },
@@ -42,7 +42,7 @@
           "settings": {
             "heading": "关于我们的大巴",
             "icon": "none",
-            "row_content": "<p><strong>Q: 线路是什么？<\/strong><\/p><p>A: 我们的Bus暂定线路为 DT（Eaton\/Union）→ Finch → Vaughan → MSL. 如后续有足够数量的需求也会酌情考虑增添新的线路。<\/p><p><strong>Q: Bus的好处是什么，有保障吗？<\/strong><\/p><p>A: 我们的Bus都是准时准点固定发车的，并且所有的行程都全程有保险cover，乘客只需要提前购票后在固定时间地点上车即可。<\/p><p><strong>Q: 每周时间是否固定？<\/strong><\/p><p>A: 每周发车时间根据实际需求会有所变动，但每周的发车信息都会在各个群以及社交媒体发布。<\/p>",
+            "row_content": "<p><strong>Q: 线路是什么？</strong></p><p>A: 我们的Bus暂定线路为 DT（Eaton/Union）→ Finch → Vaughan → MSL. 如后续有足够数量的需求也会酌情考虑增添新的线路。</p><p><strong>Q: Bus的好处是什么，有保障吗？</strong></p><p>A: 我们的Bus都是准时准点固定发车的，并且所有的行程都全程有保险cover，乘客只需要提前购票后在固定时间地点上车即可。</p><p><strong>Q: 每周时间是否固定？</strong></p><p>A: 每周发车时间根据实际需求会有所变动，但每周的发车信息都会在各个群以及社交媒体发布。</p>",
             "page": ""
           }
         },
@@ -51,7 +51,7 @@
           "settings": {
             "heading": "关于我们的Happy Hour",
             "icon": "none",
-            "row_content": "<p><strong>Q: Happy hour是什么？<\/strong><\/p><p>A: 我们每周末都会组织会员与教练同滑的活动，届时互相聊天增进友谊以及分享有趣的滑行经历。<\/p><p><strong>Q: 会员可以从happy hour中获得什么？<\/strong><\/p><p>A: Happy hour的初衷是建立会员与会员，教练与教练以及会员与教练之间的交流，更多的是提供一个互相接触，交友，并且分享经验和心得的平台。<\/p>",
+            "row_content": "<p><strong>Q: Happy hour是什么？</strong></p><p>A: 我们每周末都会组织会员与教练同滑的活动，届时互相聊天增进友谊以及分享有趣的滑行经历。</p><p><strong>Q: 会员可以从happy hour中获得什么？</strong></p><p>A: Happy hour的初衷是建立会员与会员，教练与教练以及会员与教练之间的交流，更多的是提供一个互相接触，交友，并且分享经验和心得的平台。</p>",
             "page": ""
           }
         },
@@ -60,7 +60,7 @@
           "settings": {
             "heading": "其他",
             "icon": "none",
-            "row_content": "<p><strong>Q: 会员除了上述福利外还有什么活动吗？<\/strong><\/p><p>A: 除了每周固定的Happy Hour以外，我们还会组织大山的trip，雪季中不定期的会员活动，以及雪季后的会员团建活动等。<\/p>",
+            "row_content": "<p><strong>Q: 会员除了上述福利外还有什么活动吗？</strong></p><p>A: 除了每周固定的Happy Hour以外，我们还会组织大山的trip，雪季中不定期的会员活动，以及雪季后的会员团建活动等。</p>",
             "page": ""
           }
         }
