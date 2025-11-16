@@ -25,7 +25,8 @@
         "heading_wFMiKm": {
           "type": "heading",
           "settings": {
-            "heading": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].title.value }}"
+            "heading": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].title.value }}",
+            "heading_size": "h1"
           }
         },
         "text_NH3FUT": {
@@ -74,14 +75,14 @@
         "heading_iNXAWf": {
           "type": "heading",
           "settings": {
-            "heading": "{{ page.metafields.custom.safety_page_content | metafield_text: field: 'title' }}",
+            "heading": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].title.value }}",
             "heading_size": "h1"
           }
         },
         "text_Gc4HwP": {
           "type": "text",
           "settings": {
-            "text": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].content | metafield_tag }}",
+            "text": "<p>{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].content | metafield_tag }}</p>",
             "text_style": "body"
           }
         }
@@ -93,8 +94,8 @@
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
         "image": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].image_1.value }}",
-        "height": "adapt",
-        "desktop_image_width": "medium",
+        "height": "small",
+        "desktop_image_width": "small",
         "layout": "image_first",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
