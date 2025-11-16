@@ -75,7 +75,7 @@
       "settings": {
         "image": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].image_1.value }}",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_height": "adapt",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
         "desktop_content_alignment": "center",
