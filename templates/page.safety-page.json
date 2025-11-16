@@ -25,14 +25,13 @@
         "heading_wFMiKm": {
           "type": "heading",
           "settings": {
-            "heading": "<strong>阿尔卑斯责任守则</strong>",
-            "heading_size": "h1"
+            "heading": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].title.value }}"
           }
         },
-        "text_xcEeG7": {
+        "text_NH3FUT": {
           "type": "text",
           "settings": {
-            "text": "{{ page.metafields.custom.safety_page_v1.value.content | metafield_tag }}",
+            "text": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].content | metafield_tag }}",
             "text_style": "body"
           }
         },
@@ -40,22 +39,22 @@
           "type": "button",
           "settings": {
             "button_label": "加拿大滑雪安全",
-            "button_link": "{{ page.metafields.custom.safety_page_v1.value.url_1.value }}",
+            "button_link": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].url_1.value }}",
             "button_style_secondary": false
           }
         }
       },
       "block_order": [
         "heading_wFMiKm",
-        "text_xcEeG7",
+        "text_NH3FUT",
         "button_b7xrew"
       ],
       "custom_css": [
         "img {height: auto;}",
-        ".button {border-color: #da3831; outline: 2px solid #da3831; background: #FCEC52; color: black; font-weight: 600;}"
+        ".button {border-color: #da3831; outline: 2px solid #da3831; background: #fcec52; color: black; font-weight: 600;}"
       ],
       "settings": {
-        "image": "{{ page.metafields.custom.safety_page_v1.value.image_1.value }}",
+        "image": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].image_1.value }}",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
