@@ -11,13 +11,12 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "disabled": true,
       "custom_css": [
         "h1 {margin-bottom: 20px;}"
       ],
       "settings": {
         "padding_top": 32,
-        "padding_bottom": 40
+        "padding_bottom": 16
       }
     },
     "rich_text_yfiYQX": {
