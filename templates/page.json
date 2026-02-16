@@ -19,6 +19,51 @@
         "padding_bottom": 40
       }
     },
+    "rich_text_HkiXMa": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_DAXFWt": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_chpgnE": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>SSnow AI是你的专属谈判代理，它可以直接和雪具商家的 AI Agent 私下博弈，跳过公开价，拿到只属于你的折上折<br/>！在这里你可以：<br/>1️⃣ 搜索产品，一次性比较所有热门雪具商家的产品和价格<br/>2️⃣ 把多家合作商家拉进谈判桌互相竞价，自动争取更深折扣<br/>【SSnow的AI始终站在买家立场，保证比官网公开折扣更低】<br/><br/></p>"
+          }
+        },
+        "button_hF7RnK": {
+          "type": "button",
+          "settings": {
+            "button_label": "立刻体验！",
+            "button_link": "https://ssnow.shaket.xyz/",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_DAXFWt",
+        "text_chpgnE",
+        "button_hF7RnK"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "multirow_agQkJK": {
       "type": "multirow",
       "blocks": {
@@ -38,6 +83,7 @@
       "block_order": [
         "row_qnhVWq"
       ],
+      "disabled": true,
       "custom_css": [
         "img {height: auto; width: 100%; top: 12%;}"
       ],
@@ -75,6 +121,7 @@
       "block_order": [
         "column_YQDeRH"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -95,6 +142,7 @@
   },
   "order": [
     "main",
+    "rich_text_HkiXMa",
     "multirow_agQkJK",
     "multicolumn_RfWfzn"
   ]
