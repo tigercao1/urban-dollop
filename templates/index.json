@@ -72,12 +72,21 @@
             "button_link": "https://ssnow.shaket.xyz/",
             "button_style_secondary": false
           }
+        },
+        "caption_KijYnC": {
+          "type": "caption",
+          "settings": {
+            "caption": "每天更新三张AI谈判券！",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
         }
       },
       "block_order": [
         "heading_L6GzN7",
         "text_mqJyXD",
-        "button_7CRNik"
+        "button_7CRNik",
+        "caption_KijYnC"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
