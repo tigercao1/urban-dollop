@@ -90,7 +90,7 @@
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/ed234cb7beb9eb64a1734515f82244e.jpg",
+        "image": "shopify://shop_images/instruction3.jpg",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
