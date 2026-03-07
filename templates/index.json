@@ -9,6 +9,49 @@
  */
 {
   "sections": {
+    "rich_text_3Drgdi": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_dHMMER": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ikon Pass Group Sale is ON!",
+            "heading_size": "h0"
+          }
+        },
+        "text_pBdHkC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>26/27 Ikon Pass 团购即将开始，敬请期待！</p>"
+          }
+        },
+        "button_tUcAN8": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get your code now",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_dHMMER",
+        "text_pBdHkC",
+        "button_tUcAN8"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "image_banner_WzxzwU": {
       "type": "image-banner",
       "blocks": {
@@ -791,6 +834,7 @@
     }
   },
   "order": [
+    "rich_text_3Drgdi",
     "image_banner_WzxzwU",
     "image_with_text_HzUKtx",
     "image_with_text_4MdyHY",
