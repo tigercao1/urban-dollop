@@ -15,14 +15,14 @@
         "heading_dHMMER": {
           "type": "heading",
           "settings": {
-            "heading": "Ikon Pass Group Sale is ON!",
+            "heading": "26/27 Ikon Pass 团购开始！",
             "heading_size": "h0"
           }
         },
         "text_pBdHkC": {
           "type": "text",
           "settings": {
-            "text": "<h3>26/27 Ikon Pass 团购，点击下方按钮，输入code：“<strong>ssnow</strong>”，获取您的专属团购折扣码</h3>"
+            "text": "<h3>26/27 Ikon Pass 团购，点击下方按钮，输入code：“<strong>ssnow</strong>”</h3><h3>获取您的专属团购折扣码</h3>"
           }
         },
         "button_tUcAN8": {
