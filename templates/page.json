@@ -39,6 +39,7 @@
         },
         "button_hF7RnK": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "button_label": "立刻体验！",
             "button_link": "https://ssnow.shaket.xyz/",
