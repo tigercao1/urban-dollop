@@ -1,0 +1,292 @@
+{%- comment -%}
+  Instructor row — named faces, horizontal scroll.
+
+  TWO DATA SOURCES, chosen by the `source` setting:
+
+    manual      — hand-entered blocks. Use when there is no metaobject yet.
+    metaobject  — loops an existing metaobject type, default `our_team`.
+
+  The metaobject path reads the SAME `our_team` entries that already drive
+  templates/page.instructors-list.json. Nothing needs migrating or
+  re-populating: the data is already there, the section just reads it.
+
+  Field mapping (all verified present on our_team):
+    name           -> card name
+    certification  -> cert line
+    type           -> meta line   (or client_groups, switchable)
+    picture        -> portrait
+    system.url     -> link        (or collection_url, switchable)
+
+  Unused here but available: introduction, client_groups, image_1, image_2.
+
+  There is no teaching-locations field on our_team. The meta line falls back
+  to `type`, which is not the same thing. Add a field to the definition if
+  the distinction matters.
+
+  Later, SSMS owns instructor records. Per PUBLIC_API_PLAN.md the public API
+  is server-to-server only (API key held by a Shopify app proxy or app
+  server) — Liquid cannot call it directly, and a browser fetch would leak the
+  key. So the pipe becomes:
+
+      SSMS  ->  metaobjectUpsert  ->  metaobject  ->  this section
+
+  That sync can write straight into `our_team`. Point SSMS at the existing
+  type rather than creating a second one — two instructor types would mean
+  two sources of truth and a reconciliation problem nobody asked for.
+
+  Visibility rules live on the SSMS side: only approval_status = 'approved'
+  AND is_active = true are ever synced.
+
+  ---- SCALE ----
+  A bare loop over shop.metaobjects.instructor.values stops at 50 entries and
+  fails SILENTLY — no error, the 51st instructor just is not there. Storage is
+  not the constraint (a definition holds 1M entries); this is a render cap.
+
+  It lifts with {% paginate %}, which is officially supported on
+  metaobject_definition.values and takes a page size up to 250:
+
+    {%- paginate shop.metaobjects.instructor.values by 250 -%}
+      {%- for card in shop.metaobjects.instructor.values -%}
+        ...
+      {%- endfor -%}
+    {%- endpaginate -%}
+
+  Two rules that are easy to get wrong:
+    - Loop the EXPRESSION, not an assign'd copy made outside the block. An
+      assign that reads the values before {% paginate %} opens captures the
+      unpaginated (50-item) array.
+    - Keep the paginate block in the section, not a shared snippet.
+
+  But for THIS section, pagination is the wrong answer. It is a horizontal
+  face row — dumping 100+ portraits into it is both a UX and a page-weight
+  failure, and a second page of a horizontal rail is meaningless. At that
+  roster size this section should render a curated subset (SSMS sets a
+  `featured` boolean, or sort by `sort_order` and cap the loop with `limit:`),
+  and the full roster belongs on a dedicated paginated instructors page where
+  the 250-per-page block is the right tool.
+
+  Also note: addressing entries individually by handle
+  (metaobjects.instructor['some-handle']) caps at 20 unique handles per page
+  and does NOT paginate at all. Always go through .values.
+{%- endcomment -%}
+
+{%- comment -%}
+  TWO stylesheets. instructor.css owns the card internals, shared with the
+  roster page through snippets/club-instructor-card.liquid; club.css owns this
+  rail's layout. Dropping either leaves the cards half-styled.
+{%- endcomment -%}
+{{ 'instructor.css' | asset_url | stylesheet_tag }}
+{{ 'club.css' | asset_url | stylesheet_tag }}
+
+<div class="club-faces color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="club-faces__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="club-faces__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="club-faces__title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="club-faces__all link">
+          {{- section.settings.link_label -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <ul class="club-faces__rail" role="list">
+    {%- if section.settings.source == 'metaobject' -%}
+      {%- liquid
+        assign roster = shop.metaobjects[section.settings.metaobject_type].values
+        assign shown = 0
+      -%}
+
+      {%- if roster == blank or roster.size == 0 -%}
+        {%- comment -%}
+          Empty means the type handle is wrong, not that the roster is empty —
+          a mistyped handle resolves to nil and renders nothing at all. Show
+          the reason in the editor only; storefront visitors get silence.
+        {%- endcomment -%}
+        {%- if request.design_mode -%}
+          <li class="club-faces__card">
+            <p class="club-faces__name">No entries found</p>
+            <p class="club-faces__loc">
+              No metaobject type named
+              “{{ section.settings.metaobject_type }}”, or it has no entries.
+              Check the handle in Settings › Custom data › Metaobjects.
+            </p>
+          </li>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- for entry in roster limit: section.settings.limit -%}
+        {%- liquid
+          assign shown = shown | plus: 1
+
+          if section.settings.meta_field == 'client_groups'
+            assign loc = entry.client_groups.value
+          else
+            assign loc = entry.type.value
+          endif
+
+          if section.settings.link_target == 'collection'
+            assign url = entry.collection_url.value
+          else
+            assign url = entry.system.url
+          endif
+        -%}
+        {%- render 'club-instructor-card',
+          card_name: entry.name.value,
+          card_cert: entry.certification.value,
+          card_loc: loc,
+          card_image: entry.picture.value,
+          card_url: url
+        -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for block in section.blocks -%}
+        {%- render 'club-instructor-card',
+          card_name: block.settings.display_name,
+          card_cert: block.settings.certification,
+          card_loc: block.settings.teaching_locations,
+          card_image: block.settings.profile_photo,
+          card_attrs: block.shopify_attributes
+        -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Club instructors",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Data source",
+      "options": [
+        { "value": "manual", "label": "Blocks entered below" },
+        { "value": "metaobject", "label": "Metaobject entries" }
+      ],
+      "default": "metaobject",
+      "info": "Metaobject reads the same instructor records the instructors page already uses. Nothing to re-enter."
+    },
+    {
+      "type": "text",
+      "id": "metaobject_type",
+      "label": "Metaobject type handle",
+      "default": "our_team",
+      "info": "The API handle, not the display name. Find it under Settings › Custom data › Metaobjects. A wrong handle renders nothing at all."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 50,
+      "step": 2,
+      "label": "Maximum shown",
+      "default": 12,
+      "info": "This is a scrolling row, not a directory — keep it short and link to the full roster. 50 is the hard ceiling for an unpaginated metaobject loop."
+    },
+    {
+      "type": "select",
+      "id": "meta_field",
+      "label": "Meta line",
+      "options": [
+        { "value": "type", "label": "Type" },
+        { "value": "client_groups", "label": "Client groups" }
+      ],
+      "default": "type"
+    },
+    {
+      "type": "select",
+      "id": "link_target",
+      "label": "Card links to",
+      "options": [
+        { "value": "profile", "label": "Instructor profile page" },
+        { "value": "collection", "label": "Their collection" }
+      ],
+      "default": "profile"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "教练团队"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "带你上雪的人"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "全部教练"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "instructor",
+      "name": "Instructor",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "profile_photo",
+          "label": "Profile photo"
+        },
+        {
+          "type": "text",
+          "id": "display_name",
+          "label": "Display name",
+          "default": "教练姓名"
+        },
+        {
+          "type": "text",
+          "id": "certification",
+          "label": "Certification",
+          "default": "CSIA Level 2"
+        },
+        {
+          "type": "text",
+          "id": "teaching_locations",
+          "label": "Teaching locations",
+          "default": "MSL · Blue Mountain"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Club instructors",
+      "blocks": [
+        { "type": "instructor" },
+        { "type": "instructor" },
+        { "type": "instructor" },
+        { "type": "instructor" },
+        { "type": "instructor" },
+        { "type": "instructor" }
+      ]
+    }
+  ]
+}
+{% endschema %}

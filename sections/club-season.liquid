@@ -1,0 +1,215 @@
+{%- comment -%}
+  Season strip — the keystone section.
+
+  A shop shows a catalogue; a club shows a schedule. Each card carries a date,
+  a programme, and a live spot count, so the answer to "what's happening this
+  season" is visible without a click.
+
+  PoC state: cards are theme-editor blocks, hand-entered. Production state:
+  SSMS owns the schedule and syncs `club_session` metaobjects in via
+  metaobjectUpsert, and this section loops those instead. The markup and CSS do
+  not change when that swap happens — only the source of `cards` does. See the
+  commented loop at the top of the markup.
+{%- endcomment -%}
+
+{{ 'club.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Production swap, once the `club_session` metaobject definition exists:
+
+    {%- paginate shop.metaobjects.club_session.values by 250 -%}
+      {%- for card in shop.metaobjects.club_session.values -%}
+        ... card.starts_on / card.programme / card.spots_left
+      {%- endfor -%}
+    {%- endpaginate -%}
+
+  The {% paginate %} wrapper is NOT optional cleanup. A bare loop over
+  .values stops at 50 entries and fails silently — the 51st session simply
+  does not render, with no error anywhere. 250 is the max page size.
+
+  Do not hoist the values into an {% assign %} above the paginate block: that
+  captures the unpaginated 50-item array. Sort inside the block instead.
+
+  A single season is unlikely to pass 250 sessions, so one page should hold
+  it. If it ever does, this rail should be filtered to upcoming-only
+  (starts_on >= today) rather than paginated — a horizontal scroll with a
+  page 2 is not a usable control.
+{%- endcomment -%}
+
+<div class="club-season color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="club-season__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="club-season__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="club-season__title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="club-season__all link">
+          {{- section.settings.link_label -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <ul class="club-season__rail" role="list">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign is_full = false
+        if block.settings.spots <= 0
+          assign is_full = true
+        endif
+      -%}
+      <li class="club-season__card{% if is_full %} club-season__card--full{% endif %}" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.link | default: '#' }}" class="club-season__card-link">
+          <div class="club-season__card-media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '(min-width: 990px) 320px, 74vw',
+                  widths: '400, 600, 900',
+                  class: 'club-season__card-img'
+              }}
+            {%- else -%}
+              {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+
+            <span class="club-season__pill{% if is_full %} club-season__pill--full{% endif %}">
+              {%- if is_full -%}
+                {{ block.settings.full_label | default: '名额已满' }}
+              {%- else -%}
+                {{ block.settings.spots }}{{ block.settings.spots_suffix | default: ' 位' }}
+              {%- endif -%}
+            </span>
+          </div>
+
+          <div class="club-season__card-body">
+            {%- if block.settings.date != blank -%}
+              <p class="club-season__card-date">{{ block.settings.date }}</p>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="club-season__card-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.meta != blank -%}
+              <p class="club-season__card-meta">{{ block.settings.meta }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Club season",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Dated sessions for the current season. Cards scroll horizontally. Set spots to 0 to show the session as full."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "26/27"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "本季活动"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "全部日程"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "session",
+      "name": "Session",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "1月18日 · 周六"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "周末团课"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta line",
+          "default": "MSL · 6–12岁 · 教练 1:5"
+        },
+        {
+          "type": "number",
+          "id": "spots",
+          "label": "Spots left (0 = full)",
+          "default": 6
+        },
+        {
+          "type": "text",
+          "id": "spots_suffix",
+          "label": "Spots suffix",
+          "default": " 位"
+        },
+        {
+          "type": "text",
+          "id": "full_label",
+          "label": "Full label",
+          "default": "名额已满"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Club season",
+      "blocks": [
+        { "type": "session" },
+        { "type": "session" },
+        { "type": "session" },
+        { "type": "session" }
+      ]
+    }
+  ]
+}
+{% endschema %}

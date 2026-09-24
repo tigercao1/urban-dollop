@@ -1,0 +1,223 @@
+{%- comment -%}
+  Club hero — full-bleed, 100vh, video-first.
+
+  Dawn's image-banner is page-width-capped and text-forward. This is the
+  opposite: footage fills the viewport, type sits on top, nothing is centred in
+  a box. If no video is set it degrades to a still image, so the section is
+  safe to place before the footage exists.
+
+  The "next up" strip at the bottom is the club signal — a visitor should see a
+  real date and a real spot count inside one screen, before any scrolling.
+{%- endcomment -%}
+
+{{ 'club.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="club-hero{% if section.settings.show_scrim %} club-hero--scrim{% endif %}"
+  style="--hero-height: {{ section.settings.height }}vh;"
+>
+  <div class="club-hero__media">
+    {%- if section.settings.video != blank -%}
+      {{
+        section.settings.video
+        | video_tag:
+          image_size: '1100x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true
+      }}
+    {%- elsif section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3840
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '750, 1100, 1500, 1780, 2000, 3000, 3840',
+          class: 'club-hero__img'
+      }}
+    {%- else -%}
+      <div class="club-hero__placeholder">
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="club-hero__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="club-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="club-hero__title">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="club-hero__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+      <div class="club-hero__actions">
+        {%- if section.settings.button_label_1 != blank -%}
+          <a href="{{ section.settings.button_link_1 | default: '#' }}" class="button club-hero__cta">
+            {{- section.settings.button_label_1 -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a
+            href="{{ section.settings.button_link_2 | default: '#' }}"
+            class="button button--secondary club-hero__cta"
+          >
+            {{- section.settings.button_label_2 -}}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="club-hero__nextup">
+      {%- for block in section.blocks -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="club-hero__nextup-item"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.date != blank -%}
+            <span class="club-hero__nextup-date">{{ block.settings.date }}</span>
+          {%- endif -%}
+          {%- if block.settings.label != blank -%}
+            <span class="club-hero__nextup-label">{{ block.settings.label }}</span>
+          {%- endif -%}
+          {%- if block.settings.meta != blank -%}
+            <span class="club-hero__nextup-meta">{{ block.settings.meta }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Club hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Full-bleed hero. Add a looping video for the strongest effect; an image is used as fallback when no video is set."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (looping, muted)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback image"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Height",
+      "default": 90
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scrim",
+      "label": "Darken media for text legibility",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Mt St Louis Moonstone"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "S SNOW"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "多伦多滑雪俱乐部"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Primary button label",
+      "default": "26/27 报名开始"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button label",
+      "default": "成为会员"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nextup",
+      "name": "Next up",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "1月18日"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "周末团课"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta",
+          "default": "余 6 位"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Club hero",
+      "blocks": [{ "type": "nextup" }]
+    }
+  ]
+}
+{% endschema %}
