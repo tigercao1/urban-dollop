@@ -15,6 +15,24 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- comment -%}
+      CJK type. Shopify's font_picker cannot serve a CJK face, and neither
+      Fraunces nor Schibsted Grotesk carry Han glyphs — without this every
+      Chinese character on the storefront falls back to an uncontrolled OS
+      default (PingFang / Microsoft YaHei / Noto, per platform).
+
+      Google's CSS2 endpoint slices Noto Sans/Serif SC into ~100 unicode-range
+      subsets, so a page only downloads the chunks it actually uses. Swap this
+      for self-hosted chunks (cn-font-split) before launch to drop the third
+      party; the font-family stacks below do not change when you do.
+    {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap"
+    >
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -82,12 +100,20 @@
       }
 
       :root {
-        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        {%- comment -%}
+          'Noto Sans SC' sits AFTER the Latin face and BEFORE
+          fallback_families. Order is load-bearing: fallback_families ends in a
+          generic (sans-serif) which on most platforms already resolves Han
+          glyphs, so anything after it would never be reached. Browsers do
+          font matching per glyph, so Latin resolves from Schibsted and CJK
+          from Noto with no :lang() selector needed.
+        {%- endcomment -%}
+        --font-body-family: {{ settings.type_body_font.family }}, 'Noto Sans SC', {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
         --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
 
-        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-heading-family: {{ settings.type_header_font.family }}, 'Noto Serif SC', {{ settings.type_header_font.fallback_families }};
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
 
@@ -238,6 +264,22 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%} Alpine Precision: shared tokens must load AFTER Dawn's scheme loop. {%- endcomment -%}
+    {%- render 'alpine-tokens' -%}
+    {{ 'alpine-core.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%}
+      Storefront component layer. Account and auth screens are EXCLUDED on
+      purpose: they keep Dawn's stock markup and chrome, and take the new
+      palette through the colour schemes alone. There is no portal stylesheet
+      in this theme yet — when the member portal is built, add its stylesheet
+      to the empty branch below rather than widening this one.
+    {%- endcomment -%}
+    {%- assign alpine_portal_templates = 'customers/login,customers/register,customers/reset_password,customers/activate_account,customers/account,customers/addresses,customers/order' -%}
+    {%- unless alpine_portal_templates contains request.page_type -%}
+      {{ 'alpine-storefront.css' | asset_url | stylesheet_tag }}
+    {%- endunless -%}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>

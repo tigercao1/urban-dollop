@@ -1,0 +1,234 @@
+/*
+ * Alpine Precision — STOREFRONT component layer.
+ * Loaded on every non-account page.
+ *
+ * Shares the palette, focus ring, status set and contour motif with the
+ * portal via alpine-tokens + alpine-core. Diverges on type voice, motion
+ * and density.
+ *
+ * TYPE VOICE (split, option a):
+ *   Storefront headlines use the BODY grotesque at large weights.
+ *   The display serif (Fraunces) is reserved for the wordmark and section
+ *   eyebrows only — never below 3.1rem.
+ *
+ * This file is the migration surface for the future Apple-direction
+ * storefront. Keep bespoke layout work here.
+ */
+
+/* ==========================================================================
+   1. Type voice — grotesque headlines, serif reserved for brand moments
+   ========================================================================== */
+
+.h0,
+.h1,
+h1,
+.h2,
+h2,
+.h3,
+h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Brand moments keep the display serif. */
+.header__heading-link .h2,
+.alpine-eyebrow,
+.alpine-wordmark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.alpine-eyebrow {
+  display: block;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--slate);
+  margin-bottom: 0.8rem;
+}
+
+/* ==========================================================================
+   2. Motion — retire the ambient/parallax flourishes
+   Storefront keeps hover lift and scroll reveal; it loses the multi-second
+   ambient loops that fight "restraint over decoration".
+   ========================================================================== */
+
+.animate--ambient,
+.animate--ambient img {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-trigger.animate--slide-in,
+  .scroll-trigger.animate--fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   3. Prices — display serif for the number, slate for the compare-at
+   ========================================================================== */
+
+.price__regular .price-item,
+.price__sale .price-item--sale {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+.price__sale .price-item--regular,
+.price s.price-item {
+  color: var(--slate);
+}
+
+.price--on-sale .price-item--sale {
+  color: var(--red-press);
+}
+
+/* ==========================================================================
+   4. Third-party widget seams
+   Infinite Options injects its markup from their CDN, so alpine-core cannot
+   reach it. These are best-effort container-level nudges only; they are
+   expected to be brittle across app releases.
+   ========================================================================== */
+
+.infiniteoptions-container,
+[id^='infiniteoptions'],
+[class*='infiniteoptions'] {
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.infiniteoptions-container input[type='text'],
+.infiniteoptions-container select,
+.infiniteoptions-container textarea,
+[class*='infiniteoptions'] input[type='text'],
+[class*='infiniteoptions'] select,
+[class*='infiniteoptions'] textarea {
+  border: var(--hairline);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: var(--surface);
+}
+
+/* ==========================================================================
+   5. Waiver link (JotForm) — hosted form retained, styling brought in-theme
+   ========================================================================== */
+
+.waiver-link {
+  display: inline-block;
+  margin-top: 1.6rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  color: var(--surface);
+  background-color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: var(--radius-md);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.waiver-link:hover,
+.waiver-link:focus {
+  color: var(--surface);
+  background-color: var(--red-press);
+  border-color: var(--red-press);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   6. Contour surfaces — 404 panel and empty states
+   Markup contract: the wrapper carries `surface--contour` and renders
+   {% render 'pattern-contour' %} as its FIRST DIRECT CHILD, so alpine-core's
+   `.surface--contour > *:not(.pattern-contour)` selector applies.
+   ========================================================================== */
+
+.template-404__panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 8rem 2.4rem;
+  margin: 0 auto;
+  max-width: 76rem;
+  text-align: center;
+  /* .color-inverse supplies the navy scheme; .gradient is deliberately absent
+     so the contour reads against a flat field. */
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+@media screen and (min-width: 750px) {
+  .template-404__panel {
+    padding: 11rem 6rem;
+  }
+}
+
+/* The 404 headline deliberately keeps the grotesque from section 1. Fraunces
+   is reserved for the wordmark and eyebrows on the storefront. */
+
+/* --- Empty states ------------------------------------------------------- */
+
+.collection--empty.surface--contour,
+.template-search__no-results.surface--contour {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  background-color: var(--sunken);
+}
+
+/* The zero-query search landing is a full-bleed section wrapper, not a panel:
+   a radius would land at the viewport edge. It gets height for the contour to
+   read against instead. The SVG clips to its own viewport, so no overflow
+   rule is needed here. */
+.template-search--empty.surface--contour {
+  min-height: 48rem;
+}
+
+.template-search__no-results.surface--contour {
+  padding: 4.8rem 2.4rem;
+  margin-top: 2.4rem;
+  border: var(--hairline);
+}
+
+.template-search__no-results p {
+  margin: 0;
+  color: var(--slate);
+}
+
+/* The contour panel supplies the vertical rhythm, so the stock 10/15rem
+   title margins inside an empty collection would double it up. */
+.collection--empty.surface--contour .title-wrapper {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+/* alpine-core promotes every non-contour direct child to position:relative.
+   .loading-overlay is absolutely positioned by design (component-loading-
+   overlay.css) and would otherwise occupy inline space in the empty state. */
+.surface--contour > .loading-overlay {
+  position: absolute;
+}
+
+/* .banner__box spaces its children with structural sibling selectors
+   (section-image-banner.css: `> * + *`, `> *:first-child`, `> * + .banner__text`,
+   `> * + .banner__buttons`). Prepending the decorative contour SVG steals
+   :first-child from the real content and shifts it down 1-2rem. Three classes
+   (0,3,0) so this beats the body-loaded section stylesheet regardless of order. */
+.banner__box.surface--contour > .pattern-contour + * {
+  margin-top: 0;
+}
+
+/* .content-container rounds its corners via --text-boxes-radius but sets no
+   overflow; the inset SVG rectangle would paint over them if a merchant ever
+   raises that setting above 0. */
+.banner__box.surface--contour {
+  overflow: hidden;
+}
