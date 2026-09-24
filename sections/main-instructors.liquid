@@ -1,0 +1,539 @@
+{%- comment -%}
+  Full instructor roster — one paginated grid, read straight from the
+  metaobject definition.
+
+  REPLACES the two-metafield repeater arrangement on
+  templates/page.instructors-list.json:
+
+    before   page "our-team"
+             ├─ custom.our_team    list.metaobject_reference → 50 refs → section A
+             └─ custom.our_team_2  list.metaobject_reference → 22 refs → section B
+
+    after    shop.metaobjects.our_team.values → 72 → this one section
+
+  Nothing migrates. The 72 entries are already shop-scoped — a metaobject
+  definition always is. What the page metafields held was a pointer LIST, and
+  that pointer layer is what goes away. The split into two fields existed only
+  because looping a list metafield silently stops at 50.
+
+  WHY {% paginate %} WHEN 72 < 250
+  A bare loop over .values stops at 50 with no error — instructor 51 through
+  72 would simply not be on the page, and nothing would tell you. {% paginate %}
+  is officially supported on metaobject_definition.values and takes a page size
+  up to 250, so at 72 entries the wrapper lifts the cap and the pagination UI
+  never renders. It stays dormant until entry 251.
+
+  Loop the EXPRESSION, not a copy made before the block opens — an assign that
+  reads .values above {% paginate %} captures the unpaginated 50-item array.
+  Assigns INSIDE the block are fine, which is where the sort/filter happen.
+
+  WHAT THIS SECTION CANNOT DO THAT THE METAFIELD LISTS COULD
+  1. Manual ordering. A list metafield is a hand-sorted array. .values is not.
+     Ordering needs a real field on the definition — see `sort_by` below.
+  2. Act as a publish gate. Previously an instructor appeared because someone
+     added the reference. Here EVERY entry appears unless filtered — see
+     `visible_field`. Both default to off so this section behaves identically
+     to the old one until those fields actually exist.
+{%- endcomment -%}
+
+{{ 'instructor.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.enable_filter -%}
+  <script src="{{ 'instructor-filter.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- comment -%}
+  The type handle is HARDCODED, not a setting.
+
+  {% paginate %} requires a static path. Passing a bracket lookup built from a
+  variable -- shop.metaobjects[handle].values -- fails outright with
+  "Array ... is not paginateable". A theme setting therefore cannot drive it.
+  Changing the roster type means editing this file, which is honest: the
+  alternative is a setting that silently does nothing.
+
+  club-instructors keeps its metaobject_type setting because it does NOT
+  paginate -- bracket lookups are fine everywhere except the paginate tag.
+{%- endcomment -%}
+
+{%- assign all_entries = shop.metaobjects.our_team.values -%}
+
+<div class="club-roster color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- comment -%}
+      h2, not h1. The <h1> on a page template belongs to main-page, which
+      renders {{ page.title }} -- the title set in admin. Two h1s is the
+      "double title" symptom: one from main-page, one from here.
+
+      Leave this heading BLANK when the admin page title already says it.
+      Fill it in only when the section needs a label distinct from the page
+      title, e.g. page title "教练团队" + section heading "认证教练".
+    {%- endcomment -%}
+    {%- if section.settings.heading != blank -%}
+      <div class="club-roster__head">
+        <h2 class="club-roster__title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="club-roster__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if all_entries == blank or all_entries.size == 0 -%}
+      {%- comment -%}
+        A wrong type handle resolves to nil and renders nothing, silently.
+        Say so in the editor; storefront visitors get nothing rather than a
+        broken-looking diagnostic.
+      {%- endcomment -%}
+      {%- if request.design_mode -%}
+        <p class="club-roster__empty">
+          No metaobject type named <code>our_team</code>, or it has no entries.
+          Check the API handle under Settings › Custom data › Metaobjects — the
+          handle, not the display name. Also confirm the definition is exposed
+          to storefronts, or <code>shop.metaobjects</code> cannot see it.
+        </p>
+      {%- endif -%}
+    {%- else -%}
+      {%- paginate shop.metaobjects.our_team.values by section.settings.per_page -%}
+        {%- comment -%}
+          Re-read the EXPRESSION inside the block. The assign made above the
+          paginate tag is used only for the existence check and the total
+          count, never for iteration — an assign created before the block
+          opens captures the unpaginated 50-item array.
+        {%- endcomment -%}
+        {%- assign roster = shop.metaobjects.our_team.values -%}
+
+        {%- if section.settings.visible_field != blank -%}
+          {%- assign roster = roster | where: section.settings.visible_field, true -%}
+        {%- endif -%}
+
+        {%- if section.settings.sort_by != blank -%}
+          {%- assign roster = roster | sort: section.settings.sort_by -%}
+        {%- endif -%}
+
+        {%- if request.design_mode -%}
+          <p class="club-roster__count">
+            Showing {{ roster.size }} of {{ all_entries.size }} entries.
+            (Editor only — visitors do not see this.)
+          </p>
+          {%- if section.settings.enable_filter and paginate.pages > 1 -%}
+            <p class="club-roster__empty">
+              WARNING: the roster is split across {{ paginate.pages }} pages, but
+              filtering is client-side — it can only filter the cards on the
+              current page while appearing to search everything. Raise “Entries
+              per page”, or turn filtering off until this becomes a server-side
+              filter.
+            </p>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- liquid
+          assign delim = ','
+          assign f1 = section.settings.facet_1_field
+          assign f2 = section.settings.facet_2_field
+        -%}
+
+        {%- comment -%}
+          Facet values are DERIVED from the rendered data, not configured.
+          Nobody maintains a list of levels that drifts out of sync with the
+          entries.
+
+          The cost: certification and type are FREE TEXT. “CASI 2”, “CASI II”
+          and “casi 2” are three facets. The chips show exactly what is typed
+          in the entries, so inconsistent data looks inconsistent here rather
+          than being quietly merged into something wrong.
+        {%- endcomment -%}
+
+        {%- capture facet_1_raw -%}
+          {%- for entry in roster -%}
+            {%- render 'club-instructor-field', entry: entry, field: f1 -%}{{ delim }}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- capture facet_2_raw -%}
+          {%- for entry in roster -%}
+            {%- render 'club-instructor-field', entry: entry, field: f2 -%}{{ delim }}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- comment -%}
+          One field may hold several values (“CASI 2, CSIA 1”), so split on the
+          delimiter rather than treating the field as one token. Liquid cannot
+          map a filter over an array, so pad is normalised on the whole string
+          before splitting — this is why “ , ” spacing is collapsed here.
+        {%- endcomment -%}
+        {%- assign facet_1_values = facet_1_raw
+          | replace: ' ,', ','
+          | replace: ', ', ','
+          | split: delim
+          | uniq
+          | sort
+        -%}
+        {%- assign facet_2_values = facet_2_raw
+          | replace: ' ,', ','
+          | replace: ', ', ','
+          | split: delim
+          | uniq
+          | sort
+        -%}
+
+        <instructor-filter>
+          {%- if section.settings.enable_filter -%}
+            {%- comment -%}
+              no-js-hidden: with JS off the controls never appear and the full
+              roster renders. A visible control that does nothing is worse than
+              no control.
+            {%- endcomment -%}
+            <div class="club-filter no-js-hidden">
+              {%- if section.settings.filter_by_name -%}
+                <div class="club-filter__search">
+                  <label class="visually-hidden" for="InstructorSearch-{{ section.id }}">
+                    {{ section.settings.search_label }}
+                  </label>
+                  <input
+                    id="InstructorSearch-{{ section.id }}"
+                    type="search"
+                    class="club-filter__input field__input"
+                    placeholder="{{ section.settings.search_label | escape }}"
+                    autocomplete="off"
+                    data-instructor-search
+                  >
+                </div>
+              {%- endif -%}
+
+              {%- if f1 != blank and facet_1_values.size > 0 -%}
+                <fieldset class="club-filter__group">
+                  <legend class="club-filter__legend">{{ section.settings.facet_1_label }}</legend>
+                  {%- for value in facet_1_values -%}
+                    {%- if value != blank -%}
+                      <button
+                        type="button"
+                        class="club-filter__chip"
+                        aria-pressed="false"
+                        data-facet-group="1"
+                        data-facet-value="{{ value | escape }}"
+                      >
+                        {{- value -}}
+                      </button>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </fieldset>
+              {%- endif -%}
+
+              {%- if f2 != blank and facet_2_values.size > 0 -%}
+                <fieldset class="club-filter__group">
+                  <legend class="club-filter__legend">{{ section.settings.facet_2_label }}</legend>
+                  {%- for value in facet_2_values -%}
+                    {%- if value != blank -%}
+                      <button
+                        type="button"
+                        class="club-filter__chip"
+                        aria-pressed="false"
+                        data-facet-group="2"
+                        data-facet-value="{{ value | escape }}"
+                      >
+                        {{- value -}}
+                      </button>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </fieldset>
+              {%- endif -%}
+
+              <div class="club-filter__status">
+                <p
+                  class="club-filter__count"
+                  role="status"
+                  aria-live="polite"
+                  data-instructor-count
+                  data-template="{{ section.settings.count_text | escape }}"
+                ></p>
+                <button type="button" class="club-filter__clear link" hidden data-instructor-clear>
+                  {{- section.settings.clear_label -}}
+                </button>
+              </div>
+            </div>
+
+            <p class="club-roster__empty" hidden data-instructor-empty>
+              {{ section.settings.no_results_text }}
+            </p>
+          {%- endif -%}
+
+        <ul
+          class="club-roster__grid list-unstyled"
+          style="--roster-columns: {{ section.settings.columns }};"
+          role="list"
+        >
+          {%- for entry in roster -%}
+            {%- liquid
+              # Never write a percent-brace sequence inside this tag body,
+              # not even in a comment line. The tokenizer closes the tag at
+              # the first closing delimiter it sees and dumps the remainder
+              # to the page as literal text.
+              if section.settings.meta_field == 'client_groups'
+                assign loc = entry.client_groups.value
+              else
+                assign loc = entry.type.value
+              endif
+
+              if section.settings.link_target == 'collection'
+                assign url = entry.collection_url.value
+              else
+                assign url = entry.system.url
+              endif
+
+              assign bio = blank
+              if section.settings.show_bio
+                assign bio = entry.introduction.value
+              endif
+            -%}
+
+            {%- comment -%}
+              Facet payload is pipe-DELIMITED and pipe-WRAPPED so the JS can
+              substring-test a whole token: "|CASI 1|" cannot match inside
+              "|CASI 10|". Without the wrapping, short values match longer
+              ones and the filter quietly over-selects.
+
+              Build the two payloads SEPARATELY, then assemble. An earlier
+              version ran the comma->pipe rewrite across the whole attribute
+              string, which also rewrote data-name — so an instructor named
+              "Chen, Wei" became "Chen| Wei" and stopped matching a search for
+              their own name.
+            {%- endcomment -%}
+            {%- capture facet_1_cell -%}
+              {%- render 'club-instructor-field', entry: entry, field: f1 -%}
+            {%- endcapture -%}
+            {%- capture facet_2_cell -%}
+              {%- render 'club-instructor-field', entry: entry, field: f2 -%}
+            {%- endcapture -%}
+            {%- assign facet_1_cell = facet_1_cell
+              | strip
+              | replace: ' ,', '|'
+              | replace: ', ', '|'
+              | replace: ',', '|'
+              | escape
+            -%}
+            {%- assign facet_2_cell = facet_2_cell
+              | strip
+              | replace: ' ,', '|'
+              | replace: ', ', '|'
+              | replace: ',', '|'
+              | escape
+            -%}
+            {%- capture card_data -%}
+              data-instructor-card
+              data-name="{{ entry.name.value | escape }}"
+              data-facet1="|{{ facet_1_cell }}|"
+              data-facet2="|{{ facet_2_cell }}|"
+            {%- endcapture -%}
+
+            {%- render 'club-instructor-card',
+              card_name: entry.name.value,
+              card_cert: entry.certification.value,
+              card_loc: loc,
+              card_bio: bio,
+              card_image: entry.picture.value,
+              card_url: url,
+              card_class: 'club-roster__item',
+              card_sizes: '(min-width: 990px) 20vw, 44vw',
+              card_data: card_data
+            -%}
+          {%- endfor -%}
+        </ul>
+        </instructor-filter>
+
+        {%- render 'pagination', paginate: paginate -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instructor roster",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads the instructor metaobject directly. Replaces the paired list-metafield sections — no page metafield is involved, and there is no 50-entry cap."
+    },
+    {
+      "type": "paragraph",
+      "content": "Reads the our_team metaobject. The type handle is fixed in the section file because Shopify's paginate tag only accepts a static path — a setting here would silently do nothing."
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 50,
+      "max": 250,
+      "step": 25,
+      "label": "Entries per page",
+      "default": 250,
+      "info": "250 is the maximum. At 72 instructors everything fits on one page and no pagination controls appear. Do not set this below your roster size unless you want paging."
+    },
+    {
+      "type": "header",
+      "content": "Ordering and visibility"
+    },
+    {
+      "type": "paragraph",
+      "content": "Both are blank by default, which reproduces the old behaviour exactly. Fill them in only after adding the matching fields to the metaobject definition."
+    },
+    {
+      "type": "text",
+      "id": "sort_by",
+      "label": "Sort by field",
+      "info": "Field handle to order by, e.g. sort_order. Leave blank for the definition's own order. Use an INTEGER field — sorting a text field gives 1, 10, 11, 2. Verify the result against a known order before trusting it."
+    },
+    {
+      "type": "text",
+      "id": "visible_field",
+      "label": "Visibility field",
+      "info": "Boolean field handle, e.g. visible. Only entries set to true are shown. Leave blank to show every entry. Without this, adding an entry publishes it immediately."
+    },
+    {
+      "type": "header",
+      "content": "Filtering"
+    },
+    {
+      "type": "paragraph",
+      "content": "Filters run in the browser against the cards already on the page — instant, no reload. Facet values are read from the entries themselves, so they always match the data. Because certification and type are free text, 'CASI 2' and 'CASI II' appear as two separate chips. Clean the entries, not this setting."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filter",
+      "label": "Enable filtering",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_by_name",
+      "label": "Search by name",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "facet_1_field",
+      "label": "Filter group 1 — field",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "certification", "label": "Certification" },
+        { "value": "type", "label": "Type" },
+        { "value": "client_groups", "label": "Client groups" }
+      ],
+      "default": "certification"
+    },
+    {
+      "type": "text",
+      "id": "facet_1_label",
+      "label": "Filter group 1 — label",
+      "default": "等级"
+    },
+    {
+      "type": "select",
+      "id": "facet_2_field",
+      "label": "Filter group 2 — field",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "certification", "label": "Certification" },
+        { "value": "type", "label": "Type" },
+        { "value": "client_groups", "label": "Client groups" }
+      ],
+      "default": "type"
+    },
+    {
+      "type": "text",
+      "id": "facet_2_label",
+      "label": "Filter group 2 — label",
+      "default": "项目"
+    },
+    {
+      "type": "text",
+      "id": "search_label",
+      "label": "Search placeholder",
+      "default": "搜索教练姓名"
+    },
+    {
+      "type": "text",
+      "id": "count_text",
+      "label": "Result count text",
+      "default": "显示 [shown] / [total] 位教练",
+      "info": "[shown] and [total] are replaced with numbers."
+    },
+    {
+      "type": "text",
+      "id": "clear_label",
+      "label": "Clear button",
+      "default": "清除筛选"
+    },
+    {
+      "type": "text",
+      "id": "no_results_text",
+      "label": "No results text",
+      "default": "没有符合条件的教练。"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Columns (desktop)",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bio",
+      "label": "Show introduction",
+      "default": false,
+      "info": "Off keeps the grid scannable. At 72 entries, bios make the page very long."
+    },
+    {
+      "type": "select",
+      "id": "meta_field",
+      "label": "Meta line",
+      "options": [
+        { "value": "type", "label": "Type" },
+        { "value": "client_groups", "label": "Client groups" }
+      ],
+      "default": "type"
+    },
+    {
+      "type": "select",
+      "id": "link_target",
+      "label": "Card links to",
+      "options": [
+        { "value": "profile", "label": "Instructor profile page" },
+        { "value": "collection", "label": "Their collection" }
+      ],
+      "default": "profile"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank on a page template — the page title above already acts as the heading. Filling both in produces two stacked titles."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instructor roster"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,21 @@
+{%- comment -%}
+  Echo one named field off an our_team entry.
+
+  Exists because bracket lookup on a metaobject entry (entry[field_name]) is
+  not something I could verify against live data, and a silent nil there would
+  produce empty facets that look like a data problem rather than a code one.
+  An explicit case statement cannot fail that way.
+
+  Adding a field to the definition means adding a `when` here AND an option to
+  the facet selects in main-instructors.liquid.
+
+  Accepts:
+    entry  metaobject entry
+    field  string — one of the whens below
+{%- endcomment -%}
+
+{%- case field -%}
+  {%- when 'certification' -%}{{ entry.certification.value }}
+  {%- when 'type' -%}{{ entry.type.value }}
+  {%- when 'client_groups' -%}{{ entry.client_groups.value }}
+{%- endcase -%}

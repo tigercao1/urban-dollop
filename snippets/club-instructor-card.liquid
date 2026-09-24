@@ -1,0 +1,63 @@
+{%- comment -%}
+  One instructor card. Shared by every surface that shows instructors so the
+  homepage rail and the full roster page can never drift apart visually.
+
+  Accepts (all optional except card_name):
+    card_name   string
+    card_cert   string
+    card_loc    string
+    card_bio    string — rendered only where there is room for it
+    card_image  image object OR image url string
+    card_url    string — wraps the card in a link when present
+    card_attrs  string — block.shopify_attributes, blank on metaobject paths
+    card_class  string — extra classes on the <li>. The rail passes nothing;
+                the roster grid passes its grid item classes.
+    card_sizes  string — responsive sizes attribute, defaults to the rail's
+    card_data   string — raw data-* attributes. The roster passes the facet
+                payload the filter reads; the rail passes nothing, so the
+                filter JS finds no cards there and does nothing.
+{%- endcomment -%}
+
+{%- liquid
+  assign sizes = card_sizes | default: '(min-width: 990px) 220px, 44vw'
+-%}
+
+<li class="club-faces__card {{ card_class }}" {{ card_attrs }} {{ card_data }}>
+  {%- if card_url != blank -%}
+    <a href="{{ card_url }}" class="club-faces__link">
+  {%- endif -%}
+
+  <div class="club-faces__media">
+    {%- if card_image != blank -%}
+      {{
+        card_image
+        | image_url: width: 600
+        | image_tag:
+          loading: 'lazy',
+          sizes: sizes,
+          widths: '220, 330, 440, 600',
+          class: 'club-faces__img'
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg club-faces__img' }}
+    {%- endif -%}
+  </div>
+
+  <p class="club-faces__name">{{ card_name }}</p>
+
+  {%- if card_cert != blank -%}
+    <p class="club-faces__cert">{{ card_cert }}</p>
+  {%- endif -%}
+
+  {%- if card_loc != blank -%}
+    <p class="club-faces__loc">{{ card_loc }}</p>
+  {%- endif -%}
+
+  {%- if card_bio != blank -%}
+    <div class="club-faces__bio rte">{{ card_bio }}</div>
+  {%- endif -%}
+
+  {%- if card_url != blank -%}
+    </a>
+  {%- endif -%}
+</li>

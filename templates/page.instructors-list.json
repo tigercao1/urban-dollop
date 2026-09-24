@@ -88,6 +88,21 @@
         "padding_bottom": 36
       }
     },
+    "roster": {
+      "type": "main-instructors",
+      "settings": {
+        "per_page": 250,
+        "sort_by": "",
+        "visible_field": "",
+        "columns": 5,
+        "show_bio": false,
+        "meta_field": "type",
+        "link_target": "profile",
+        "heading": "",
+        "subheading": "",
+        "color_scheme": "background-1"
+      }
+    },
     "multicolumn_R4MqcL": {
       "type": "multicolumn",
       "blocks": {
@@ -106,6 +121,7 @@
       "block_order": [
         "column_FD8JHJ"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -141,6 +157,7 @@
       "block_order": [
         "column_WmxYaE"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -161,6 +178,7 @@
   },
   "order": [
     "main",
+    "roster",
     "fc5107c4-cded-40b9-8700-1dae25e2768d",
     "multirow_fNT7Mh",
     "multicolumn_R4MqcL",

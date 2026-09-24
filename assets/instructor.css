@@ -1,0 +1,281 @@
+/*
+ * instructor.css — roster page + shared instructor card
+ *
+ * EVERY custom property here is written with a FALLBACK:
+ *
+ *     color: var(--ink, rgb(var(--color-foreground)));
+ *              ^^^^^   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *              Alpine  Dawn's own scheme token
+ *
+ * On stock Dawn the Alpine token is undefined and the fallback wins, so this
+ * page looks like the rest of the theme. When the Alpine token layer ships,
+ * the same declarations pick it up with no edit here and no merge conflict.
+ * The dependency runs one way: the palette enhances this file, never gates it.
+ *
+ * No literal hex anywhere. Fallbacks are Dawn scheme variables, so recolouring
+ * a scheme in the theme editor recolours this page too — today, before any
+ * token layer exists.
+ *
+ * Scope: the card internals (.club-faces__*), the roster grid
+ * (.club-roster__*) and the filter (.club-filter__*). The homepage rail that
+ * also uses this card owns its own layout elsewhere.
+ */
+
+/* ---------------------------------------------------------------- card ---- */
+
+/* Shared with the homepage rail via snippets/club-instructor-card.liquid, so
+   a change here shows up in both places by construction, not by discipline. */
+
+.club-faces__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.club-faces__link:hover .club-faces__img,
+.club-faces__link:focus-visible .club-faces__img {
+  transform: scale(1.03);
+}
+
+.club-faces__link:hover .club-faces__name {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.club-faces__media {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-md, var(--border-radius, 0.4rem));
+  margin-bottom: 1.2rem;
+  background: var(--sunken, rgba(var(--color-foreground), 0.04));
+}
+
+.club-faces__img,
+.club-faces__media .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms var(--ease, ease);
+}
+
+.club-faces__name {
+  font-family: var(--font-body, var(--font-body-family));
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  color: var(--ink, rgb(var(--color-foreground)));
+}
+
+.club-faces__cert {
+  font-size: 1.3rem;
+  color: var(--red, rgb(var(--color-button)));
+  margin: 0 0 0.2rem;
+}
+
+.club-faces__loc {
+  font-size: 1.3rem;
+  color: var(--slate, rgba(var(--color-foreground), 0.62));
+  margin: 0;
+}
+
+.club-faces__bio {
+  font-size: 1.4rem;
+  line-height: var(--cjk-leading, 1.7);
+  color: var(--slate, rgba(var(--color-foreground), 0.62));
+  margin-top: 0.8rem;
+}
+
+.club-faces__bio > :first-child {
+  margin-top: 0;
+}
+
+.club-faces__bio > :last-child {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------- filter ---- */
+
+.club-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.6rem 2.4rem;
+  padding: 0 0 2.4rem;
+  margin-bottom: 3.2rem;
+  border-bottom: var(--hairline, 0.1rem solid rgba(var(--color-foreground), 0.12));
+}
+
+.club-filter__search {
+  flex: 1 1 24rem;
+  max-width: 32rem;
+}
+
+.club-filter__input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  font-size: 1.5rem;
+  border: var(--hairline, 0.1rem solid rgba(var(--color-foreground), 0.12));
+  border-radius: var(--radius-md, var(--border-radius, 0.4rem));
+  background: var(--surface, rgb(var(--color-background)));
+  color: var(--ink, rgb(var(--color-foreground)));
+}
+
+.club-filter__group {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.club-filter__legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate, rgba(var(--color-foreground), 0.62));
+}
+
+.club-filter__chip {
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 0.8rem 1.4rem;
+  border: var(--hairline, 0.1rem solid rgba(var(--color-foreground), 0.12));
+  border-radius: 999px;
+  background: var(--surface, rgb(var(--color-background)));
+  color: var(--ink, rgb(var(--color-foreground)));
+  cursor: pointer;
+  transition: background var(--dur, var(--duration-default)) var(--ease, ease),
+    color var(--dur, var(--duration-default)) var(--ease, ease),
+    border-color var(--dur, var(--duration-default)) var(--ease, ease);
+}
+
+.club-filter__chip:hover {
+  border-color: var(--navy, rgb(var(--color-foreground)));
+}
+
+.club-filter__chip[aria-pressed='true'] {
+  background: var(--navy, rgb(var(--color-foreground)));
+  border-color: var(--navy, rgb(var(--color-foreground)));
+  color: var(--surface, rgb(var(--color-background)));
+}
+
+.club-filter__status {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-left: auto;
+}
+
+.club-filter__count {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--slate, rgba(var(--color-foreground), 0.62));
+  font-variant-numeric: tabular-nums;
+}
+
+.club-filter__clear {
+  font-size: 1.4rem;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  color: var(--red, rgb(var(--color-button)));
+}
+
+/* The grid sets display on its children, which outranks the hidden attribute's
+   UA default. Without this, filtered-out cards stay visible. */
+.club-roster__grid > li[hidden] {
+  display: none !important;
+}
+
+/* -------------------------------------------------------------- roster ---- */
+
+.club-roster {
+  padding: 4rem 0 6.4rem;
+}
+
+.club-roster__head {
+  margin-bottom: 4rem;
+  max-width: 60rem;
+}
+
+.club-roster__title {
+  font-family: var(--font-body, var(--font-body-family));
+  font-size: clamp(3.2rem, 5vw, 5.2rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.club-roster__sub {
+  font-size: 1.6rem;
+  line-height: var(--cjk-leading, 1.7);
+  color: var(--slate, rgba(var(--color-foreground), 0.62));
+  margin: 1.2rem 0 0;
+}
+
+.club-roster__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--roster-columns, 5), 1fr);
+  gap: 3.2rem 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* A no-op today: nothing in this PR gives the card a flex basis. It exists
+   because the homepage rail does, and the two share one card snippet — this
+   is what stops the rail's 22rem basis from overflowing the grid track when
+   that section ships. Deleting it now costs nothing and breaks the grid later. */
+.club-roster__item {
+  flex: none;
+  scroll-snap-align: none;
+}
+
+.club-roster__empty,
+.club-roster__count {
+  font-size: 1.4rem;
+  line-height: var(--cjk-leading, 1.7);
+  color: var(--slate, rgba(var(--color-foreground), 0.62));
+  padding: 1.2rem 1.6rem;
+  border: var(--hairline, 0.1rem solid rgba(var(--color-foreground), 0.12));
+  border-radius: var(--radius-md, var(--border-radius, 0.4rem));
+  background: var(--sunken, rgba(var(--color-foreground), 0.04));
+}
+
+.club-roster__count {
+  margin-bottom: 2.4rem;
+}
+
+@media screen and (max-width: 989px) {
+  .club-roster__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .club-roster__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem 1.2rem;
+  }
+
+  .club-filter__status {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* -------------------------------------------------------------- motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .club-faces__link:hover .club-faces__img,
+  .club-faces__link:focus-visible .club-faces__img {
+    transform: none;
+  }
+}
