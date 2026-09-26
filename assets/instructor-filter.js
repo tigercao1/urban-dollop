@@ -21,52 +21,88 @@
  * the full roster renders and nothing broken is visible.
  */
 
+const SEPARATORS = /[,，|｜丨/／、]/;
+
+const tokenize = (text) =>
+  (text || '')
+    .split(SEPARATORS)
+    .map((part) => part.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+
+const keyOf = (value) => value.toLowerCase();
+
 class InstructorFilter extends HTMLElement {
   connectedCallback() {
-    this.cards = Array.from(this.querySelectorAll('[data-instructor-card]'));
+    this.cards = Array.from(this.querySelectorAll('[data-instructor-card]')).map((el) => ({
+      el,
+      name: (el.dataset.name || '').toLowerCase(),
+      facets: {
+        1: new Set(tokenize(el.dataset.facet1).map(keyOf)),
+        2: new Set(tokenize(el.dataset.facet2).map(keyOf)),
+      },
+    }));
     this.search = this.querySelector('[data-instructor-search]');
-    this.chips = Array.from(this.querySelectorAll('[data-facet-value]'));
     this.countEl = this.querySelector('[data-instructor-count]');
     this.emptyEl = this.querySelector('[data-instructor-empty]');
     this.clearEl = this.querySelector('[data-instructor-clear]');
 
     this.query = '';
-    // One Set per facet group. Multi-select WITHIN a group is OR
-    // ("CASI 2 or CSIA 1"), across groups it is AND.
     this.active = { 1: new Set(), 2: new Set() };
+    this.chips = [];
+
+    this.querySelectorAll('fieldset[data-facet-group]').forEach((fieldset) => {
+      this.buildChips(fieldset, fieldset.dataset.facetGroup);
+    });
 
     if (this.search) {
       this.search.addEventListener('input', (e) => {
         this.query = e.target.value.trim().toLowerCase();
         this.apply();
       });
-      // Enter in a lone text input would submit an enclosing form and reload.
       this.search.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') e.preventDefault();
       });
     }
-
-    this.chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        const group = chip.dataset.facetGroup;
-        const value = chip.dataset.facetValue;
-        const set = this.active[group];
-        if (set.has(value)) {
-          set.delete(value);
-          chip.setAttribute('aria-pressed', 'false');
-        } else {
-          set.add(value);
-          chip.setAttribute('aria-pressed', 'true');
-        }
-        this.apply();
-      });
-    });
 
     if (this.clearEl) {
       this.clearEl.addEventListener('click', () => this.clear());
     }
 
     this.apply();
+  }
+
+  buildChips(fieldset, group) {
+    const labels = new Map();
+    this.cards.forEach((card) => {
+      tokenize(card.el.dataset['facet' + group]).forEach((value) => {
+        const key = keyOf(value);
+        if (!labels.has(key)) labels.set(key, value);
+      });
+    });
+    if (labels.size === 0) return;
+
+    const sorted = Array.from(labels.entries()).sort((a, b) =>
+      a[1].localeCompare(b[1], undefined, { numeric: true, sensitivity: 'base' })
+    );
+
+    sorted.forEach(([key, label]) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'club-filter__chip';
+      chip.setAttribute('aria-pressed', 'false');
+      chip.textContent = label;
+      chip.addEventListener('click', () => {
+        const set = this.active[group];
+        const pressed = !set.has(key);
+        if (pressed) set.add(key);
+        else set.delete(key);
+        chip.setAttribute('aria-pressed', String(pressed));
+        this.apply();
+      });
+      fieldset.appendChild(chip);
+      this.chips.push(chip);
+    });
+    fieldset.hidden = false;
   }
 
   clear() {
@@ -79,19 +115,13 @@ class InstructorFilter extends HTMLElement {
   }
 
   matches(card) {
-    if (this.query) {
-      const name = (card.dataset.name || '').toLowerCase();
-      if (!name.includes(this.query)) return false;
-    }
+    if (this.query && !card.name.includes(this.query)) return false;
     for (const group of [1, 2]) {
-      const set = this.active[group];
-      if (set.size === 0) continue;
-      // Values are stored pipe-delimited and pipe-wrapped so a substring test
-      // cannot match a partial token: "|CASI 1|" never matches "|CASI 10|".
-      const haystack = card.dataset['facet' + group] || '';
+      const selected = this.active[group];
+      if (selected.size === 0) continue;
       let hit = false;
-      for (const v of set) {
-        if (haystack.includes('|' + v + '|')) {
+      for (const key of selected) {
+        if (card.facets[group].has(key)) {
           hit = true;
           break;
         }
@@ -105,15 +135,13 @@ class InstructorFilter extends HTMLElement {
     let shown = 0;
     this.cards.forEach((card) => {
       const ok = this.matches(card);
-      card.hidden = !ok;
+      card.el.hidden = !ok;
       if (ok) shown += 1;
     });
 
     if (this.countEl) {
       const tpl = this.countEl.dataset.template || '';
-      this.countEl.textContent = tpl
-        .replace('[shown]', shown)
-        .replace('[total]', this.cards.length);
+      this.countEl.textContent = tpl.replace('[shown]', shown).replace('[total]', this.cards.length);
     }
     if (this.emptyEl) this.emptyEl.hidden = shown !== 0;
 

@@ -125,52 +125,8 @@
         {%- endif -%}
 
         {%- liquid
-          assign delim = ','
           assign f1 = section.settings.facet_1_field
           assign f2 = section.settings.facet_2_field
-        -%}
-
-        {%- comment -%}
-          Facet values are DERIVED from the rendered data, not configured.
-          Nobody maintains a list of levels that drifts out of sync with the
-          entries.
-
-          The cost: certification and type are FREE TEXT. “CASI 2”, “CASI II”
-          and “casi 2” are three facets. The chips show exactly what is typed
-          in the entries, so inconsistent data looks inconsistent here rather
-          than being quietly merged into something wrong.
-        {%- endcomment -%}
-
-        {%- capture facet_1_raw -%}
-          {%- for entry in roster -%}
-            {%- render 'club-instructor-field', entry: entry, field: f1 -%}{{ delim }}
-          {%- endfor -%}
-        {%- endcapture -%}
-        {%- capture facet_2_raw -%}
-          {%- for entry in roster -%}
-            {%- render 'club-instructor-field', entry: entry, field: f2 -%}{{ delim }}
-          {%- endfor -%}
-        {%- endcapture -%}
-
-        {%- comment -%}
-          One field may hold several values (“CASI 2, CSIA 1”), so split on the
-          delimiter rather than treating the field as one token. Liquid cannot
-          map a filter over an array, so pad is normalised on the whole string
-          before splitting — this is why “ , ” spacing is collapsed here.
-        {%- endcomment -%}
-        {%- assign facet_1_values = facet_1_raw
-          | replace: ' ,', ','
-          | replace: ', ', ','
-          | split: delim
-          | uniq
-          | sort
-        -%}
-        {%- assign facet_2_values = facet_2_raw
-          | replace: ' ,', ','
-          | replace: ', ', ','
-          | split: delim
-          | uniq
-          | sort
         -%}
 
         <instructor-filter>
@@ -197,41 +153,15 @@
                 </div>
               {%- endif -%}
 
-              {%- if f1 != blank and facet_1_values.size > 0 -%}
-                <fieldset class="club-filter__group">
+              {%- if f1 != blank -%}
+                <fieldset class="club-filter__group" hidden data-facet-group="1">
                   <legend class="club-filter__legend">{{ section.settings.facet_1_label }}</legend>
-                  {%- for value in facet_1_values -%}
-                    {%- if value != blank -%}
-                      <button
-                        type="button"
-                        class="club-filter__chip"
-                        aria-pressed="false"
-                        data-facet-group="1"
-                        data-facet-value="{{ value | escape }}"
-                      >
-                        {{- value -}}
-                      </button>
-                    {%- endif -%}
-                  {%- endfor -%}
                 </fieldset>
               {%- endif -%}
 
-              {%- if f2 != blank and facet_2_values.size > 0 -%}
-                <fieldset class="club-filter__group">
+              {%- if f2 != blank -%}
+                <fieldset class="club-filter__group" hidden data-facet-group="2">
                   <legend class="club-filter__legend">{{ section.settings.facet_2_label }}</legend>
-                  {%- for value in facet_2_values -%}
-                    {%- if value != blank -%}
-                      <button
-                        type="button"
-                        class="club-filter__chip"
-                        aria-pressed="false"
-                        data-facet-group="2"
-                        data-facet-value="{{ value | escape }}"
-                      >
-                        {{- value -}}
-                      </button>
-                    {%- endif -%}
-                  {%- endfor -%}
                 </fieldset>
               {%- endif -%}
 
@@ -283,43 +213,17 @@
               endif
             -%}
 
-            {%- comment -%}
-              Facet payload is pipe-DELIMITED and pipe-WRAPPED so the JS can
-              substring-test a whole token: "|CASI 1|" cannot match inside
-              "|CASI 10|". Without the wrapping, short values match longer
-              ones and the filter quietly over-selects.
-
-              Build the two payloads SEPARATELY, then assemble. An earlier
-              version ran the comma->pipe rewrite across the whole attribute
-              string, which also rewrote data-name — so an instructor named
-              "Chen, Wei" became "Chen| Wei" and stopped matching a search for
-              their own name.
-            {%- endcomment -%}
             {%- capture facet_1_cell -%}
               {%- render 'club-instructor-field', entry: entry, field: f1 -%}
             {%- endcapture -%}
             {%- capture facet_2_cell -%}
               {%- render 'club-instructor-field', entry: entry, field: f2 -%}
             {%- endcapture -%}
-            {%- assign facet_1_cell = facet_1_cell
-              | strip
-              | replace: ' ,', '|'
-              | replace: ', ', '|'
-              | replace: ',', '|'
-              | escape
-            -%}
-            {%- assign facet_2_cell = facet_2_cell
-              | strip
-              | replace: ' ,', '|'
-              | replace: ', ', '|'
-              | replace: ',', '|'
-              | escape
-            -%}
             {%- capture card_data -%}
               data-instructor-card
               data-name="{{ entry.name.value | escape }}"
-              data-facet1="|{{ facet_1_cell }}|"
-              data-facet2="|{{ facet_2_cell }}|"
+              data-facet1="{{ facet_1_cell | escape }}"
+              data-facet2="{{ facet_2_cell | escape }}"
             {%- endcapture -%}
 
             {%- render 'club-instructor-card',
