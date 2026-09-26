@@ -1,0 +1,180 @@
+{
+  "sections": {
+    "hero": {
+      "type": "club-hero",
+      "blocks": {
+        "n1": {
+          "type": "nextup",
+          "settings": {
+            "date": "1月18日",
+            "label": "周末团课",
+            "meta": "余 6 位"
+          }
+        },
+        "n2": {
+          "type": "nextup",
+          "settings": {
+            "date": "1月25日",
+            "label": "精品小班",
+            "meta": "余 2 位"
+          }
+        },
+        "n3": {
+          "type": "nextup",
+          "settings": {
+            "date": "2月14日",
+            "label": "Tremblant 外滑",
+            "meta": "候补中"
+          }
+        }
+      },
+      "block_order": ["n1", "n2", "n3"],
+      "settings": {
+        "height": 90,
+        "show_scrim": true,
+        "eyebrow": "Mt St Louis Moonstone · Blue Mountain",
+        "heading": "S SNOW",
+        "subheading": "多伦多滑雪俱乐部 · 会员制 · 教练带队",
+        "button_label_1": "26/27 报名开始",
+        "button_label_2": "成为会员"
+      }
+    },
+    "stats": {
+      "type": "club-stats",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "340", "label": "会员" } },
+        "s2": { "type": "stat", "settings": { "value": "12", "label": "教练" } },
+        "s3": { "type": "stat", "settings": { "value": "18", "label": "本季活动" } },
+        "s4": { "type": "stat", "settings": { "value": "3", "label": "外滑旅行" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "heading": "26/27 雪季",
+        "color_scheme": "inverse"
+      }
+    },
+    "season": {
+      "type": "club-season",
+      "blocks": {
+        "c1": {
+          "type": "session",
+          "settings": {
+            "date": "1月18日 · 周六",
+            "title": "周末团课",
+            "meta": "MSL · 6–12岁 · 教练 1:5",
+            "spots": 6
+          }
+        },
+        "c2": {
+          "type": "session",
+          "settings": {
+            "date": "1月25日 · 周日",
+            "title": "精品小班",
+            "meta": "Blue Mountain · 进阶 · 教练 1:3",
+            "spots": 2
+          }
+        },
+        "c3": {
+          "type": "session",
+          "settings": {
+            "date": "2月14–17日",
+            "title": "Tremblant 外滑",
+            "meta": "四天三晚 · 含巴士",
+            "spots": 0
+          }
+        },
+        "c4": {
+          "type": "session",
+          "settings": {
+            "date": "3月16–20日",
+            "title": "春假冬令营",
+            "meta": "全托管 · 5天 · 7–14岁",
+            "spots": 11
+          }
+        },
+        "c5": {
+          "type": "session",
+          "settings": {
+            "date": "每周六",
+            "title": "雪场巴士",
+            "meta": "士嘉堡 / 万锦 发车",
+            "spots": 24
+          }
+        }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5"],
+      "settings": {
+        "eyebrow": "26/27",
+        "heading": "本季活动",
+        "link_label": "全部日程",
+        "color_scheme": "background-1"
+      }
+    },
+    "wall": {
+      "type": "club-photowall",
+      "blocks": {
+        "p1": { "type": "photo", "settings": { "wide": true } },
+        "p2": { "type": "photo" },
+        "p3": { "type": "photo" },
+        "p4": { "type": "photo", "settings": { "tall": true } },
+        "p5": { "type": "photo" },
+        "p6": { "type": "photo" },
+        "p7": { "type": "photo" },
+        "p8": { "type": "photo", "settings": { "wide": true } },
+        "p9": { "type": "photo" },
+        "p10": { "type": "photo" },
+        "p11": { "type": "photo" },
+        "p12": { "type": "photo" },
+        "p13": { "type": "photo" },
+        "p14": { "type": "photo" }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7",
+        "p8",
+        "p9",
+        "p10",
+        "p11",
+        "p12",
+        "p13",
+        "p14"
+      ],
+      "settings": {
+        "heading": "上个雪季",
+        "columns": 4,
+        "gap": 4,
+        "color_scheme": "background-1"
+      }
+    },
+    "instructors": {
+      "type": "club-instructors",
+      "blocks": {
+        "i1": { "type": "instructor", "settings": { "display_name": "教练 A", "certification": "CSIA Level 3" } },
+        "i2": { "type": "instructor", "settings": { "display_name": "教练 B", "certification": "CASI Level 2" } },
+        "i3": { "type": "instructor", "settings": { "display_name": "教练 C", "certification": "CSIA Level 2" } },
+        "i4": { "type": "instructor", "settings": { "display_name": "教练 D", "certification": "CSIA Level 2" } },
+        "i5": { "type": "instructor", "settings": { "display_name": "教练 E", "certification": "CASI Level 1" } },
+        "i6": { "type": "instructor", "settings": { "display_name": "教练 F", "certification": "CSIA Level 1" } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"],
+      "settings": {
+        "source": "metaobject",
+        "metaobject_type": "our_team",
+        "limit": 12,
+        "meta_field": "type",
+        "link_target": "profile",
+        "eyebrow": "教练团队",
+        "heading": "带你上雪的人",
+        "link_label": "全部教练",
+        "link_url": "shopify://pages/our-team",
+        "color_scheme": "background-2"
+      }
+    }
+  },
+  "order": ["hero", "stats", "season", "wall", "instructors"]
+}
