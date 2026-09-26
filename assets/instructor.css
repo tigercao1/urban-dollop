@@ -111,14 +111,18 @@
   max-width: 32rem;
 }
 
-.club-filter__input {
-  width: 100%;
-  padding: 0.9rem 1.2rem;
-  font-size: 1.5rem;
-  border: var(--hairline, 0.1rem solid rgba(var(--color-foreground), 0.12));
-  border-radius: var(--radius-md, var(--border-radius, 0.4rem));
-  background: var(--surface, rgb(var(--color-background)));
-  color: var(--ink, rgb(var(--color-foreground)));
+.club-filter__search .club-filter__input {
+  padding-right: 4.8rem;
+}
+
+.club-filter__search-icon {
+  cursor: default;
+  pointer-events: none;
+}
+
+.club-filter__search-icon > svg {
+  height: 1.8rem;
+  width: 1.8rem;
 }
 
 .club-filter__group {

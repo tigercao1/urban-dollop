@@ -260,6 +260,17 @@
     }
   },
   "sections": {
+    "instructors": {
+      "search_label": "搜尋教練姓名",
+      "count": "顯示 {{ shown }} / {{ total }} 位教練",
+      "clear": "清除篩選",
+      "no_results": "沒有符合條件的教練。",
+      "facets": {
+        "certification": "等級",
+        "type": "項目",
+        "client_groups": "適合族群"
+      }
+    },
     "header": {
       "announcement": "公告",
       "menu": "選單",

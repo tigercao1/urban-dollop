@@ -269,6 +269,17 @@
     }
   },
   "sections": {
+    "instructors": {
+      "search_label": "Search instructors by name",
+      "count": "Showing {{ shown }} of {{ total }} instructors",
+      "clear": "Clear filters",
+      "no_results": "No instructors match these filters.",
+      "facets": {
+        "certification": "Level",
+        "type": "Discipline",
+        "client_groups": "Client groups"
+      }
+    },
     "announcements": {
       "previous_announcement": "Previous announcement",
       "next_announcement": "Next announcement",

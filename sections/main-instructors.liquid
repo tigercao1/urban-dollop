@@ -127,6 +127,31 @@
         {%- liquid
           assign f1 = section.settings.facet_1_field
           assign f2 = section.settings.facet_2_field
+          assign search_label = 'sections.instructors.search_label' | t
+
+          assign facet_1_label = section.settings.facet_1_label
+          if facet_1_label == blank
+            case f1
+              when 'certification'
+                assign facet_1_label = 'sections.instructors.facets.certification' | t
+              when 'type'
+                assign facet_1_label = 'sections.instructors.facets.type' | t
+              when 'client_groups'
+                assign facet_1_label = 'sections.instructors.facets.client_groups' | t
+            endcase
+          endif
+
+          assign facet_2_label = section.settings.facet_2_label
+          if facet_2_label == blank
+            case f2
+              when 'certification'
+                assign facet_2_label = 'sections.instructors.facets.certification' | t
+              when 'type'
+                assign facet_2_label = 'sections.instructors.facets.type' | t
+              when 'client_groups'
+                assign facet_2_label = 'sections.instructors.facets.client_groups' | t
+            endcase
+          endif
         -%}
 
         <instructor-filter>
@@ -136,32 +161,38 @@
               roster renders. A visible control that does nothing is worse than
               no control.
             {%- endcomment -%}
-            <div class="club-filter no-js-hidden">
+            <div class="club-filter no-js-hidden" role="search" aria-label="{{ search_label | escape }}">
               {%- if section.settings.filter_by_name -%}
-                <div class="club-filter__search">
-                  <label class="visually-hidden" for="InstructorSearch-{{ section.id }}">
-                    {{ section.settings.search_label }}
-                  </label>
+                <div class="club-filter__search field">
                   <input
                     id="InstructorSearch-{{ section.id }}"
                     type="search"
                     class="club-filter__input field__input"
-                    placeholder="{{ section.settings.search_label | escape }}"
+                    placeholder="{{ search_label | escape }}"
                     autocomplete="off"
+                    enterkeyhint="search"
                     data-instructor-search
                   >
+                  <label class="field__label" for="InstructorSearch-{{ section.id }}">
+                    {{- search_label -}}
+                  </label>
+                  <span class="club-filter__search-icon field__button" aria-hidden="true">
+                    <svg class="icon icon-search" viewBox="0 0 18 19" fill="none" focusable="false">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+                    </svg>
+                  </span>
                 </div>
               {%- endif -%}
 
               {%- if f1 != blank -%}
                 <fieldset class="club-filter__group" hidden data-facet-group="1">
-                  <legend class="club-filter__legend">{{ section.settings.facet_1_label }}</legend>
+                  <legend class="club-filter__legend">{{ facet_1_label }}</legend>
                 </fieldset>
               {%- endif -%}
 
               {%- if f2 != blank -%}
                 <fieldset class="club-filter__group" hidden data-facet-group="2">
-                  <legend class="club-filter__legend">{{ section.settings.facet_2_label }}</legend>
+                  <legend class="club-filter__legend">{{ facet_2_label }}</legend>
                 </fieldset>
               {%- endif -%}
 
@@ -171,16 +202,16 @@
                   role="status"
                   aria-live="polite"
                   data-instructor-count
-                  data-template="{{ section.settings.count_text | escape }}"
+                  data-template="{{ 'sections.instructors.count' | t: shown: '[shown]', total: '[total]' | escape }}"
                 ></p>
                 <button type="button" class="club-filter__clear link" hidden data-instructor-clear>
-                  {{- section.settings.clear_label -}}
+                  {{- 'sections.instructors.clear' | t -}}
                 </button>
               </div>
             </div>
 
             <p class="club-roster__empty" hidden data-instructor-empty>
-              {{ section.settings.no_results_text }}
+              {{ 'sections.instructors.no_results' | t }}
             </p>
           {%- endif -%}
 
@@ -327,7 +358,7 @@
       "type": "text",
       "id": "facet_1_label",
       "label": "Filter group 1 — label",
-      "default": "等级"
+      "info": "Leave blank to use the translated default for the chosen field."
     },
     {
       "type": "select",
@@ -345,32 +376,7 @@
       "type": "text",
       "id": "facet_2_label",
       "label": "Filter group 2 — label",
-      "default": "项目"
-    },
-    {
-      "type": "text",
-      "id": "search_label",
-      "label": "Search placeholder",
-      "default": "搜索教练姓名"
-    },
-    {
-      "type": "text",
-      "id": "count_text",
-      "label": "Result count text",
-      "default": "显示 [shown] / [total] 位教练",
-      "info": "[shown] and [total] are replaced with numbers."
-    },
-    {
-      "type": "text",
-      "id": "clear_label",
-      "label": "Clear button",
-      "default": "清除筛选"
-    },
-    {
-      "type": "text",
-      "id": "no_results_text",
-      "label": "No results text",
-      "default": "没有符合条件的教练。"
+      "info": "Leave blank to use the translated default for the chosen field."
     },
     {
       "type": "header",
