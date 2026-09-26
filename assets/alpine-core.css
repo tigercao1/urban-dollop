@@ -1,0 +1,338 @@
+/*
+ * Alpine Precision — SHARED component layer.
+ * Loaded on every page, after base.css and alpine-tokens.
+ *
+ * Owns only what MUST be identical between the storefront and the
+ * account/portal surfaces: focus ring, status pills, form error states,
+ * icon colour, active-nav trail marker, typography baseline.
+ *
+ * Anything that may diverge belongs in alpine-storefront.css instead. Do not
+ * add layout or motion flourish here.
+ *
+ * NOTE: account and auth screens keep Dawn's stock markup and chrome. They
+ * are reached only by the few .customer rules below (focus ring, field error)
+ * plus the colour schemes. There is no portal stylesheet in this theme yet.
+ */
+
+/* ==========================================================================
+   1. Typography baseline
+   ========================================================================== */
+
+/* Dawn renders body copy at 0.75 alpha; Alpine wants sharp editorial ink. */
+body {
+  color: rgb(var(--color-foreground));
+  letter-spacing: normal;
+}
+
+.text-body {
+  letter-spacing: normal;
+}
+
+/* Mono for identifiers, dates, order numbers, API-ish strings. */
+.alpine-mono,
+.order-number,
+time.alpine-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   2. Focus ring — crisp navy, no halo
+   Replaces Dawn's double/triple box-shadow halo everywhere.
+   ========================================================================== */
+
+*:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.focused,
+.no-js *:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* Dawn variants that reposition the ring. */
+.focus-inset:focus-visible,
+.focused.focus-inset {
+  outline: 2px solid var(--navy);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.focus-offset:focus-visible,
+.focused.focus-offset {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.focus-none {
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* Local overrides in base.css beat the universal rule on specificity,
+   so they are neutralised explicitly. */
+.button:focus-visible,
+.customer button:focus-visible,
+.shopify-challenge__button:focus-visible,
+.share-button__button:focus-visible,
+.share-button__fallback button:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.field__input:focus-visible,
+.select__select:focus-visible,
+.customer .field input:focus-visible,
+.customer select:focus-visible,
+.share-button__fallback .field__input:focus,
+textarea:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* On navy surfaces the navy ring disappears — flip to surface white. */
+.color-inverse *:focus-visible,
+.surface--navy *:focus-visible {
+  outline-color: var(--surface);
+}
+
+/* ==========================================================================
+   3. Buttons — danger variant via Dawn's token-reassignment pattern
+   ========================================================================== */
+
+.button--danger {
+  --color-button: 214, 62, 70;
+  --color-button-text: 255, 255, 255;
+  --alpha-button-background: 1;
+}
+
+.button--danger:hover {
+  --color-button: 184, 51, 58;
+}
+
+.button--ghost {
+  --color-button: var(--color-background);
+  --color-button-text: var(--color-foreground);
+  --alpha-button-background: 0;
+  --alpha-button-border: 0;
+}
+
+/* ==========================================================================
+   4. Status pills + banners — 3px left rule, colour never alone
+   ========================================================================== */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.2rem 1rem 0.2rem 0.7rem;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  border: var(--hairline);
+  border-left-width: 3px;
+  border-radius: 999px;
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+.status-pill--pending {
+  border-left-color: var(--status-pending);
+  color: var(--status-pending);
+  background-color: var(--status-pending-tint);
+}
+
+.status-pill--approved {
+  border-left-color: var(--status-approved);
+  color: var(--status-approved);
+  background-color: var(--status-approved-tint);
+}
+
+.status-pill--rejected {
+  border-left-color: var(--status-rejected);
+  color: var(--red-press);
+  background-color: var(--red-tint);
+}
+
+.status-pill--inactive {
+  border-left-color: var(--status-inactive);
+  color: var(--slate);
+  background-color: var(--sunken);
+}
+
+.status-banner {
+  display: block;
+  padding: 1.2rem 1.4rem;
+  border: var(--hairline);
+  border-left: 3px solid var(--slate);
+  border-radius: var(--radius-md);
+  background-color: var(--sunken);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.status-banner--pending {
+  border-left-color: var(--status-pending);
+  background-color: var(--status-pending-tint);
+}
+
+.status-banner--approved {
+  border-left-color: var(--status-approved);
+  background-color: var(--status-approved-tint);
+}
+
+.status-banner--rejected {
+  border-left-color: var(--status-rejected);
+  background-color: var(--red-tint);
+}
+
+.status-banner--info {
+  border-left-color: var(--navy);
+  background-color: var(--navy-tint);
+}
+
+/* ==========================================================================
+   5. Form validation states
+   Dawn ships .field--with-error with no visual treatment at all.
+   ========================================================================== */
+
+.field--with-error .field__input,
+.field--with-error .select__select,
+.customer .field--with-error input {
+  border-color: var(--red);
+  outline-color: var(--red);
+}
+
+.field--with-error .field__input:focus-visible,
+.customer .field--with-error input:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+.form__message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.form__message--error,
+.field--with-error .form__message {
+  color: var(--red-press);
+}
+
+.form__message--success {
+  color: var(--status-approved);
+}
+
+.form-status {
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. Icon colour — all status SVGs route through currentColor
+   ========================================================================== */
+
+.icon-error,
+.svg-wrapper .icon-error {
+  color: var(--status-rejected);
+}
+
+.icon-success,
+.svg-wrapper .icon-success {
+  color: var(--status-approved);
+}
+
+.icon-warning {
+  color: var(--status-pending);
+}
+
+/* ==========================================================================
+   7. Active nav — the single red trail marker
+   ========================================================================== */
+
+.header__active-menu-item {
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 0.3rem;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.header__menu-item:hover .header__active-menu-item {
+  text-decoration: none;
+  border-bottom-color: var(--red-press);
+}
+
+.list-menu__item--active {
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 0.3rem;
+}
+
+.list-menu__item--active:hover {
+  text-decoration: none;
+  border-bottom-color: var(--red-press);
+}
+
+/* Drawer nav uses a vertical trail marker instead of a background tint. */
+.menu-drawer__menu-item--active {
+  color: rgb(var(--color-foreground));
+  background-color: transparent;
+  border-left: 3px solid var(--red);
+}
+
+.menu-drawer__menu-item--active:hover {
+  background-color: var(--sunken);
+  border-left-color: var(--red-press);
+}
+
+/* ==========================================================================
+   8. Contour motif surface
+   ========================================================================== */
+
+.surface--contour {
+  position: relative;
+  isolation: isolate;
+}
+
+.surface--contour > *:not(.pattern-contour) {
+  position: relative;
+  z-index: 1;
+}
+
+.pattern-contour {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  color: currentColor;
+  opacity: 0.12;
+}
+
+.surface--navy {
+  background-color: var(--navy);
+  color: var(--canvas);
+}
