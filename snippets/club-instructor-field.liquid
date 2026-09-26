@@ -9,13 +9,20 @@
   Adding a field to the definition means adding a `when` here AND an option to
   the facet selects in main-instructors.liquid.
 
+  List fields are joined with commas so they split like a typed list.
+
   Accepts:
     entry  metaobject entry
     field  string — one of the whens below
 {%- endcomment -%}
 
 {%- case field -%}
-  {%- when 'certification' -%}{{ entry.certification.value }}
-  {%- when 'type' -%}{{ entry.type.value }}
-  {%- when 'client_groups' -%}{{ entry.client_groups.value }}
+  {%- when 'certification' -%}{%- assign source = entry.certification -%}
+  {%- when 'type' -%}{%- assign source = entry.type -%}
+  {%- when 'client_groups' -%}{%- assign source = entry.client_groups -%}
 {%- endcase -%}
+{%- if source.type contains 'list.' -%}
+  {{- source.value | join: ', ' | strip -}}
+{%- else -%}
+  {{- source.value | strip -}}
+{%- endif -%}

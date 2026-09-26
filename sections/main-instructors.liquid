@@ -226,12 +226,6 @@
               # not even in a comment line. The tokenizer closes the tag at
               # the first closing delimiter it sees and dumps the remainder
               # to the page as literal text.
-              if section.settings.meta_field == 'client_groups'
-                assign loc = entry.client_groups.value
-              else
-                assign loc = entry.type.value
-              endif
-
               if section.settings.link_target == 'collection'
                 assign url = entry.collection_url.value
               else
@@ -244,6 +238,12 @@
               endif
             -%}
 
+            {%- capture cert -%}
+              {%- render 'club-instructor-field', entry: entry, field: 'certification' -%}
+            {%- endcapture -%}
+            {%- capture loc -%}
+              {%- render 'club-instructor-field', entry: entry, field: section.settings.meta_field -%}
+            {%- endcapture -%}
             {%- capture facet_1_cell -%}
               {%- render 'club-instructor-field', entry: entry, field: f1 -%}
             {%- endcapture -%}
@@ -259,7 +259,7 @@
 
             {%- render 'club-instructor-card',
               card_name: entry.name.value,
-              card_cert: entry.certification.value,
+              card_cert: cert,
               card_loc: loc,
               card_bio: bio,
               card_image: entry.picture.value,

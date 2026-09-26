@@ -21,10 +21,13 @@
  * the full roster renders and nothing broken is visible.
  */
 
-const SEPARATORS = /[,，|｜丨/／、]/;
+const SEPARATORS = /[,，;；|｜丨/／、\n\r]/;
+const INVISIBLE = /[\u200B-\u200D\u2060\uFEFF]/g;
 
 const tokenize = (text) =>
   (text || '')
+    .normalize('NFKC')
+    .replace(INVISIBLE, '')
     .split(SEPARATORS)
     .map((part) => part.replace(/\s+/g, ' ').trim())
     .filter(Boolean);
@@ -41,6 +44,11 @@ class InstructorFilter extends HTMLElement {
         2: new Set(tokenize(el.dataset.facet2).map(keyOf)),
       },
     }));
+    this.querySelectorAll('[data-instructor-card] .club-faces__cert, [data-instructor-card] .club-faces__loc').forEach(
+      (el) => {
+        el.textContent = tokenize(el.textContent).join(' | ');
+      }
+    );
     this.search = this.querySelector('[data-instructor-search]');
     this.countEl = this.querySelector('[data-instructor-count]');
     this.emptyEl = this.querySelector('[data-instructor-empty]');
