@@ -273,11 +273,20 @@
       "search_label": "Search instructors by name",
       "count": "Showing {{ shown }} of {{ total }} instructors",
       "clear": "Clear filters",
+      "age_any": "Any age",
+      "age_option": "{{ age }} years",
+      "values": {
+        "ski": "Ski",
+        "snowboard": "Snowboard"
+      },
       "no_results": "No instructors match these filters.",
       "facets": {
         "certification": "Level",
         "type": "Discipline",
-        "client_groups": "Client groups"
+        "client_groups": "Client groups",
+        "locations": "Locations",
+        "languages": "Languages",
+        "age": "Student age"
       }
     },
     "announcements": {

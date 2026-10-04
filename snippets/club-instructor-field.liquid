@@ -6,8 +6,8 @@
   produce empty facets that look like a data problem rather than a code one.
   An explicit case statement cannot fail that way.
 
-  Adding a field to the definition means adding a `when` here AND an option to
-  the facet selects in main-instructors.liquid.
+  Adding a filterable field means adding a `when` here AND adding it to
+  facet_fields and the filter_ settings in main-instructors.liquid.
 
   List fields are joined with commas so they split like a typed list.
 
@@ -20,6 +20,8 @@
   {%- when 'certification' -%}{%- assign source = entry.certification -%}
   {%- when 'type' -%}{%- assign source = entry.type -%}
   {%- when 'client_groups' -%}{%- assign source = entry.client_groups -%}
+  {%- when 'locations' -%}{%- assign source = entry.locations -%}
+  {%- when 'languages' -%}{%- assign source = entry.languages -%}
 {%- endcase -%}
 {%- if source.type contains 'list.' -%}
   {{- source.value | join: ', ' | strip -}}

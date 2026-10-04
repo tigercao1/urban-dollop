@@ -28,12 +28,9 @@
   Assigns INSIDE the block are fine, which is where the sort/filter happen.
 
   WHAT THIS SECTION CANNOT DO THAT THE METAFIELD LISTS COULD
-  1. Manual ordering. A list metafield is a hand-sorted array. .values is not.
-     Ordering needs a real field on the definition — see `sort_by` below.
-  2. Act as a publish gate. Previously an instructor appeared because someone
-     added the reference. Here EVERY entry appears unless filtered — see
-     `visible_field`. Both default to off so this section behaves identically
-     to the old one until those fields actually exist.
+  1. Manual ordering. A list metafield is a hand-sorted array. .values is not,
+     so order comes from the sort_order field on the definition.
+  2. Act as a publish gate. Every Active entry appears; Draft entries do not.
 {%- endcomment -%}
 
 {{ 'instructor.css' | asset_url | stylesheet_tag }}
@@ -100,13 +97,14 @@
         {%- endcomment -%}
         {%- assign roster = shop.metaobjects.our_team.values -%}
 
-        {%- if section.settings.visible_field != blank -%}
-          {%- assign roster = roster | where: section.settings.visible_field, true -%}
-        {%- endif -%}
-
-        {%- if section.settings.sort_by != blank -%}
-          {%- assign roster = roster | sort: section.settings.sort_by -%}
-        {%- endif -%}
+        {%- capture order_keys -%}
+          {%- for entry in roster -%}
+            {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+            {{- position -}}-{{- forloop.index0 | plus: 10000 -}}
+            {%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign order_keys = order_keys | split: ',' | sort -%}
 
         {%- if request.design_mode -%}
           <p class="club-roster__count">
@@ -125,36 +123,18 @@
         {%- endif -%}
 
         {%- liquid
-          assign f1 = section.settings.facet_1_field
-          assign f2 = section.settings.facet_2_field
           assign search_label = 'sections.instructors.search_label' | t
-
-          assign facet_1_label = section.settings.facet_1_label
-          if facet_1_label == blank
-            case f1
-              when 'certification'
-                assign facet_1_label = 'sections.instructors.facets.certification' | t
-              when 'type'
-                assign facet_1_label = 'sections.instructors.facets.type' | t
-              when 'client_groups'
-                assign facet_1_label = 'sections.instructors.facets.client_groups' | t
-            endcase
-          endif
-
-          assign facet_2_label = section.settings.facet_2_label
-          if facet_2_label == blank
-            case f2
-              when 'certification'
-                assign facet_2_label = 'sections.instructors.facets.certification' | t
-              when 'type'
-                assign facet_2_label = 'sections.instructors.facets.type' | t
-              when 'client_groups'
-                assign facet_2_label = 'sections.instructors.facets.client_groups' | t
-            endcase
-          endif
+          assign facet_fields = 'certification,type,client_groups,locations,languages' | split: ','
         -%}
 
-        <instructor-filter>
+        {%- capture value_labels -%}
+          {"ski":{{ 'sections.instructors.values.ski' | t | json }},"snowboard":{{ 'sections.instructors.values.snowboard' | t | json }}}
+        {%- endcapture -%}
+
+        <instructor-filter
+          data-value-labels="{{ value_labels | escape }}"
+          data-card-meta-field="{{ section.settings.meta_field }}"
+        >
           {%- if section.settings.enable_filter -%}
             {%- comment -%}
               no-js-hidden: with JS off the controls never appear and the full
@@ -184,16 +164,35 @@
                 </div>
               {%- endif -%}
 
-              {%- if f1 != blank -%}
-                <fieldset class="club-filter__group" hidden data-facet-group="1">
-                  <legend class="club-filter__legend">{{ facet_1_label }}</legend>
-                </fieldset>
-              {%- endif -%}
+              {%- for field in facet_fields -%}
+                {%- assign setting_id = 'filter_' | append: field -%}
+                {%- if section.settings[setting_id] -%}
+                  <fieldset class="club-filter__group" hidden data-facet-group="{{ field }}">
+                    <legend class="club-filter__legend">
+                      {%- case field -%}
+                        {%- when 'certification' -%}{{ 'sections.instructors.facets.certification' | t }}
+                        {%- when 'type' -%}{{ 'sections.instructors.facets.type' | t }}
+                        {%- when 'client_groups' -%}{{ 'sections.instructors.facets.client_groups' | t }}
+                        {%- when 'locations' -%}{{ 'sections.instructors.facets.locations' | t }}
+                        {%- when 'languages' -%}{{ 'sections.instructors.facets.languages' | t }}
+                      {%- endcase -%}
+                    </legend>
+                  </fieldset>
+                {%- endif -%}
+              {%- endfor -%}
 
-              {%- if f2 != blank -%}
-                <fieldset class="club-filter__group" hidden data-facet-group="2">
-                  <legend class="club-filter__legend">{{ facet_2_label }}</legend>
-                </fieldset>
+              {%- if section.settings.filter_min_age -%}
+                <div class="club-filter__age field" hidden data-age-filter>
+                  <select
+                    id="InstructorAge-{{ section.id }}"
+                    class="select__select field__input"
+                    data-any-label="{{ 'sections.instructors.age_any' | t | escape }}"
+                    data-option-template="{{ 'sections.instructors.age_option' | t: age: '[age]' | escape }}"
+                  ></select>
+                  <label class="field__label" for="InstructorAge-{{ section.id }}">
+                    {{- 'sections.instructors.facets.age' | t -}}
+                  </label>
+                </div>
               {%- endif -%}
 
               <div class="club-filter__status">
@@ -220,7 +219,9 @@
           style="--roster-columns: {{ section.settings.columns }};"
           role="list"
         >
-          {%- for entry in roster -%}
+          {%- for order_key in order_keys -%}
+            {%- assign entry_index = order_key | split: '-' | last | minus: 10000 -%}
+            {%- for entry in roster limit: 1 offset: entry_index -%}
             {%- liquid
               # Never write a percent-brace sequence inside this tag body,
               # not even in a comment line. The tokenizer closes the tag at
@@ -244,17 +245,16 @@
             {%- capture loc -%}
               {%- render 'club-instructor-field', entry: entry, field: section.settings.meta_field -%}
             {%- endcapture -%}
-            {%- capture facet_1_cell -%}
-              {%- render 'club-instructor-field', entry: entry, field: f1 -%}
-            {%- endcapture -%}
-            {%- capture facet_2_cell -%}
-              {%- render 'club-instructor-field', entry: entry, field: f2 -%}
-            {%- endcapture -%}
             {%- capture card_data -%}
               data-instructor-card
               data-name="{{ entry.name.value | escape }}"
-              data-facet1="{{ facet_1_cell | escape }}"
-              data-facet2="{{ facet_2_cell | escape }}"
+              data-min-age="{{ entry.min_age.value }}"
+              {%- for field in facet_fields -%}
+                {%- capture cell -%}
+                  {%- render 'club-instructor-field', entry: entry, field: field -%}
+                {%- endcapture %}
+              data-facet-{{ field | replace: '_', '-' }}="{{ cell | escape }}"
+              {%- endfor -%}
             {%- endcapture -%}
 
             {%- render 'club-instructor-card',
@@ -268,6 +268,7 @@
               card_sizes: '(min-width: 990px) 20vw, 44vw',
               card_data: card_data
             -%}
+            {%- endfor -%}
           {%- endfor -%}
         </ul>
         </instructor-filter>
@@ -303,24 +304,8 @@
       "info": "250 is the maximum. At 72 instructors everything fits on one page and no pagination controls appear. Do not set this below your roster size unless you want paging."
     },
     {
-      "type": "header",
-      "content": "Ordering and visibility"
-    },
-    {
       "type": "paragraph",
-      "content": "Both are blank by default, which reproduces the old behaviour exactly. Fill them in only after adding the matching fields to the metaobject definition."
-    },
-    {
-      "type": "text",
-      "id": "sort_by",
-      "label": "Sort by field",
-      "info": "Field handle to order by, e.g. sort_order. Leave blank for the definition's own order. Use an INTEGER field — sorting a text field gives 1, 10, 11, 2. Verify the result against a known order before trusting it."
-    },
-    {
-      "type": "text",
-      "id": "visible_field",
-      "label": "Visibility field",
-      "info": "Boolean field handle, e.g. visible. Only entries set to true are shown. Leave blank to show every entry. Without this, adding an entry publishes it immediately."
+      "content": "Instructors are ordered by the sort_order integer field, lowest first. Entries without one go last, in Shopify's order. Hide an instructor by setting the entry to Draft."
     },
     {
       "type": "header",
@@ -343,40 +328,44 @@
       "default": true
     },
     {
-      "type": "select",
-      "id": "facet_1_field",
-      "label": "Filter group 1 — field",
-      "options": [
-        { "value": "", "label": "None" },
-        { "value": "certification", "label": "Certification" },
-        { "value": "type", "label": "Type" },
-        { "value": "client_groups", "label": "Client groups" }
-      ],
-      "default": "certification"
+      "type": "checkbox",
+      "id": "filter_certification",
+      "label": "Filter by certification",
+      "default": true
     },
     {
-      "type": "text",
-      "id": "facet_1_label",
-      "label": "Filter group 1 — label",
-      "info": "Leave blank to use the translated default for the chosen field."
+      "type": "checkbox",
+      "id": "filter_type",
+      "label": "Filter by type",
+      "default": true
     },
     {
-      "type": "select",
-      "id": "facet_2_field",
-      "label": "Filter group 2 — field",
-      "options": [
-        { "value": "", "label": "None" },
-        { "value": "certification", "label": "Certification" },
-        { "value": "type", "label": "Type" },
-        { "value": "client_groups", "label": "Client groups" }
-      ],
-      "default": "type"
+      "type": "checkbox",
+      "id": "filter_client_groups",
+      "label": "Filter by client groups",
+      "default": true
     },
     {
-      "type": "text",
-      "id": "facet_2_label",
-      "label": "Filter group 2 — label",
-      "info": "Leave blank to use the translated default for the chosen field."
+      "type": "checkbox",
+      "id": "filter_locations",
+      "label": "Filter by locations",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_languages",
+      "label": "Filter by languages",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_min_age",
+      "label": "Filter by student age",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "A filter group appears only when at least one entry has a value for that field."
     },
     {
       "type": "header",

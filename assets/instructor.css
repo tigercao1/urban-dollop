@@ -115,6 +115,10 @@
   padding-right: 4.8rem;
 }
 
+.club-filter__age {
+  flex: 0 1 18rem;
+}
+
 .club-filter__search-icon {
   cursor: default;
   pointer-events: none;

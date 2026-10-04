@@ -92,8 +92,7 @@
       "type": "main-instructors",
       "settings": {
         "per_page": 250,
-        "sort_by": "",
-        "visible_field": "",
+        "filter_client_groups": false,
         "columns": 5,
         "show_bio": false,
         "meta_field": "type",

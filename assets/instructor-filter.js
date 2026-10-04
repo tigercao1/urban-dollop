@@ -21,46 +21,71 @@
  * the full roster renders and nothing broken is visible.
  */
 
-const SEPARATORS = /[,，;；|｜丨/／、\n\r]/;
+const SEPARATORS = /[,，;；|｜丨/／、·•・\n\r]/;
+const SEGMENT_SEPARATORS = /[;；|｜丨·•・\n\r]/;
+const LIST_SEPARATORS = /[,，、/／]/;
 const INVISIBLE = /[\u200B-\u200D\u2060\uFEFF]/g;
+const DISCIPLINE_PREFIX = /^([^:：]{1,24})[:：](.*)$/;
+const TYPE_ALIASES = {
+  ski: ['ski', 'skiing', 'skier', '双板', '雙板'],
+  snowboard: ['snowboard', 'snowboarding', 'snowboarder', '单板', '單板'],
+};
 
-const tokenize = (text) =>
-  (text || '')
-    .normalize('NFKC')
-    .replace(INVISIBLE, '')
-    .split(SEPARATORS)
-    .map((part) => part.replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-
+const clean = (text) => (text || '').normalize('NFKC').replace(INVISIBLE, '');
+const tidy = (part) => part.replace(/\s+/g, ' ').trim();
 const keyOf = (value) => value.toLowerCase();
+
+const splitPlain = (text, separators = SEPARATORS) => clean(text).split(separators).map(tidy).filter(Boolean);
+
+const splitCertifications = (text) => {
+  const tokens = [];
+  clean(text)
+    .split(SEGMENT_SEPARATORS)
+    .forEach((segment) => {
+      const match = tidy(segment).match(DISCIPLINE_PREFIX);
+      const discipline = match ? tidy(match[1]) : '';
+      const rest = match ? match[2] : segment;
+      rest
+        .split(LIST_SEPARATORS)
+        .map(tidy)
+        .filter(Boolean)
+        .forEach((part) => {
+          tokens.push(discipline && /^trainer\b/i.test(part) ? `${discipline} ${part}` : part);
+        });
+    });
+  return tokens;
+};
 
 class InstructorFilter extends HTMLElement {
   connectedCallback() {
-    this.cards = Array.from(this.querySelectorAll('[data-instructor-card]')).map((el) => ({
-      el,
-      name: (el.dataset.name || '').toLowerCase(),
-      facets: {
-        1: new Set(tokenize(el.dataset.facet1).map(keyOf)),
-        2: new Set(tokenize(el.dataset.facet2).map(keyOf)),
-      },
+    this.valueLabels = this.readValueLabels();
+    this.groups = Array.from(this.querySelectorAll('fieldset[data-facet-group]')).map((fieldset) => ({
+      name: fieldset.dataset.facetGroup,
+      fieldset,
+      active: new Set(),
     }));
-    this.querySelectorAll('[data-instructor-card] .club-faces__cert, [data-instructor-card] .club-faces__loc').forEach(
-      (el) => {
-        el.textContent = tokenize(el.textContent).join(' | ');
-      }
-    );
+
+    this.cards = Array.from(this.querySelectorAll('[data-instructor-card]')).map((el) => {
+      const facets = {};
+      this.groups.forEach(({ name }) => {
+        facets[name] = new Set(this.tokenize(el.getAttribute(`data-facet-${name.replace(/_/g, '-')}`), name).map(keyOf));
+      });
+      const minAge = parseInt(el.dataset.minAge, 10);
+      return { el, name: (el.dataset.name || '').toLowerCase(), facets, minAge: Number.isNaN(minAge) ? null : minAge };
+    });
+
+    this.tidyCardText();
+
     this.search = this.querySelector('[data-instructor-search]');
     this.countEl = this.querySelector('[data-instructor-count]');
     this.emptyEl = this.querySelector('[data-instructor-empty]');
     this.clearEl = this.querySelector('[data-instructor-clear]');
-
     this.query = '';
-    this.active = { 1: new Set(), 2: new Set() };
+    this.age = null;
     this.chips = [];
 
-    this.querySelectorAll('fieldset[data-facet-group]').forEach((fieldset) => {
-      this.buildChips(fieldset, fieldset.dataset.facetGroup);
-    });
+    this.groups.forEach((group) => this.buildChips(group));
+    this.buildAgeFilter();
 
     if (this.search) {
       this.search.addEventListener('input', (e) => {
@@ -79,64 +104,118 @@ class InstructorFilter extends HTMLElement {
     this.apply();
   }
 
-  buildChips(fieldset, group) {
+  readValueLabels() {
+    try {
+      return JSON.parse(this.dataset.valueLabels || '{}');
+    } catch (e) {
+      return {};
+    }
+  }
+
+  translateType(value) {
+    const key = keyOf(value);
+    const canonical = Object.keys(TYPE_ALIASES).find((name) => TYPE_ALIASES[name].includes(key));
+    return canonical && this.valueLabels[canonical] ? this.valueLabels[canonical] : value;
+  }
+
+  tokenize(text, field) {
+    if (field === 'certification') return splitCertifications(text);
+    if (field === 'type') {
+      return splitPlain(text, /[,，;；|｜丨/／、·•・&＆\n\r]/).map((value) => this.translateType(value));
+    }
+    return splitPlain(text);
+  }
+
+  tidyCardText() {
+    const metaField = this.dataset.cardMetaField || 'type';
+    this.cards.forEach(({ el }) => {
+      const cert = el.querySelector('.club-faces__cert');
+      const meta = el.querySelector('.club-faces__loc');
+      if (cert) cert.textContent = this.tokenize(cert.textContent, 'certification').join(' | ');
+      if (meta) meta.textContent = this.tokenize(meta.textContent, metaField).join(' | ');
+    });
+  }
+
+  buildChips(group) {
     const labels = new Map();
     this.cards.forEach((card) => {
-      tokenize(card.el.dataset['facet' + group]).forEach((value) => {
+      this.tokenize(card.el.getAttribute(`data-facet-${group.name.replace(/_/g, '-')}`), group.name).forEach((value) => {
         const key = keyOf(value);
         if (!labels.has(key)) labels.set(key, value);
       });
     });
     if (labels.size === 0) return;
 
-    const sorted = Array.from(labels.entries()).sort((a, b) =>
-      a[1].localeCompare(b[1], undefined, { numeric: true, sensitivity: 'base' })
-    );
-
-    sorted.forEach(([key, label]) => {
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'club-filter__chip';
-      chip.setAttribute('aria-pressed', 'false');
-      chip.textContent = label;
-      chip.addEventListener('click', () => {
-        const set = this.active[group];
-        const pressed = !set.has(key);
-        if (pressed) set.add(key);
-        else set.delete(key);
-        chip.setAttribute('aria-pressed', String(pressed));
-        this.apply();
+    Array.from(labels.entries())
+      .sort((a, b) => a[1].localeCompare(b[1], undefined, { numeric: true, sensitivity: 'base' }))
+      .forEach(([key, label]) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'club-filter__chip';
+        chip.setAttribute('aria-pressed', 'false');
+        chip.textContent = label;
+        chip.addEventListener('click', () => {
+          const pressed = !group.active.has(key);
+          if (pressed) group.active.add(key);
+          else group.active.delete(key);
+          chip.setAttribute('aria-pressed', String(pressed));
+          this.apply();
+        });
+        group.fieldset.appendChild(chip);
+        this.chips.push(chip);
       });
-      fieldset.appendChild(chip);
-      this.chips.push(chip);
+    group.fieldset.hidden = false;
+  }
+
+  buildAgeFilter() {
+    const wrapper = this.querySelector('[data-age-filter]');
+    if (!wrapper) return;
+    const ages = this.cards.map((card) => card.minAge).filter((age) => age !== null);
+    if (ages.length === 0) return;
+
+    this.ageSelect = wrapper.querySelector('select');
+    const template = this.ageSelect.dataset.optionTemplate || '[age]';
+    const any = document.createElement('option');
+    any.value = '';
+    any.textContent = this.ageSelect.dataset.anyLabel || '';
+    this.ageSelect.appendChild(any);
+    for (let age = Math.min(...ages); age <= 18; age += 1) {
+      const option = document.createElement('option');
+      option.value = String(age);
+      option.textContent = template.replace('[age]', age);
+      this.ageSelect.appendChild(option);
+    }
+    this.ageSelect.addEventListener('change', () => {
+      this.age = this.ageSelect.value === '' ? null : parseInt(this.ageSelect.value, 10);
+      this.apply();
     });
-    fieldset.hidden = false;
+    wrapper.hidden = false;
   }
 
   clear() {
     this.query = '';
     if (this.search) this.search.value = '';
-    this.active[1].clear();
-    this.active[2].clear();
+    this.age = null;
+    if (this.ageSelect) this.ageSelect.value = '';
+    this.groups.forEach((group) => group.active.clear());
     this.chips.forEach((c) => c.setAttribute('aria-pressed', 'false'));
     this.apply();
   }
 
   matches(card) {
     if (this.query && !card.name.includes(this.query)) return false;
-    for (const group of [1, 2]) {
-      const selected = this.active[group];
-      if (selected.size === 0) continue;
-      let hit = false;
-      for (const key of selected) {
-        if (card.facets[group].has(key)) {
-          hit = true;
-          break;
-        }
+    if (this.age !== null && card.minAge !== null && card.minAge > this.age) return false;
+    return this.groups.every(({ name, active }) => {
+      if (active.size === 0) return true;
+      for (const key of active) {
+        if (card.facets[name].has(key)) return true;
       }
-      if (!hit) return false;
-    }
-    return true;
+      return false;
+    });
+  }
+
+  isFiltering() {
+    return this.query !== '' || this.age !== null || this.groups.some((group) => group.active.size > 0);
   }
 
   apply() {
@@ -152,9 +231,7 @@ class InstructorFilter extends HTMLElement {
       this.countEl.textContent = tpl.replace('[shown]', shown).replace('[total]', this.cards.length);
     }
     if (this.emptyEl) this.emptyEl.hidden = shown !== 0;
-
-    const filtering = this.query !== '' || this.active[1].size > 0 || this.active[2].size > 0;
-    if (this.clearEl) this.clearEl.hidden = !filtering;
+    if (this.clearEl) this.clearEl.hidden = !this.isFiltering();
   }
 }
 
