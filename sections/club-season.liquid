@@ -59,7 +59,7 @@
     {%- for block in section.blocks -%}
       {%- liquid
         assign is_full = false
-        if block.settings.spots <= 0
+        if block.settings.spots != blank and block.settings.spots <= 0
           assign is_full = true
         endif
       -%}
@@ -80,13 +80,15 @@
               {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
 
-            <span class="club-season__pill{% if is_full %} club-season__pill--full{% endif %}">
-              {%- if is_full -%}
-                {{ block.settings.full_label | default: '名额已满' }}
-              {%- else -%}
-                {{ block.settings.spots }}{{ block.settings.spots_suffix | default: ' 位' }}
-              {%- endif -%}
-            </span>
+            {%- if block.settings.spots != blank -%}
+              <span class="club-season__pill{% if is_full %} club-season__pill--full{% endif %}">
+                {%- if is_full -%}
+                  {{ block.settings.full_label | default: '名额已满' }}
+                {%- else -%}
+                  {{ block.settings.spots }}{{ block.settings.spots_suffix | default: ' 位' }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
           </div>
 
           <div class="club-season__card-body">
@@ -114,7 +116,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Dated sessions for the current season. Cards scroll horizontally. Set spots to 0 to show the session as full."
+      "content": "Dated sessions for the current season. Cards scroll horizontally. Set spots to 0 to show the session as full, or leave it blank to hide the badge."
     },
     {
       "type": "text",
@@ -177,8 +179,7 @@
         {
           "type": "number",
           "id": "spots",
-          "label": "Spots left (0 = full)",
-          "default": 6
+          "label": "Spots left (0 = full, blank = hide)"
         },
         {
           "type": "text",
