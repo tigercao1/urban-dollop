@@ -1140,7 +1140,7 @@ summary::-webkit-details-marker {
 .media > img {
   object-fit: cover;
   object-position: center center;
-  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity var(--dur) var(--ease);
 }
 
 .media--square {
@@ -1803,7 +1803,7 @@ details[open] > .share-button__fallback {
 .field__input:-webkit-autofill ~ .field__button,
 .field__input:-webkit-autofill ~ .field__label,
 .customer .field input:-webkit-autofill ~ label {
-  color: rgb(0, 0, 0);
+  color: rgb(var(--color-foreground));
 }
 
 /* Text area */
@@ -2343,7 +2343,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 }
 
 .section-header.animate {
-  transition: top 0.15s ease-out;
+  transition: top var(--dur) var(--ease);
 }
 
 .shopify-section-group-header-group {
@@ -2473,7 +2473,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
 .header__heading-logo-wrapper {
   width: 100%;
   display: inline-block;
-  transition: width 0.3s cubic-bezier(0.52, 0, 0.61, 0.99);
+  transition: width var(--dur) var(--ease);
 }
 
 @media screen and (max-width: 989px) {
@@ -2722,7 +2722,7 @@ details[open] .modal-overlay::after {
   position: absolute;
   opacity: 1;
   transform: scale(1);
-  transition: transform 150ms ease, opacity 150ms ease;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 
 details:not([open]) > .header__icon--menu .icon-close,
@@ -3262,19 +3262,9 @@ details-disclosure > details {
 /* Animations */
 
 @media (prefers-reduced-motion: no-preference) {
-  .animate--ambient > img,
-  .animate--ambient > svg {
-    animation: animateAmbient 30s linear infinite;
-  }
-
-  @keyframes animateAmbient {
-    0% {
-      transform: rotate(0deg) translateX(1em) rotate(0deg) scale(1.2);
-    }
-    100% {
-      transform: rotate(360deg) translateX(1em) rotate(-360deg) scale(1.2);
-    }
-  }
+  /* Alpine Precision: the 30s ambient rotate/translate loop was retired.
+     Restraint over decoration — the image now sits still. The
+     .animate--ambient merchant setting still exists and is now a no-op. */
 
   .scroll-trigger.animate--fade-in,
   .scroll-trigger.animate--slide-in {
@@ -3352,8 +3342,8 @@ details-disclosure > details {
   .animate--hover-3d-lift .deferred-media:hover .deferred-media__poster-button {
     transition: transform var(--duration-extended) ease, box-shadow var(--duration-long) ease; /* Slow the card transition speed while hover is active. */
     transform: rotate(1deg);
-    box-shadow: -1rem -1rem 1rem -1rem rgba(0, 0, 0, 0.05), 1rem 1rem 1rem -1rem rgba(0, 0, 0, 0.05),
-      0 0 0.5rem 0 rgba(255, 255, 255, 0), 0 2rem 3.5rem -2rem rgba(0, 0, 0, 0.5);
+    box-shadow: -1rem -1rem 1rem -1rem rgba(28, 34, 51, 0.05), 1rem 1rem 1rem -1rem rgba(28, 34, 51, 0.05),
+      0 0 0.5rem 0 rgba(28, 34, 51, 0), 0 2rem 3.5rem -2rem rgba(28, 34, 51, 0.5);
   }
 
   .animate--hover-3d-lift .deferred-media:hover .deferred-media__poster-button {
@@ -3384,7 +3374,7 @@ details-disclosure > details {
 
   .animate--hover-3d-lift .card-wrapper:hover .card--shape.card--standard:not(.card--text) .card__inner {
     transition: transform calc(2 * var(--duration-extended)) ease, filter var(--duration-long) ease; /* Slow the card transition speed while hover is active. */
-    filter: drop-shadow(0rem 2rem 2rem rgba(0, 0, 0, 0.15)) drop-shadow(0rem 1rem 1rem rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0rem 2rem 2rem rgba(28, 34, 51, 0.15)) drop-shadow(0rem 1rem 1rem rgba(28, 34, 51, 0.15));
   }
 
   .animate--hover-3d-lift .card-wrapper:hover .card--card:after,
@@ -3424,7 +3414,9 @@ details-disclosure > details {
     left: 0;
     opacity: 0;
     pointer-events: none;
-    transition: background-position calc(2 * var(--duration-extended)) ease, opacity var(--duration-default) ease;
+    /* Alpine Precision: the background-position sweep was retired; the sheen
+       now cross-fades in place instead of travelling across the card. */
+    transition: opacity var(--dur) var(--ease);
     mix-blend-mode: overlay;
     background-size: 400% 100%;
     background-position: 90% 0;
@@ -3440,7 +3432,7 @@ details-disclosure > details {
   .animate--hover-3d-lift .card-wrapper:hover .card--card:before,
   .animate--hover-3d-lift .card-wrapper:hover .card--standard .card__media:after {
     opacity: 0.2;
-    transition: background-position 6s ease, opacity var(--duration-long) ease;
+    transition: opacity var(--dur) var(--ease);
     background-position: left;
     z-index: 2;
   }
@@ -3513,6 +3505,6 @@ details-disclosure > details {
 }
 
 .terms_reminder_text--text {
-  color: red;
+  color: var(--status-rejected);
   display: none;
 }
