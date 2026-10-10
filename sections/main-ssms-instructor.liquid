@@ -124,9 +124,6 @@
       <div class="instructor-profile__about">
         <h2 class="instructor-profile__heading">{{ 'sections.instructor_profile.about' | t }}</h2>
         <div class="instructor-profile__bio rte">{{ bio | escape | newline_to_br }}</div>
-        {%- if booking_url != blank -%}
-          <a class="button button--secondary instructor-profile__cta--repeat" href="{{ booking_url }}">{{ booking_label }}</a>
-        {%- endif -%}
       </div>
     {%- endif -%}
 

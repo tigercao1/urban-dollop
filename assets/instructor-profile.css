@@ -137,13 +137,9 @@
   line-height: 1.8;
 }
 
-.instructor-profile__cta--repeat {
-  margin-top: 2.4rem;
-}
-
 .instructor-profile__photos {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
   gap: 1.6rem;
   margin: 0;
 }
@@ -151,7 +147,9 @@
 .instructor-profile__photos img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 50% 30%;
   border-radius: var(--media-radius, 0.8rem);
 }
 
