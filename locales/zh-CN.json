@@ -269,6 +269,26 @@
     }
   },
   "sections": {
+    "instructors": {
+      "search_label": "搜索教练姓名",
+      "count": "显示 {{ shown }} / {{ total }} 位教练",
+      "clear": "清除筛选",
+      "age_any": "不限",
+      "age_option": "{{ age }} 岁",
+      "values": {
+        "ski": "双板",
+        "snowboard": "单板"
+      },
+      "no_results": "没有符合条件的教练。",
+      "facets": {
+        "certification": "等级",
+        "type": "项目",
+        "client_groups": "适合人群",
+        "locations": "教学地点",
+        "languages": "教学语言",
+        "age": "学员年龄"
+      }
+    },
     "header": {
       "announcement": "公告",
       "menu": "菜单",
