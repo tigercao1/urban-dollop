@@ -60,10 +60,10 @@
   But for THIS section, pagination is the wrong answer. It is a horizontal
   face row — dumping 100+ portraits into it is both a UX and a page-weight
   failure, and a second page of a horizontal rail is meaningless. At that
-  roster size this section should render a curated subset (SSMS sets a
-  `featured` boolean, or sort by `sort_order` and cap the loop with `limit:`),
-  and the full roster belongs on a dedicated paginated instructors page where
-  the 250-per-page block is the right tool.
+  roster size this section renders a curated subset: entries sorted by
+  `sort_order` (unnumbered last), capped by the "Maximum shown" setting. The
+  sort only sees the first 50 entries Shopify returns. The full roster belongs
+  on the paginated instructors page.
 
   Also note: addressing entries individually by handle
   (metaobjects.instructor['some-handle']) caps at 20 unique handles per page
@@ -122,7 +122,18 @@
         {%- endif -%}
       {%- endif -%}
 
-      {%- for entry in roster limit: section.settings.limit -%}
+      {%- capture order_keys -%}
+        {%- for entry in roster -%}
+          {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+          {{- position -}}-{{- forloop.index0 | plus: 10000 -}}
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign order_keys = order_keys | split: ',' | sort -%}
+
+      {%- for order_key in order_keys limit: section.settings.limit -%}
+        {%- assign entry_index = order_key | split: '-' | last | minus: 10000 -%}
+        {%- for entry in roster limit: 1 offset: entry_index -%}
         {%- liquid
           assign shown = shown | plus: 1
 
@@ -145,6 +156,7 @@
           card_image: entry.picture.value,
           card_url: url
         -%}
+        {%- endfor -%}
       {%- endfor -%}
     {%- else -%}
       {%- for block in section.blocks -%}

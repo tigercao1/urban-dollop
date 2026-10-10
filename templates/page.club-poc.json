@@ -8,27 +8,30 @@
           "settings": {
             "date": "1月18日",
             "label": "周末团课",
-            "meta": "余 6 位"
+            "meta": "余 6 位",
+            "link": "shopify://products/saturday-group-class"
           }
         },
         "n2": {
           "type": "nextup",
           "settings": {
-            "date": "1月25日",
-            "label": "精品小班",
-            "meta": "余 2 位"
+            "date": "12月20日",
+            "label": "圣诞元旦冬令营",
+            "meta": "全托管 · 两期",
+            "link": "shopify://products/wintercamp-27"
           }
         },
         "n3": {
           "type": "nextup",
           "settings": {
-            "date": "2月14日",
-            "label": "Tremblant 外滑",
-            "meta": "候补中"
+            "date": "1月18日",
+            "label": "Blue Mountain 精英训练营",
+            "meta": "4天 · 两位精英教练",
+            "link": "shopify://products/blue-mountain-camp-2027"
           }
         }
       },
-      "block_order": ["n1", "n2", "n3"],
+      "block_order": ["n2", "n1", "n3"],
       "settings": {
         "height": 90,
         "show_scrim": true,
@@ -36,7 +39,9 @@
         "heading": "S SNOW",
         "subheading": "多伦多滑雪俱乐部 · 会员制 · 教练带队",
         "button_label_1": "26/27 报名开始",
-        "button_label_2": "成为会员"
+        "button_link_1": "shopify://collections/group-lessons",
+        "button_label_2": "成为会员",
+        "button_link_2": "shopify://collections/join-us"
       }
     },
     "stats": {
@@ -62,25 +67,26 @@
             "date": "1月18日 · 周六",
             "title": "周末团课",
             "meta": "MSL · 6–12岁 · 教练 1:5",
-            "spots": 6
+            "spots": 6,
+            "link": "shopify://products/saturday-group-class"
           }
         },
         "c2": {
           "type": "session",
           "settings": {
-            "date": "1月25日 · 周日",
-            "title": "精品小班",
-            "meta": "Blue Mountain · 进阶 · 教练 1:3",
-            "spots": 2
+            "date": "12月20–23日 · 12月27–30日",
+            "title": "圣诞元旦冬令营",
+            "meta": "全托管 · 7岁+ · 3–5人小班",
+            "link": "shopify://products/wintercamp-27"
           }
         },
         "c3": {
           "type": "session",
           "settings": {
-            "date": "2月14–17日",
-            "title": "Tremblant 外滑",
-            "meta": "四天三晚 · 含巴士",
-            "spots": 0
+            "date": "1月18–21日",
+            "title": "Blue Mountain 精英训练营",
+            "meta": "4天 · 两位精英教练",
+            "link": "shopify://products/blue-mountain-camp-2027"
           }
         },
         "c4": {
@@ -89,7 +95,8 @@
             "date": "3月16–20日",
             "title": "春假冬令营",
             "meta": "全托管 · 5天 · 7–14岁",
-            "spots": 11
+            "spots": 11,
+            "link": "shopify://products/marchbreak-camp"
           }
         },
         "c5": {
@@ -98,15 +105,17 @@
             "date": "每周六",
             "title": "雪场巴士",
             "meta": "士嘉堡 / 万锦 发车",
-            "spots": 24
+            "spots": 24,
+            "link": "shopify://collections/bus"
           }
         }
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5"],
+      "block_order": ["c2", "c1", "c3", "c4", "c5"],
       "settings": {
         "eyebrow": "26/27",
         "heading": "本季活动",
         "link_label": "全部日程",
+        "link_url": "shopify://collections/group-lessons",
         "color_scheme": "background-1"
       }
     },
@@ -176,5 +185,5 @@
       }
     }
   },
-  "order": ["hero", "stats", "season", "wall", "instructors"]
+  "order": ["hero", "stats", "instructors", "season", "wall"]
 }
