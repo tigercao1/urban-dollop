@@ -197,9 +197,10 @@
   color: var(--red, rgb(var(--color-button)));
 }
 
-/* The grid sets display on its children, which outranks the hidden attribute's
-   UA default. Without this, filtered-out cards stay visible. */
-.club-roster__grid > li[hidden] {
+/* The grid, the filter groups and Dawn's .field set display, which outranks
+   the hidden attribute's UA default. Without this, hidden cards and empty
+   filter groups stay visible. */
+instructor-filter [hidden] {
   display: none !important;
 }
 
