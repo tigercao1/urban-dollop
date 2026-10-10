@@ -269,6 +269,16 @@
     }
   },
   "sections": {
+    "instructor_profile": {
+      "back": "全部教练",
+      "book_with_me": "找我上课",
+      "book_private": "预约私教课",
+      "certifications": "认证",
+      "teaches": "擅长教学",
+      "age_from": "{{ age }} 岁以上",
+      "about": "关于我",
+      "photos": "照片"
+    },
     "instructors": {
       "search_label": "搜索教练姓名",
       "count": "显示 {{ shown }} / {{ total }} 位教练",

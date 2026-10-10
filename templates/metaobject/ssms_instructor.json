@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "profile": {
+      "type": "main-ssms-instructor",
+      "settings": {
+        "fallback_url": "shopify://collections/private-packages",
+        "color_scheme": "background-1"
+      }
+    }
+  },
+  "order": ["profile"]
+}
