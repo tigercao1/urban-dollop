@@ -260,6 +260,16 @@
     }
   },
   "sections": {
+    "instructor_profile": {
+      "back": "全部教練",
+      "book_with_me": "找我上課",
+      "book_private": "預約私教課",
+      "certifications": "認證",
+      "teaches": "擅長教學",
+      "age_from": "{{ age }} 歲以上",
+      "about": "關於我",
+      "photos": "照片"
+    },
     "instructors": {
       "search_label": "搜尋教練姓名",
       "count": "顯示 {{ shown }} / {{ total }} 位教練",

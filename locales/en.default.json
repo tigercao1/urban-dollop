@@ -269,6 +269,16 @@
     }
   },
   "sections": {
+    "instructor_profile": {
+      "back": "All instructors",
+      "book_with_me": "Book a lesson with me",
+      "book_private": "Book a private lesson",
+      "certifications": "Certifications",
+      "teaches": "Teaches",
+      "age_from": "Ages {{ age }}+",
+      "about": "About me",
+      "photos": "Photos"
+    },
     "instructors": {
       "search_label": "Search instructors by name",
       "count": "Showing {{ shown }} of {{ total }} instructors",

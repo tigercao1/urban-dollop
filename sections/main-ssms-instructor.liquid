@@ -1,0 +1,181 @@
+{{ 'instructor-profile.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign profile = metaobject
+  assign name = profile.name.value
+
+  assign certifications = profile.certification.value | replace: '，', ',' | replace: '、', ',' | split: ','
+  assign disciplines = profile.type.value | replace: '｜', '|' | split: '|'
+  assign client_groups = profile.client_groups.value | replace: '，', ',' | replace: '、', ',' | split: ','
+  assign locations = profile.locations.value
+  assign languages = profile.languages.value
+  assign min_age = profile.min_age.value
+  assign bio = profile.introduction.value
+
+  assign booking_url = profile.collection_url.value
+  assign booking_label = 'sections.instructor_profile.book_with_me' | t
+  if booking_url == blank
+    assign booking_url = section.settings.fallback_url
+    assign booking_label = 'sections.instructor_profile.book_private' | t
+  endif
+
+  assign roster_url = pages['our-team'].url | default: routes.root_url
+-%}
+
+<div class="instructor-profile color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <a class="instructor-profile__back link" href="{{ roster_url }}">
+      ← {{ 'sections.instructor_profile.back' | t }}
+    </a>
+
+    <div class="instructor-profile__hero">
+      <div class="instructor-profile__media">
+        {%- if profile.picture.value != blank -%}
+          {{
+            profile.picture.value
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'eager',
+              sizes: '(min-width: 990px) 440px, 100vw',
+              widths: '400, 600, 900, 1200',
+              alt: name,
+              class: 'instructor-profile__img'
+          }}
+        {%- else -%}
+          <div class="instructor-profile__initial" aria-hidden="true">{{ name | slice: 0 }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="instructor-profile__summary">
+        <h1 class="instructor-profile__name">{{ name }}</h1>
+
+        {%- if disciplines.size > 0 -%}
+          <ul class="instructor-profile__chips list-unstyled" role="list">
+            {%- for discipline in disciplines -%}
+              {%- assign discipline = discipline | strip -%}
+              {%- if discipline != blank -%}
+                <li class="instructor-profile__chip">
+                  {%- case discipline -%}
+                    {%- when '双板', '雙板', 'Ski', 'ski' -%}{{ 'sections.instructors.values.ski' | t }}
+                    {%- when '单板', '單板', 'Snowboard', 'snowboard' -%}{{ 'sections.instructors.values.snowboard' | t }}
+                    {%- else -%}{{ discipline }}
+                  {%- endcase -%}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if certifications.size > 0 -%}
+          <div class="instructor-profile__certs">
+            <h2 class="instructor-profile__label">{{ 'sections.instructor_profile.certifications' | t }}</h2>
+            <ul class="instructor-profile__badges list-unstyled" role="list">
+              {%- for cert in certifications -%}
+                {%- assign cert = cert | strip -%}
+                {%- if cert != blank -%}
+                  <li class="instructor-profile__badge">{{ cert }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <dl class="instructor-profile__facts">
+          {%- if client_groups.size > 0 -%}
+            <div class="instructor-profile__fact">
+              <dt>{{ 'sections.instructor_profile.teaches' | t }}</dt>
+              <dd>
+                {%- for group in client_groups -%}
+                  {%- assign group = group | strip -%}
+                  {%- if group != blank -%}
+                    <span class="instructor-profile__tag">{{ group }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </dd>
+            </div>
+          {%- endif -%}
+          {%- if locations != blank and locations.size > 0 -%}
+            <div class="instructor-profile__fact">
+              <dt>{{ 'sections.instructors.facets.locations' | t }}</dt>
+              <dd>{{ locations | join: ' · ' }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if languages != blank and languages.size > 0 -%}
+            <div class="instructor-profile__fact">
+              <dt>{{ 'sections.instructors.facets.languages' | t }}</dt>
+              <dd>{{ languages | join: ' · ' }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if min_age != blank -%}
+            <div class="instructor-profile__fact">
+              <dt>{{ 'sections.instructors.facets.age' | t }}</dt>
+              <dd>{{ 'sections.instructor_profile.age_from' | t: age: min_age }}</dd>
+            </div>
+          {%- endif -%}
+        </dl>
+
+        {%- if booking_url != blank -%}
+          <a class="button instructor-profile__cta" href="{{ booking_url }}">{{ booking_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if bio != blank -%}
+      <div class="instructor-profile__about">
+        <h2 class="instructor-profile__heading">{{ 'sections.instructor_profile.about' | t }}</h2>
+        <div class="instructor-profile__bio rte">{{ bio | escape | newline_to_br }}</div>
+        {%- if booking_url != blank -%}
+          <a class="button button--secondary instructor-profile__cta--repeat" href="{{ booking_url }}">{{ booking_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if profile.image_1.value != blank or profile.image_2.value != blank -%}
+      <div class="instructor-profile__gallery">
+        <h2 class="instructor-profile__heading">{{ 'sections.instructor_profile.photos' | t }}</h2>
+        <ul class="instructor-profile__photos list-unstyled" role="list">
+          {%- if profile.image_1.value != blank -%}
+            <li>
+              {{
+                profile.image_1.value
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200', alt: name
+              }}
+            </li>
+          {%- endif -%}
+          {%- if profile.image_2.value != blank -%}
+            <li>
+              {{
+                profile.image_2.value
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200', alt: name
+              }}
+            </li>
+          {%- endif -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instructor profile",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "url",
+      "id": "fallback_url",
+      "label": "Booking link when the instructor has none",
+      "info": "Used when the entry's Collection url is empty."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ]
+}
+{% endschema %}
