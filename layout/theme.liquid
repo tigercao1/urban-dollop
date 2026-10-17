@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    {%- if template.name == 'index' and template.suffix == 'club' -%}
+      <meta name="robots" content="noindex, nofollow">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
