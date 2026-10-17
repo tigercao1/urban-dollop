@@ -1,0 +1,177 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 0
+      }
+    },
+    "fc5107c4-cded-40b9-8700-1dae25e2768d": {
+      "type": "multirow",
+      "blocks": {
+        "template--21452043714582__fc5107c4-cded-40b9-8700-1dae25e2768d-row-1": {
+          "type": "row",
+          "repeater": "{{ page.metafields.custom.our_team.value }}",
+          "settings": {
+            "image": "{{ block.repeater.picture.value }}",
+            "caption": "{{ block.repeater.certification.value }} | {{ block.repeater.type.value }}",
+            "heading": "{{ block.repeater.name.value }}",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}</p>",
+            "button_label": "了解更多",
+            "button_link": "{{ block.repeater.system.url }}"
+          }
+        }
+      },
+      "block_order": [
+        "template--21452043714582__fc5107c4-cded-40b9-8700-1dae25e2768d-row-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "background-1",
+        "row_color_scheme": "",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "multirow_fNT7Mh": {
+      "type": "multirow",
+      "blocks": {
+        "row_E3RNkT": {
+          "type": "row",
+          "repeater": "{{ page.metafields.custom.our_team_2.value }}",
+          "settings": {
+            "image": "{{ block.repeater.picture.value }}",
+            "caption": "{{ block.repeater.certification.value }} | {{ block.repeater.type.value }}",
+            "heading": "{{ block.repeater.name.value }}",
+            "text": "<p>{{ block.repeater.introduction | metafield_tag }}</p>",
+            "button_label": "了解更多",
+            "button_link": "{{ block.repeater.system.url }}"
+          }
+        }
+      },
+      "block_order": [
+        "row_E3RNkT"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_height": "large",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "mobile_content_alignment": "center",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "roster": {
+      "type": "main-instructors",
+      "settings": {
+        "per_page": 250,
+        "columns": 5,
+        "show_bio": false,
+        "meta_field": "type",
+        "link_target": "profile",
+        "heading": "",
+        "subheading": "",
+        "color_scheme": "background-1",
+        "source": "ssms_instructor"
+      }
+    },
+    "multicolumn_R4MqcL": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_FD8JHJ": {
+          "type": "column",
+          "repeater": "{{ page.metafields.custom.our_team.value }}",
+          "settings": {
+            "image": "{{ block.repeater.picture.value }}",
+            "title": "{{ block.repeater.name.value }}",
+            "text": "<h5>{{ block.repeater.type.value }}</h5><h6>{{ block.repeater.certification.value }}</h6>",
+            "link_label": "了解更多",
+            "link": "{{ block.repeater.system.url }}"
+          }
+        }
+      },
+      "block_order": [
+        "column_FD8JHJ"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "portrait",
+        "columns_desktop": 5,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_AAYU3i": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_WmxYaE": {
+          "type": "column",
+          "repeater": "{{ page.metafields.custom.our_team_2.value }}",
+          "settings": {
+            "image": "{{ block.repeater.picture.value }}",
+            "title": "{{ block.repeater.name.value }}",
+            "text": "<h5>{{ block.repeater.type.value }}</h5><h6>{{ block.repeater.certification.value }}</h6>",
+            "link_label": "了解更多",
+            "link": "{{ block.repeater.system.url }}"
+          }
+        }
+      },
+      "block_order": [
+        "column_WmxYaE"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "portrait",
+        "columns_desktop": 5,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "roster",
+    "fc5107c4-cded-40b9-8700-1dae25e2768d",
+    "multirow_fNT7Mh",
+    "multicolumn_R4MqcL",
+    "multicolumn_AAYU3i"
+  ]
+}

@@ -6,7 +6,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-    {%- if template.name == 'index' and template.suffix == 'club' -%}
+    {%- liquid
+      assign staging_template = false
+      if template.name == 'index' and template.suffix == 'club'
+        assign staging_template = true
+      endif
+      if template.name == 'page' and template.suffix == 'ssms'
+        assign staging_template = true
+      endif
+    -%}
+    {%- if staging_template -%}
       <meta name="robots" content="noindex, nofollow">
     {%- endif -%}
 
