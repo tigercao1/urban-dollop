@@ -37,7 +37,7 @@
         "tiktok": "TikTok"
       }
     },
-    "continue_shopping": "继续购物",
+    "continue_shopping": "继续浏览课程",
     "pagination": {
       "label": "分页",
       "page": "第 {{ number }} 页",
@@ -115,7 +115,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "添加到购物车",
+      "add_to_cart": "立即报名",
       "description": "描述",
       "on_sale": "促销",
       "product_variants": "产品多属性",
@@ -137,7 +137,7 @@
         "unit_price": "单价"
       },
       "share": "分享此产品",
-      "sold_out": "售罄",
+      "sold_out": "名额已满",
       "unavailable": "不可用",
       "vendor": "厂商",
       "video_exit_message": "{{ title }} 在同一窗口中打开全屏视频。",
@@ -308,12 +308,12 @@
       }
     },
     "cart": {
-      "title": "您的购物车",
+      "title": "报名清单",
       "caption": "购物车商品",
       "remove_title": "删除 {{ title }}",
       "note": "订单特殊说明",
       "checkout": "结账",
-      "empty": "您的购物车为空",
+      "empty": "您的报名清单是空的",
       "cart_error": "更新购物车时出错。请重试。",
       "cart_quantity_error_html": "您只能向购物车添加 {{ quantity }} 件此商品。",
       "taxes_and_shipping_policy_at_checkout_html": "结账时计算的税费、折扣和<a href=\"{{ link }}\">运费<\/a>",

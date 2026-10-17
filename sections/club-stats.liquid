@@ -1,0 +1,95 @@
+{%- comment -%}
+  Stat band — the cheapest club signal available.
+
+  No photography, pure type. "340 会员 · 12 教练" is something a shop
+  structurally cannot say, and it costs one section of markup. Deliberately
+  quiet: it sits between two loud sections and supplies the contrast that makes
+  them read as loud.
+{%- endcomment -%}
+
+{{ 'club.css' | asset_url | stylesheet_tag }}
+
+<div class="club-stats color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <p class="club-stats__heading">{{ section.settings.heading }}</p>
+    {%- endif -%}
+
+    <dl class="club-stats__grid" style="--stat-columns: {{ section.blocks.size }};">
+      {%- for block in section.blocks -%}
+        <div class="club-stats__item" {{ block.shopify_attributes }}>
+          <dt class="club-stats__value">
+            {{- block.settings.value -}}
+            {%- if block.settings.suffix != blank -%}
+              <span class="club-stats__suffix">{{ block.settings.suffix }}</span>
+            {%- endif -%}
+          </dt>
+          <dd class="club-stats__label">{{ block.settings.label }}</dd>
+        </div>
+      {%- endfor -%}
+    </dl>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Club stats",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Numbers only — members, instructors, events, trips. Keep it to four or five."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Small heading above",
+      "default": "本季"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "inverse"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Number",
+          "default": "340"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "会员"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Club stats",
+      "blocks": [
+        { "type": "stat" },
+        { "type": "stat" },
+        { "type": "stat" },
+        { "type": "stat" }
+      ]
+    }
+  ]
+}
+{% endschema %}

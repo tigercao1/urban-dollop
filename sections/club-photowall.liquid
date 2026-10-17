@@ -1,0 +1,133 @@
+{%- comment -%}
+  Photo wall — quantity is the message.
+
+  Sixteen small frames of people beat one hero shot here. No captions, no
+  headings on the images: the point is not any individual photograph, it is the
+  accumulated evidence that a lot of people showed up a lot of times.
+
+  Deliberately full-bleed and gapless-tight so it reads as one dense field
+  rather than a gallery of separate pictures.
+{%- endcomment -%}
+
+{{ 'club.css' | asset_url | stylesheet_tag }}
+
+<div class="club-wall color-{{ section.settings.color_scheme }} gradient">
+  {%- if section.settings.heading != blank -%}
+    <div class="page-width">
+      <h2 class="club-wall__title">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div
+    class="club-wall__grid"
+    style="--wall-columns: {{ section.settings.columns }}; --wall-gap: {{ section.settings.gap }}px;"
+  >
+    {%- for block in section.blocks -%}
+      <div
+        class="club-wall__cell{% if block.settings.tall %} club-wall__cell--tall{% endif %}{% if block.settings.wide %} club-wall__cell--wide{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 25vw, 50vw',
+              widths: '300, 500, 700, 1000, 1200',
+              class: 'club-wall__img'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg club-wall__img' }}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Club photo wall",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Dense mosaic of last season's photos. Aim for 12–20 images — below about 12 the wall reads as a sparse gallery instead of a crowd. Mark a few as tall or wide to break the grid."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (optional)"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "label": "Columns (desktop)",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap",
+      "default": 4
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "tall",
+          "label": "Span two rows",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "wide",
+          "label": "Span two columns",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Club photo wall",
+      "blocks": [
+        { "type": "photo", "settings": { "wide": true } },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo", "settings": { "tall": true } },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
