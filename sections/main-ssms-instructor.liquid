@@ -131,24 +131,8 @@
       <div class="instructor-profile__gallery">
         <h2 class="instructor-profile__heading">{{ 'sections.instructor_profile.photos' | t }}</h2>
         <ul class="instructor-profile__photos list-unstyled" role="list">
-          {%- if profile.image_1.value != blank -%}
-            <li>
-              {{
-                profile.image_1.value
-                | image_url: width: 1200
-                | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200', alt: name
-              }}
-            </li>
-          {%- endif -%}
-          {%- if profile.image_2.value != blank -%}
-            <li>
-              {{
-                profile.image_2.value
-                | image_url: width: 1200
-                | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '600, 900, 1200', alt: name
-              }}
-            </li>
-          {%- endif -%}
+          {%- render 'instructor-profile-photo', photo: profile.image_1.value, alt: name -%}
+          {%- render 'instructor-profile-photo', photo: profile.image_2.value, alt: name -%}
         </ul>
       </div>
     {%- endif -%}
