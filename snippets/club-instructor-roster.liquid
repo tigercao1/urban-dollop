@@ -1,0 +1,181 @@
+{%- comment -%}
+  Roster body shared by every source. Accepts: roster (the paginated .values
+  array, read inside the paginate block), all_entries, paginate, section.
+{%- endcomment -%}
+
+{%- capture order_keys -%}
+  {%- for entry in roster -%}
+    {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+    {{- position -}}-{{- forloop.index0 | plus: 10000 -}}
+    {%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign order_keys = order_keys | split: ',' | sort -%}
+
+{%- if request.design_mode -%}
+  <p class="club-roster__count">
+    Showing {{ roster.size }} of {{ all_entries.size }} entries.
+    (Editor only — visitors do not see this.)
+  </p>
+  {%- if section.settings.enable_filter and paginate.pages > 1 -%}
+    <p class="club-roster__empty">
+      WARNING: the roster is split across {{ paginate.pages }} pages, but
+      filtering is client-side — it can only filter the cards on the
+      current page while appearing to search everything. Raise “Entries
+      per page”, or turn filtering off until this becomes a server-side
+      filter.
+    </p>
+  {%- endif -%}
+{%- endif -%}
+
+{%- liquid
+  assign search_label = 'sections.instructors.search_label' | t
+  assign facet_fields = 'certification,type,client_groups,locations,languages' | split: ','
+-%}
+
+{%- capture value_labels -%}
+  {"ski":{{ 'sections.instructors.values.ski' | t | json }},"snowboard":{{ 'sections.instructors.values.snowboard' | t | json }}}
+{%- endcapture -%}
+
+<instructor-filter
+  data-value-labels="{{ value_labels | escape }}"
+  data-card-meta-field="{{ section.settings.meta_field }}"
+>
+  {%- if section.settings.enable_filter -%}
+    {%- comment -%}
+      no-js-hidden: with JS off the controls never appear and the full
+      roster renders. A visible control that does nothing is worse than
+      no control.
+    {%- endcomment -%}
+    <div class="club-filter no-js-hidden" role="search" aria-label="{{ search_label | escape }}">
+      {%- if section.settings.filter_by_name -%}
+        <div class="club-filter__search field">
+          <input
+            id="InstructorSearch-{{ section.id }}"
+            type="search"
+            class="club-filter__input field__input"
+            placeholder="{{ search_label | escape }}"
+            autocomplete="off"
+            enterkeyhint="search"
+            data-instructor-search
+          >
+          <label class="field__label" for="InstructorSearch-{{ section.id }}">
+            {{- search_label -}}
+          </label>
+          <span class="club-filter__search-icon field__button" aria-hidden="true">
+            <svg class="icon icon-search" viewBox="0 0 18 19" fill="none" focusable="false">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+            </svg>
+          </span>
+        </div>
+      {%- endif -%}
+
+      {%- for field in facet_fields -%}
+        {%- assign setting_id = 'filter_' | append: field -%}
+        {%- if section.settings[setting_id] -%}
+          <fieldset class="club-filter__group" hidden data-facet-group="{{ field }}">
+            <legend class="club-filter__legend">
+              {%- case field -%}
+                {%- when 'certification' -%}{{ 'sections.instructors.facets.certification' | t }}
+                {%- when 'type' -%}{{ 'sections.instructors.facets.type' | t }}
+                {%- when 'client_groups' -%}{{ 'sections.instructors.facets.client_groups' | t }}
+                {%- when 'locations' -%}{{ 'sections.instructors.facets.locations' | t }}
+                {%- when 'languages' -%}{{ 'sections.instructors.facets.languages' | t }}
+              {%- endcase -%}
+            </legend>
+          </fieldset>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.settings.filter_min_age -%}
+        <div class="club-filter__age field select" hidden data-age-filter>
+          <select
+            id="InstructorAge-{{ section.id }}"
+            class="select__select field__input"
+            data-any-label="{{ 'sections.instructors.age_any' | t | escape }}"
+            data-option-template="{{ 'sections.instructors.age_option' | t: age: '[age]' | escape }}"
+          ></select>
+          <label class="field__label" for="InstructorAge-{{ section.id }}">
+            {{- 'sections.instructors.facets.age' | t -}}
+          </label>
+          {% render 'icon-caret' %}
+        </div>
+      {%- endif -%}
+
+      <div class="club-filter__status">
+        <p
+          class="club-filter__count"
+          role="status"
+          aria-live="polite"
+          data-instructor-count
+          data-template="{{ 'sections.instructors.count' | t: shown: '[shown]', total: '[total]' | escape }}"
+        ></p>
+        <button type="button" class="club-filter__clear link" hidden data-instructor-clear>
+          {{- 'sections.instructors.clear' | t -}}
+        </button>
+      </div>
+    </div>
+
+    <p class="club-roster__empty" hidden data-instructor-empty>
+      {{ 'sections.instructors.no_results' | t }}
+    </p>
+  {%- endif -%}
+
+<ul
+  class="club-roster__grid list-unstyled"
+  style="--roster-columns: {{ section.settings.columns }};"
+  role="list"
+>
+  {%- for order_key in order_keys -%}
+    {%- assign entry_index = order_key | split: '-' | last | minus: 10000 -%}
+    {%- for entry in roster limit: 1 offset: entry_index -%}
+    {%- liquid
+      # Never write a percent-brace sequence inside this tag body,
+      # not even in a comment line. The tokenizer closes the tag at
+      # the first closing delimiter it sees and dumps the remainder
+      # to the page as literal text.
+      if section.settings.link_target == 'collection'
+        assign url = entry.collection_url.value
+      else
+        assign url = entry.system.url
+      endif
+
+      assign bio = blank
+      if section.settings.show_bio
+        assign bio = entry.introduction.value
+      endif
+    -%}
+
+    {%- capture cert -%}
+      {%- render 'club-instructor-field', entry: entry, field: 'certification' -%}
+    {%- endcapture -%}
+    {%- capture loc -%}
+      {%- render 'club-instructor-field', entry: entry, field: section.settings.meta_field -%}
+    {%- endcapture -%}
+    {%- capture card_data -%}
+      data-instructor-card
+      data-name="{{ entry.name.value | escape }}"
+      data-min-age="{{ entry.min_age.value }}"
+      {%- for field in facet_fields -%}
+        {%- capture cell -%}
+          {%- render 'club-instructor-field', entry: entry, field: field -%}
+        {%- endcapture %}
+      data-facet-{{ field | replace: '_', '-' }}="{{ cell | escape }}"
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- render 'club-instructor-card',
+      card_name: entry.name.value,
+      card_cert: cert,
+      card_loc: loc,
+      card_bio: bio,
+      card_image: entry.picture.value,
+      card_url: url,
+      card_class: 'club-roster__item',
+      card_sizes: '(min-width: 990px) 20vw, 44vw',
+      card_data: card_data
+    -%}
+    {%- endfor -%}
+  {%- endfor -%}
+</ul>
+</instructor-filter>
