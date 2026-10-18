@@ -53,6 +53,8 @@
 
 {%- if section.settings.source == 'ssms_instructor' -%}
   {%- assign all_entries = shop.metaobjects.ssms_instructor.values -%}
+{%- elsif section.settings.source == 'transition' -%}
+  {%- assign all_entries = shop.metaobjects.our_team.values -%}
 {%- else -%}
   {%- assign all_entries = shop.metaobjects.our_team.values -%}
 {%- endif -%}
@@ -98,6 +100,11 @@
             {%- render 'club-instructor-roster', roster: shop.metaobjects.ssms_instructor.values, all_entries: all_entries, paginate: paginate, section: section -%}
             {%- render 'pagination', paginate: paginate -%}
           {%- endpaginate -%}
+        {%- when 'transition' -%}
+          {%- paginate shop.metaobjects.ssms_instructor.values by section.settings.per_page -%}
+            {%- render 'club-instructor-roster', roster: shop.metaobjects.ssms_instructor.values, legacy: shop.metaobjects.our_team.values, all_entries: all_entries, paginate: paginate, section: section -%}
+            {%- render 'pagination', paginate: paginate -%}
+          {%- endpaginate -%}
         {%- else -%}
           {%- paginate shop.metaobjects.our_team.values by section.settings.per_page -%}
             {%- render 'club-instructor-roster', roster: shop.metaobjects.our_team.values, all_entries: all_entries, paginate: paginate, section: section -%}
@@ -124,7 +131,8 @@
       "label": "Instructor list",
       "options": [
         { "value": "our_team", "label": "Instructors (our_team, hand-managed)" },
-        { "value": "ssms_instructor", "label": "Instructors (SSMS)" }
+        { "value": "ssms_instructor", "label": "Instructors (SSMS)" },
+        { "value": "transition", "label": "SSMS, plus legacy instructors not yet in SSMS" }
       ],
       "default": "our_team",
       "info": "Each option is a fixed path in the section file, because Shopify's paginate tag only accepts a static path. A new list needs a new option there."
