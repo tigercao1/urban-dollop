@@ -15,6 +15,19 @@
         assign staging_template = true
       endif
     -%}
+    {%- if template.name == 'page' and template.suffix == 'instructors-list' -%}
+      {%- liquid
+        assign requested_handle = request.path | split: '/' | last
+        assign legacy_url = blank
+        if requested_handle != page.handle
+          assign legacy_url = metaobjects.our_team[requested_handle].system.url
+        endif
+      -%}
+      {%- if legacy_url != blank and legacy_url != request.path -%}
+        <meta http-equiv="refresh" content="0;url={{ legacy_url }}">
+        <script>window.location.replace({{ legacy_url | json }});</script>
+      {%- endif -%}
+    {%- endif -%}
     {%- if staging_template -%}
       <meta name="robots" content="noindex, nofollow">
     {%- endif -%}
