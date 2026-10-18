@@ -1,22 +1,46 @@
 {%- comment -%}
   Roster body shared by every source. Accepts: roster (the paginated .values
-  array, read inside the paginate block), all_entries, paginate, section.
+  array, read inside the paginate block), all_entries, paginate, section, and
+  optionally legacy (our_team .values). Legacy entries whose handle also exists
+  in roster are skipped, so a published SSMS instructor replaces their legacy
+  card.
 {%- endcomment -%}
 
+{%- capture roster_handles -%}
+  |{%- for entry in roster -%}{{ entry.system.handle }}|{%- endfor -%}
+{%- endcapture -%}
+
+{%- assign legacy_shown = 0 -%}
 {%- capture order_keys -%}
   {%- for entry in roster -%}
     {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
-    {{- position -}}-{{- forloop.index0 | plus: 10000 -}}
-    {%- unless forloop.last -%},{%- endunless -%}
+    {{- position -}}-a-{{- forloop.index0 | plus: 10000 -}},
+  {%- endfor -%}
+  {%- for entry in legacy -%}
+    {%- assign handle_key = '|' | append: entry.system.handle | append: '|' -%}
+    {%- unless roster_handles contains handle_key -%}
+      {%- assign legacy_shown = legacy_shown | plus: 1 -%}
+      {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+      {{- position -}}-b-{{- forloop.index0 | plus: 10000 -}},
+    {%- endunless -%}
   {%- endfor -%}
 {%- endcapture -%}
 {%- assign order_keys = order_keys | split: ',' | sort -%}
 
 {%- if request.design_mode -%}
   <p class="club-roster__count">
-    Showing {{ roster.size }} of {{ all_entries.size }} entries.
+    {%- if legacy != blank -%}
+      {{ roster.size }} published SSMS instructors, plus {{ legacy_shown }} of {{ legacy.size }} legacy instructors who have no published SSMS entry.
+    {%- else -%}
+      Showing {{ roster.size }} of {{ all_entries.size }} entries.
+    {%- endif %}
     (Editor only — visitors do not see this.)
   </p>
+  {%- if legacy.size >= 50 -%}
+    <p class="club-roster__empty">
+      WARNING: the legacy list has 50 or more entries, and only the first 50 can be read here.
+    </p>
+  {%- endif -%}
   {%- if section.settings.enable_filter and paginate.pages > 1 -%}
     <p class="club-roster__empty">
       WARNING: the roster is split across {{ paginate.pages }} pages, but
@@ -127,8 +151,19 @@
   role="list"
 >
   {%- for order_key in order_keys -%}
-    {%- assign entry_index = order_key | split: '-' | last | minus: 10000 -%}
-    {%- for entry in roster limit: 1 offset: entry_index -%}
+    {%- liquid
+      assign key_parts = order_key | split: '-'
+      assign entry_index = key_parts[2] | minus: 10000
+      if key_parts[1] == 'b'
+        for candidate in legacy limit: 1 offset: entry_index
+          assign entry = candidate
+        endfor
+      else
+        for candidate in roster limit: 1 offset: entry_index
+          assign entry = candidate
+        endfor
+      endif
+    -%}
     {%- liquid
       # Never write a percent-brace sequence inside this tag body,
       # not even in a comment line. The tokenizer closes the tag at
@@ -175,7 +210,6 @@
       card_sizes: '(min-width: 990px) 20vw, 44vw',
       card_data: card_data
     -%}
-    {%- endfor -%}
   {%- endfor -%}
 </ul>
 </instructor-filter>
