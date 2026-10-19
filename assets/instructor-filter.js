@@ -34,6 +34,11 @@ const TYPE_ALIASES = {
 const clean = (text) => (text || '').normalize('NFKC').replace(INVISIBLE, '');
 const tidy = (part) => part.replace(/\s+/g, ' ').trim();
 const keyOf = (value) => value.toLowerCase();
+const PARTIAL_LEVEL = /^(csia|casi) level ([2-4]) (?:partial|teach|teaching|riding|ski|skiing)$/;
+const levelBelowPartial = (key) => {
+  const match = key.match(PARTIAL_LEVEL);
+  return match ? `${match[1]} level ${Number(match[2]) - 1}` : null;
+};
 
 const splitPlain = (text, separators = SEPARATORS) => clean(text).split(separators).map(tidy).filter(Boolean);
 
@@ -68,7 +73,7 @@ class InstructorFilter extends HTMLElement {
     this.cards = Array.from(this.querySelectorAll('[data-instructor-card]')).map((el) => {
       const facets = {};
       this.groups.forEach(({ name }) => {
-        facets[name] = new Set(this.tokenize(el.getAttribute(`data-facet-${name.replace(/_/g, '-')}`), name).map(keyOf));
+        facets[name] = new Set(this.facetKeys(el.getAttribute(`data-facet-${name.replace(/_/g, '-')}`), name));
       });
       const minAge = parseInt(el.dataset.minAge, 10);
       return { el, name: (el.dataset.name || '').toLowerCase(), facets, minAge: Number.isNaN(minAge) ? null : minAge };
@@ -124,6 +129,12 @@ class InstructorFilter extends HTMLElement {
       return splitPlain(text, /[,，;；|｜丨/／、·•・&＆\n\r]/).map((value) => this.translateType(value));
     }
     return splitPlain(text);
+  }
+
+  facetKeys(text, field) {
+    const keys = this.tokenize(text, field).map(keyOf);
+    if (field !== 'certification') return keys;
+    return keys.concat(keys.map(levelBelowPartial).filter(Boolean));
   }
 
   tidyCardText() {
