@@ -62,13 +62,16 @@
         if block.settings.spots != blank and block.settings.spots <= 0
           assign is_full = true
         endif
+
+        assign card_image = block.settings.image | default: block.settings.product.featured_image | default: block.settings.collection.featured_image
+        assign card_url = block.settings.link | default: block.settings.product.url | default: block.settings.collection.url | default: '#'
       -%}
       <li class="club-season__card{% if is_full %} club-season__card--full{% endif %}" {{ block.shopify_attributes }}>
-        <a href="{{ block.settings.link | default: '#' }}" class="club-season__card-link">
+        <a href="{{ card_url }}" class="club-season__card-link">
           <div class="club-season__card-media">
-            {%- if block.settings.image != blank -%}
+            {%- if card_image != blank -%}
               {{
-                block.settings.image
+                card_image
                 | image_url: width: 900
                 | image_tag:
                   loading: 'lazy',
@@ -154,9 +157,22 @@
       "name": "Session",
       "settings": [
         {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "The card uses this product's main image and links to it."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Used for the image and link when no product is set."
+        },
+        {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Image override",
+          "info": "Leave empty to use the product's or collection's image."
         },
         {
           "type": "text",
@@ -196,7 +212,8 @@
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "Link override",
+          "info": "Leave empty to link to the product or collection."
         }
       ]
     }

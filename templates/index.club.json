@@ -47,10 +47,10 @@
     "stats": {
       "type": "club-stats",
       "blocks": {
-        "s1": { "type": "stat", "settings": { "value": "340", "label": "会员" } },
-        "s2": { "type": "stat", "settings": { "value": "12", "label": "教练" } },
-        "s3": { "type": "stat", "settings": { "value": "18", "label": "本季活动" } },
-        "s4": { "type": "stat", "settings": { "value": "3", "label": "外滑旅行" } }
+        "s1": { "type": "stat", "settings": { "source": "members", "value": "340", "label": "会员" } },
+        "s2": { "type": "stat", "settings": { "source": "instructors", "value": "12", "label": "教练" } },
+        "s3": { "type": "stat", "settings": { "source": "collection_products", "collection": "group-lessons", "value": "18", "label": "本季活动" } },
+        "s4": { "type": "stat", "settings": { "source": "manual", "value": "3", "label": "外滑旅行" } }
       },
       "block_order": ["s1", "s2", "s3", "s4"],
       "settings": {
@@ -68,7 +68,7 @@
             "title": "周末团课",
             "meta": "MSL · 6–12岁 · 教练 1:5",
             "spots": 6,
-            "link": "shopify://products/saturday-group-class"
+            "product": "saturday-group-class"
           }
         },
         "c2": {
@@ -77,7 +77,7 @@
             "date": "12月20–23日 · 12月27–30日",
             "title": "圣诞元旦冬令营",
             "meta": "全托管 · 7岁+ · 3–5人小班",
-            "link": "shopify://products/wintercamp-27"
+            "product": "wintercamp-27"
           }
         },
         "c3": {
@@ -86,7 +86,7 @@
             "date": "1月18–21日",
             "title": "Blue Mountain 精英训练营",
             "meta": "4天 · 两位精英教练",
-            "link": "shopify://products/blue-mountain-camp-2027"
+            "product": "blue-mountain-camp-2027"
           }
         },
         "c4": {
@@ -96,7 +96,7 @@
             "title": "春假冬令营",
             "meta": "全托管 · 5天 · 7–14岁",
             "spots": 11,
-            "link": "shopify://products/marchbreak-camp"
+            "product": "marchbreak-camp"
           }
         },
         "c5": {
@@ -106,7 +106,7 @@
             "title": "雪场巴士",
             "meta": "士嘉堡 / 万锦 发车",
             "spots": 24,
-            "link": "shopify://collections/bus"
+            "collection": "bus"
           }
         }
       },
@@ -122,14 +122,14 @@
     "wall": {
       "type": "club-photowall",
       "blocks": {
-        "p1": { "type": "photo", "settings": { "wide": true } },
+        "p1": { "type": "photo" },
         "p2": { "type": "photo" },
         "p3": { "type": "photo" },
-        "p4": { "type": "photo", "settings": { "tall": true } },
+        "p4": { "type": "photo" },
         "p5": { "type": "photo" },
         "p6": { "type": "photo" },
         "p7": { "type": "photo" },
-        "p8": { "type": "photo", "settings": { "wide": true } },
+        "p8": { "type": "photo" },
         "p9": { "type": "photo" },
         "p10": { "type": "photo" },
         "p11": { "type": "photo" },

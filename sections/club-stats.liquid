@@ -9,6 +9,33 @@
 
 {{ 'club.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign counts_instructors = false
+  for block in section.blocks
+    if block.settings.source == 'instructors'
+      assign counts_instructors = true
+    endif
+  endfor
+-%}
+
+{%- if counts_instructors -%}
+  {%- assign instructor_count = 0 -%}
+  {%- paginate shop.metaobjects.ssms_instructor.values by 250 -%}
+    {%- capture ssms_handles -%}
+      |{%- for entry in shop.metaobjects.ssms_instructor.values -%}
+        {%- assign instructor_count = instructor_count | plus: 1 -%}
+        {{- entry.system.handle -}}|
+      {%- endfor -%}
+    {%- endcapture -%}
+  {%- endpaginate -%}
+  {%- for entry in shop.metaobjects.our_team.values -%}
+    {%- assign handle_key = '|' | append: entry.system.handle | append: '|' -%}
+    {%- unless ssms_handles contains handle_key -%}
+      {%- assign instructor_count = instructor_count | plus: 1 -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}
+
 <div class="club-stats color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width">
     {%- if section.settings.heading != blank -%}
@@ -17,9 +44,24 @@
 
     <dl class="club-stats__grid" style="--stat-columns: {{ section.blocks.size }};">
       {%- for block in section.blocks -%}
+        {%- liquid
+          case block.settings.source
+            when 'instructors'
+              assign stat_value = instructor_count
+            when 'collection_products'
+              assign stat_value = block.settings.collection.products_count
+            when 'members'
+              assign stat_value = metaobjects.site_stats['current'].member_count.value
+            else
+              assign stat_value = nil
+          endcase
+          if stat_value == blank
+            assign stat_value = block.settings.value
+          endif
+        -%}
         <div class="club-stats__item" {{ block.shopify_attributes }}>
           <dt class="club-stats__value">
-            {{- block.settings.value -}}
+            {{- stat_value -}}
             {%- if block.settings.suffix != blank -%}
               <span class="club-stats__suffix">{{ block.settings.suffix }}</span>
             {%- endif -%}
@@ -61,9 +103,28 @@
       "limit": 6,
       "settings": [
         {
+          "type": "select",
+          "id": "source",
+          "label": "Number source",
+          "options": [
+            { "value": "manual", "label": "Typed in below" },
+            { "value": "instructors", "label": "Instructors on the roster" },
+            { "value": "collection_products", "label": "Products in a collection" },
+            { "value": "members", "label": "Member count (site stats)" }
+          ],
+          "default": "manual"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Only used when the source is products in a collection."
+        },
+        {
           "type": "text",
           "id": "value",
           "label": "Number",
+          "info": "Shown as typed when the source is manual, and as the fallback when a live source has no value.",
           "default": "340"
         },
         {
