@@ -12,21 +12,12 @@
     "hero": {
       "type": "club-hero",
       "blocks": {
-        "n1": {
-          "type": "nextup",
-          "settings": {
-            "date": "1月18日",
-            "label": "周末团课",
-            "meta": "余 6 位",
-            "link": "shopify://products/saturday-group-class"
-          }
-        },
         "n2": {
           "type": "nextup",
           "settings": {
             "date": "12月20日",
             "label": "圣诞元旦冬令营",
-            "meta": "全托管 · 两期",
+            "meta": "全托管 · 两期 · 每期四天",
             "link": "shopify://products/wintercamp-27"
           }
         },
@@ -34,13 +25,26 @@
           "type": "nextup",
           "settings": {
             "date": "1月18日",
-            "label": "Blue Mountain 精英训练营",
-            "meta": "4天 · 两位精英教练",
+            "label": "Blue Mountain | JDS高阶训练营",
+            "meta": "4天 · 两位精英教练 JDS · Luc Néron",
             "link": "shopify://products/blue-mountain-camp-2027"
+          }
+        },
+        "n1": {
+          "type": "nextup",
+          "settings": {
+            "date": "2月25日",
+            "label": "Devil's Glen Country Club私人雪场活动",
+            "meta": "周中包山畅滑",
+            "link": "shopify://products/feb25-devils-glen"
           }
         }
       },
-      "block_order": ["n2", "n1", "n3"],
+      "block_order": [
+        "n2",
+        "n3",
+        "n1"
+      ],
       "settings": {
         "video": "shopify://files/videos/copy_754FB3C1-CB19-425C-BAD4-E152B662179A.mov",
         "image": "shopify://shop_images/75DE73FE-A394-4540-B111-EF9002B6CB79.jpg",
@@ -48,10 +52,10 @@
         "show_scrim": true,
         "eyebrow": "Mount St. Louis Moonstone · Blue Mountain · Mont Tremblant",
         "heading": "Serendipity Snow",
-        "subheading": "多伦多滑雪俱乐部 · 会员制 · 教练带队",
-        "slogan": "滑雪，是我们的生活方式",
+        "subheading": "多伦多一站式滑雪俱乐部",
+        "slogan": "滑雪，是我们的一种生活方式⛄️",
         "button_label_1": "26/27 报名开始",
-        "button_link_1": "shopify://collections/group-lessons",
+        "button_link_1": "shopify://collections/private-packages",
         "button_label_2": "成为会员",
         "button_link_2": "shopify://collections/join-us"
       }
@@ -59,78 +63,204 @@
     "stats": {
       "type": "club-stats",
       "blocks": {
-        "s2": { "type": "stat", "settings": { "source": "instructors", "value": "12", "label": "教练" } },
-        "s3": { "type": "stat", "settings": { "source": "season_cards", "value": "18", "label": "本季活动" } }
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "source": "instructors",
+            "collection": "",
+            "value": "12",
+            "suffix": "",
+            "label": "教练"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "source": "manual",
+            "collection": "",
+            "value": "12",
+            "suffix": "",
+            "label": "本季活动"
+          }
+        }
       },
-      "block_order": ["s2", "s3"],
+      "block_order": [
+        "s2",
+        "s3"
+      ],
       "settings": {
         "heading": "26/27 雪季",
         "color_scheme": "inverse"
       }
     },
+    "instructors": {
+      "type": "club-instructors",
+      "blocks": {
+        "i1": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 A",
+            "certification": "CSIA Level 3",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        },
+        "i2": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 B",
+            "certification": "CASI Level 2",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        },
+        "i3": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 C",
+            "certification": "CSIA Level 2",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        },
+        "i4": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 D",
+            "certification": "CSIA Level 2",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        },
+        "i5": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 E",
+            "certification": "CASI Level 1",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        },
+        "i6": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 F",
+            "certification": "CSIA Level 1",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "source": "metaobject",
+        "metaobject_type": "our_team",
+        "limit": 12,
+        "meta_field": "type",
+        "link_target": "profile",
+        "eyebrow": "教练团队",
+        "heading": "带你上雪的人",
+        "link_label": "全部教练",
+        "link_url": "shopify://pages/our-team",
+        "color_scheme": "background-2"
+      }
+    },
     "season": {
       "type": "club-season",
       "blocks": {
-        "c1": {
+        "session_zEFN96": {
           "type": "session",
           "settings": {
-            "spots_suffix": " 位",
+            "product": "feb25-devils-glen",
+            "collection": "",
+            "image": "shopify://shop_images/images_2.jpg",
+            "date": "2月25日 · 周四",
+            "title": "Devil's Glen 私人雪场活动",
+            "meta": "一年一度私人雪场包山畅滑",
+            "spots": 30,
+            "spots_suffix": "位",
             "full_label": "名额已满",
-            "date": "1月18日 · 周六",
-            "title": "周末团课",
-            "meta": "MSL · 6–12岁 · 教练 1:5",
-            "spots": 6,
-            "product": "saturday-group-class"
+            "link": ""
           }
         },
         "c2": {
           "type": "session",
           "settings": {
-            "spots_suffix": " 位",
-            "full_label": "名额已满",
+            "product": "wintercamp-27",
+            "collection": "",
             "date": "12月20–23日 · 12月27–30日",
             "title": "圣诞元旦冬令营",
             "meta": "全托管 · 7岁+ · 3–5人小班",
-            "product": "wintercamp-27"
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
+          }
+        },
+        "c1": {
+          "type": "session",
+          "settings": {
+            "product": "saturday-group-class",
+            "collection": "",
+            "date": "1月18日 · 周六",
+            "title": "周末团课",
+            "meta": "MSL · 6–12岁 · 教练 1:5",
+            "spots": 6,
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
           }
         },
         "c3": {
           "type": "session",
           "settings": {
-            "spots_suffix": " 位",
-            "full_label": "名额已满",
+            "product": "blue-mountain-camp-2027",
+            "collection": "",
             "date": "1月18–21日",
             "title": "Blue Mountain 精英训练营",
             "meta": "4天 · 两位精英教练",
-            "product": "blue-mountain-camp-2027"
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
           }
         },
         "c4": {
           "type": "session",
           "settings": {
-            "spots_suffix": " 位",
-            "full_label": "名额已满",
+            "product": "marchbreak-camp",
+            "collection": "",
             "date": "3月16–20日",
             "title": "春假冬令营",
             "meta": "全托管 · 5天 · 7–14岁",
             "spots": 11,
-            "product": "marchbreak-camp"
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
           }
         },
         "c5": {
           "type": "session",
           "settings": {
-            "spots_suffix": " 位",
-            "full_label": "名额已满",
+            "product": "",
+            "collection": "bus",
             "date": "每周六",
             "title": "雪场巴士",
             "meta": "士嘉堡 / 万锦 发车",
             "spots": 24,
-            "collection": "bus"
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
           }
         }
       },
-      "block_order": ["c2", "c1", "c3", "c4", "c5"],
+      "block_order": [
+        "session_zEFN96",
+        "c2",
+        "c1",
+        "c3",
+        "c4",
+        "c5"
+      ],
       "settings": {
         "eyebrow": "26/27",
         "heading": "本季活动",
@@ -142,31 +272,156 @@
     "wall": {
       "type": "club-photowall",
       "blocks": {
-        "p1": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-01.jpg" } },
-        "p2": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-02.jpg" } },
-        "p3": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-03.jpg" } },
-        "p4": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-04.jpg" } },
-        "p5": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-05.jpg" } },
-        "p6": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-06.jpg" } },
-        "p7": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-07.jpg" } },
-        "p8": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-08.jpg" } },
-        "p9": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-09.jpg" } },
-        "p10": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-10.jpg" } },
-        "p11": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-11.jpg" } },
-        "p12": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-12.jpg" } },
-        "p13": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-13.jpg" } },
-        "p14": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-14.jpg" } },
-        "p15": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-15.jpg" } },
-        "p16": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-16.jpg" } },
-        "p17": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-17.jpg" } },
-        "p18": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-18.jpg" } },
-        "p19": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-19.jpg" } },
-        "p20": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-20.jpg" } },
-        "p21": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-21.jpg" } },
-        "p22": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-22.jpg" } },
-        "p23": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-23.jpg" } },
-        "p24": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-24.jpg" } },
-        "p25": { "type": "photo", "settings": { "image": "shopify://shop_images/ssnow-past-seasons-25.jpg" } }
+        "p1": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-01.jpg"
+          }
+        },
+        "p2": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-02.jpg"
+          }
+        },
+        "p3": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-03.jpg"
+          }
+        },
+        "p4": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-04.jpg"
+          }
+        },
+        "p5": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-05.jpg"
+          }
+        },
+        "p6": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-06.jpg"
+          }
+        },
+        "p7": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-07.jpg"
+          }
+        },
+        "p8": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-08.jpg"
+          }
+        },
+        "p9": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-09.jpg"
+          }
+        },
+        "p10": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-10.jpg"
+          }
+        },
+        "p11": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-11.jpg"
+          }
+        },
+        "p12": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-12.jpg"
+          }
+        },
+        "p13": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-13.jpg"
+          }
+        },
+        "p14": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-14.jpg"
+          }
+        },
+        "p15": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-15.jpg"
+          }
+        },
+        "p16": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-16.jpg"
+          }
+        },
+        "p17": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-17.jpg"
+          }
+        },
+        "p18": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-18.jpg"
+          }
+        },
+        "p19": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-19.jpg"
+          }
+        },
+        "p20": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-20.jpg"
+          }
+        },
+        "p21": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-21.jpg"
+          }
+        },
+        "p22": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-22.jpg"
+          }
+        },
+        "p23": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-23.jpg"
+          }
+        },
+        "p24": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-24.jpg"
+          }
+        },
+        "p25": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-25.jpg"
+          }
+        }
       },
       "block_order": [
         "p1",
@@ -196,39 +451,21 @@
         "p25"
       ],
       "settings": {
-        "heading": "往季精彩瞬间",
         "layout": "justified",
+        "heading": "往季精彩瞬间",
         "columns": 4,
         "row_height": 270,
         "row_height_mobile": 120,
         "gap": 4,
         "color_scheme": "background-1"
       }
-    },
-    "instructors": {
-      "type": "club-instructors",
-      "blocks": {
-        "i1": { "type": "instructor", "settings": { "display_name": "教练 A", "certification": "CSIA Level 3" } },
-        "i2": { "type": "instructor", "settings": { "display_name": "教练 B", "certification": "CASI Level 2" } },
-        "i3": { "type": "instructor", "settings": { "display_name": "教练 C", "certification": "CSIA Level 2" } },
-        "i4": { "type": "instructor", "settings": { "display_name": "教练 D", "certification": "CSIA Level 2" } },
-        "i5": { "type": "instructor", "settings": { "display_name": "教练 E", "certification": "CASI Level 1" } },
-        "i6": { "type": "instructor", "settings": { "display_name": "教练 F", "certification": "CSIA Level 1" } }
-      },
-      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"],
-      "settings": {
-        "source": "metaobject",
-        "metaobject_type": "our_team",
-        "limit": 12,
-        "meta_field": "type",
-        "link_target": "profile",
-        "eyebrow": "教练团队",
-        "heading": "带你上雪的人",
-        "link_label": "全部教练",
-        "link_url": "shopify://pages/our-team",
-        "color_scheme": "background-2"
-      }
     }
   },
-  "order": ["hero", "stats", "instructors", "season", "wall"]
+  "order": [
+    "hero",
+    "stats",
+    "instructors",
+    "season",
+    "wall"
+  ]
 }
