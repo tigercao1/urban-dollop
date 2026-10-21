@@ -490,6 +490,8 @@
   flex-wrap: wrap;
   align-items: flex-start;
   container-type: inline-size;
+  max-width: 160rem;
+  margin-inline: auto;
   --wall-row: var(--wall-row-desktop);
 }
 
