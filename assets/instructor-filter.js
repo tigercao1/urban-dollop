@@ -34,10 +34,28 @@ const TYPE_ALIASES = {
 const clean = (text) => (text || '').normalize('NFKC').replace(INVISIBLE, '');
 const tidy = (part) => part.replace(/\s+/g, ' ').trim();
 const keyOf = (value) => value.toLowerCase();
+const normalizeName = (text) => tidy(clean(text)).toLowerCase();
+const compact = (text) => text.replace(/\s+/g, '');
+const HAN = /\p{Script=Han}/u;
+const PINYIN_READINGS = ['off', 'head'];
 const PARTIAL_LEVEL = /^(csia|casi) level ([2-4]) (?:partial|teach|teaching|riding|ski|skiing)$/;
 const levelBelowPartial = (key) => {
   const match = key.match(PARTIAL_LEVEL);
   return match ? `${match[1]} level ${Number(match[2]) - 1}` : null;
+};
+
+const readCache = (key) => {
+  try {
+    return JSON.parse(sessionStorage.getItem(key));
+  } catch (e) {
+    return null;
+  }
+};
+
+const writeCache = (key, value) => {
+  try {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {}
 };
 
 const splitPlain = (text, separators = SEPARATORS) => clean(text).split(separators).map(tidy).filter(Boolean);
@@ -76,7 +94,15 @@ class InstructorFilter extends HTMLElement {
         facets[name] = new Set(this.facetKeys(el.getAttribute(`data-facet-${name.replace(/_/g, '-')}`), name));
       });
       const minAge = parseInt(el.dataset.minAge, 10);
-      return { el, name: (el.dataset.name || '').toLowerCase(), facets, minAge: Number.isNaN(minAge) ? null : minAge };
+      return {
+        el,
+        handle: el.dataset.handle || '',
+        names: [normalizeName(el.dataset.name)].filter(Boolean),
+        pinyin: [],
+        initials: [],
+        facets,
+        minAge: Number.isNaN(minAge) ? null : minAge,
+      };
     });
 
     this.tidyCardText();
@@ -93,8 +119,10 @@ class InstructorFilter extends HTMLElement {
     this.buildAgeFilter();
 
     if (this.search) {
+      this.search.addEventListener('focus', () => this.loadSearchTerms(), { once: true });
       this.search.addEventListener('input', (e) => {
-        this.query = e.target.value.trim().toLowerCase();
+        this.loadSearchTerms();
+        this.query = normalizeName(e.target.value);
         this.apply();
       });
       this.search.addEventListener('keydown', (e) => {
@@ -107,6 +135,119 @@ class InstructorFilter extends HTMLElement {
     }
 
     this.apply();
+  }
+
+  loadSearchTerms() {
+    if (this.searchTermsRequested) return;
+    this.searchTermsRequested = true;
+    this.loadOtherLocaleNames();
+    this.loadPinyin();
+  }
+
+  loadOtherLocaleNames() {
+    const sectionId = this.dataset.sectionId;
+    if (!sectionId) return;
+    (this.dataset.alternateRoots || '')
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach((root) => {
+        this.fetchNames(this.alternateUrl(root, sectionId))
+          .then((names) => this.addNames(names))
+          .catch(() => {});
+      });
+  }
+
+  alternateUrl(root, sectionId) {
+    const currentRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+    const { pathname, search, origin } = window.location;
+    const path = pathname.startsWith(currentRoot) ? pathname.slice(currentRoot.length) : pathname.replace(/^\//, '');
+    const url = new URL(`${root.replace(/\/?$/, '/')}${path}${search}`, origin);
+    url.searchParams.set('section_id', sectionId);
+    return url;
+  }
+
+  fetchNames(url) {
+    const key = `instructor-filter:names:${url.pathname}?section_id=${url.searchParams.get('section_id')}`;
+    const cached = readCache(key);
+    if (cached) return Promise.resolve(cached);
+    return fetch(url.toString())
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.text();
+      })
+      .then((html) => {
+        const names = {};
+        new DOMParser()
+          .parseFromString(html, 'text/html')
+          .querySelectorAll('[data-instructor-card][data-handle]')
+          .forEach((el) => {
+            if (el.dataset.handle && el.dataset.name) names[el.dataset.handle] = el.dataset.name;
+          });
+        if (Object.keys(names).length > 0) writeCache(key, names);
+        return names;
+      });
+  }
+
+  addNames(names) {
+    this.cards.forEach((card) => {
+      const name = card.handle && normalizeName(names[card.handle]);
+      if (!name || card.names.includes(name)) return;
+      card.names.push(name);
+      this.indexPinyin(card);
+    });
+    if (this.query) this.apply();
+  }
+
+  loadPinyin() {
+    const src = this.dataset.pinyinSrc;
+    if (!src) return;
+    const ready = () => {
+      if (!window.pinyinPro) return;
+      this.cards.forEach((card) => this.indexPinyin(card));
+      if (this.query) this.apply();
+    };
+    if (window.pinyinPro) {
+      ready();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.addEventListener('load', ready);
+    document.head.appendChild(script);
+  }
+
+  indexPinyin(card) {
+    if (!window.pinyinPro) return;
+    const full = new Set();
+    const initials = new Set();
+    card.names
+      .filter((name) => HAN.test(name))
+      .forEach((name) => {
+        PINYIN_READINGS.forEach((surname) => {
+          const syllables = window.pinyinPro.pinyin(name, {
+            toneType: 'none',
+            type: 'array',
+            nonZh: 'removed',
+            surname,
+          });
+          const joined = syllables.join('').toLowerCase();
+          full.add(joined.replace(/ü/g, 'v'));
+          full.add(joined.replace(/ü/g, 'u'));
+          initials.add(syllables.map((syllable) => syllable.charAt(0)).join('').toLowerCase());
+        });
+      });
+    card.pinyin = Array.from(full);
+    card.initials = Array.from(initials);
+  }
+
+  matchesName(card) {
+    const query = compact(this.query);
+    return (
+      card.names.some((name) => name.includes(this.query) || compact(name).includes(query)) ||
+      card.pinyin.some((term) => term.includes(query)) ||
+      card.initials.some((term) => term.startsWith(query))
+    );
   }
 
   readValueLabels() {
@@ -214,7 +355,7 @@ class InstructorFilter extends HTMLElement {
   }
 
   matches(card) {
-    if (this.query && !card.name.includes(this.query)) return false;
+    if (this.query && !this.matchesName(card)) return false;
     if (this.age !== null && card.minAge !== null && card.minAge > this.age) return false;
     return this.groups.every(({ name, active }) => {
       if (active.size === 0) return true;
