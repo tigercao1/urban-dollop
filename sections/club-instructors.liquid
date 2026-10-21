@@ -79,7 +79,7 @@
 {{ 'club.css' | asset_url | stylesheet_tag }}
 
 <div class="club-faces color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width">
+  <div class="club-faces__inner">
     <div class="club-faces__head">
       <div>
         {%- if section.settings.eyebrow != blank -%}
@@ -95,83 +95,83 @@
         </a>
       {%- endif -%}
     </div>
-  </div>
 
-  <ul class="club-faces__rail" role="list">
-    {%- if section.settings.source == 'metaobject' -%}
-      {%- liquid
-        assign roster = shop.metaobjects[section.settings.metaobject_type].values
-        assign shown = 0
-      -%}
-
-      {%- if roster == blank or roster.size == 0 -%}
-        {%- comment -%}
-          Empty means the type handle is wrong, not that the roster is empty —
-          a mistyped handle resolves to nil and renders nothing at all. Show
-          the reason in the editor only; storefront visitors get silence.
-        {%- endcomment -%}
-        {%- if request.design_mode -%}
-          <li class="club-faces__card">
-            <p class="club-faces__name">No entries found</p>
-            <p class="club-faces__loc">
-              No metaobject type named
-              “{{ section.settings.metaobject_type }}”, or it has no entries.
-              Check the handle in Settings › Custom data › Metaobjects.
-            </p>
-          </li>
-        {%- endif -%}
-      {%- endif -%}
-
-      {%- capture order_keys -%}
-        {%- for entry in roster -%}
-          {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
-          {{- position -}}-{{- forloop.index0 | plus: 10000 -}}
-          {%- unless forloop.last -%},{%- endunless -%}
-        {%- endfor -%}
-      {%- endcapture -%}
-      {%- assign order_keys = order_keys | split: ',' | sort -%}
-
-      {%- for order_key in order_keys limit: section.settings.limit -%}
-        {%- assign entry_index = order_key | split: '-' | last | minus: 10000 -%}
-        {%- for entry in roster limit: 1 offset: entry_index -%}
+    <ul class="club-faces__rail" role="list">
+      {%- if section.settings.source == 'metaobject' -%}
         {%- liquid
-          assign shown = shown | plus: 1
-
-          if section.settings.meta_field == 'client_groups'
-            assign loc = entry.client_groups.value
-          else
-            assign ski_label = 'sections.instructors.values.ski' | t
-            assign snowboard_label = 'sections.instructors.values.snowboard' | t
-            assign loc = entry.type.value | replace: '双板', ski_label | replace: '雙板', ski_label | replace: '单板', snowboard_label | replace: '單板', snowboard_label
-          endif
-
-          if section.settings.link_target == 'collection'
-            assign url = entry.collection_url.value
-          else
-            assign url = entry.system.url
-          endif
+          assign roster = shop.metaobjects[section.settings.metaobject_type].values
+          assign shown = 0
         -%}
-        {%- render 'club-instructor-card',
-          card_name: entry.name.value,
-          card_cert: entry.certification.value,
-          card_loc: loc,
-          card_image: entry.picture.value,
-          card_url: url
-        -%}
+
+        {%- if roster == blank or roster.size == 0 -%}
+          {%- comment -%}
+            Empty means the type handle is wrong, not that the roster is empty —
+            a mistyped handle resolves to nil and renders nothing at all. Show
+            the reason in the editor only; storefront visitors get silence.
+          {%- endcomment -%}
+          {%- if request.design_mode -%}
+            <li class="club-faces__card">
+              <p class="club-faces__name">No entries found</p>
+              <p class="club-faces__loc">
+                No metaobject type named
+                “{{ section.settings.metaobject_type }}”, or it has no entries.
+                Check the handle in Settings › Custom data › Metaobjects.
+              </p>
+            </li>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- capture order_keys -%}
+          {%- for entry in roster -%}
+            {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+            {{- position -}}-{{- forloop.index0 | plus: 10000 -}}
+            {%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign order_keys = order_keys | split: ',' | sort -%}
+
+        {%- for order_key in order_keys limit: section.settings.limit -%}
+          {%- assign entry_index = order_key | split: '-' | last | minus: 10000 -%}
+          {%- for entry in roster limit: 1 offset: entry_index -%}
+          {%- liquid
+            assign shown = shown | plus: 1
+
+            if section.settings.meta_field == 'client_groups'
+              assign loc = entry.client_groups.value
+            else
+              assign ski_label = 'sections.instructors.values.ski' | t
+              assign snowboard_label = 'sections.instructors.values.snowboard' | t
+              assign loc = entry.type.value | replace: '双板', ski_label | replace: '雙板', ski_label | replace: '单板', snowboard_label | replace: '單板', snowboard_label
+            endif
+
+            if section.settings.link_target == 'collection'
+              assign url = entry.collection_url.value
+            else
+              assign url = entry.system.url
+            endif
+          -%}
+          {%- render 'club-instructor-card',
+            card_name: entry.name.value,
+            card_cert: entry.certification.value,
+            card_loc: loc,
+            card_image: entry.picture.value,
+            card_url: url
+          -%}
+          {%- endfor -%}
         {%- endfor -%}
-      {%- endfor -%}
-    {%- else -%}
-      {%- for block in section.blocks -%}
-        {%- render 'club-instructor-card',
-          card_name: block.settings.display_name,
-          card_cert: block.settings.certification,
-          card_loc: block.settings.teaching_locations,
-          card_image: block.settings.profile_photo,
-          card_attrs: block.shopify_attributes
-        -%}
-      {%- endfor -%}
-    {%- endif -%}
-  </ul>
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- render 'club-instructor-card',
+            card_name: block.settings.display_name,
+            card_cert: block.settings.certification,
+            card_loc: block.settings.teaching_locations,
+            card_image: block.settings.profile_photo,
+            card_attrs: block.shopify_attributes
+          -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
 </div>
 
 {% schema %}
