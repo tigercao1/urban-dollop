@@ -140,7 +140,9 @@
           if section.settings.meta_field == 'client_groups'
             assign loc = entry.client_groups.value
           else
-            assign loc = entry.type.value
+            assign ski_label = 'sections.instructors.values.ski' | t
+            assign snowboard_label = 'sections.instructors.values.snowboard' | t
+            assign loc = entry.type.value | replace: '双板', ski_label | replace: '雙板', ski_label | replace: '单板', snowboard_label | replace: '單板', snowboard_label
           endif
 
           if section.settings.link_target == 'collection'
