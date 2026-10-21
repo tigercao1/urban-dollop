@@ -62,6 +62,8 @@
         "c1": {
           "type": "session",
           "settings": {
+            "spots_suffix": " 位",
+            "full_label": "名额已满",
             "date": "1月18日 · 周六",
             "title": "周末团课",
             "meta": "MSL · 6–12岁 · 教练 1:5",
@@ -72,6 +74,8 @@
         "c2": {
           "type": "session",
           "settings": {
+            "spots_suffix": " 位",
+            "full_label": "名额已满",
             "date": "12月20–23日 · 12月27–30日",
             "title": "圣诞元旦冬令营",
             "meta": "全托管 · 7岁+ · 3–5人小班",
@@ -81,6 +85,8 @@
         "c3": {
           "type": "session",
           "settings": {
+            "spots_suffix": " 位",
+            "full_label": "名额已满",
             "date": "1月18–21日",
             "title": "Blue Mountain 精英训练营",
             "meta": "4天 · 两位精英教练",
@@ -90,6 +96,8 @@
         "c4": {
           "type": "session",
           "settings": {
+            "spots_suffix": " 位",
+            "full_label": "名额已满",
             "date": "3月16–20日",
             "title": "春假冬令营",
             "meta": "全托管 · 5天 · 7–14岁",
@@ -100,6 +108,8 @@
         "c5": {
           "type": "session",
           "settings": {
+            "spots_suffix": " 位",
+            "full_label": "名额已满",
             "date": "每周六",
             "title": "雪场巴士",
             "meta": "士嘉堡 / 万锦 发车",
