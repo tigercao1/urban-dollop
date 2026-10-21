@@ -37,7 +37,7 @@
 {%- endcomment -%}
 
 <div class="club-season color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width">
+  <div class="club-season__inner">
     <div class="club-season__head">
       <div>
         {%- if section.settings.eyebrow != blank -%}
@@ -53,62 +53,62 @@
         </a>
       {%- endif -%}
     </div>
+
+    <ul class="club-season__rail" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign is_full = false
+          if block.settings.spots != blank and block.settings.spots <= 0
+            assign is_full = true
+          endif
+
+          assign card_image = block.settings.image | default: block.settings.product.featured_image | default: block.settings.collection.featured_image
+          assign card_url = block.settings.link | default: block.settings.product.url | default: block.settings.collection.url | default: '#'
+        -%}
+        <li class="club-season__card{% if is_full %} club-season__card--full{% endif %}" {{ block.shopify_attributes }}>
+          <a href="{{ card_url }}" class="club-season__card-link">
+            <div class="club-season__card-media">
+              {%- if card_image != blank -%}
+                {{
+                  card_image
+                  | image_url: width: 900
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 320px, 74vw',
+                    widths: '400, 600, 900',
+                    class: 'club-season__card-img'
+                }}
+              {%- else -%}
+                {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              {%- if block.settings.spots != blank -%}
+                <span class="club-season__pill{% if is_full %} club-season__pill--full{% endif %}">
+                  {%- if is_full -%}
+                    {{ block.settings.full_label | default: '名额已满' }}
+                  {%- else -%}
+                    {{ block.settings.spots }}{{ block.settings.spots_suffix | default: ' 位' }}
+                  {%- endif -%}
+                </span>
+              {%- endif -%}
+            </div>
+
+            <div class="club-season__card-body">
+              {%- if block.settings.date != blank -%}
+                <p class="club-season__card-date">{{ block.settings.date }}</p>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <h3 class="club-season__card-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.meta != blank -%}
+                <p class="club-season__card-meta">{{ block.settings.meta }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
   </div>
-
-  <ul class="club-season__rail" role="list">
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign is_full = false
-        if block.settings.spots != blank and block.settings.spots <= 0
-          assign is_full = true
-        endif
-
-        assign card_image = block.settings.image | default: block.settings.product.featured_image | default: block.settings.collection.featured_image
-        assign card_url = block.settings.link | default: block.settings.product.url | default: block.settings.collection.url | default: '#'
-      -%}
-      <li class="club-season__card{% if is_full %} club-season__card--full{% endif %}" {{ block.shopify_attributes }}>
-        <a href="{{ card_url }}" class="club-season__card-link">
-          <div class="club-season__card-media">
-            {%- if card_image != blank -%}
-              {{
-                card_image
-                | image_url: width: 900
-                | image_tag:
-                  loading: 'lazy',
-                  sizes: '(min-width: 990px) 320px, 74vw',
-                  widths: '400, 600, 900',
-                  class: 'club-season__card-img'
-              }}
-            {%- else -%}
-              {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-
-            {%- if block.settings.spots != blank -%}
-              <span class="club-season__pill{% if is_full %} club-season__pill--full{% endif %}">
-                {%- if is_full -%}
-                  {{ block.settings.full_label | default: '名额已满' }}
-                {%- else -%}
-                  {{ block.settings.spots }}{{ block.settings.spots_suffix | default: ' 位' }}
-                {%- endif -%}
-              </span>
-            {%- endif -%}
-          </div>
-
-          <div class="club-season__card-body">
-            {%- if block.settings.date != blank -%}
-              <p class="club-season__card-date">{{ block.settings.date }}</p>
-            {%- endif -%}
-            {%- if block.settings.title != blank -%}
-              <h3 class="club-season__card-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-            {%- if block.settings.meta != blank -%}
-              <p class="club-season__card-meta">{{ block.settings.meta }}</p>
-            {%- endif -%}
-          </div>
-        </a>
-      </li>
-    {%- endfor -%}
-  </ul>
 </div>
 
 {% schema %}

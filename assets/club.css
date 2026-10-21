@@ -314,19 +314,25 @@
   white-space: nowrap;
 }
 
-/* Rail scrolls full-bleed so cards visibly run off-screen — that overflow cue
-   is what tells a visitor to scroll — but its inline padding matches the
-   .page-width gutter, so the first and last cards line up with the heading. */
+.club-season__inner,
+.club-faces__inner {
+  --rail-gutter: 5rem;
+  max-width: 160rem;
+  margin: 0 auto;
+  padding: 0 var(--rail-gutter);
+}
+
+/* Rail bleeds into the container's gutter so cards visibly run off its edge —
+   that overflow cue is what tells a visitor to scroll — but its inline padding
+   matches the gutter, so the first and last cards line up with the heading. */
 .club-season__rail,
 .club-faces__rail {
-  --rail-gutter: 5rem;
-  --rail-inset: max(var(--rail-gutter), calc((100% - var(--page-width)) / 2 + var(--rail-gutter)));
   display: flex;
   gap: 1.6rem;
   list-style: none;
-  margin: 0;
-  padding: 0 var(--rail-inset) 1.6rem;
-  scroll-padding-inline: var(--rail-inset);
+  margin: 0 calc(-1 * var(--rail-gutter));
+  padding: 0 var(--rail-gutter) 1.6rem;
+  scroll-padding-inline: var(--rail-gutter);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
@@ -426,8 +432,8 @@
 }
 
 @media screen and (max-width: 749px) {
-  .club-season__rail,
-  .club-faces__rail {
+  .club-season__inner,
+  .club-faces__inner {
     --rail-gutter: 1.5rem;
   }
 
