@@ -8,7 +8,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
     {%- liquid
       assign staging_template = false
-      if template.name == 'index' and template.suffix == 'club'
+      if template.name == 'index' and template.suffix == 'legacy'
         assign staging_template = true
       endif
       if template.name == 'page' and template.suffix == 'ssms'

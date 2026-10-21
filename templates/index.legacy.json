@@ -1,0 +1,853 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_3Drgdi": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_dHMMER": {
+          "type": "heading",
+          "settings": {
+            "heading": "26/27 Ikon Pass 团购开始！",
+            "heading_size": "h0"
+          }
+        },
+        "text_pBdHkC": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>26/27 Ikon Pass 团购，点击下方按钮，输入code：“<strong>ssnow</strong>”</h3><h3>获取您的专属团购折扣码</h3>"
+          }
+        },
+        "button_tUcAN8": {
+          "type": "button",
+          "settings": {
+            "button_label": "立刻获取",
+            "button_link": "https://ssnow.club/ikon",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_dHMMER",
+        "text_pBdHkC",
+        "button_tUcAN8"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "image_banner_WzxzwU": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_wXVbjL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Serendipity Snow Club",
+            "heading_size": "h0"
+          }
+        },
+        "text_QcCgYp": {
+          "type": "text",
+          "settings": {
+            "text": "位于多伦多的滑雪俱乐部",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wXVbjL",
+        "text_QcCgYp"
+      ],
+      "custom_css": [
+        "p {font-size: 120%;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/75DE73FE-A394-4540-B111-EF9002B6CB79_46b7eb2c-f387-4095-86d9-c708a674131d.png",
+        "image_overlay_opacity": 60,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-1",
+        "image_behavior": "fixed",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "image_with_text_HzUKtx": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_L6GzN7": {
+          "type": "heading",
+          "settings": {
+            "heading": "雪具选购AI平台",
+            "heading_size": "h2"
+          }
+        },
+        "text_mqJyXD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>AI一次性全网比价，AI Agent智能谈判，替您与商家博弈，跳过公开价，每次都享专属折上折，购雪具更划算！</p>",
+            "text_style": "body"
+          }
+        },
+        "button_7CRNik": {
+          "type": "button",
+          "settings": {
+            "button_label": "立即体验",
+            "button_link": "https://ssnow.shaket.xyz/",
+            "button_style_secondary": false
+          }
+        },
+        "caption_KijYnC": {
+          "type": "caption",
+          "settings": {
+            "caption": "每天更新三张AI谈判券！",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "heading_L6GzN7",
+        "text_mqJyXD",
+        "button_7CRNik",
+        "caption_KijYnC"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/instruction3.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_4MdyHY": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_nJa8QB": {
+          "type": "heading",
+          "settings": {
+            "heading": "跟我们一起享受冬季❄️",
+            "heading_size": "h2"
+          }
+        },
+        "text_BaPBzY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>S Snow是位于多伦多的年轻人滑雪俱乐部，滑雪已然成为我们在加拿大冬天的生活方式。</p><p>S Snow<strong>会员</strong>尊享七大福利，我们欢迎想学滑雪的，热爱滑雪的，想找寻滑雪组织的朋友们加入我们的会员，一起共赴白雪之旅！</p>",
+            "text_style": "body"
+          }
+        },
+        "button_JAfdFV": {
+          "type": "button",
+          "settings": {
+            "button_label": "加入我们的会员",
+            "button_link": "shopify://products/membership",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_nJa8QB",
+        "text_BaPBzY",
+        "button_JAfdFV"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/IMG_0585.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_X8LMzc": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Tabrdw": {
+          "type": "heading",
+          "settings": {
+            "heading": "我们的团课",
+            "heading_size": "h2"
+          }
+        },
+        "text_93Cwqq": {
+          "type": "text",
+          "settings": {
+            "text": "<p>我们提供孩子们的单双周末团课，圣诞元旦假期全托管冬令营，春假全托管冬令营，精品小班，明星教练带队，时刻保障孩子们的安全。</p><p>上课地点：MSL</p>",
+            "text_style": "body"
+          }
+        },
+        "button_N6iLK3": {
+          "type": "button",
+          "settings": {
+            "button_label": "了解详情",
+            "button_link": "shopify://collections/group-lessons",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Tabrdw",
+        "text_93Cwqq",
+        "button_N6iLK3"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/34681704431962_.pic.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_PhV9xF": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Rkj6iR": {
+          "type": "heading",
+          "settings": {
+            "heading": "私人定制课程",
+            "heading_size": "h2"
+          }
+        },
+        "text_EJhTrG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>精品单双二级/三级教练定制一对一，一对多课程，针对性专业教学，从基础到进阶，高效提升学员水平，安全有保障。</p><p>上课地点：MSL、蓝山等</p>",
+            "text_style": "body"
+          }
+        },
+        "button_jz4BjT": {
+          "type": "button",
+          "settings": {
+            "button_label": "了解详情",
+            "button_link": "shopify://collections/private-packages",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Rkj6iR",
+        "text_EJhTrG",
+        "button_jz4BjT"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/WechatIMG36.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_rEgLqa": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8kcPAP": {
+          "type": "heading",
+          "settings": {
+            "heading": "我们的外滑旅行",
+            "heading_size": "h2"
+          }
+        },
+        "text_wkrKwH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>往年翠湖山庄(Mont-Tremblant)一站式滑雪旅行，Revelstoke团，Banff Big3团都取得成功！</p><p>25/26雪季更有新加入Ikon Pass的Le Massif团，敬请期待！</p>",
+            "text_style": "body"
+          }
+        },
+        "button_JVDRHq": {
+          "type": "button",
+          "settings": {
+            "button_label": "了解详情",
+            "button_link": "shopify://pages/ski-trips",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_8kcPAP",
+        "text_wkrKwH",
+        "button_JVDRHq"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/IMG_6417.png",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner_rxCxwk": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_39GaUX": {
+          "type": "heading",
+          "settings": {
+            "heading": "加入教练团队",
+            "heading_size": "h1"
+          }
+        },
+        "text_eHGHQE": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_RFa6gU": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "点击申请",
+            "button_link_1": "https://forms.gle/QsvAXCDWUdssKv8S9",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_39GaUX",
+        "text_eHGHQE",
+        "buttons_RFa6gU"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Image_20250909210259.jpg",
+        "image_overlay_opacity": 60,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "18554820-68c3-46fc-b8f8-75be69ccc18e": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "联系我们",
+            "heading_size": "h2"
+          }
+        },
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>扫一扫微信二维码咨询S Snow小客服，点击按钮即可直接对话</p>",
+            "text_style": "body"
+          }
+        },
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1": {
+          "type": "button",
+          "settings": {
+            "button_label": "直接联系",
+            "button_link": "https://work.weixin.qq.com/kfid/kfc5aee46fb708b2a70",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-heading-1",
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-text-1",
+        "template--20539033616406__18554820-68c3-46fc-b8f8-75be69ccc18e-button-1"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/1af6239968c17b254d03f71f068a35dd.jpg",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "accent-2",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "1132b7c7-4b5a-46f8-9a6c-3ba1592a3cd7": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/34631704431885_.pic.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "daa05d72-8d5c-424a-9235-7a57ae741e02": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/34641704431886_.pic.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "6fa51626-838a-4961-a3a9-921ba3b60f8b": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/34651704431888_.pic.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "04057a84-6700-44c1-b81f-667cc2f9db2e": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/34661704431889_.pic.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "a18addf3-a8d1-42cd-a056-e1fd3ff1d418": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/34671704431890_.pic.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "background-1",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "1132b7c7-4b5a-46f8-9a6c-3ba1592a3cd7",
+        "daa05d72-8d5c-424a-9235-7a57ae741e02",
+        "6fa51626-838a-4961-a3a9-921ba3b60f8b",
+        "04057a84-6700-44c1-b81f-667cc2f9db2e",
+        "a18addf3-a8d1-42cd-a056-e1fd3ff1d418"
+      ],
+      "disabled": true,
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Tian's backcountry snowboarding adventrue"
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>S Snow</strong>是位于多伦多的年轻人滑雪俱乐部",
+            "heading_size": "h2"
+          }
+        },
+        "d14bd64d-c954-4c8f-886b-8fb6cdb400bb": {
+          "type": "heading",
+          "settings": {
+            "heading": "滑雪已然成为我们在加拿大冬天的<strong>生活方式</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "24d9b205-08a7-4b1a-adc5-bf53af4f8368": {
+          "type": "heading",
+          "settings": {
+            "heading": "我们欢迎<strong>想学滑雪</strong>的，<strong>热爱滑雪</strong>的，想<strong>找寻滑雪组织</strong>的朋友们加入我们的会员，一起共赴白雪之旅",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "d14bd64d-c954-4c8f-886b-8fb6cdb400bb",
+        "24d9b205-08a7-4b1a-adc5-bf53af4f8368"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "multicolumn_xKLVqW": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VJV6Mq": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/1x1.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_nGrkdA": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Image_20250909134142.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_bN7Hkf": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/station.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_4Cigtn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/26650057.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_VJV6Mq",
+        "column_nGrkdA",
+        "column_bN7Hkf",
+        "column_4Cigtn"
+      ],
+      "settings": {
+        "title": "合作伙伴",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_k4LHdc": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_xq4Ut3": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/WechatIMG3766.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_RU3WgA": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Balo2.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_KmNdWE": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/IMG-9098.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Q3zLdP": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/ede063081e00ae436465a43ced33994e.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_e79HkK": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/WechatIMG3769.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_jExkk9": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/631768dac5dae2d449929837_Asset_1Logo.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_xq4Ut3",
+        "column_RU3WgA",
+        "column_KmNdWE",
+        "column_Q3zLdP",
+        "column_e79HkK",
+        "column_jExkk9"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 72
+      }
+    },
+    "multicolumn_NydTHa": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_HPTHia": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/2018-09-02_IK_Logo_Navy.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WzQD9j": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/bracelayer-logo-with-tag.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_A8aUN6": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/logo.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_HPTHia",
+        "column_WzQD9j",
+        "column_A8aUN6"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    },
+    "9c4ac763-8063-4732-ab82-33042f353aec": {
+      "type": "collage",
+      "blocks": {
+        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/34681704431962_.pic.jpg"
+          }
+        },
+        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WechatIMG1165.jpg"
+          }
+        },
+        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WechatIMG36.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--20539033616406__9c4ac763-8063-4732-ab82-33042f353aec-image-1",
+        "2cf91f3d-5c0a-4479-93ef-d2424d7a65e9",
+        "6bf9b9dc-864c-465f-b3ef-01af4200b7c8"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "rich_text_3Drgdi",
+    "image_banner_WzxzwU",
+    "image_with_text_4MdyHY",
+    "image_with_text_HzUKtx",
+    "image_with_text_X8LMzc",
+    "image_with_text_PhV9xF",
+    "image_with_text_rEgLqa",
+    "image_banner_rxCxwk",
+    "18554820-68c3-46fc-b8f8-75be69ccc18e",
+    "slideshow",
+    "rich-text",
+    "multicolumn_xKLVqW",
+    "multicolumn_k4LHdc",
+    "multicolumn_NydTHa",
+    "9c4ac763-8063-4732-ab82-33042f353aec"
+  ]
+}
