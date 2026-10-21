@@ -61,9 +61,18 @@
   {"ski":{{ 'sections.instructors.values.ski' | t | json }},"snowboard":{{ 'sections.instructors.values.snowboard' | t | json }}}
 {%- endcapture -%}
 
+{%- capture alternate_roots -%}
+  {%- for language in localization.available_languages -%}
+    {%- unless language.iso_code == request.locale.iso_code -%}{{ language.root_url }} {% endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
 <instructor-filter
   data-value-labels="{{ value_labels | escape }}"
   data-card-meta-field="{{ section.settings.meta_field }}"
+  data-section-id="{{ section.id }}"
+  data-alternate-roots="{{ alternate_roots | strip | escape }}"
+  data-pinyin-src="{{ 'pinyin-pro.min.js' | asset_url }}"
 >
   {%- if section.settings.enable_filter -%}
     {%- comment -%}
@@ -189,6 +198,7 @@
     {%- endcapture -%}
     {%- capture card_data -%}
       data-instructor-card
+      data-handle="{{ entry.system.handle | escape }}"
       data-name="{{ entry.name.value | escape }}"
       data-min-age="{{ entry.min_age.value }}"
       {%- for field in facet_fields -%}
