@@ -485,10 +485,38 @@
   transform: scale(1.04);
 }
 
+.club-wall__grid--justified {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  container-type: inline-size;
+  --wall-row: var(--wall-row-desktop);
+}
+
+.club-wall__grid--justified::after {
+  content: '';
+  flex: 1000000 1 0;
+}
+
+.club-wall__grid--justified .club-wall__cell {
+  flex: var(--ratio) 1 calc(var(--ratio) * var(--wall-row));
+  min-width: 0;
+}
+
+.club-wall__grid--justified .club-wall__img,
+.club-wall__grid--justified .club-wall__cell .placeholder-svg {
+  height: auto;
+  aspect-ratio: var(--ratio);
+}
+
 @media screen and (max-width: 749px) {
   .club-wall__grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 26vw;
+  }
+
+  .club-wall__grid--justified {
+    --wall-row: var(--wall-row-mobile);
   }
 
   /* A wide cell at 2 columns would become a full-width band and break the
