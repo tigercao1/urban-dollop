@@ -23,10 +23,18 @@
     style="--wall-columns: {{ section.settings.columns }}; --wall-gap: {{ section.settings.gap }}px;"
   >
     {%- for block in section.blocks -%}
-      <div
-        class="club-wall__cell{% if block.settings.tall %} club-wall__cell--tall{% endif %}{% if block.settings.wide %} club-wall__cell--wide{% endif %}"
-        {{ block.shopify_attributes }}
-      >
+      {%- liquid
+        assign cell_shape = ''
+        assign ratio = block.settings.image.aspect_ratio
+        if ratio != blank
+          if ratio < 0.9
+            assign cell_shape = ' club-wall__cell--tall'
+          elsif ratio > 1.9
+            assign cell_shape = ' club-wall__cell--wide'
+          endif
+        endif
+      -%}
+      <div class="club-wall__cell{{ cell_shape }}" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
           {{
             block.settings.image
@@ -52,7 +60,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Dense mosaic of last season's photos. Aim for 12–20 images — below about 12 the wall reads as a sparse gallery instead of a crowd. Mark a few as tall or wide to break the grid."
+      "content": "Dense mosaic of last season's photos. Aim for 12–20 images — below about 12 the wall reads as a sparse gallery instead of a crowd. Portrait photos get a tall tile and panoramas a wide one, which breaks the grid."
     },
     {
       "type": "text",
@@ -93,19 +101,8 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "checkbox",
-          "id": "tall",
-          "label": "Span two rows",
-          "default": false
-        },
-        {
-          "type": "checkbox",
-          "id": "wide",
-          "label": "Span two columns",
-          "default": false
+          "label": "Image",
+          "info": "Portrait photos take a tall tile and panoramas a wide one, automatically."
         }
       ]
     }
@@ -114,10 +111,10 @@
     {
       "name": "Club photo wall",
       "blocks": [
-        { "type": "photo", "settings": { "wide": true } },
         { "type": "photo" },
         { "type": "photo" },
-        { "type": "photo", "settings": { "tall": true } },
+        { "type": "photo" },
+        { "type": "photo" },
         { "type": "photo" },
         { "type": "photo" },
         { "type": "photo" },
