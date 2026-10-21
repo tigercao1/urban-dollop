@@ -189,7 +189,11 @@
 
 .club-hero__nextup-meta {
   font-size: 1.3rem;
-  color: var(--status-pending, rgb(var(--color-button)));
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.club-hero__still {
+  display: none;
 }
 
 @media screen and (max-width: 749px) {
@@ -212,6 +216,20 @@
 
   .club-hero__nextup-item:first-child {
     border-top: 0;
+  }
+
+  .club-hero__nextup-date {
+    flex: 0 0 5.6rem;
+  }
+
+  .club-hero__nextup-label {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .club-hero__nextup-meta {
+    flex: 0 1 12rem;
+    text-align: right;
   }
 }
 
@@ -567,6 +585,10 @@
 @media (prefers-reduced-motion: reduce) {
   .club-hero__media video {
     display: none;
+  }
+
+  .club-hero__still {
+    display: block;
   }
 
   .club-season__card-link:hover,
