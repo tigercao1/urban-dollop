@@ -97,10 +97,14 @@
   opacity: 0.85;
 }
 
+.club-hero__eyebrow-part {
+  white-space: nowrap;
+}
+
 .club-hero__title {
   font-family: var(--font-display, var(--font-heading-family));
   /* The single biggest lever on "premium". Dawn's h0 tops out far below this. */
-  font-size: clamp(5.4rem, 11vw, 13rem);
+  font-size: clamp(5.4rem, 9vw, 10rem);
   line-height: 0.92;
   letter-spacing: -0.02em;
   margin: 0;
@@ -113,6 +117,15 @@
   line-height: var(--cjk-leading, 1.7);
   margin: 1.6rem 0 0;
   opacity: 0.92;
+}
+
+.club-hero__slogan {
+  font-family: var(--font-body, var(--font-body-family));
+  font-size: clamp(1.6rem, 2vw, 2.1rem);
+  font-weight: 600;
+  line-height: var(--cjk-leading, 1.7);
+  letter-spacing: 0.04em;
+  margin: 0.2rem 0 0;
 }
 
 .club-hero__actions {

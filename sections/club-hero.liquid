@@ -18,10 +18,17 @@
 >
   <div class="club-hero__media">
     {%- if section.settings.video != blank -%}
+      {%- liquid
+        if section.settings.image != blank
+          assign hero_poster = section.settings.image | image_url: width: 1920
+        else
+          assign hero_poster = section.settings.video.preview_image | image_url: width: 1920
+        endif
+      -%}
       {{
         section.settings.video
         | video_tag:
-          image_size: '1100x',
+          poster: hero_poster,
           autoplay: true,
           loop: true,
           muted: true,
@@ -48,7 +55,11 @@
 
   <div class="club-hero__inner">
     {%- if section.settings.eyebrow != blank -%}
-      <p class="club-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      <p class="club-hero__eyebrow">
+        <span class="club-hero__eyebrow-part">
+          {{- section.settings.eyebrow | split: ' · ' | join: '</span>&nbsp;· <span class="club-hero__eyebrow-part">' -}}
+        </span>
+      </p>
     {%- endif -%}
 
     {%- if section.settings.heading != blank -%}
@@ -57,6 +68,10 @@
 
     {%- if section.settings.subheading != blank -%}
       <p class="club-hero__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.slogan != blank -%}
+      <p class="club-hero__slogan">{{ section.settings.slogan }}</p>
     {%- endif -%}
 
     {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
@@ -157,6 +172,11 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "多伦多滑雪俱乐部"
+    },
+    {
+      "type": "text",
+      "id": "slogan",
+      "label": "Slogan"
     },
     {
       "type": "text",
