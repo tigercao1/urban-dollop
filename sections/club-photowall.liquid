@@ -12,12 +12,6 @@
 {{ 'club.css' | asset_url | stylesheet_tag }}
 
 <div class="club-wall color-{{ section.settings.color_scheme }} gradient">
-  {%- if section.settings.heading != blank -%}
-    <div class="page-width">
-      <h2 class="club-wall__title">{{ section.settings.heading }}</h2>
-    </div>
-  {%- endif -%}
-
   {%- liquid
     assign justified = false
     if section.settings.layout == 'justified'
@@ -28,6 +22,16 @@
       assign sizes_vw_mobile = row_cqw_mobile | times: 1.3
     endif
   -%}
+  {%- if justified -%}<div class="club-wall__inner">{%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    {%- if justified -%}
+      <h2 class="club-wall__title">{{ section.settings.heading }}</h2>
+    {%- else -%}
+      <div class="page-width">
+        <h2 class="club-wall__title">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
   <div
     class="club-wall__grid{% if justified %} club-wall__grid--justified{% endif %}"
     style="--wall-columns: {{ section.settings.columns }}; --wall-gap: {{ section.settings.gap }}px;
@@ -65,7 +69,7 @@
         {%- if block.settings.image != blank -%}
           {{
             block.settings.image
-            | image_url: width: 1200
+            | image_url: width: 2400
             | image_tag: loading: 'lazy', sizes: cell_sizes, widths: cell_widths, class: 'club-wall__img'
           }}
         {%- else -%}
@@ -74,6 +78,7 @@
       </div>
     {%- endfor -%}
   </div>
+  {%- if justified -%}</div>{%- endif -%}
 </div>
 
 {% schema %}

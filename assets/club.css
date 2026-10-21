@@ -315,7 +315,8 @@
 }
 
 .club-season__inner,
-.club-faces__inner {
+.club-faces__inner,
+.club-wall__inner {
   --rail-gutter: 5rem;
   max-width: 160rem;
   margin: 0 auto;
@@ -433,7 +434,8 @@
 
 @media screen and (max-width: 749px) {
   .club-season__inner,
-  .club-faces__inner {
+  .club-faces__inner,
+  .club-wall__inner {
     --rail-gutter: 1.5rem;
   }
 
@@ -490,8 +492,6 @@
   flex-wrap: wrap;
   align-items: flex-start;
   container-type: inline-size;
-  max-width: 160rem;
-  margin-inline: auto;
   --wall-row: var(--wall-row-desktop);
 }
 
