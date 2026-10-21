@@ -11,9 +11,13 @@
 
 {%- liquid
   assign counts_instructors = false
+  assign counts_season_cards = false
   for block in section.blocks
     if block.settings.source == 'instructors'
       assign counts_instructors = true
+    endif
+    if block.settings.source == 'season_cards'
+      assign counts_season_cards = true
     endif
   endfor
 -%}
@@ -36,7 +40,11 @@
   {%- endfor -%}
 {%- endif -%}
 
-<div class="club-stats color-{{ section.settings.color_scheme }} gradient">
+{%- if counts_season_cards -%}
+  <script src="{{ 'club-stats.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div class="club-stats{% if section.blocks.size <= 2 %} club-stats--few{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width">
     {%- if section.settings.heading != blank -%}
       <p class="club-stats__heading">{{ section.settings.heading }}</p>
@@ -61,7 +69,9 @@
         -%}
         <div class="club-stats__item" {{ block.shopify_attributes }}>
           <dt class="club-stats__value">
-            {{- stat_value -}}
+            <span class="club-stats__number" data-stat-source="{{ block.settings.source }}">
+              {{- stat_value -}}
+            </span>
             {%- if block.settings.suffix != blank -%}
               <span class="club-stats__suffix">{{ block.settings.suffix }}</span>
             {%- endif -%}
@@ -110,7 +120,8 @@
             { "value": "manual", "label": "Typed in below" },
             { "value": "instructors", "label": "Instructors on the roster" },
             { "value": "collection_products", "label": "Products in a collection" },
-            { "value": "members", "label": "Member count (site stats)" }
+            { "value": "members", "label": "Member count (site stats)" },
+            { "value": "season_cards", "label": "Cards in the season row" }
           ],
           "default": "manual"
         },

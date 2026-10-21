@@ -255,6 +255,17 @@
   margin: 0;
 }
 
+.club-stats--few .club-stats__heading,
+.club-stats--few .club-stats__item {
+  text-align: center;
+  align-items: center;
+}
+
+.club-stats--few .club-stats__grid {
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
 @media screen and (max-width: 749px) {
   .club-stats__grid {
     grid-template-columns: repeat(2, 1fr);
