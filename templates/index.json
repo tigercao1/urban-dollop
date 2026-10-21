@@ -169,6 +169,48 @@
     "season": {
       "type": "club-season",
       "blocks": {
+        "c2": {
+          "type": "session",
+          "settings": {
+            "product": "wintercamp-27",
+            "collection": "",
+            "image": "shopify://shop_images/75DE73FE-A394-4540-B111-EF9002B6CB79_46b7eb2c-f387-4095-86d9-c708a674131d.png",
+            "date": "12月20–23日 · 12月27–30日",
+            "title": "圣诞元旦冬令营",
+            "meta": "全托管 · 7岁+ · 小班",
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
+          }
+        },
+        "c1": {
+          "type": "session",
+          "settings": {
+            "product": "saturday-group-class",
+            "collection": "",
+            "date": "1月 · 2月 · 周六",
+            "title": "周末团课",
+            "meta": "MSL · 7岁+ · 教练 1:4",
+            "spots": 12,
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "session",
+          "settings": {
+            "product": "blue-mountain-camp-2027",
+            "collection": "",
+            "image": "shopify://shop_images/ssnow-past-seasons-20.jpg",
+            "date": "1月18–21日",
+            "title": "Blue Mountain 精英训练营",
+            "meta": "4天 · 两位精英教练",
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
+          }
+        },
         "session_zEFN96": {
           "type": "session",
           "settings": {
@@ -184,54 +226,14 @@
             "link": ""
           }
         },
-        "c2": {
-          "type": "session",
-          "settings": {
-            "product": "wintercamp-27",
-            "collection": "",
-            "date": "12月20–23日 · 12月27–30日",
-            "title": "圣诞元旦冬令营",
-            "meta": "全托管 · 7岁+ · 3–5人小班",
-            "spots_suffix": "位",
-            "full_label": "名额已满",
-            "link": ""
-          }
-        },
-        "c1": {
-          "type": "session",
-          "settings": {
-            "product": "saturday-group-class",
-            "collection": "",
-            "date": "1月18日 · 周六",
-            "title": "周末团课",
-            "meta": "MSL · 6–12岁 · 教练 1:5",
-            "spots": 6,
-            "spots_suffix": "位",
-            "full_label": "名额已满",
-            "link": ""
-          }
-        },
-        "c3": {
-          "type": "session",
-          "settings": {
-            "product": "blue-mountain-camp-2027",
-            "collection": "",
-            "date": "1月18–21日",
-            "title": "Blue Mountain 精英训练营",
-            "meta": "4天 · 两位精英教练",
-            "spots_suffix": "位",
-            "full_label": "名额已满",
-            "link": ""
-          }
-        },
         "c4": {
           "type": "session",
           "settings": {
             "product": "marchbreak-camp",
             "collection": "",
-            "date": "3月16–20日",
+            "date": "3月13-14日 · 3月15-16日",
             "title": "春假冬令营",
-            "meta": "全托管 · 5天 · 7–14岁",
+            "meta": "全托管 · 7–14岁 · 两天一期",
             "spots": 11,
             "spots_suffix": "位",
             "full_label": "名额已满",
@@ -243,9 +245,9 @@
           "settings": {
             "product": "",
             "collection": "bus",
-            "date": "每周六",
+            "date": "圣诞假期",
             "title": "雪场巴士",
-            "meta": "士嘉堡 / 万锦 发车",
+            "meta": "GTA 各地发车",
             "spots": 24,
             "spots_suffix": "位",
             "full_label": "名额已满",
@@ -254,10 +256,10 @@
         }
       },
       "block_order": [
-        "session_zEFN96",
         "c2",
         "c1",
         "c3",
+        "session_zEFN96",
         "c4",
         "c5"
       ],
