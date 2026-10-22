@@ -340,6 +340,12 @@
             "image": "shopify://shop_images/ssnow-past-seasons-11.jpg"
           }
         },
+        "photo_GFY8Md": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5817.heic"
+          }
+        },
         "p12": {
           "type": "photo",
           "settings": {
@@ -437,6 +443,7 @@
         "p9",
         "p10",
         "p11",
+        "photo_GFY8Md",
         "p12",
         "p13",
         "p14",
