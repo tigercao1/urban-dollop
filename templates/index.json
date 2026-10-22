@@ -128,19 +128,19 @@
             "teaching_locations": "MSL · Blue Mountain"
           }
         },
-        "i5": {
-          "type": "instructor",
-          "settings": {
-            "display_name": "教练 E",
-            "certification": "CASI Level 1",
-            "teaching_locations": "MSL · Blue Mountain"
-          }
-        },
         "i6": {
           "type": "instructor",
           "settings": {
             "display_name": "教练 F",
             "certification": "CSIA Level 1",
+            "teaching_locations": "MSL · Blue Mountain"
+          }
+        },
+        "i5": {
+          "type": "instructor",
+          "settings": {
+            "display_name": "教练 E",
+            "certification": "CASI Level 1",
             "teaching_locations": "MSL · Blue Mountain"
           }
         }
@@ -150,13 +150,13 @@
         "i2",
         "i3",
         "i4",
-        "i5",
-        "i6"
+        "i6",
+        "i5"
       ],
       "settings": {
         "source": "metaobject",
         "metaobject_type": "our_team",
-        "limit": 12,
+        "limit": 10,
         "meta_field": "type",
         "link_target": "profile",
         "eyebrow": "教练团队",
