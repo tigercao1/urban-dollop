@@ -169,6 +169,21 @@
     "season": {
       "type": "club-season",
       "blocks": {
+        "session_NegqBr": {
+          "type": "session",
+          "settings": {
+            "product": "casi-exam-prep",
+            "collection": "",
+            "image": "shopify://shop_images/IMG_0554-resized-3750x5000.jpg",
+            "date": "12月12日 · 12月19日 · 1月9日",
+            "title": "CASI 一级二级备考班",
+            "meta": "3小时小班课程 · 全面备考",
+            "spots": 15,
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
+          }
+        },
         "c2": {
           "type": "session",
           "settings": {
@@ -183,20 +198,6 @@
             "link": ""
           }
         },
-        "c1": {
-          "type": "session",
-          "settings": {
-            "product": "saturday-group-class",
-            "collection": "",
-            "date": "1月 · 2月 · 周六",
-            "title": "周末团课",
-            "meta": "MSL · 7岁+ · 教练 1:4",
-            "spots": 12,
-            "spots_suffix": "位",
-            "full_label": "名额已满",
-            "link": ""
-          }
-        },
         "c3": {
           "type": "session",
           "settings": {
@@ -206,6 +207,20 @@
             "date": "1月18–21日",
             "title": "Blue Mountain 精英训练营",
             "meta": "4天 · 两位精英教练",
+            "spots_suffix": "位",
+            "full_label": "名额已满",
+            "link": ""
+          }
+        },
+        "c1": {
+          "type": "session",
+          "settings": {
+            "product": "saturday-group-class",
+            "collection": "",
+            "date": "1月 · 2月 · 周六",
+            "title": "周末团课",
+            "meta": "MSL · 7岁+ · 教练 1:4",
+            "spots": 12,
             "spots_suffix": "位",
             "full_label": "名额已满",
             "link": ""
@@ -256,9 +271,10 @@
         }
       },
       "block_order": [
+        "session_NegqBr",
         "c2",
-        "c1",
         "c3",
+        "c1",
         "session_zEFN96",
         "c4",
         "c5"
@@ -338,12 +354,6 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-11.jpg"
-          }
-        },
-        "photo_GFY8Md": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/IMG_5817.heic"
           }
         },
         "p12": {
@@ -443,7 +453,6 @@
         "p9",
         "p10",
         "p11",
-        "photo_GFY8Md",
         "p12",
         "p13",
         "p14",
