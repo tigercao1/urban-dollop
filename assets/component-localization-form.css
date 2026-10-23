@@ -114,12 +114,12 @@ noscript .localization-selector.link {
 }
 
 .localization-selector option {
-  color: #000000;
+  color: rgb(var(--color-foreground));
 }
 
 .localization-selector + .disclosure__list-wrapper {
   opacity: 1;
-  animation: animateLocalization var(--duration-default) ease;
+  animation: animateLocalization var(--dur) var(--ease);
 }
 
 .disclosure {

@@ -1,3 +1,7 @@
+{%- comment -%}
+  Waiver link. The form itself stays hosted at JotForm — only the styling is
+  brought in-theme. Presentation lives in .waiver-link (alpine-storefront.css).
+{%- endcomment -%}
 {% if shop.locale == 'en' %}
   <a
     href="
@@ -13,23 +17,7 @@
       )
     "
     target="_blank"
-    style="
-      margin-top: 16px;
-      font-size: 18px;
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-block;
-      padding: 10px 20px 10px 20px;
-      font-family: inherit;
-      text-shadow: none;
-      user-select: none;
-      transition: all,.1s,ease-in;
-      background-color: #FFA500;
-      border: 1px solid #FFA500;
-      border-radius: 50px;
-      color: #FFFFFF;
-      text-align: center;
-    "
+    class="waiver-link"
   >
     {{ "custom_liquid.product.waiver" | t }}
   </a>
@@ -48,23 +36,7 @@
       )
     "
     target="_blank"
-    style="
-      margin-top: 16px;
-      font-size: 18px;
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-block;
-      padding: 10px 20px 10px 20px;
-      font-family: inherit;
-      text-shadow: none;
-      user-select: none;
-      transition: all,.1s,ease-in;
-      background-color: #FFA500;
-      border: 1px solid #FFA500;
-      border-radius: 50px;
-      color: #FFFFFF;
-      text-align: center;
-    "
+    class="waiver-link"
   >
     {{ "custom_liquid.product.waiver" | t }}
   </a>

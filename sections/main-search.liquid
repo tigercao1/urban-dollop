@@ -64,7 +64,15 @@
 {%- endstyle -%}
 
 {% paginate search.results by 24 %}
-  <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
+  {%- comment -%}
+    Alpine contour, empty state (a): zero-query landing only. Scoped to
+    `unless search.performed` so it cannot stack with states (b) and (c), which
+    both live inside the `search.performed` branch below.
+  {%- endcomment -%}
+  <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %}{% unless search.performed %} surface--contour{% endunless %} section-{{ section.id }}-padding">
+    {%- unless search.performed -%}
+      {% render 'pattern-contour' %}
+    {%- endunless -%}
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       <h1 class="h2 center">
         {%- if search.performed -%}
@@ -139,8 +147,12 @@
             <p role="status">{{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}</p>
           {%- endif -%}
         {%- endunless -%}
+        {%- comment -%} Alpine contour, empty state (c): zero results, no filters. {%- endcomment -%}
         {%- if search.results_count == 0 and search.filters == empty -%}
-          <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+          <div class="template-search__no-results surface--contour">
+            {% render 'pattern-contour' %}
+            <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+          </div>
         {%- endif -%}
       {%- endif -%}
     </div>
@@ -199,7 +211,9 @@
         {%- endif -%}
         <div class="product-grid-container" id="ProductGridContainer">
           {%- if search.results.size == 0 and search.filters != empty -%}
-            <div class="template-search__results collection collection--empty{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}" id="product-grid" data-id="{{ section.id }}">
+            {%- comment -%} Alpine contour, empty state (b): zero results with filters applied. {%- endcomment -%}
+            <div class="template-search__results collection collection--empty surface--contour{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}" id="product-grid" data-id="{{ section.id }}">
+              {% render 'pattern-contour' %}
               <div class="loading-overlay gradient"></div>
               <div class="title-wrapper center">
                 <h2 class="title title--primary">

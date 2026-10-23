@@ -99,6 +99,18 @@
     {%- endunless -%}
 
     {{ 'template-giftcard.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%}
+      This template is {% layout none %} and never loads alpine-tokens or
+      alpine-core.css. snippets/icon-success.liquid paints with currentColor,
+      so its status colour is inlined here in a plain value, kept in sync with
+      --status-approved.
+    {%- endcomment -%}
+    <style>
+      .icon-success {
+        color: #2f7d6b;
+      }
+    </style>
   </head>
 
   <body class="gradient gift-card">
