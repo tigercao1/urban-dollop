@@ -284,7 +284,17 @@
       "count": "显示 {{ shown }} / {{ total }} 位教练",
       "clear": "清除筛选",
       "age_any": "不限",
-      "age_option": "{{ age }} 岁",
+      "age_option": "{{ age }} 岁及以上",
+      "filters": "筛选",
+      "filters_count": "筛选 ({{ active }})",
+      "close": "关闭",
+      "reset": "重置",
+      "show_results": "显示 {{ shown }} 位教练",
+      "level_hint": "请先选择项目，再选择等级",
+      "level_option": "Level {{ level }}",
+      "level_park": "Park",
+      "level_carving": "Carving",
+      "trainer_only": "仅看培训师 (Trainer)",
       "values": {
         "ski": "双板",
         "snowboard": "单板"

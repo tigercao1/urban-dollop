@@ -275,7 +275,17 @@
       "count": "顯示 {{ shown }} / {{ total }} 位教練",
       "clear": "清除篩選",
       "age_any": "不限",
-      "age_option": "{{ age }} 歲",
+      "age_option": "{{ age }} 歲及以上",
+      "filters": "篩選",
+      "filters_count": "篩選 ({{ active }})",
+      "close": "關閉",
+      "reset": "重設",
+      "show_results": "顯示 {{ shown }} 位教練",
+      "level_hint": "請先選擇項目，再選擇等級",
+      "level_option": "Level {{ level }}",
+      "level_park": "Park",
+      "level_carving": "Carving",
+      "trainer_only": "僅看培訓師 (Trainer)",
       "values": {
         "ski": "雙板",
         "snowboard": "單板"

@@ -157,7 +157,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Filters run in the browser against the cards already on the page — instant, no reload. Facet values are read from the entries themselves, so they always match the data. Because certification and type are free text, 'CASI 2' and 'CASI II' appear as two separate chips. Clean the entries, not this setting."
+      "content": "Filters run in the browser against the cards already on the page — instant, no reload. Facet values are read from the entries themselves, so they always match the data. Levels are read from certification text such as 'CSIA Level 2' or 'CASI Park Level 1' (CSIA is ski, CASI is snowboard); text in any other format is not matched. Clean the entries, not this setting."
     },
     {
       "type": "checkbox",
@@ -175,7 +175,8 @@
       "type": "checkbox",
       "id": "filter_certification",
       "label": "Filter by certification",
-      "default": true
+      "default": true,
+      "info": "Level chips and the trainer switch. They need the discipline control, which appears when this or Filter by type is on."
     },
     {
       "type": "checkbox",
