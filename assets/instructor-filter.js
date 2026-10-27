@@ -115,6 +115,8 @@ const certificationProfile = (certificationText, typeText) => {
 
 class InstructorFilter extends HTMLElement {
   connectedCallback() {
+    if (this.initialized) return;
+    this.initialized = true;
     this.valueLabels = this.readLabels('valueLabels');
     this.levelLabels = this.readLabels('levelLabels');
     this.groups = Array.from(this.querySelectorAll('fieldset[data-facet-group]')).map((fieldset) => ({
@@ -178,7 +180,8 @@ class InstructorFilter extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this.sheet && this.sheet.open) document.body.classList.remove('overflow-hidden');
+    if (this.sheet) this.sheet.close();
+    this.releaseScrollLock();
   }
 
   loadSearchTerms() {
@@ -450,6 +453,7 @@ class InstructorFilter extends HTMLElement {
 
   openSheet() {
     this.sheet.showModal();
+    this.ownsScrollLock = !document.body.classList.contains('overflow-hidden');
     document.body.classList.add('overflow-hidden');
   }
 
@@ -458,8 +462,13 @@ class InstructorFilter extends HTMLElement {
   }
 
   afterSheetClosed() {
-    document.body.classList.remove('overflow-hidden');
+    this.releaseScrollLock();
     this.openButton.focus();
+  }
+
+  releaseScrollLock() {
+    if (this.ownsScrollLock) document.body.classList.remove('overflow-hidden');
+    this.ownsScrollLock = false;
   }
 
   buildAgeFilter() {
