@@ -1,0 +1,9 @@
+<fieldset class="club-filter__group" hidden data-facet-group="{{ field }}">
+  <legend class="club-filter__legend">
+    {%- case field -%}
+      {%- when 'client_groups' -%}{{ 'sections.instructors.facets.client_groups' | t }}
+      {%- when 'locations' -%}{{ 'sections.instructors.facets.locations' | t }}
+      {%- when 'languages' -%}{{ 'sections.instructors.facets.languages' | t }}
+    {%- endcase -%}
+  </legend>
+</fieldset>

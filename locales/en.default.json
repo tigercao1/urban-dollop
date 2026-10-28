@@ -284,7 +284,17 @@
       "count": "Showing {{ shown }} of {{ total }} instructors",
       "clear": "Clear filters",
       "age_any": "Any age",
-      "age_option": "{{ age }} years",
+      "age_option": "{{ age }} years and above",
+      "filters": "Filters",
+      "filters_count": "Filters ({{ active }})",
+      "close": "Close",
+      "reset": "Reset",
+      "show_results": "Show {{ shown }} instructors",
+      "level_hint": "Choose a discipline first to see its levels",
+      "level_option": "Level {{ level }}",
+      "level_park": "Park",
+      "level_carving": "Carving",
+      "trainer_only": "Trainers only",
       "values": {
         "ski": "Ski",
         "snowboard": "Snowboard"

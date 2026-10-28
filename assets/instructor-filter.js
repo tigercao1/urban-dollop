@@ -26,10 +26,17 @@ const SEGMENT_SEPARATORS = /[;；|｜丨·•・\n\r]/;
 const LIST_SEPARATORS = /[,，、/／]/;
 const INVISIBLE = /[\u200B-\u200D\u2060\uFEFF]/g;
 const DISCIPLINE_PREFIX = /^([^:：]{1,24})[:：](.*)$/;
+const TYPE_SEPARATORS = /[,，;；|｜丨/／、·•・&＆\n\r]/;
 const TYPE_ALIASES = {
   ski: ['ski', 'skiing', 'skier', '双板', '雙板'],
   snowboard: ['snowboard', 'snowboarding', 'snowboarder', '单板', '單板'],
 };
+const DISCIPLINES = Object.keys(TYPE_ALIASES);
+const DISCIPLINE_ORG = { ski: 'CSIA', snowboard: 'CASI' };
+const ORG_DISCIPLINE = { csia: 'ski', casi: 'snowboard' };
+const LEVEL_TRACKS = ['park', 'carving'];
+const CERTIFICATION_LEVEL = new RegExp(`^(?:(csia|casi) )?(?:(${LEVEL_TRACKS.join('|')}) )?level (\\d+)\\b`);
+const TRAINER = /\btrainer\b/;
 
 const clean = (text) => (text || '').normalize('NFKC').replace(INVISIBLE, '');
 const tidy = (part) => part.replace(/\s+/g, ' ').trim();
@@ -43,6 +50,8 @@ const levelBelowPartial = (key) => {
   const match = key.match(PARTIAL_LEVEL);
   return match ? `${match[1]} level ${Number(match[2]) - 1}` : null;
 };
+const canonicalDiscipline = (key) => DISCIPLINES.find((name) => TYPE_ALIASES[name].includes(key)) || null;
+const levelRank = (key) => (/^\d+$/.test(key) ? Number(key) : 1000 + LEVEL_TRACKS.indexOf(key));
 
 const readCache = (key) => {
   try {
@@ -79,9 +88,37 @@ const splitCertifications = (text) => {
   return tokens;
 };
 
+const parseCertification = (key) => {
+  if (TRAINER.test(key)) return { trainer: true, discipline: canonicalDiscipline(key.split(' ')[0]), level: null };
+  const match = (levelBelowPartial(key) || key).match(CERTIFICATION_LEVEL);
+  if (!match) return null;
+  return { trainer: false, discipline: ORG_DISCIPLINE[match[1]] || null, level: match[2] || match[3] };
+};
+
+const certificationProfile = (certificationText, typeText) => {
+  const entries = splitCertifications(certificationText).map(keyOf).map(parseCertification).filter(Boolean);
+  const disciplines = new Set(
+    splitPlain(typeText, TYPE_SEPARATORS)
+      .map((value) => canonicalDiscipline(keyOf(value)))
+      .filter(Boolean)
+  );
+  entries.forEach(({ discipline }) => discipline && disciplines.add(discipline));
+
+  const levels = Object.fromEntries(DISCIPLINES.map((name) => [name, new Set()]));
+  const trainers = new Set();
+  entries.forEach(({ trainer, discipline, level }) => {
+    const applies = discipline ? [discipline] : disciplines.size > 0 ? Array.from(disciplines) : DISCIPLINES;
+    applies.forEach((name) => (trainer ? trainers.add(name) : levels[name].add(level)));
+  });
+  return { disciplines, levels, trainers };
+};
+
 class InstructorFilter extends HTMLElement {
   connectedCallback() {
-    this.valueLabels = this.readValueLabels();
+    if (this.initialized) return;
+    this.initialized = true;
+    this.valueLabels = this.readLabels('valueLabels');
+    this.levelLabels = this.readLabels('levelLabels');
     this.groups = Array.from(this.querySelectorAll('fieldset[data-facet-group]')).map((fieldset) => ({
       name: fieldset.dataset.facetGroup,
       fieldset,
@@ -102,6 +139,7 @@ class InstructorFilter extends HTMLElement {
         initials: [],
         facets,
         minAge: Number.isNaN(minAge) ? null : minAge,
+        ...certificationProfile(el.getAttribute('data-facet-certification'), el.getAttribute('data-facet-type')),
       };
     });
 
@@ -113,10 +151,14 @@ class InstructorFilter extends HTMLElement {
     this.clearEl = this.querySelector('[data-instructor-clear]');
     this.query = '';
     this.age = null;
+    this.discipline = null;
+    this.levels = new Set();
+    this.trainerOnly = false;
     this.chips = [];
 
     this.groups.forEach((group) => this.buildChips(group));
     this.buildAgeFilter();
+    this.buildSheet();
 
     if (this.search) {
       this.search.addEventListener('focus', () => this.loadSearchTerms(), { once: true });
@@ -135,6 +177,11 @@ class InstructorFilter extends HTMLElement {
     }
 
     this.apply();
+  }
+
+  disconnectedCallback() {
+    if (this.sheet) this.sheet.close();
+    this.releaseScrollLock();
   }
 
   loadSearchTerms() {
@@ -250,32 +297,29 @@ class InstructorFilter extends HTMLElement {
     );
   }
 
-  readValueLabels() {
+  readLabels(name) {
     try {
-      return JSON.parse(this.dataset.valueLabels || '{}');
+      return JSON.parse(this.dataset[name] || '{}');
     } catch (e) {
       return {};
     }
   }
 
   translateType(value) {
-    const key = keyOf(value);
-    const canonical = Object.keys(TYPE_ALIASES).find((name) => TYPE_ALIASES[name].includes(key));
+    const canonical = canonicalDiscipline(keyOf(value));
     return canonical && this.valueLabels[canonical] ? this.valueLabels[canonical] : value;
   }
 
   tokenize(text, field) {
     if (field === 'certification') return splitCertifications(text);
     if (field === 'type') {
-      return splitPlain(text, /[,，;；|｜丨/／、·•・&＆\n\r]/).map((value) => this.translateType(value));
+      return splitPlain(text, TYPE_SEPARATORS).map((value) => this.translateType(value));
     }
     return splitPlain(text);
   }
 
   facetKeys(text, field) {
-    const keys = this.tokenize(text, field).map(keyOf);
-    if (field !== 'certification') return keys;
-    return keys.concat(keys.map(levelBelowPartial).filter(Boolean));
+    return this.tokenize(text, field).map(keyOf);
   }
 
   tidyCardText() {
@@ -301,22 +345,130 @@ class InstructorFilter extends HTMLElement {
     Array.from(labels.entries())
       .sort((a, b) => a[1].localeCompare(b[1], undefined, { numeric: true, sensitivity: 'base' }))
       .forEach(([key, label]) => {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'club-filter__chip';
-        chip.setAttribute('aria-pressed', 'false');
-        chip.textContent = label;
-        chip.addEventListener('click', () => {
-          const pressed = !group.active.has(key);
-          if (pressed) group.active.add(key);
-          else group.active.delete(key);
-          chip.setAttribute('aria-pressed', String(pressed));
-          this.apply();
-        });
+        const chip = this.createChip(label, group.active, key);
         group.fieldset.appendChild(chip);
         this.chips.push(chip);
       });
     group.fieldset.hidden = false;
+  }
+
+  createChip(label, active, key) {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'club-filter__chip';
+    chip.setAttribute('aria-pressed', String(active.has(key)));
+    chip.textContent = label;
+    chip.addEventListener('click', () => {
+      const pressed = !active.has(key);
+      if (pressed) active.add(key);
+      else active.delete(key);
+      chip.setAttribute('aria-pressed', String(pressed));
+      this.apply();
+    });
+    return chip;
+  }
+
+  buildSheet() {
+    this.sheet = this.querySelector('[data-filter-sheet]');
+    if (!this.sheet) return;
+    this.openButton = this.querySelector('[data-filter-open]');
+    this.openLabel = this.querySelector('[data-filter-open-label]');
+    this.defaultOpenLabel = this.openLabel.textContent;
+    this.showEl = this.querySelector('[data-filter-show]');
+    this.disciplineGroup = this.querySelector('[data-discipline-group]');
+    this.levelGroup = this.querySelector('[data-level-group]');
+    this.trainerRow = this.querySelector('[data-trainer-row]');
+
+    this.openButton.addEventListener('click', () => this.openSheet());
+    this.sheet.addEventListener('close', () => this.afterSheetClosed());
+    this.sheet.addEventListener('click', (e) => {
+      if (e.target === this.sheet) this.closeSheet();
+    });
+    this.sheet.querySelector('[data-filter-close]').addEventListener('click', () => this.closeSheet());
+    this.showEl.addEventListener('click', () => this.closeSheet());
+    this.sheet.querySelector('[data-filter-reset]').addEventListener('click', () => this.resetFilters());
+
+    this.buildDisciplineControl();
+    this.buildLevelControl();
+  }
+
+  buildDisciplineControl() {
+    if (!this.disciplineGroup) return;
+    this.disciplineButtons = Array.from(this.disciplineGroup.querySelectorAll('[data-discipline]'));
+    this.disciplineButtons.forEach((button) => {
+      const name = button.dataset.discipline;
+      button.hidden = !this.cards.some((card) => card.disciplines.has(name));
+      button.addEventListener('click', () => this.chooseDiscipline(name));
+    });
+    this.disciplineGroup.hidden = this.disciplineButtons.every((button) => button.hidden);
+  }
+
+  buildLevelControl() {
+    if (!this.levelGroup) return;
+    this.levelOptions = {};
+    DISCIPLINES.forEach((name) => {
+      const keys = new Set();
+      this.cards.forEach((card) => card.levels[name].forEach((key) => keys.add(key)));
+      this.levelOptions[name] = Array.from(keys).sort((a, b) => levelRank(a) - levelRank(b));
+    });
+    this.levelChips = this.levelGroup.querySelector('[data-level-chips]');
+    this.levelHint = this.levelGroup.querySelector('[data-level-hint]');
+    this.levelOrg = this.levelGroup.querySelector('[data-level-org]');
+    this.levelGroup.hidden = DISCIPLINES.every((name) => this.levelOptions[name].length === 0);
+
+    this.trainerSwitch = this.trainerRow.querySelector('[data-trainer-switch]');
+    this.trainerRow.hidden = !this.cards.some((card) => card.trainers.size > 0);
+    this.trainerSwitch.addEventListener('change', () => {
+      this.trainerOnly = this.trainerSwitch.checked;
+      this.apply();
+    });
+  }
+
+  levelLabel(key) {
+    return /^\d+$/.test(key)
+      ? (this.levelLabels.template || '[level]').replace('[level]', key)
+      : this.levelLabels[key] || key;
+  }
+
+  chooseDiscipline(name) {
+    this.discipline = this.discipline === name ? null : name;
+    this.levels.clear();
+    this.syncDisciplineControls();
+    this.apply();
+  }
+
+  syncDisciplineControls() {
+    if (this.disciplineButtons) {
+      this.disciplineButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.discipline === this.discipline));
+      });
+    }
+    if (!this.levelChips) return;
+    const options = this.discipline ? this.levelOptions[this.discipline] : [];
+    this.levelChips.replaceChildren(...options.map((key) => this.createChip(this.levelLabel(key), this.levels, key)));
+    this.levelChips.hidden = options.length === 0;
+    this.levelHint.hidden = this.discipline !== null;
+    this.levelOrg.textContent = this.discipline ? DISCIPLINE_ORG[this.discipline] : '';
+  }
+
+  openSheet() {
+    this.sheet.showModal();
+    this.ownsScrollLock = !document.body.classList.contains('overflow-hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  closeSheet() {
+    this.sheet.close();
+  }
+
+  afterSheetClosed() {
+    this.releaseScrollLock();
+    this.openButton.focus();
+  }
+
+  releaseScrollLock() {
+    if (this.ownsScrollLock) document.body.classList.remove('overflow-hidden');
+    this.ownsScrollLock = false;
   }
 
   buildAgeFilter() {
@@ -347,16 +499,37 @@ class InstructorFilter extends HTMLElement {
   clear() {
     this.query = '';
     if (this.search) this.search.value = '';
+    this.resetFilters();
+  }
+
+  resetFilters() {
     this.age = null;
     if (this.ageSelect) this.ageSelect.value = '';
+    this.discipline = null;
+    this.levels.clear();
+    this.trainerOnly = false;
+    if (this.trainerSwitch) this.trainerSwitch.checked = false;
+    this.syncDisciplineControls();
     this.groups.forEach((group) => group.active.clear());
     this.chips.forEach((c) => c.setAttribute('aria-pressed', 'false'));
     this.apply();
   }
 
-  matches(card) {
+  matchesCertification(card) {
+    if (this.discipline && !card.disciplines.has(this.discipline)) return false;
+    if (this.levels.size > 0 && !Array.from(this.levels).some((key) => card.levels[this.discipline].has(key))) {
+      return false;
+    }
+    if (this.trainerOnly && !(this.discipline ? card.trainers.has(this.discipline) : card.trainers.size > 0)) {
+      return false;
+    }
+    return true;
+  }
+
+  matchesFilters(card) {
     if (this.query && !this.matchesName(card)) return false;
     if (this.age !== null && card.minAge !== null && card.minAge > this.age) return false;
+    if (!this.matchesCertification(card)) return false;
     return this.groups.every(({ name, active }) => {
       if (active.size === 0) return true;
       for (const key of active) {
@@ -366,14 +539,21 @@ class InstructorFilter extends HTMLElement {
     });
   }
 
+  activeCount() {
+    const chosen = this.groups.reduce((total, { active }) => total + active.size, 0);
+    return (
+      chosen + this.levels.size + (this.discipline ? 1 : 0) + (this.trainerOnly ? 1 : 0) + (this.age !== null ? 1 : 0)
+    );
+  }
+
   isFiltering() {
-    return this.query !== '' || this.age !== null || this.groups.some((group) => group.active.size > 0);
+    return this.query !== '' || this.activeCount() > 0;
   }
 
   apply() {
     let shown = 0;
     this.cards.forEach((card) => {
-      const ok = this.matches(card);
+      const ok = this.matchesFilters(card);
       card.el.hidden = !ok;
       if (ok) shown += 1;
     });
@@ -384,6 +564,13 @@ class InstructorFilter extends HTMLElement {
     }
     if (this.emptyEl) this.emptyEl.hidden = shown !== 0;
     if (this.clearEl) this.clearEl.hidden = !this.isFiltering();
+    if (this.showEl) this.showEl.textContent = (this.showEl.dataset.template || '').replace('[shown]', shown);
+    if (this.openLabel) {
+      const active = this.activeCount();
+      this.openLabel.textContent = active
+        ? (this.openButton.dataset.activeTemplate || '').replace('[active]', active)
+        : this.defaultOpenLabel;
+    }
   }
 }
 

@@ -55,10 +55,27 @@
 {%- liquid
   assign search_label = 'sections.instructors.search_label' | t
   assign facet_fields = 'certification,type,client_groups,locations,languages' | split: ','
+  assign place_groups = 'locations,client_groups' | split: ','
+  assign language_groups = 'languages' | split: ','
+  assign sheet_title_id = 'InstructorSheetTitle-' | append: section.id
+
+  assign show_discipline = false
+  if section.settings.filter_type or section.settings.filter_certification
+    assign show_discipline = true
+  endif
+
+  assign show_sheet = false
+  if show_discipline or section.settings.filter_client_groups or section.settings.filter_locations or section.settings.filter_languages or section.settings.filter_min_age
+    assign show_sheet = true
+  endif
 -%}
 
 {%- capture value_labels -%}
   {"ski":{{ 'sections.instructors.values.ski' | t | json }},"snowboard":{{ 'sections.instructors.values.snowboard' | t | json }}}
+{%- endcapture -%}
+
+{%- capture level_labels -%}
+  {"template":{{ 'sections.instructors.level_option' | t: level: '[level]' | json }},"park":{{ 'sections.instructors.level_park' | t | json }},"carving":{{ 'sections.instructors.level_carving' | t | json }}}
 {%- endcapture -%}
 
 {%- capture alternate_roots -%}
@@ -69,6 +86,7 @@
 
 <instructor-filter
   data-value-labels="{{ value_labels | escape }}"
+  data-level-labels="{{ level_labels | escape }}"
   data-card-meta-field="{{ section.settings.meta_field }}"
   data-section-id="{{ section.id }}"
   data-alternate-roots="{{ alternate_roots | strip | escape }}"
@@ -103,39 +121,22 @@
         </div>
       {%- endif -%}
 
-      {%- for field in facet_fields -%}
-        {%- assign setting_id = 'filter_' | append: field -%}
-        {%- if section.settings[setting_id] -%}
-          <fieldset class="club-filter__group" hidden data-facet-group="{{ field }}">
-            <legend class="club-filter__legend">
-              {%- case field -%}
-                {%- when 'certification' -%}{{ 'sections.instructors.facets.certification' | t }}
-                {%- when 'type' -%}{{ 'sections.instructors.facets.type' | t }}
-                {%- when 'client_groups' -%}{{ 'sections.instructors.facets.client_groups' | t }}
-                {%- when 'locations' -%}{{ 'sections.instructors.facets.locations' | t }}
-                {%- when 'languages' -%}{{ 'sections.instructors.facets.languages' | t }}
-              {%- endcase -%}
-            </legend>
-          </fieldset>
-        {%- endif -%}
-      {%- endfor -%}
-
-      {%- if section.settings.filter_min_age -%}
-        <div class="club-filter__age field select" hidden data-age-filter>
-          <select
-            id="InstructorAge-{{ section.id }}"
-            class="select__select field__input"
-            data-any-label="{{ 'sections.instructors.age_any' | t | escape }}"
-            data-option-template="{{ 'sections.instructors.age_option' | t: age: '[age]' | escape }}"
-          ></select>
-          <label class="field__label" for="InstructorAge-{{ section.id }}">
-            {{- 'sections.instructors.facets.age' | t -}}
-          </label>
-          {% render 'icon-caret' %}
-        </div>
-      {%- endif -%}
-
       <div class="club-filter__status">
+        {%- if show_sheet -%}
+          <button
+            type="button"
+            class="club-filter__open button button--secondary"
+            aria-haspopup="dialog"
+            data-filter-open
+            data-active-template="{{ 'sections.instructors.filters_count' | t: active: '[active]' | escape }}"
+          >
+            {%- render 'icon-filter' -%}
+            <span data-filter-open-label>{{ 'sections.instructors.filters' | t }}</span>
+          </button>
+        {%- endif -%}
+        <button type="button" class="club-filter__clear link" hidden data-instructor-clear>
+          {{- 'sections.instructors.clear' | t -}}
+        </button>
         <p
           class="club-filter__count"
           role="status"
@@ -143,11 +144,98 @@
           data-instructor-count
           data-template="{{ 'sections.instructors.count' | t: shown: '[shown]', total: '[total]' | escape }}"
         ></p>
-        <button type="button" class="club-filter__clear link" hidden data-instructor-clear>
-          {{- 'sections.instructors.clear' | t -}}
-        </button>
       </div>
     </div>
+
+    {%- if show_sheet -%}
+      <dialog class="club-sheet" aria-modal="true" aria-labelledby="{{ sheet_title_id }}" data-filter-sheet>
+        <div class="club-sheet__panel">
+          <div class="club-sheet__head">
+            <h2 class="club-sheet__title" id="{{ sheet_title_id }}">{{ 'sections.instructors.filters' | t }}</h2>
+            <button
+              type="button"
+              class="club-sheet__close"
+              aria-label="{{ 'sections.instructors.close' | t | escape }}"
+              data-filter-close
+            >
+              {%- render 'icon-close' -%}
+            </button>
+          </div>
+
+          <div class="club-sheet__body">
+            {%- if show_discipline -%}
+              <fieldset class="club-filter__group" hidden data-discipline-group>
+                <legend class="club-filter__legend">{{ 'sections.instructors.facets.type' | t }}</legend>
+                <div class="club-segment">
+                  <button type="button" class="club-segment__option" aria-pressed="false" data-discipline="ski">
+                    {{- 'sections.instructors.values.ski' | t -}}
+                  </button>
+                  <button type="button" class="club-segment__option" aria-pressed="false" data-discipline="snowboard">
+                    {{- 'sections.instructors.values.snowboard' | t -}}
+                  </button>
+                </div>
+              </fieldset>
+            {%- endif -%}
+
+            {%- if section.settings.filter_certification -%}
+              <fieldset class="club-filter__group" hidden data-level-group>
+                <legend class="club-filter__legend">
+                  {{- 'sections.instructors.facets.certification' | t }} <span data-level-org></span>
+                </legend>
+                <p class="club-filter__hint" data-level-hint>{{ 'sections.instructors.level_hint' | t }}</p>
+                <div class="club-filter__chips" hidden data-level-chips></div>
+              </fieldset>
+
+              <label class="club-switch" hidden data-trainer-row>
+                <span class="club-switch__label">{{ 'sections.instructors.trainer_only' | t }}</span>
+                <input type="checkbox" role="switch" class="club-switch__input" data-trainer-switch>
+              </label>
+            {%- endif -%}
+
+            {%- for field in place_groups -%}
+              {%- assign setting_id = 'filter_' | append: field -%}
+              {%- if section.settings[setting_id] -%}
+                {%- render 'club-filter-group', field: field -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if section.settings.filter_min_age -%}
+              <div class="club-filter__age field select" hidden data-age-filter>
+                <select
+                  id="InstructorAge-{{ section.id }}"
+                  class="select__select field__input"
+                  data-any-label="{{ 'sections.instructors.age_any' | t | escape }}"
+                  data-option-template="{{ 'sections.instructors.age_option' | t: age: '[age]' | escape }}"
+                ></select>
+                <label class="field__label" for="InstructorAge-{{ section.id }}">
+                  {{- 'sections.instructors.facets.age' | t -}}
+                </label>
+                {% render 'icon-caret' %}
+              </div>
+            {%- endif -%}
+
+            {%- for field in language_groups -%}
+              {%- assign setting_id = 'filter_' | append: field -%}
+              {%- if section.settings[setting_id] -%}
+                {%- render 'club-filter-group', field: field -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          <div class="club-sheet__foot">
+            <button type="button" class="club-sheet__reset button button--secondary" data-filter-reset>
+              {{- 'sections.instructors.reset' | t -}}
+            </button>
+            <button
+              type="button"
+              class="club-sheet__show button"
+              data-filter-show
+              data-template="{{ 'sections.instructors.show_results' | t: shown: '[shown]' | escape }}"
+            ></button>
+          </div>
+        </div>
+      </dialog>
+    {%- endif -%}
 
     <p class="club-roster__empty" hidden data-instructor-empty>
       {{ 'sections.instructors.no_results' | t }}
