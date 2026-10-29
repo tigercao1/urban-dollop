@@ -21,8 +21,15 @@
   margin-top: 4rem;
 }
 
+/* Bare <button> — the auth forms submit with an unclassed button, so a
+   .button rule would not reach them. Geometry and motion only; colour still
+   comes from Dawn's own button variables. */
 .customer button {
   margin: 4rem 0 1.5rem;
+  border-radius: var(--radius-md, var(--border-radius));
+  transition: background-color var(--dur, var(--duration-default)) var(--ease, ease),
+    border-color var(--dur, var(--duration-default)) var(--ease, ease),
+    color var(--dur, var(--duration-default)) var(--ease, ease);
 }
 
 .customer ul {
@@ -385,11 +392,20 @@
   margin-bottom: 0;
 }
 
+/* Secondary action set — outlined against the primary button colour. */
 .activate button[name='decline'],
 .addresses li > button,
 .addresses form button[type] {
-  background-color: rgba(var(--color-background), var(--alpha-button-background));
-  color: rgb(var(--color-link));
+  background-color: var(--surface, rgb(var(--color-background)));
+  color: var(--navy, rgb(var(--color-foreground)));
+  border: 1px solid var(--grey, rgba(var(--color-foreground), 0.25));
+  border-radius: var(--radius-md, var(--border-radius));
+}
+
+.activate button[name='decline']:hover,
+.addresses li > button:hover,
+.addresses form button[type]:hover {
+  border-color: var(--navy, rgb(var(--color-foreground)));
 }
 
 @media only screen and (min-width: 750px) {

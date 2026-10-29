@@ -129,7 +129,8 @@
         {% endif %}
       >
         {%- if collection.products.size == 0 -%}
-          <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
+          <div class="collection collection--empty surface--contour page-width" id="product-grid" data-id="{{ section.id }}">
+            {% render 'pattern-contour' %}
             <div class="loading-overlay gradient"></div>
             <div class="title-wrapper center">
               <h2 class="title title--primary">
