@@ -63,6 +63,16 @@
     "stats": {
       "type": "club-stats",
       "blocks": {
+        "stat_UzzYtE": {
+          "type": "stat",
+          "settings": {
+            "source": "manual",
+            "collection": "",
+            "value": "4500+",
+            "suffix": "",
+            "label": "社区"
+          }
+        },
         "s2": {
           "type": "stat",
           "settings": {
@@ -85,6 +95,7 @@
         }
       },
       "block_order": [
+        "stat_UzzYtE",
         "s2",
         "s3"
       ],
