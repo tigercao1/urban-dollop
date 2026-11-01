@@ -205,6 +205,11 @@
   font-size: 1.5rem;
 }
 
+.club-filter__open[data-pointer-closed]:focus-visible {
+  outline: 0;
+  box-shadow: inherit;
+}
+
 .club-filter__open .icon {
   width: 1.8rem;
   height: 1.8rem;
