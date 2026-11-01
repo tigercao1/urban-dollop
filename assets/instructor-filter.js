@@ -380,6 +380,7 @@ class InstructorFilter extends HTMLElement {
     this.trainerRow = this.querySelector('[data-trainer-row]');
 
     this.openButton.addEventListener('click', () => this.openSheet());
+    ['keydown', 'blur'].forEach((type) => this.openButton.addEventListener(type, () => this.clearPointerClosed()));
     this.sheet.addEventListener('close', () => this.afterSheetClosed());
     this.sheet.addEventListener('click', (e) => {
       if (e.target === this.sheet) this.closeSheet();
@@ -452,7 +453,9 @@ class InstructorFilter extends HTMLElement {
   }
 
   openSheet() {
+    this.showFocusRing = this.openButton.matches(':focus-visible:not([data-pointer-closed])');
     this.sheet.showModal();
+    if (!this.showFocusRing) this.sheet.focus({ preventScroll: true, focusVisible: false });
     this.ownsScrollLock = !document.body.classList.contains('overflow-hidden');
     document.body.classList.add('overflow-hidden');
   }
@@ -463,7 +466,12 @@ class InstructorFilter extends HTMLElement {
 
   afterSheetClosed() {
     this.releaseScrollLock();
-    this.openButton.focus();
+    this.openButton.toggleAttribute('data-pointer-closed', !this.showFocusRing);
+    this.openButton.focus({ focusVisible: this.showFocusRing });
+  }
+
+  clearPointerClosed() {
+    this.openButton.removeAttribute('data-pointer-closed');
   }
 
   releaseScrollLock() {

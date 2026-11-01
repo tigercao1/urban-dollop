@@ -148,7 +148,7 @@
     </div>
 
     {%- if show_sheet -%}
-      <dialog class="club-sheet" aria-modal="true" aria-labelledby="{{ sheet_title_id }}" data-filter-sheet>
+      <dialog class="club-sheet" tabindex="-1" aria-modal="true" aria-labelledby="{{ sheet_title_id }}" data-filter-sheet>
         <div class="club-sheet__panel">
           <div class="club-sheet__head">
             <h2 class="club-sheet__title" id="{{ sheet_title_id }}">{{ 'sections.instructors.filters' | t }}</h2>
