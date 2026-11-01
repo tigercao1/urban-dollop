@@ -452,7 +452,9 @@ class InstructorFilter extends HTMLElement {
   }
 
   openSheet() {
+    this.showFocusRing = this.openButton.matches(':focus-visible');
     this.sheet.showModal();
+    if (!this.showFocusRing) this.sheet.focus({ preventScroll: true, focusVisible: false });
     this.ownsScrollLock = !document.body.classList.contains('overflow-hidden');
     document.body.classList.add('overflow-hidden');
   }
@@ -463,7 +465,7 @@ class InstructorFilter extends HTMLElement {
 
   afterSheetClosed() {
     this.releaseScrollLock();
-    this.openButton.focus();
+    this.openButton.focus({ focusVisible: this.showFocusRing });
   }
 
   releaseScrollLock() {
