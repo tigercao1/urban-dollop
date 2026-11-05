@@ -15,32 +15,13 @@
   padding: 0;
 }
 
-/* Two per row on desktop. The WeChat card (with its QR code) is two rows tall. */
-@media screen and (min-width: 990px) {
-  .contact-cards__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-flow: row dense;
-  }
-  .contact-card {
-    padding: 1.6rem;
-  }
-  .contact-card__value {
-    font-size: 1.5rem;
-  }
-  .contact-card--wechat {
-    grid-row: span 2;
-    align-content: start;
-  }
-  .contact-card--wechat .contact-card__qr-wrap {
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 5.4rem;
-  }
-}
 
 .contact-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  /* Flex + wrap: the buttons sit beside the value when there is room and drop
+     to their own line when there isn't (e.g. longer English labels), instead
+     of overlapping the one-line phone number or email. */
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.2rem 1.2rem;
   padding: 1.6rem 2rem;
@@ -56,10 +37,13 @@
 }
 
 .contact-card__head {
+  /* Basis 0: a long name (RED) wraps its own text before pushing the buttons
+     down; a one-line value (phone, email) still moves them to the next line
+     when it can't fit, so nothing ever overlaps. */
+  flex: 1 1 0;
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  min-width: 0;
 }
 
 .contact-card__icon {
@@ -84,9 +68,6 @@
   height: 2.8rem;
 }
 
-.contact-card__text {
-  min-width: 0;
-}
 
 .contact-card__label {
   margin: 0;
@@ -111,7 +92,7 @@
 }
 
 .contact-card__note {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
   margin: 0;
   font-size: 1.3rem;
   color: rgba(var(--color-foreground), 0.7);
@@ -119,6 +100,7 @@
 
 .contact-card__actions {
   flex: none;
+  margin-left: auto;
   display: flex;
   gap: 0.8rem;
 }
@@ -176,7 +158,7 @@
 }
 
 .contact-card__qr-wrap {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
   display: flex;
   align-items: center;
   gap: 1.2rem;
@@ -249,4 +231,53 @@
 .contact-cards__toast.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+/* Two per row on desktop. The WeChat card (with its QR code) is two rows tall. */
+@media screen and (min-width: 990px) {
+  .contact-cards__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+  }
+  /* Two columns leave ~33rem per card: tighten so value + buttons share one
+     line in both Chinese and the longer English labels. */
+  .contact-card {
+    padding: 1.4rem;
+    gap: 0.8rem;
+  }
+  .contact-card__head {
+    gap: 0.8rem;
+  }
+  .contact-card__icon {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+  .contact-card__icon .icon-contact {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .contact-card__value {
+    font-size: 1.5rem;
+  }
+  .contact-card__actions {
+    gap: 0.6rem;
+  }
+  .contact-card__btn {
+    height: 3.2rem;
+    padding: 0 1.1rem;
+    font-size: 1.25rem;
+  }
+  .contact-card__btn--icon {
+    width: 3.2rem;
+    padding: 0;
+  }
+  .contact-card--wechat {
+    grid-row: span 2;
+    align-content: start;
+  }
+  .contact-card--wechat .contact-card__qr-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 4.4rem;
+  }
 }
