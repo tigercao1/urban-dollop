@@ -9,11 +9,7 @@
 {{ 'component-footer-contact.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign s = block.settings
-  if request.locale.iso_code contains 'zh'
-    assign copied_label = '已复制'
-  else
-    assign copied_label = 'Copied'
-  endif
+  assign copied_label = 'sections.footer.copied' | t
   assign wa_digits = s.whatsapp | remove: '+' | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
 -%}
 <ul class="footer-contact list-unstyled" role="list" data-copied-label="{{ copied_label }}">

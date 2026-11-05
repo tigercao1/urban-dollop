@@ -346,7 +346,9 @@
       "new_estimated_total": "没有预计总额"
     },
     "footer": {
-      "payment": "付款方式"
+      "payment": "付款方式",
+      "contact_us": "联系我们",
+      "copied": "已复制"
     },
     "featured_blog": {
       "view_all": "查看全部",
