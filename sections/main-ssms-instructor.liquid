@@ -24,9 +24,22 @@
 
 <div class="instructor-profile color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width">
-    <a class="instructor-profile__back link" href="{{ roster_url }}">
+    <a class="instructor-profile__back link" href="{{ roster_url }}" data-roster-back>
       ← {{ 'sections.instructor_profile.back' | t }}
     </a>
+    <script>
+      // Return to the roster with the filters the visitor had chosen
+      // (saved by assets/instructor-filter.js), when it is the same roster page.
+      (() => {
+        const link = document.querySelector('[data-roster-back]');
+        try {
+          const saved = sessionStorage.getItem('instructor-filter:roster-url');
+          if (!link || !saved) return;
+          const target = new URL(saved, window.location.origin);
+          if (target.pathname === new URL(link.href).pathname) link.href = target.pathname + target.search;
+        } catch (e) {}
+      })();
+    </script>
 
     <div class="instructor-profile__hero">
       <div class="instructor-profile__media">
