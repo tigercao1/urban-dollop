@@ -46,6 +46,9 @@ const TRAINER = /\btrainer\b/;
 // (e.g. ?languages=english&languages=mandarin).
 const PARAM = { query: 'q', age: 'age', discipline: 'type', level: 'level', trainer: 'trainer' };
 const URL_WRITE_DELAY = 250;
+// The last roster URL (with its filters), read by the profile page's
+// "← All instructors" link so it returns to the same filtered list.
+const ROSTER_URL_KEY = 'instructor-filter:roster-url';
 
 const clean = (text) => (text || '').normalize('NFKC').replace(INVISIBLE, '');
 const tidy = (part) => part.replace(/\s+/g, ' ').trim();
@@ -169,6 +172,9 @@ class InstructorFilter extends HTMLElement {
     this.buildAgeFilter();
     this.buildSheet();
     this.restoreState();
+    // A card clicked within the debounce window must still leave its URL behind.
+    this.onPageHide = () => this.flushUrl();
+    window.addEventListener('pagehide', this.onPageHide);
 
     if (this.search) {
       this.search.addEventListener('focus', () => this.loadSearchTerms(), { once: true });
@@ -191,6 +197,7 @@ class InstructorFilter extends HTMLElement {
 
   disconnectedCallback() {
     clearTimeout(this.urlTimer);
+    window.removeEventListener('pagehide', this.onPageHide);
     if (this.sheet) this.sheet.close();
     this.releaseScrollLock();
   }
@@ -568,7 +575,14 @@ class InstructorFilter extends HTMLElement {
     this.urlTimer = setTimeout(() => this.writeUrl(), URL_WRITE_DELAY);
   }
 
+  flushUrl() {
+    if (!this.urlTimer) return;
+    clearTimeout(this.urlTimer);
+    this.writeUrl();
+  }
+
   writeUrl() {
+    this.urlTimer = null;
     const url = new URL(window.location.href);
     const params = url.searchParams;
     [...Object.values(PARAM), ...this.groups.map(({ name }) => name)].forEach((key) => params.delete(key));
@@ -585,6 +599,9 @@ class InstructorFilter extends HTMLElement {
     if (url.href !== window.location.href) {
       window.history.replaceState(window.history.state, '', url);
     }
+    try {
+      sessionStorage.setItem(ROSTER_URL_KEY, url.pathname + url.search);
+    } catch (e) {}
   }
 
   clear() {
