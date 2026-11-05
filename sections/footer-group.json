@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -25,13 +25,21 @@
           "type": "text",
           "settings": {
             "heading": "地址",
-            "subtext": "<p>24 Mt St Louis Rd W, Coldwater, ON L0K 1E0<\/p>"
+            "subtext": "<p>24 Mt St Louis Rd W, Coldwater, ON L0K 1E0</p>"
+          }
+        },
+        "text_nzHdxL": {
+          "type": "text",
+          "settings": {
+            "heading": "联系我们",
+            "subtext": "<p>WeChat: ssnowclub<br/>WhatsApp: +1 (343) 558-2247<br/>Email: info@ssnow.club</p>"
           }
         }
       },
       "block_order": [
         "90b0e951-daac-4463-bc6b-36984fd8125d",
-        "text_rJTRUp"
+        "text_rJTRUp",
+        "text_nzHdxL"
       ],
       "settings": {
         "color_scheme": "background-2",
