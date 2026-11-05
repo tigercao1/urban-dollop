@@ -350,6 +350,15 @@
       "contact_us": "联系我们",
       "copied": "已复制"
     },
+    "contact_cards": {
+      "copy": "复制",
+      "copy_wechat": "复制微信号",
+      "follow": "去关注",
+      "message": "发消息",
+      "send_email": "发邮件",
+      "email": "邮箱",
+      "red": "小红书"
+    },
     "featured_blog": {
       "view_all": "查看全部",
       "onboarding_title": "博客文章",

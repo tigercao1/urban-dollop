@@ -1,0 +1,209 @@
+{% comment %}
+  Contact page: one card per contact method, with a main action (open / message / email)
+  and a copy button. Reuses the brand icons from snippets/icon-contact.liquid.
+{% endcomment %}
+{{ 'section-contact-cards.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="contact-cards page-width page-width--narrow section-{{ section.id }}-padding">
+    {%- liquid
+      assign cards_heading = section.settings.heading | default: page.title
+      if cards_heading == blank
+        assign cards_heading = 'sections.footer.contact_us' | t
+      endif
+    -%}
+    <h1 class="main-page-title page-title h0">{{ cards_heading }}</h1>
+    {%- if section.settings.subheading != blank -%}
+      <div class="contact-cards__lead rte">{{ section.settings.subheading }}</div>
+    {%- endif -%}
+
+    <ul class="contact-cards__grid list-unstyled" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign b = block.settings
+          if b.value == blank
+            continue
+          endif
+          assign label = ''
+          assign primary_url = ''
+          assign primary_label = ''
+          assign primary_external = true
+          assign copy_value = b.value
+          case b.method
+            when 'wechat'
+              assign label = 'WeChat'
+              assign primary_label = 'sections.contact_cards.copy_wechat' | t
+            when 'red'
+              assign label = 'sections.contact_cards.red' | t
+              assign primary_url = b.link
+              assign primary_label = 'sections.contact_cards.follow' | t
+            when 'instagram'
+              assign label = 'Instagram'
+              assign primary_url = b.link
+              assign primary_label = 'sections.contact_cards.follow' | t
+            when 'whatsapp'
+              assign label = 'WhatsApp'
+              assign wa_digits = b.value | remove: '+' | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
+              assign primary_url = 'https://wa.me/' | append: wa_digits
+              assign primary_label = 'sections.contact_cards.message' | t
+            when 'email'
+              assign label = 'sections.contact_cards.email' | t
+              assign primary_url = 'mailto:' | append: b.value
+              assign primary_label = 'sections.contact_cards.send_email' | t
+              assign primary_external = false
+          endcase
+        -%}
+        <li class="contact-card" {{ block.shopify_attributes }}>
+          <div class="contact-card__head">
+            <span class="contact-card__icon">{%- render 'icon-contact', name: b.method -%}</span>
+            <div class="contact-card__text">
+              <p class="contact-card__label">{{ label }}</p>
+              <p class="contact-card__value">{{ b.value }}</p>
+            </div>
+          </div>
+
+          {%- if b.note != blank -%}
+            <p class="contact-card__note">{{ b.note }}</p>
+          {%- endif -%}
+
+          {%- if b.method == 'wechat' and b.qr != blank -%}
+            {{ b.qr | image_url: width: 400 | image_tag: class: 'contact-card__qr', width: 160, height: 160, loading: 'lazy', alt: 'WeChat QR code' }}
+          {%- endif -%}
+
+          <div class="contact-card__actions">
+            {%- if primary_url != blank -%}
+              <a
+                href="{{ primary_url }}"
+                class="button contact-card__primary"
+                {% if primary_external %}target="_blank" rel="noopener"{% endif %}
+              >
+                {{- primary_label -}}
+              </a>
+              <button
+                type="button"
+                class="button button--secondary contact-card__copy"
+                data-copy="{{ copy_value | escape }}"
+                aria-label="{{ 'sections.contact_cards.copy' | t }} {{ label }}: {{ copy_value | escape }}"
+              >
+                {{- 'sections.contact_cards.copy' | t -}}
+              </button>
+            {%- else -%}
+              <button
+                type="button"
+                class="button contact-card__primary"
+                data-copy="{{ copy_value | escape }}"
+                {% if b.method == 'wechat' %}data-app-url="weixin://"{% endif %}
+              >
+                {{- primary_label -}}
+              </button>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="contact-cards__toast" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    if (window.contactCardsInit) return;
+    window.contactCardsInit = true;
+    const copiedLabel = {{ 'sections.footer.copied' | t | json }};
+
+    const copyText = async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      }
+    };
+
+    document.addEventListener('click', async (event) => {
+      const button = event.target.closest('.contact-cards [data-copy]');
+      if (!button) return;
+      const root = button.closest('.contact-cards');
+      const toast = root.querySelector('.contact-cards__toast');
+
+      if (await copyText(button.dataset.copy)) {
+        toast.textContent = `${copiedLabel}: ${button.dataset.copy}`;
+        toast.classList.add('is-visible');
+        button.classList.add('is-copied');
+        clearTimeout(root._toastTimer);
+        root._toastTimer = setTimeout(() => {
+          toast.classList.remove('is-visible');
+          button.classList.remove('is-copied');
+        }, 2000);
+      }
+
+      // WeChat has no web profile; on phones open the app after copying the ID.
+      if (button.dataset.appUrl && window.matchMedia('(pointer: coarse)').matches) {
+        setTimeout(() => { window.location.href = button.dataset.appUrl; }, 700);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Contact cards",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Leave blank to use the page title." },
+    { "type": "richtext", "id": "subheading", "label": "Intro text" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "background-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_top", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_bottom", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "method",
+      "name": "Contact method",
+      "settings": [
+        {
+          "type": "select",
+          "id": "method",
+          "label": "Type",
+          "options": [
+            { "value": "wechat", "label": "WeChat" },
+            { "value": "red", "label": "RED (Xiaohongshu)" },
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "whatsapp", "label": "WhatsApp" },
+            { "value": "email", "label": "Email" }
+          ],
+          "default": "wechat"
+        },
+        { "type": "text", "id": "value", "label": "ID / name / number / address", "info": "Shown on the card and copied by the Copy button." },
+        { "type": "url", "id": "link", "label": "Profile link", "info": "RED and Instagram only." },
+        { "type": "text", "id": "note", "label": "Short note", "info": "Optional, e.g. fastest reply." },
+        { "type": "image_picker", "id": "qr", "label": "QR code", "info": "WeChat only. Optional." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Contact cards" }]
+}
+{% endschema %}
