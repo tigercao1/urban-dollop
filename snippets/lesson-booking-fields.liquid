@@ -1,0 +1,109 @@
+{% comment %}
+  Private-lesson booking details, replacing the Infinite Options app fields.
+
+  The inputs sit above the Add to cart button and belong to the product form through
+  the `form` attribute, so their values are added to the cart line as line item
+  properties and show on the order (Shopify admin > Orders > line item).
+
+  Property names are kept exactly as the app used them (微信号, 联系电话, 学生姓名,
+  学生年龄, 学生水平描述) so old and new orders read the same; the visible labels
+  are translated.
+
+  Usage: {% render 'lesson-booking-fields', product_form_id: product_form_id, block: block %}
+{% endcomment %}
+{{ 'component-lesson-fields.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign uid = block.id | default: 'lesson'
+  assign required_mark = '<span class="lesson-fields__req" aria-hidden="true">*</span>'
+-%}
+<fieldset class="lesson-fields" {{ block.shopify_attributes }}>
+  <legend class="lesson-fields__title">{{ 'products.lesson_fields.title' | t }}</legend>
+  <p class="lesson-fields__hint">{{ 'products.lesson_fields.hint' | t }}</p>
+
+  <div class="lesson-fields__grid">
+    <div class="field">
+      <input
+        class="field__input"
+        type="text"
+        id="LessonStudent-{{ uid }}"
+        name="properties[学生姓名]"
+        form="{{ product_form_id }}"
+        placeholder="{{ 'products.lesson_fields.student_name' | t }}"
+        autocomplete="off"
+        required
+      >
+      <label class="field__label" for="LessonStudent-{{ uid }}">
+        {{- 'products.lesson_fields.student_name' | t }} {{ required_mark -}}
+      </label>
+    </div>
+
+    <div class="field">
+      <input
+        class="field__input"
+        type="number"
+        inputmode="numeric"
+        min="3"
+        max="99"
+        id="LessonAge-{{ uid }}"
+        name="properties[学生年龄]"
+        form="{{ product_form_id }}"
+        placeholder="{{ 'products.lesson_fields.student_age' | t }}"
+        required
+      >
+      <label class="field__label" for="LessonAge-{{ uid }}">
+        {{- 'products.lesson_fields.student_age' | t }} {{ required_mark -}}
+      </label>
+    </div>
+
+    <div class="field">
+      <input
+        class="field__input"
+        type="tel"
+        id="LessonPhone-{{ uid }}"
+        name="properties[联系电话]"
+        form="{{ product_form_id }}"
+        placeholder="{{ 'products.lesson_fields.phone' | t }}"
+        autocomplete="tel"
+        required
+      >
+      <label class="field__label" for="LessonPhone-{{ uid }}">
+        {{- 'products.lesson_fields.phone' | t }} {{ required_mark -}}
+      </label>
+    </div>
+
+    <div class="field">
+      <input
+        class="field__input"
+        type="text"
+        id="LessonWechat-{{ uid }}"
+        name="properties[微信号]"
+        form="{{ product_form_id }}"
+        placeholder="{{ 'products.lesson_fields.wechat' | t }}"
+        autocomplete="off"
+      >
+      <label class="field__label" for="LessonWechat-{{ uid }}">{{ 'products.lesson_fields.wechat' | t }}</label>
+    </div>
+
+    <div class="field lesson-fields__wide">
+      <textarea
+        class="text-area field__input"
+        id="LessonLevel-{{ uid }}"
+        name="properties[学生水平描述]"
+        form="{{ product_form_id }}"
+        rows="3"
+        placeholder="{{ 'products.lesson_fields.level_placeholder' | t }}"
+      ></textarea>
+      <label class="field__label" for="LessonLevel-{{ uid }}">{{ 'products.lesson_fields.level' | t }}</label>
+    </div>
+  </div>
+</fieldset>
+<script>
+  // Buy buttons only render for signed-in members (or Public products). Without the
+  // product form there is nothing to submit, so hide the fields too.
+  (() => {
+    const fields = document.currentScript.previousElementSibling;
+    const check = () => { fields.hidden = !document.getElementById({{ product_form_id | json }}); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', check);
+    else check();
+  })();
+</script>
