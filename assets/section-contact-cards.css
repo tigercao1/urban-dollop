@@ -1,4 +1,4 @@
-/* Contact page cards: follow the section colour scheme. */
+/* Contact page cards: one compact row per method, in the section colour scheme. */
 .contact-cards .page-title {
   margin-bottom: 1.2rem;
 }
@@ -10,41 +10,32 @@
 
 .contact-cards__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.6rem;
+  gap: 1.2rem;
   margin: 2.4rem 0 0;
   padding: 0;
 }
 
-@media screen and (min-width: 750px) {
-  .contact-cards__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-  }
-}
-
 .contact-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  padding: 2.4rem;
-  border-radius: 1.6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.2rem 1.2rem;
+  padding: 1.6rem 2rem;
+  border-radius: 1.4rem;
   border: 0.1rem solid rgba(var(--color-foreground), 0.1);
   background: rgba(var(--color-foreground), 0.03);
-  transition: border-color var(--duration-short, 100ms) ease, box-shadow var(--duration-short, 100ms) ease,
-    transform var(--duration-short, 100ms) ease;
+  transition: border-color var(--duration-short, 100ms) ease, box-shadow var(--duration-short, 100ms) ease;
 }
 
 .contact-card:hover {
   border-color: rgba(var(--color-foreground), 0.25);
-  box-shadow: 0 0.6rem 2rem rgba(var(--color-shadow, var(--color-foreground)), 0.08);
-  transform: translateY(-0.2rem);
+  box-shadow: 0 0.4rem 1.6rem rgba(var(--color-foreground), 0.06);
 }
 
 .contact-card__head {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.2rem;
   min-width: 0;
 }
 
@@ -53,21 +44,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 4.2rem;
+  height: 4.2rem;
   border-radius: 50%;
   background: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
 }
 
 .contact-card__icon .icon-contact {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .contact-card__icon .icon-contact--wide {
-  width: 3rem;
-  height: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
 }
 
 .contact-card__text {
@@ -76,49 +67,124 @@
 
 .contact-card__label {
   margin: 0;
-  font-size: 1.3rem;
-  letter-spacing: 0.06rem;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  letter-spacing: 0.04rem;
   color: rgba(var(--color-foreground), 0.65);
 }
 
 .contact-card__value {
-  margin: 0.2rem 0 0;
-  font-size: 1.8rem;
-  line-height: 1.3;
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.35;
   color: rgb(var(--color-foreground));
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .contact-card__note {
-  margin: -0.4rem 0 0;
-  font-size: 1.4rem;
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 1.3rem;
   color: rgba(var(--color-foreground), 0.7);
+}
+
+.contact-card__actions {
+  flex: none;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.contact-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.4rem;
+  padding: 0 1.4rem;
+  border-radius: 99rem;
+  border: 0.1rem solid rgb(var(--color-foreground));
+  font: inherit;
+  font-size: 1.3rem;
+  letter-spacing: 0.04rem;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-short, 100ms) ease, color var(--duration-short, 100ms) ease,
+    opacity var(--duration-short, 100ms) ease;
+}
+
+.contact-card__btn--primary {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.contact-card__btn--primary:hover {
+  opacity: 0.85;
+}
+
+.contact-card__btn--secondary {
+  background: transparent;
+  color: rgb(var(--color-foreground));
+}
+
+.contact-card__btn--secondary:hover {
+  background: rgba(var(--color-foreground), 0.08);
+}
+
+.contact-card__btn:focus-visible {
+  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline-offset: 0.2rem;
+}
+
+.contact-card__qr-wrap {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-left: 5.4rem;
 }
 
 .contact-card__qr {
   display: block;
-  width: 16rem;
-  height: 16rem;
+  width: 12rem;
+  height: 12rem;
+  padding: 0.6rem;
   border-radius: 0.8rem;
   background: #fff;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
 }
 
-.contact-card__actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
+.contact-card__qr-caption {
+  margin: 0;
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.7);
 }
 
-.contact-card__actions .button {
-  flex: 1 1 auto;
-  min-height: 4.4rem;
-  min-width: 0;
-  padding: 0 1.6rem;
-  font-size: 1.4rem;
-}
-
-.contact-card__actions .contact-card__copy {
-  flex: 0 0 auto;
+@media screen and (max-width: 479px) {
+  .contact-card {
+    padding: 1.4rem;
+    column-gap: 0.8rem;
+  }
+  .contact-card__head {
+    gap: 1rem;
+  }
+  .contact-card__icon {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+  .contact-card__value {
+    font-size: 1.5rem;
+  }
+  .contact-card__actions {
+    gap: 0.6rem;
+  }
+  .contact-card__btn {
+    height: 3.2rem;
+    padding: 0 1.1rem;
+  }
+  .contact-card__qr-wrap {
+    padding-left: 0;
+  }
 }
 
 .contact-cards__toast {
@@ -140,14 +206,4 @@
 .contact-cards__toast.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
-}
-
-/* An odd last card fills the row instead of sitting alone on the left. */
-@media screen and (min-width: 750px) {
-  .contact-card:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-  }
-  .contact-card:last-child:nth-child(odd) .contact-card__actions {
-    max-width: calc(50% - 1rem);
-  }
 }

@@ -364,7 +364,8 @@
       "message": "Message",
       "send_email": "Send email",
       "email": "Email",
-      "red": "RED (Xiaohongshu)"
+      "red": "RED (Xiaohongshu)",
+      "scan_qr": "Scan with WeChat to add us"
     },
     "featured_blog": {
       "view_all": "View all",

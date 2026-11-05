@@ -71,7 +71,14 @@
             <span class="contact-card__icon">{%- render 'icon-contact', name: b.method -%}</span>
             <div class="contact-card__text">
               <p class="contact-card__label">{{ label }}</p>
-              <p class="contact-card__value">{{ b.value }}</p>
+              <p class="contact-card__value">
+                {%- if b.method == 'whatsapp' -%}
+                  {%- comment -%}Non-breaking hyphen so the number never splits at "558-".{%- endcomment -%}
+                  {{ b.value | replace: '-', '‑' }}
+                {%- else -%}
+                  {{ b.value }}
+                {%- endif -%}
+              </p>
             </div>
           </div>
 
@@ -79,22 +86,18 @@
             <p class="contact-card__note">{{ b.note }}</p>
           {%- endif -%}
 
-          {%- if b.method == 'wechat' and b.qr != blank -%}
-            {{ b.qr | image_url: width: 400 | image_tag: class: 'contact-card__qr', width: 160, height: 160, loading: 'lazy', alt: 'WeChat QR code' }}
-          {%- endif -%}
-
           <div class="contact-card__actions">
             {%- if primary_url != blank -%}
               <a
                 href="{{ primary_url }}"
-                class="button contact-card__primary"
+                class="contact-card__btn contact-card__btn--primary"
                 {% if primary_external %}target="_blank" rel="noopener"{% endif %}
               >
                 {{- primary_label -}}
               </a>
               <button
                 type="button"
-                class="button button--secondary contact-card__copy"
+                class="contact-card__btn contact-card__btn--secondary"
                 data-copy="{{ copy_value | escape }}"
                 aria-label="{{ 'sections.contact_cards.copy' | t }} {{ label }}: {{ copy_value | escape }}"
               >
@@ -103,7 +106,7 @@
             {%- else -%}
               <button
                 type="button"
-                class="button contact-card__primary"
+                class="contact-card__btn contact-card__btn--primary"
                 data-copy="{{ copy_value | escape }}"
                 {% if b.method == 'wechat' %}data-app-url="weixin://"{% endif %}
               >
@@ -111,6 +114,17 @@
               </button>
             {%- endif -%}
           </div>
+
+          {%- if b.method == 'wechat' -%}
+            <div class="contact-card__qr-wrap">
+              {%- if b.qr != blank -%}
+                {{ b.qr | image_url: width: 400 | image_tag: class: 'contact-card__qr', width: 120, height: 120, loading: 'lazy', alt: 'WeChat QR code' }}
+              {%- else -%}
+                <img src="{{ 'wechat-qr.jpg' | asset_url }}" class="contact-card__qr" width="120" height="120" loading="lazy" alt="WeChat QR code">
+              {%- endif -%}
+              <p class="contact-card__qr-caption">{{ 'sections.contact_cards.scan_qr' | t }}</p>
+            </div>
+          {%- endif -%}
         </li>
       {%- endfor -%}
     </ul>
@@ -200,7 +214,7 @@
         { "type": "text", "id": "value", "label": "ID / name / number / address", "info": "Shown on the card and copied by the Copy button." },
         { "type": "url", "id": "link", "label": "Profile link", "info": "RED and Instagram only." },
         { "type": "text", "id": "note", "label": "Short note", "info": "Optional, e.g. fastest reply." },
-        { "type": "image_picker", "id": "qr", "label": "QR code", "info": "WeChat only. Optional." }
+        { "type": "image_picker", "id": "qr", "label": "QR code", "info": "WeChat only. Leave blank to use the built-in SSnow 小客服 QR code." }
       ]
     }
   ],

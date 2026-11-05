@@ -357,7 +357,8 @@
       "message": "发消息",
       "send_email": "发邮件",
       "email": "邮箱",
-      "red": "小红书"
+      "red": "小红书",
+      "scan_qr": "微信扫码，添加好友"
     },
     "featured_blog": {
       "view_all": "查看全部",
