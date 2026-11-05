@@ -85,6 +85,8 @@
                     <div class="footer-block__details-content rte">
                       {{ block.settings.subtext }}
                     </div>
+                  {%- when 'contact_icons' -%}
+                    {%- render 'footer-contact', block: block -%}
                   {%- when 'link_list' -%}
                     {%- if block.settings.menu != blank -%}
                       <ul class="footer-block__details-content list-unstyled">
@@ -416,6 +418,21 @@
           "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
           "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
         }
+      ]
+    },
+    {
+      "type": "contact_icons",
+      "name": "Contact icons",
+      "settings": [
+        { "type": "inline_richtext", "id": "heading", "default": "联系我们", "label": "Heading" },
+        { "type": "text", "id": "wechat_id", "label": "WeChat ID", "info": "Click copies the ID." },
+        { "type": "image_picker", "id": "wechat_qr", "label": "WeChat QR code", "info": "Optional. Shown on hover above the WeChat icon." },
+        { "type": "text", "id": "red_name", "label": "RED (Xiaohongshu) name" },
+        { "type": "url", "id": "red_url", "label": "RED (Xiaohongshu) link" },
+        { "type": "text", "id": "instagram_handle", "label": "Instagram handle" },
+        { "type": "url", "id": "instagram_url", "label": "Instagram link" },
+        { "type": "text", "id": "whatsapp", "label": "WhatsApp number", "info": "With country code, e.g. +1 (343) 558-2247" },
+        { "type": "text", "id": "email", "label": "Email" }
       ]
     },
     {

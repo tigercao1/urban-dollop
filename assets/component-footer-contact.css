@@ -1,0 +1,139 @@
+/* Footer contact icons: round buttons that follow the footer colour scheme. */
+.footer-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-contact__item {
+  position: relative;
+}
+
+.footer-contact__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  background: rgba(var(--color-foreground), 0.05);
+  color: rgba(var(--color-foreground), 0.7);
+  cursor: pointer;
+  text-decoration: none;
+  font: inherit;
+  transition: background-color var(--duration-short, 100ms) ease, color var(--duration-short, 100ms) ease,
+    border-color var(--duration-short, 100ms) ease, transform var(--duration-short, 100ms) ease;
+}
+
+.footer-contact__icon:hover,
+.footer-contact__icon:focus-visible {
+  background: rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.footer-contact__icon:active {
+  transform: scale(0.94);
+}
+
+.footer-contact__icon .icon-contact {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* The RED wordmark is wide and thin; give it more room. */
+.footer-contact__icon .icon-contact--wide {
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.footer-contact__tip {
+  position: absolute;
+  bottom: calc(100% + 0.8rem);
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 0.4rem);
+  transition: opacity var(--duration-short, 100ms) ease, transform var(--duration-short, 100ms) ease,
+    visibility var(--duration-short, 100ms);
+}
+
+.footer-contact__tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -0.5rem;
+  border: 0.5rem solid transparent;
+  border-top-color: rgb(var(--color-foreground));
+}
+
+.footer-contact__qr {
+  display: block;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 0.4rem;
+  background: #fff;
+}
+
+.footer-contact__item:hover .footer-contact__tip,
+.footer-contact__icon:focus-visible + .footer-contact__tip,
+.footer-contact__item.is-copied .footer-contact__tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* Keep edge tooltips on screen. */
+.footer-contact__item:first-child .footer-contact__tip {
+  left: 0;
+  transform: translate(0, 0.4rem);
+}
+.footer-contact__item:first-child:hover .footer-contact__tip,
+.footer-contact__item:first-child .footer-contact__icon:focus-visible + .footer-contact__tip,
+.footer-contact__item:first-child.is-copied .footer-contact__tip {
+  transform: translate(0, 0);
+}
+.footer-contact__item:first-child .footer-contact__tip::after {
+  left: 2.2rem;
+}
+
+.footer-contact__item:last-child .footer-contact__tip {
+  left: auto;
+  right: 0;
+  transform: translate(0, 0.4rem);
+}
+.footer-contact__item:last-child:hover .footer-contact__tip,
+.footer-contact__item:last-child .footer-contact__icon:focus-visible + .footer-contact__tip,
+.footer-contact__item:last-child.is-copied .footer-contact__tip {
+  transform: translate(0, 0);
+}
+.footer-contact__item:last-child .footer-contact__tip::after {
+  left: auto;
+  right: 1.7rem;
+}
+
+@media (hover: none) {
+  .footer-contact__item:hover:not(.is-copied) .footer-contact__tip {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
