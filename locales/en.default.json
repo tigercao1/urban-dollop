@@ -114,6 +114,16 @@
     "collection_title": "Your collection's name"
   },
   "products": {
+    "lesson_fields": {
+      "title": "Student details",
+      "hint": "Needed to arrange your lesson. Saved with your order.",
+      "student_name": "Student name",
+      "student_age": "Student age",
+      "phone": "Phone number",
+      "wechat": "WeChat ID (optional)",
+      "level": "Current level (optional)",
+      "level_placeholder": "e.g. first time, can do green runs, linking turns on blue runs"
+    },
     "product": {
       "add_to_cart": "Register now",
       "choose_options": "Choose options",
