@@ -3,7 +3,11 @@
  *
  * Client-side filtering for the instructor roster. Every card is already in
  * the DOM -- at 73 entries the whole roster is one server render -- so
- * filtering is a class toggle, not a fetch. No URL change, no reload.
+ * filtering is a class toggle, not a fetch. No reload.
+ *
+ * The chosen filters are mirrored into the URL query (replaceState, no new
+ * history entry) and read back on load, so opening an instructor and pressing
+ * Back returns to the same filtered list -- and a filtered list can be shared.
  *
  * WHY NOT DAWN'S facets.js
  * That drives collection filtering through URL params and a server round
@@ -37,6 +41,11 @@ const ORG_DISCIPLINE = { csia: 'ski', casi: 'snowboard' };
 const LEVEL_TRACKS = ['park', 'carving'];
 const CERTIFICATION_LEVEL = new RegExp(`^(?:(csia|casi) )?(?:(${LEVEL_TRACKS.join('|')}) )?level (\\d+)\\b`);
 const TRAINER = /\btrainer\b/;
+
+// URL query keys for the filter state. Facet groups use their own name
+// (e.g. ?languages=english&languages=mandarin).
+const PARAM = { query: 'q', age: 'age', discipline: 'type', level: 'level', trainer: 'trainer' };
+const URL_WRITE_DELAY = 250;
 
 const clean = (text) => (text || '').normalize('NFKC').replace(INVISIBLE, '');
 const tidy = (part) => part.replace(/\s+/g, ' ').trim();
@@ -159,6 +168,7 @@ class InstructorFilter extends HTMLElement {
     this.groups.forEach((group) => this.buildChips(group));
     this.buildAgeFilter();
     this.buildSheet();
+    this.restoreState();
 
     if (this.search) {
       this.search.addEventListener('focus', () => this.loadSearchTerms(), { once: true });
@@ -180,6 +190,7 @@ class InstructorFilter extends HTMLElement {
   }
 
   disconnectedCallback() {
+    clearTimeout(this.urlTimer);
     if (this.sheet) this.sheet.close();
     this.releaseScrollLock();
   }
@@ -357,6 +368,7 @@ class InstructorFilter extends HTMLElement {
     chip.type = 'button';
     chip.className = 'club-filter__chip';
     chip.setAttribute('aria-pressed', String(active.has(key)));
+    chip.dataset.key = key;
     chip.textContent = label;
     chip.addEventListener('click', () => {
       const pressed = !active.has(key);
@@ -504,6 +516,77 @@ class InstructorFilter extends HTMLElement {
     wrapper.hidden = false;
   }
 
+  restoreState() {
+    const params = new URLSearchParams(window.location.search);
+
+    const query = params.get(PARAM.query);
+    if (query && this.search) {
+      this.search.value = query;
+      this.query = normalizeName(query);
+      this.loadSearchTerms();
+    }
+
+    const age = params.get(PARAM.age);
+    if (age && this.ageSelect && Array.from(this.ageSelect.options).some((o) => o.value === age)) {
+      this.ageSelect.value = age;
+      this.age = parseInt(age, 10);
+    }
+
+    const discipline = params.get(PARAM.discipline);
+    const disciplineAvailable =
+      this.disciplineButtons &&
+      this.disciplineButtons.some((button) => !button.hidden && button.dataset.discipline === discipline);
+    if (disciplineAvailable) {
+      this.discipline = discipline;
+      params
+        .getAll(PARAM.level)
+        .filter((key) => this.levelOptions && this.levelOptions[discipline].includes(key))
+        .forEach((key) => this.levels.add(key));
+      this.syncDisciplineControls();
+    }
+
+    if (params.get(PARAM.trainer) === '1' && this.trainerSwitch && !this.trainerRow.hidden) {
+      this.trainerSwitch.checked = true;
+      this.trainerOnly = true;
+    }
+
+    this.groups.forEach((group) => {
+      const wanted = new Set(params.getAll(group.name));
+      if (wanted.size === 0) return;
+      group.fieldset.querySelectorAll('.club-filter__chip').forEach((chip) => {
+        if (!wanted.has(chip.dataset.key)) return;
+        group.active.add(chip.dataset.key);
+        chip.setAttribute('aria-pressed', 'true');
+      });
+    });
+  }
+
+  // Mirror the filters into the URL so Back from an instructor page restores them.
+  // Debounced: typing in search would otherwise call replaceState on every key.
+  saveState() {
+    clearTimeout(this.urlTimer);
+    this.urlTimer = setTimeout(() => this.writeUrl(), URL_WRITE_DELAY);
+  }
+
+  writeUrl() {
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+    [...Object.values(PARAM), ...this.groups.map(({ name }) => name)].forEach((key) => params.delete(key));
+
+    if (this.search && this.search.value.trim()) params.set(PARAM.query, this.search.value.trim());
+    if (this.age !== null) params.set(PARAM.age, String(this.age));
+    if (this.discipline) {
+      params.set(PARAM.discipline, this.discipline);
+      this.levels.forEach((key) => params.append(PARAM.level, key));
+    }
+    if (this.trainerOnly) params.set(PARAM.trainer, '1');
+    this.groups.forEach(({ name, active }) => active.forEach((key) => params.append(name, key)));
+
+    if (url.href !== window.location.href) {
+      window.history.replaceState(window.history.state, '', url);
+    }
+  }
+
   clear() {
     this.query = '';
     if (this.search) this.search.value = '';
@@ -559,6 +642,7 @@ class InstructorFilter extends HTMLElement {
   }
 
   apply() {
+    this.saveState();
     let shown = 0;
     this.cards.forEach((card) => {
       const ok = this.matchesFilters(card);
