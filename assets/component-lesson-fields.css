@@ -34,6 +34,14 @@
 /* One field per row: the product info column is narrow on desktop too, and the
    bilingual labels (e.g. 微信 / WhatsApp / 邮箱) need the full width. */
 
+/* Labels never wrap: a wrapped floating label overlaps the typed text on phones. */
+.lesson-fields .field__label {
+  max-width: calc(100% - 3.2rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .lesson-fields .field {
   margin: 0;
 }
