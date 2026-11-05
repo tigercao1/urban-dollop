@@ -29,10 +29,16 @@
           }
         },
         "text_nzHdxL": {
-          "type": "text",
+          "type": "contact_icons",
           "settings": {
             "heading": "联系我们",
-            "subtext": "<p>WeChat: ssnowclub<br/>WhatsApp: +1 (343) 558-2247<br/>Email: info@ssnow.club</p>"
+            "wechat_id": "ssnowclub",
+            "red_name": "S Snow Club俱乐部",
+            "red_url": "https://xhslink.cn/m/3tdryCDzrIP",
+            "instagram_handle": "s_snow_club",
+            "instagram_url": "https://www.instagram.com/s_snow_club/",
+            "whatsapp": "+1 (343) 558-2247",
+            "email": "info@ssnow.club"
           }
         }
       },

@@ -1,0 +1,149 @@
+{% comment %}
+  Footer "Contact us" block: round brand icons in the footer's own colour scheme.
+  - WeChat: copies the ID; on phones it also opens the WeChat app.
+  - WhatsApp: copies the number and opens a chat (wa.me).
+  - RED / Instagram: open the profile; RED copies the name when no link is set.
+  - Email: opens the mail app.
+  Usage: {% render 'footer-contact', block: block %}
+{% endcomment %}
+{{ 'component-footer-contact.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = block.settings
+  if request.locale.iso_code contains 'zh'
+    assign copied_label = '已复制'
+  else
+    assign copied_label = 'Copied'
+  endif
+  assign wa_digits = s.whatsapp | remove: '+' | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
+-%}
+<ul class="footer-contact list-unstyled" role="list" data-copied-label="{{ copied_label }}">
+  {%- if s.wechat_id != blank -%}
+    <li class="footer-contact__item">
+      <button
+        type="button"
+        class="footer-contact__icon"
+        data-copy="{{ s.wechat_id | escape }}"
+        data-app-url="weixin://"
+        aria-label="WeChat: {{ s.wechat_id | escape }}"
+      >
+        {%- render 'icon-contact', name: 'wechat' -%}
+      </button>
+      <span class="footer-contact__tip" aria-hidden="true">
+        {%- if s.wechat_qr != blank -%}
+          {{ s.wechat_qr | image_url: width: 280 | image_tag: class: 'footer-contact__qr', width: 140, height: 140, loading: 'lazy', alt: '' }}
+        {%- endif -%}
+        <span class="footer-contact__tip-text" data-default="WeChat: {{ s.wechat_id | escape }}">WeChat: {{ s.wechat_id }}</span>
+      </span>
+    </li>
+  {%- endif -%}
+
+  {%- if s.red_name != blank or s.red_url != blank -%}
+    {%- assign red_label = s.red_name | default: 'RED' -%}
+    <li class="footer-contact__item">
+      {%- if s.red_url != blank -%}
+        <a href="{{ s.red_url }}" class="footer-contact__icon" target="_blank" rel="noopener" aria-label="RED: {{ red_label | escape }}">
+          {%- render 'icon-contact', name: 'red' -%}
+        </a>
+      {%- else -%}
+        <button type="button" class="footer-contact__icon" data-copy="{{ red_label | escape }}" aria-label="RED: {{ red_label | escape }}">
+          {%- render 'icon-contact', name: 'red' -%}
+        </button>
+      {%- endif -%}
+      <span class="footer-contact__tip" aria-hidden="true">
+        <span class="footer-contact__tip-text" data-default="RED: {{ red_label | escape }}">RED: {{ red_label }}</span>
+      </span>
+    </li>
+  {%- endif -%}
+
+  {%- if s.instagram_url != blank -%}
+    {%- assign ig_label = s.instagram_handle | default: 'Instagram' -%}
+    <li class="footer-contact__item">
+      <a href="{{ s.instagram_url }}" class="footer-contact__icon" target="_blank" rel="noopener" aria-label="Instagram: {{ ig_label | escape }}">
+        {%- render 'icon-contact', name: 'instagram' -%}
+      </a>
+      <span class="footer-contact__tip" aria-hidden="true">
+        <span class="footer-contact__tip-text">Instagram: {{ ig_label }}</span>
+      </span>
+    </li>
+  {%- endif -%}
+
+  {%- if s.whatsapp != blank -%}
+    <li class="footer-contact__item">
+      <a
+        href="https://wa.me/{{ wa_digits }}"
+        class="footer-contact__icon"
+        target="_blank"
+        rel="noopener"
+        data-copy="{{ s.whatsapp | escape }}"
+        aria-label="WhatsApp: {{ s.whatsapp | escape }}"
+      >
+        {%- render 'icon-contact', name: 'whatsapp' -%}
+      </a>
+      <span class="footer-contact__tip" aria-hidden="true">
+        <span class="footer-contact__tip-text" data-default="WhatsApp: {{ s.whatsapp | escape }}">WhatsApp: {{ s.whatsapp }}</span>
+      </span>
+    </li>
+  {%- endif -%}
+
+  {%- if s.email != blank -%}
+    <li class="footer-contact__item">
+      <a href="mailto:{{ s.email }}" class="footer-contact__icon" aria-label="Email: {{ s.email | escape }}">
+        {%- render 'icon-contact', name: 'email' -%}
+      </a>
+      <span class="footer-contact__tip" aria-hidden="true">
+        <span class="footer-contact__tip-text">{{ s.email }}</span>
+      </span>
+    </li>
+  {%- endif -%}
+</ul>
+
+<script>
+  (() => {
+    if (window.footerContactInit) return;
+    window.footerContactInit = true;
+
+    const copyText = async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      }
+    };
+
+    document.addEventListener('click', async (event) => {
+      const icon = event.target.closest('.footer-contact [data-copy]');
+      if (!icon) return;
+
+      const item = icon.closest('.footer-contact__item');
+      const list = icon.closest('.footer-contact');
+      const text = item.querySelector('.footer-contact__tip-text');
+      const isPhone = window.matchMedia('(pointer: coarse)').matches;
+
+      // Links (WhatsApp) still open; copying happens alongside.
+      const copied = await copyText(icon.dataset.copy);
+      if (copied && text) {
+        text.textContent = `${list.dataset.copiedLabel} ${icon.dataset.copy}`;
+        item.classList.add('is-copied');
+        clearTimeout(item._copiedTimer);
+        item._copiedTimer = setTimeout(() => {
+          item.classList.remove('is-copied');
+          if (text.dataset.default) text.textContent = text.dataset.default;
+        }, 2000);
+      }
+
+      // WeChat has no web profile link; on phones, open the app after copying the ID.
+      if (icon.dataset.appUrl && isPhone) {
+        setTimeout(() => { window.location.href = icon.dataset.appUrl; }, 600);
+      }
+    });
+  })();
+</script>
