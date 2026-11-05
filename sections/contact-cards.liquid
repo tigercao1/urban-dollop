@@ -66,7 +66,7 @@
               assign primary_external = false
           endcase
         -%}
-        <li class="contact-card" {{ block.shopify_attributes }}>
+        <li class="contact-card contact-card--{{ b.method }}" {{ block.shopify_attributes }}>
           <div class="contact-card__head">
             <span class="contact-card__icon">{%- render 'icon-contact', name: b.method -%}</span>
             <div class="contact-card__text">
@@ -97,11 +97,12 @@
               </a>
               <button
                 type="button"
-                class="contact-card__btn contact-card__btn--secondary"
+                class="contact-card__btn contact-card__btn--secondary contact-card__btn--icon"
                 data-copy="{{ copy_value | escape }}"
+                title="{{ 'sections.contact_cards.copy' | t }}"
                 aria-label="{{ 'sections.contact_cards.copy' | t }} {{ label }}: {{ copy_value | escape }}"
               >
-                {{- 'sections.contact_cards.copy' | t -}}
+                {%- render 'icon-contact', name: 'copy' -%}
               </button>
             {%- else -%}
               <button
