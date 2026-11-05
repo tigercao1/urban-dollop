@@ -353,7 +353,9 @@
       }
     },
     "footer": {
-      "payment": "Payment methods"
+      "payment": "Payment methods",
+      "contact_us": "Contact us",
+      "copied": "Copied"
     },
     "featured_blog": {
       "view_all": "View all",

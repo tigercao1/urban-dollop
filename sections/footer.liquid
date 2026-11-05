@@ -74,8 +74,14 @@
                   style="--animation-order: {{ forloop.index }};"
                 {% endif %}
               >
-                {%- if block.settings.heading != blank -%}
-                  <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
+                {%- liquid
+                  assign block_heading = block.settings.heading
+                  if block.type == 'contact_icons' and block_heading == blank
+                    assign block_heading = 'sections.footer.contact_us' | t
+                  endif
+                -%}
+                {%- if block_heading != blank -%}
+                  <h2 class="footer-block__heading inline-richtext">{{- block_heading -}}</h2>
                 {%- endif -%}
 
                 {%- case block.type -%}
@@ -424,7 +430,7 @@
       "type": "contact_icons",
       "name": "Contact icons",
       "settings": [
-        { "type": "inline_richtext", "id": "heading", "default": "联系我们", "label": "Heading" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Leave blank to show \"Contact us\" in each store language." },
         { "type": "text", "id": "wechat_id", "label": "WeChat ID", "info": "Click copies the ID." },
         { "type": "image_picker", "id": "wechat_qr", "label": "WeChat QR code", "info": "Optional. Shown on hover above the WeChat icon." },
         { "type": "text", "id": "red_name", "label": "RED (Xiaohongshu) name" },
