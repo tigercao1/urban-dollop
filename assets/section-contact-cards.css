@@ -1,0 +1,252 @@
+/* Contact page cards: one compact row per method, in the section colour scheme. */
+.contact-cards .page-title {
+  margin-bottom: 1.2rem;
+}
+
+.contact-cards__lead {
+  margin-bottom: 3.2rem;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.contact-cards__grid {
+  display: grid;
+  gap: 1.2rem;
+  margin: 2.4rem 0 0;
+  padding: 0;
+}
+
+/* Two per row on desktop. The WeChat card (with its QR code) is two rows tall. */
+@media screen and (min-width: 990px) {
+  .contact-cards__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+  }
+  .contact-card {
+    padding: 1.6rem;
+  }
+  .contact-card__value {
+    font-size: 1.5rem;
+  }
+  .contact-card--wechat {
+    grid-row: span 2;
+    align-content: start;
+  }
+  .contact-card--wechat .contact-card__qr-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 5.4rem;
+  }
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.2rem 1.2rem;
+  padding: 1.6rem 2rem;
+  border-radius: 1.4rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  background: rgba(var(--color-foreground), 0.03);
+  transition: border-color var(--duration-short, 100ms) ease, box-shadow var(--duration-short, 100ms) ease;
+}
+
+.contact-card:hover {
+  border-color: rgba(var(--color-foreground), 0.25);
+  box-shadow: 0 0.4rem 1.6rem rgba(var(--color-foreground), 0.06);
+}
+
+.contact-card__head {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+.contact-card__icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.contact-card__icon .icon-contact {
+  width: 2rem;
+  height: 2rem;
+}
+
+.contact-card__icon .icon-contact--wide {
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.contact-card__text {
+  min-width: 0;
+}
+
+.contact-card__label {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  letter-spacing: 0.04rem;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.contact-card__value {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.35;
+  color: rgb(var(--color-foreground));
+  overflow-wrap: break-word;
+}
+
+/* Keep numbers and addresses on one line. */
+.contact-card--whatsapp .contact-card__value,
+.contact-card--email .contact-card__value {
+  white-space: nowrap;
+}
+
+.contact-card__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.contact-card__actions {
+  flex: none;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.contact-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.4rem;
+  padding: 0 1.4rem;
+  border-radius: 99rem;
+  border: 0.1rem solid rgb(var(--color-foreground));
+  font: inherit;
+  font-size: 1.3rem;
+  letter-spacing: 0.04rem;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-short, 100ms) ease, color var(--duration-short, 100ms) ease,
+    opacity var(--duration-short, 100ms) ease;
+}
+
+.contact-card__btn--primary {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.contact-card__btn--primary:hover {
+  opacity: 0.85;
+}
+
+.contact-card__btn--secondary {
+  background: transparent;
+  color: rgb(var(--color-foreground));
+}
+
+.contact-card__btn--secondary:hover {
+  background: rgba(var(--color-foreground), 0.08);
+}
+
+.contact-card__btn--icon {
+  width: 3.4rem;
+  padding: 0;
+}
+
+.contact-card__btn--icon .icon-contact-copy {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.contact-card__btn:focus-visible {
+  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline-offset: 0.2rem;
+}
+
+.contact-card__qr-wrap {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-left: 5.4rem;
+}
+
+.contact-card__qr {
+  display: block;
+  width: 12rem;
+  height: 12rem;
+  padding: 0.6rem;
+  border-radius: 0.8rem;
+  background: #fff;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+}
+
+.contact-card__qr-caption {
+  margin: 0;
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+@media screen and (max-width: 479px) {
+  .contact-card {
+    padding: 1.4rem;
+    column-gap: 0.8rem;
+  }
+  .contact-card__head {
+    gap: 1rem;
+  }
+  .contact-card__icon {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+  .contact-card__value {
+    font-size: 1.5rem;
+  }
+  .contact-card__actions {
+    gap: 0.6rem;
+  }
+  .contact-card__btn {
+    height: 3.2rem;
+    padding: 0 1.1rem;
+  }
+  .contact-card__btn--icon {
+    width: 3.2rem;
+    padding: 0;
+  }
+  .contact-card__qr-wrap {
+    padding-left: 0;
+  }
+}
+
+.contact-cards__toast {
+  position: fixed;
+  left: 50%;
+  bottom: 3.2rem;
+  z-index: 100;
+  padding: 1rem 1.8rem;
+  border-radius: 99rem;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 1.4rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 1rem);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.contact-cards__toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

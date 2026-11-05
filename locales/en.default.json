@@ -357,6 +357,16 @@
       "contact_us": "Contact us",
       "copied": "Copied"
     },
+    "contact_cards": {
+      "copy": "Copy",
+      "copy_wechat": "Copy WeChat ID",
+      "follow": "Follow",
+      "message": "Message",
+      "send_email": "Send email",
+      "email": "Email",
+      "red": "RED (Xiaohongshu)",
+      "scan_qr": "Scan with WeChat to add us"
+    },
     "featured_blog": {
       "view_all": "View all",
       "onboarding_title": "Blog post",
