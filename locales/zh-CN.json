@@ -114,6 +114,17 @@
     "collection_title": "您的产品系列的名称"
   },
   "products": {
+    "lesson_fields": {
+      "title": "学员信息",
+      "hint": "用于安排课程，会随订单一起保存。",
+      "student_name": "学生姓名",
+      "student_age": "学生年龄",
+      "phone": "联系电话",
+      "wechat": "微信 / WhatsApp / 邮箱（选填）",
+      "wechat_hint": "填一个就可以，方便安排课程时联系。",
+      "level": "学生水平描述（选填）",
+      "level_placeholder": "例如：第一次滑、能滑绿道、蓝道可以连续转弯"
+    },
     "product": {
       "add_to_cart": "立即报名",
       "description": "描述",
