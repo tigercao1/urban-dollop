@@ -31,14 +31,8 @@
   gap: 1.2rem;
 }
 
-@media screen and (min-width: 750px) {
-  .lesson-fields__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .lesson-fields__wide {
-    grid-column: 1 / -1;
-  }
-}
+/* One field per row: the product info column is narrow on desktop too, and the
+   bilingual labels (e.g. 微信 / WhatsApp / 邮箱) need the full width. */
 
 .lesson-fields .field {
   margin: 0;
