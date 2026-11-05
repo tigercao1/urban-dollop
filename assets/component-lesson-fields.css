@@ -49,6 +49,21 @@
   resize: vertical;
 }
 
+.lesson-fields__note {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+/* Show which required field is missing after the customer tries to add to cart. */
+.lesson-fields .field__input:user-invalid,
+.lesson-fields.is-checked .field__input:invalid {
+  outline: 0.2rem solid #e5043b;
+  outline-offset: 0;
+  box-shadow: none;
+}
+
 .lesson-fields__req {
   color: #e5043b;
   margin-left: 0.2rem;

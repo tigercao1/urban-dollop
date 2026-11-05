@@ -5,9 +5,9 @@
   the `form` attribute, so their values are added to the cart line as line item
   properties and show on the order (Shopify admin > Orders > line item).
 
-  Property names are kept exactly as the app used them (微信号, 联系电话, 学生姓名,
-  学生年龄, 学生水平描述) so old and new orders read the same; the visible labels
-  are translated.
+  Property names follow the app's (联系电话, 学生姓名, 学生年龄, 学生水平描述) so old
+  and new orders read the same. The old 微信号 field is now 微信/WhatsApp/邮箱, since
+  customers can leave any of the three. The visible labels are translated.
 
   Usage: {% render 'lesson-booking-fields', product_form_id: product_form_id, block: block %}
 {% endcomment %}
@@ -71,17 +71,21 @@
       </label>
     </div>
 
+    <div class="lesson-fields__item">
     <div class="field">
       <input
         class="field__input"
         type="text"
         id="LessonWechat-{{ uid }}"
-        name="properties[微信号]"
+        name="properties[微信/WhatsApp/邮箱]"
         form="{{ product_form_id }}"
         placeholder="{{ 'products.lesson_fields.wechat' | t }}"
         autocomplete="off"
+        aria-describedby="LessonWechatHint-{{ uid }}"
       >
       <label class="field__label" for="LessonWechat-{{ uid }}">{{ 'products.lesson_fields.wechat' | t }}</label>
+    </div>
+    <small class="lesson-fields__note" id="LessonWechatHint-{{ uid }}">{{ 'products.lesson_fields.wechat_hint' | t }}</small>
     </div>
 
     <div class="field lesson-fields__wide">
@@ -100,10 +104,28 @@
 <script>
   // Buy buttons only render for signed-in members (or Public products). Without the
   // product form there is nothing to submit, so hide the fields too.
+  //
+  // The theme's product form is `novalidate`, so `required` alone does not stop Add to
+  // cart. This capture-phase listener runs before product-form.js and blocks the
+  // submit until the required fields are filled.
   (() => {
     const fields = document.currentScript.previousElementSibling;
-    const check = () => { fields.hidden = !document.getElementById({{ product_form_id | json }}); };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', check);
-    else check();
+    const formId = {{ product_form_id | json }};
+    const init = () => {
+      const form = document.getElementById(formId);
+      fields.hidden = !form;
+      if (!form) return;
+      form.addEventListener('submit', (event) => {
+        const invalid = [...fields.querySelectorAll('input, textarea')].filter((el) => !el.checkValidity());
+        if (!invalid.length) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        fields.classList.add('is-checked');
+        invalid[0].focus();
+        invalid[0].reportValidity();
+      }, true);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
   })();
 </script>

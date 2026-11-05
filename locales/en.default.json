@@ -120,7 +120,8 @@
       "student_name": "Student name",
       "student_age": "Student age",
       "phone": "Phone number",
-      "wechat": "WeChat ID (optional)",
+      "wechat": "WeChat / WhatsApp / Email (optional)",
+      "wechat_hint": "Any one is fine, for lesson arrangements.",
       "level": "Current level (optional)",
       "level_placeholder": "e.g. first time, can do green runs, linking turns on blue runs"
     },
