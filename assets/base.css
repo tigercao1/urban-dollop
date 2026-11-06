@@ -3517,7 +3517,7 @@ details-disclosure > details {
   display: none;
 }
 
-/* SSnow: page titles line up with collection titles across the site.
+/* SSnow: page titles line up with collection titles (e.g. /collections/private-packages).
    .page-width--start keeps the full page-width left edge (same as collection
    banners, product grids and the header), but caps the content inside at the
    old narrow reading width, so text pages keep short lines and simply start
