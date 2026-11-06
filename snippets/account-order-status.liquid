@@ -1,0 +1,15 @@
+{%- comment -%}
+  Payment status pill for an order on the account page.
+  Accepts: order
+{%- endcomment -%}
+{%- liquid
+  case order.financial_status
+    when 'paid'
+      assign tone = 'ok'
+    when 'pending', 'authorized', 'partially_paid'
+      assign tone = 'warn'
+    else
+      assign tone = 'mute'
+  endcase
+-%}
+<span class="acct-pill acct-pill--{{ tone }}">{{ order.financial_status_label }}</span>
