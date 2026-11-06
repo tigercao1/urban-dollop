@@ -159,6 +159,82 @@
           -%}
           {%- endfor -%}
         {%- endfor -%}
+      {%- elsif section.settings.source == 'roster' -%}
+        {%- comment -%}
+          Same order as the Instructor Team page (main-instructors, source
+          "transition"): published SSMS instructors plus legacy our_team
+          entries that have no SSMS twin, sorted by sort_order (unnumbered
+          last; SSMS before legacy on a tie). Keep this in step with
+          snippets/club-instructor-roster.liquid, which builds the same keys.
+        {%- endcomment -%}
+        {%- liquid
+          assign roster = shop.metaobjects.ssms_instructor.values
+          assign legacy = shop.metaobjects.our_team.values
+          assign ski_label = 'sections.instructors.values.ski' | t
+          assign snowboard_label = 'sections.instructors.values.snowboard' | t
+        -%}
+        {%- capture roster_handles -%}
+          |{%- for entry in roster -%}{{ entry.system.handle }}|{%- endfor -%}
+        {%- endcapture -%}
+        {%- capture order_keys -%}
+          {%- for entry in roster -%}
+            {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+            {{- position -}}-a-{{- forloop.index0 | plus: 10000 -}},
+          {%- endfor -%}
+          {%- for entry in legacy -%}
+            {%- assign handle_key = '|' | append: entry.system.handle | append: '|' -%}
+            {%- unless roster_handles contains handle_key -%}
+              {%- assign position = entry.sort_order.value | default: 999999 | plus: 1000000 -%}
+              {{- position -}}-b-{{- forloop.index0 | plus: 10000 -}},
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign order_keys = order_keys | split: ',' | sort -%}
+
+        {%- if order_keys.size == 0 and request.design_mode -%}
+          <li class="club-faces__card">
+            <p class="club-faces__name">No instructors found</p>
+            <p class="club-faces__loc">Neither ssms_instructor nor our_team has entries visible to the storefront.</p>
+          </li>
+        {%- endif -%}
+
+        {%- for order_key in order_keys limit: section.settings.limit -%}
+          {%- liquid
+            assign key_parts = order_key | split: '-'
+            assign entry_index = key_parts[2] | minus: 10000
+            if key_parts[1] == 'b'
+              for candidate in legacy limit: 1 offset: entry_index
+                assign entry = candidate
+              endfor
+            else
+              for candidate in roster limit: 1 offset: entry_index
+                assign entry = candidate
+              endfor
+            endif
+
+            if section.settings.link_target == 'collection'
+              assign url = entry.collection_url.value
+            else
+              assign url = entry.system.url
+            endif
+          -%}
+          {%- capture cert -%}
+            {%- render 'club-instructor-field', entry: entry, field: 'certification' -%}
+          {%- endcapture -%}
+          {%- capture loc -%}
+            {%- render 'club-instructor-field', entry: entry, field: section.settings.meta_field -%}
+          {%- endcapture -%}
+          {%- if section.settings.meta_field == 'type' -%}
+            {%- assign loc = loc | replace: '双板', ski_label | replace: '雙板', ski_label | replace: '单板', snowboard_label | replace: '單板', snowboard_label -%}
+          {%- endif -%}
+          {%- render 'club-instructor-card',
+            card_name: entry.name.value,
+            card_cert: cert,
+            card_loc: loc,
+            card_image: entry.picture.value,
+            card_url: url
+          -%}
+        {%- endfor -%}
       {%- else -%}
         {%- for block in section.blocks -%}
           {%- render 'club-instructor-card',
@@ -186,10 +262,11 @@
       "label": "Data source",
       "options": [
         { "value": "manual", "label": "Blocks entered below" },
-        { "value": "metaobject", "label": "Metaobject entries" }
+        { "value": "metaobject", "label": "Metaobject entries" },
+        { "value": "roster", "label": "Same as Instructor Team page" }
       ],
       "default": "metaobject",
-      "info": "Metaobject reads the same instructor records the instructors page already uses. Nothing to re-enter."
+      "info": "\"Same as Instructor Team page\" shows the first instructors in the order of the Instructor Team page (SSMS instructors plus legacy entries, by sort order). \"Metaobject entries\" reads one type only."
     },
     {
       "type": "text",
