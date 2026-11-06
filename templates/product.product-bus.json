@@ -64,9 +64,7 @@
         },
         "bus_fields": {
           "type": "bus_fields",
-          "settings": {
-            "stops": ""
-          }
+          "settings": {}
         }
       },
       "block_order": [
