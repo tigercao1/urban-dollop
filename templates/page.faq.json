@@ -13,7 +13,8 @@
       "type": "main-page",
       "settings": {
         "padding_top": 28,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "layout": "narrow"
       }
     },
     "39001418-fe7d-4499-8988-8da0e556e416": {

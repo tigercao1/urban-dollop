@@ -16,7 +16,8 @@
       ],
       "settings": {
         "padding_top": 32,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "layout": "narrow"
       }
     },
     "rich_text_HkiXMa": {
