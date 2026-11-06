@@ -1,71 +1,40 @@
-{% if shop.locale == 'en' %}
+{%- comment -%}
+  Waiver card: title, why it is needed, a full-width button that opens the
+  waiver page (/pages/waiver, which embeds the JotForm) in a new tab so the
+  product form is kept, and a note that it is signed once a year.
+  Used on product pages (main-product.liquid, above the buy buttons) and on pages
+  with the custom.waiver_enforced metafield (main-page.liquid).
+{%- endcomment -%}
+{%- liquid
+  # The waiver page embeds the JotForm (English or Chinese form by language).
+  # routes.root_url is '/' for zh-CN and '/en' for English.
+  if routes.root_url == '/'
+    assign waiver_url = '/pages/waiver'
+  else
+    assign waiver_url = routes.root_url | append: '/pages/waiver'
+  endif
+-%}
+{{ 'component-waiver-card.css' | asset_url | stylesheet_tag }}
+<div class="waiver-card">
+  <div class="waiver-card__head">
+    <svg class="waiver-card__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+      <path d="M14 3v5h5"/>
+      <path d="M9 13h6M9 17h4"/>
+    </svg>
+    <span class="waiver-card__title">{{ 'custom_liquid.product.waiver' | t }}</span>
+  </div>
+  <p class="waiver-card__text">{{ 'custom_liquid.product.sign_waiver' | t }}</p>
   <a
-    href="
-      javascript:void(
-        window.open(
-          'https://form.jotform.com/232628492941059',
-          'blank',
-          'scrollbars=yes,
-          toolbar=no,
-          width=700,
-          height=500'
-        )
-      )
-    "
+    class="waiver-card__button button button--full-width"
+    href="{{ waiver_url }}"
     target="_blank"
-    style="
-      margin-top: 16px;
-      font-size: 18px;
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-block;
-      padding: 10px 20px 10px 20px;
-      font-family: inherit;
-      text-shadow: none;
-      user-select: none;
-      transition: all,.1s,ease-in;
-      background-color: #FFA500;
-      border: 1px solid #FFA500;
-      border-radius: 50px;
-      color: #FFFFFF;
-      text-align: center;
-    "
+    rel="noopener"
   >
-    {{ "custom_liquid.product.waiver" | t }}
+    <span class="waiver-card__label">{{ 'custom_liquid.product.sign_waiver_button' | t }}</span>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>
+    </svg>
   </a>
-{% else %}
-  <a
-    href="
-      javascript:void(
-        window.open(
-          'https://form.jotform.com/242658653833264',
-          'blank',
-          'scrollbars=yes,
-          toolbar=no,
-          width=700,
-          height=500'
-        )
-      )
-    "
-    target="_blank"
-    style="
-      margin-top: 16px;
-      font-size: 18px;
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-block;
-      padding: 10px 20px 10px 20px;
-      font-family: inherit;
-      text-shadow: none;
-      user-select: none;
-      transition: all,.1s,ease-in;
-      background-color: #FFA500;
-      border: 1px solid #FFA500;
-      border-radius: 50px;
-      color: #FFFFFF;
-      text-align: center;
-    "
-  >
-    {{ "custom_liquid.product.waiver" | t }}
-  </a>
-{% endif %}
+  <p class="waiver-card__note">{{ 'custom_liquid.product.sign_waiver_note' | t }}</p>
+</div>
