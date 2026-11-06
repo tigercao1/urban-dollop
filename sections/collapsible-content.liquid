@@ -18,7 +18,7 @@
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="collapsible-content collapsible-{{ section.settings.layout }}-layout isolate{% if section.settings.layout == 'section' %} page-width{% elsif section.settings.layout == 'none' %} content-container content-container--full-width{% endif %}">
     <div class="collapsible-content__wrapper section-{{ section.id }}-padding{% if section.settings.layout == 'section' %} content-container color-{{ section.settings.container_color_scheme }} gradient{% endif %}">
-      <div class="{% if section.settings.image == blank %}collapsible-content-wrapper-narrow{% else %}page-width{% endif %}">
+      <div class="{% if section.settings.image != blank %}page-width{% elsif section.settings.content_alignment == 'left' %}page-width page-width--start{% else %}collapsible-content-wrapper-narrow{% endif %}">
         <div
           class="collapsible-content__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           style="text-align: {{ section.settings.heading_alignment }};"
@@ -164,6 +164,16 @@
           "value": "right",
           "label": "t:sections.collapsible_content.settings.heading_alignment.options__3.label"
         }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content position (no image)",
+      "options": [
+        { "value": "center", "label": "Centered" },
+        { "value": "left", "label": "Left, lined up with the page title" }
       ],
       "default": "center"
     },
