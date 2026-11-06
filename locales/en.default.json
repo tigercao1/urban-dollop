@@ -114,14 +114,6 @@
     "collection_title": "Your collection's name"
   },
   "products": {
-    "bus_fields": {
-      "title": "Rider details",
-      "hint": "Used for the boarding list and saved with your order.",
-      "stop": "Pick-up stop",
-      "stop_placeholder": "Choose your pick-up stop",
-      "name": "Your name",
-      "phone": "Phone"
-    },
     "lesson_fields": {
       "title": "Student details",
       "hint": "Needed to arrange your lesson. Saved with your order.",
