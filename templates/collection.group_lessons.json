@@ -76,11 +76,35 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "crosslinks": {
+      "type": "collection-crosslink",
+      "blocks": {
+        "group-to-private": {
+          "type": "card",
+          "settings": {
+            "show_on": "group-lessons",
+            "eyebrow": "也可以看看",
+            "heading": "想要一对一的专属指导？",
+            "text": "小型私课：一对一 / 一对二 / 一对三，二级、三级教练按孩子的水平针对性教学，进步更快。",
+            "button_label": "查看小型私课",
+            "button_link": "shopify://collections/private-packages"
+          }
+        }
+      },
+      "block_order": [
+        "group-to-private"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
     "banner",
     "product-grid",
+    "crosslinks",
     "9f7f2b1b-121f-4fa0-a975-8ab7831e449f"
   ]
 }
