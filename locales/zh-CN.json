@@ -135,7 +135,10 @@
     },
     "product": {
       "related_heading": "您可能还会感兴趣",
-      "add_to_cart": "立即报名",
+      "add_to_cart": "加入购物车",
+      "add_to_registration": "加入报名清单",
+      "reserve_seat": "预订座位",
+      "join_membership": "加入会员",
       "description": "描述",
       "on_sale": "促销",
       "product_variants": "产品多属性",
@@ -546,7 +549,7 @@
       "last_name": "姓氏",
       "email": "电子邮件",
       "password": "密码",
-      "submit": "创建"
+      "submit": "创建账户"
     },
     "reset_password": {
       "title": "重置账户密码",
@@ -620,7 +623,7 @@
       "inactive_status": "非会员 🔴",
       "thank_you_message": "感谢您的加入！",
       "member_only_message_html": "会员专享，点击<a href=\"{{ link }}\">此处<\/a>购买会员",
-      "login_message_html": "您还尚未<a href=\"{{ link }}\">登录<\/a>"
+      "login_message_html": "请先<a href=\"{{ link }}\">登录<\/a>再购买"
     },
     "product": {
       "waiver": "免责协议",

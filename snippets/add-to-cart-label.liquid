@@ -1,0 +1,26 @@
+{%- comment -%}
+  Add-to-cart button text by product kind, so the button reads like a ski school
+  rather than a shop:
+    Bus (product type)            -> 预订座位 / Reserve seat
+    Membership (product type)     -> 加入会员 / Join now
+    in the "shopping" collection  -> 加入购物车 / Add to cart   (gear store)
+    everything else               -> 加入报名清单 / Add to registration (lessons, camps, trips)
+
+  Usage: {%- render 'add-to-cart-label', product: product -%}
+{%- endcomment -%}
+{%- liquid
+  assign label_key = 'products.product.add_to_registration'
+  if product.type == 'Bus'
+    assign label_key = 'products.product.reserve_seat'
+  elsif product.type == 'Membership'
+    assign label_key = 'products.product.join_membership'
+  else
+    for collection in product.collections
+      if collection.handle == 'shopping'
+        assign label_key = 'products.product.add_to_cart'
+        break
+      endif
+    endfor
+  endif
+  echo label_key | t
+-%}

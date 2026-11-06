@@ -135,7 +135,10 @@
     },
     "product": {
       "related_heading": "You may also like",
-      "add_to_cart": "Register now",
+      "add_to_cart": "Add to cart",
+      "add_to_registration": "Add to registration",
+      "reserve_seat": "Reserve seat",
+      "join_membership": "Join now",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",
@@ -572,7 +575,7 @@
       "last_name": "Last name",
       "email": "Email",
       "password": "Password",
-      "submit": "Create"
+      "submit": "Create account"
     },
     "reset_password": {
       "title": "Reset account password",
