@@ -424,6 +424,8 @@
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
             {%- when 'lesson_fields' -%}
               {% render 'lesson-booking-fields', product_form_id: product_form_id, block: block %}
+            {%- when 'bus_fields' -%}
+              {% render 'bus-booking-fields', product: product, product_form_id: product_form_id, block: block %}
             {%- when 'buy_buttons' -%}
               {% if customer %}
                 {% if product.type contains 'Membership' %}
@@ -873,6 +875,23 @@
         {
           "type": "paragraph",
           "content": "Student name, age, phone, WeChat and level. Saved on the cart line and shown on the order. Place it above Buy buttons."
+        }
+      ]
+    },
+    {
+      "type": "bus_fields",
+      "name": "Bus rider fields",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Required pick-up stop, name and phone, saved on the cart line and shown on the order. Stops come from the product's Pick-up stops metafield (booking.pickup_stops). Place it above Buy buttons."
+        },
+        {
+          "type": "textarea",
+          "id": "stops",
+          "label": "Stops (fallback)",
+          "info": "Used only when the product has no Pick-up stops. One stop per line."
         }
       ]
     },

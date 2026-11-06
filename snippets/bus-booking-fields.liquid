@@ -1,0 +1,112 @@
+{% comment %}
+  Shuttle bus rider details, replacing the Infinite Options "Pick up location" dropdown.
+
+  Three required fields above Add to cart: pick-up stop, name and phone. They belong
+  to the product form through the `form` attribute, so the values are saved on the
+  cart line as line item properties and show on the order.
+
+  The stop list comes from the product, so each route shows only its own stops:
+    product.metafields.booking.pickup_stops  (list of single-line text,
+    e.g. "Finch Station · 7:30 AM"), edited on the product page in Shopify admin.
+  If that is empty, the block's "Stops" setting is used (one stop per line).
+
+  The stop is saved under the app's old property name, "Pick up location", so old
+  and new orders read the same. Name and phone use 乘客姓名 / 联系电话 (联系电话 is
+  also what lesson orders use).
+
+  Usage: {% render 'bus-booking-fields', product: product, product_form_id: product_form_id, block: block %}
+{% endcomment %}
+{{ 'component-lesson-fields.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign uid = block.id | default: 'bus'
+  assign required_mark = '<span class="lesson-fields__req" aria-hidden="true">*</span>'
+  assign stops = product.metafields.booking.pickup_stops.value
+  if stops == blank
+    assign stops = block.settings.stops | newline_to_br | split: '<br />'
+  endif
+-%}
+<fieldset class="lesson-fields bus-fields" {{ block.shopify_attributes }}>
+  <legend class="lesson-fields__title">{{ 'products.bus_fields.title' | t }}</legend>
+  <p class="lesson-fields__hint">{{ 'products.bus_fields.hint' | t }}</p>
+
+  <div class="lesson-fields__grid">
+    <div class="field select">
+      <select
+        class="select__select field__input"
+        id="BusStop-{{ uid }}"
+        name="properties[Pick up location]"
+        form="{{ product_form_id }}"
+        required
+      >
+        <option value="" selected disabled>{{ 'products.bus_fields.stop_placeholder' | t }}</option>
+        {%- for stop in stops -%}
+          {%- assign stop_text = stop | strip -%}
+          {%- if stop_text != blank -%}
+            <option value="{{ stop_text | escape }}">{{ stop_text }}</option>
+          {%- endif -%}
+        {%- endfor -%}
+      </select>
+      <label class="field__label" for="BusStop-{{ uid }}">
+        {{- 'products.bus_fields.stop' | t }} {{ required_mark -}}
+      </label>
+      {% render 'icon-caret' %}
+    </div>
+
+    <div class="field">
+      <input
+        class="field__input"
+        type="text"
+        id="BusName-{{ uid }}"
+        name="properties[乘客姓名]"
+        form="{{ product_form_id }}"
+        placeholder="{{ 'products.bus_fields.name' | t }}"
+        autocomplete="name"
+        required
+      >
+      <label class="field__label" for="BusName-{{ uid }}">
+        {{- 'products.bus_fields.name' | t }} {{ required_mark -}}
+      </label>
+    </div>
+
+    <div class="field">
+      <input
+        class="field__input"
+        type="tel"
+        id="BusPhone-{{ uid }}"
+        name="properties[联系电话]"
+        form="{{ product_form_id }}"
+        placeholder="{{ 'products.bus_fields.phone' | t }}"
+        autocomplete="tel"
+        required
+      >
+      <label class="field__label" for="BusPhone-{{ uid }}">
+        {{- 'products.bus_fields.phone' | t }} {{ required_mark -}}
+      </label>
+    </div>
+  </div>
+</fieldset>
+<script>
+  // Same guard as lesson-booking-fields: the product form is `novalidate`, so block
+  // Add to cart (capture phase, before product-form.js) until the required fields are
+  // filled, and hide the fields when there is no product form to submit.
+  (() => {
+    const fields = document.currentScript.previousElementSibling;
+    const formId = {{ product_form_id | json }};
+    const init = () => {
+      const form = document.getElementById(formId);
+      fields.hidden = !form;
+      if (!form) return;
+      form.addEventListener('submit', (event) => {
+        const invalid = [...fields.querySelectorAll('input, select')].filter((el) => !el.checkValidity());
+        if (!invalid.length) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        fields.classList.add('is-checked');
+        invalid[0].focus();
+        invalid[0].reportValidity();
+      }, true);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+</script>
