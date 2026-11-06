@@ -165,7 +165,7 @@
         "i5"
       ],
       "settings": {
-        "source": "metaobject",
+        "source": "roster",
         "metaobject_type": "our_team",
         "limit": 10,
         "meta_field": "type",
