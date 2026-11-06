@@ -4,7 +4,10 @@
       "type": "main-account",
       "settings": {
         "padding_top": 36,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "book_link": "shopify://collections/private-packages",
+        "team_link": "shopify://pages/our-team",
+        "contact_link": "shopify://pages/contact-us"
       }
     }
   },

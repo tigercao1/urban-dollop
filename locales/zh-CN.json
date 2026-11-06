@@ -445,6 +445,30 @@
       "view_addresses": "查看地址",
       "return": "返回账户详细信息"
     },
+    "account_page": {
+      "welcome_html": "欢迎回来，<em>{{ name }}</em>",
+      "welcome_plain": "欢迎回来",
+      "orders": "订单",
+      "last_order": "最近下单",
+      "latest_order": "最近订单",
+      "view_order": "查看订单",
+      "book_again": "再次预约",
+      "more_items": {
+        "one": "+{{ count }} 件",
+        "other": "+{{ count }} 件"
+      },
+      "earlier_orders": "更早的订单",
+      "show_all": "查看全部订单（{{ count }}）",
+      "show_less": "收起",
+      "default_address": "默认地址",
+      "no_address": "还没有保存地址。",
+      "manage_addresses": "管理地址",
+      "cta_title": "准备好挑战下一个级别了吗？",
+      "book_lesson": "预约私教课",
+      "see_team": "看看教练团队",
+      "learn_more": "想了解更多？",
+      "contact_us": "联系我们"
+    },
     "account_fallback": "账户",
     "activate_account": {
       "title": "激活账户",

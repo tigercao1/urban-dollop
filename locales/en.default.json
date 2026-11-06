@@ -445,6 +445,30 @@
       "view_addresses": "View addresses",
       "return": "Return to Account details"
     },
+    "account_page": {
+      "welcome_html": "Welcome back, <em>{{ name }}</em>",
+      "welcome_plain": "Welcome back",
+      "orders": "Orders",
+      "last_order": "Last order",
+      "latest_order": "Latest order",
+      "view_order": "View order",
+      "book_again": "Book again",
+      "more_items": {
+        "one": "+ {{ count }} more item",
+        "other": "+ {{ count }} more items"
+      },
+      "earlier_orders": "Earlier orders",
+      "show_all": "View all orders ({{ count }})",
+      "show_less": "Show less",
+      "default_address": "Default address",
+      "no_address": "No address saved yet.",
+      "manage_addresses": "Manage addresses",
+      "cta_title": "Ready for your next level?",
+      "book_lesson": "Book a private lesson",
+      "see_team": "Meet our instructors",
+      "learn_more": "Want to know more?",
+      "contact_us": "Contact us"
+    },
     "account_fallback": "Account",
     "activate_account": {
       "title": "Activate account",
