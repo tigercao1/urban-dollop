@@ -23,6 +23,7 @@
         assign show_dynamic_checkout = true
       endif
     -%}
+    {%- capture add_label -%}{%- render 'add-to-cart-label', product: product -%}{%- endcapture -%}
 
     <product-form
       class="product-form"
@@ -77,6 +78,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
+            data-add-label="{{ add_label | strip | escape }}"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
               disabled
@@ -86,7 +88,7 @@
               {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
-                {{ 'products.product.add_to_cart' | t }}
+                {{ add_label | strip }}
               {%- endif -%}
             </span>
             <div class="loading-overlay__spinner hidden">
@@ -107,6 +109,31 @@
         </div>
       {%- endform -%}
     </product-form>
+    {%- if show_dynamic_checkout -%}
+      <script>
+        // Buy it now skips the product form's submit event, so the required booking
+        // fields (student details, bus pick-up stop / name / phone) would not be
+        // checked. Block the click in the capture phase, before Shopify's button
+        // handler runs, until every required field tied to this form is filled.
+        (() => {
+          const formId = {{ product_form_id | json }};
+          document.addEventListener('click', (event) => {
+            const payButton = event.target.closest && event.target.closest('.shopify-payment-button');
+            if (!payButton) return;
+            const form = document.getElementById(formId);
+            if (!form || !form.contains(payButton)) return;
+            const fields = [...document.querySelectorAll(`[form="${formId}"][required], #${formId} [required]`)];
+            const invalid = fields.filter((el) => !el.checkValidity());
+            if (!invalid.length) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            invalid.forEach((el) => el.closest('.lesson-fields')?.classList.add('is-checked'));
+            invalid[0].focus();
+            invalid[0].reportValidity();
+          }, true);
+        })();
+      </script>
+    {%- endif -%}
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">

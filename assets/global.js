@@ -1162,7 +1162,8 @@ class VariantSelects extends HTMLElement {
       if (text) addButtonText.textContent = text;
     } else {
       addButton.removeAttribute('disabled');
-      addButtonText.textContent = window.variantStrings.addToCart;
+      // Per-product label (Add to registration / Reserve seat / ...) set by buy-buttons.liquid.
+      addButtonText.textContent = addButton.dataset.addLabel || window.variantStrings.addToCart;
     }
 
     if (!modifyClass) return;
