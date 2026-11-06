@@ -37,7 +37,7 @@
         "tiktok": "TikTok"
       }
     },
-    "continue_shopping": "继续浏览课程",
+    "continue_shopping": "继续购物",
     "pagination": {
       "label": "分页",
       "page": "第 {{ number }} 页",
@@ -126,7 +126,7 @@
       "level_placeholder": "例如：第一次滑、能滑绿道、蓝道可以连续转弯"
     },
     "product": {
-      "add_to_cart": "立即报名",
+      "add_to_cart": "加入购物车",
       "description": "描述",
       "on_sale": "促销",
       "product_variants": "产品多属性",
@@ -329,12 +329,12 @@
       }
     },
     "cart": {
-      "title": "报名清单",
+      "title": "购物车",
       "caption": "购物车商品",
       "remove_title": "删除 {{ title }}",
       "note": "订单特殊说明",
       "checkout": "结账",
-      "empty": "您的报名清单是空的",
+      "empty": "您的购物车是空的",
       "cart_error": "更新购物车时出错。请重试。",
       "cart_quantity_error_html": "您只能向购物车添加 {{ quantity }} 件此商品。",
       "taxes_and_shipping_policy_at_checkout_html": "结账时计算的税费、折扣和<a href=\"{{ link }}\">运费<\/a>",
@@ -537,7 +537,7 @@
       "last_name": "姓氏",
       "email": "电子邮件",
       "password": "密码",
-      "submit": "创建"
+      "submit": "创建账户"
     },
     "reset_password": {
       "title": "重置账户密码",
@@ -611,7 +611,7 @@
       "inactive_status": "非会员 🔴",
       "thank_you_message": "感谢您的加入！",
       "member_only_message_html": "会员专享，点击<a href=\"{{ link }}\">此处<\/a>购买会员",
-      "login_message_html": "您还尚未<a href=\"{{ link }}\">登录<\/a>"
+      "login_message_html": "请先<a href=\"{{ link }}\">登录<\/a>再购买"
     },
     "product": {
       "waiver": "免责协议",
