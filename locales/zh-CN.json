@@ -114,6 +114,14 @@
     "collection_title": "您的产品系列的名称"
   },
   "products": {
+    "bus_fields": {
+      "title": "乘车信息",
+      "hint": "用于核对上车名单，会随订单一起保存。",
+      "stop": "上车站点",
+      "stop_placeholder": "请选择上车站点",
+      "name": "您的名字",
+      "phone": "电话"
+    },
     "lesson_fields": {
       "title": "学员信息",
       "hint": "用于安排课程，会随订单一起保存。",
@@ -126,6 +134,7 @@
       "level_placeholder": "例如：第一次滑、能滑绿道、蓝道可以连续转弯"
     },
     "product": {
+      "related_heading": "您可能还会感兴趣",
       "add_to_cart": "加入购物车",
       "add_to_registration": "加入报名清单",
       "reserve_seat": "预订座位",
