@@ -1,0 +1,18 @@
+{%- comment -%}
+  Address block for the account pages. Shopify's format_address joins the
+  last and first name with no space in Chinese ("DengElaine"), so the name
+  line is built here as "First Last".
+  Accepts: address
+{%- endcomment -%}
+{%- liquid
+  assign name = address.first_name | append: ' ' | append: address.last_name | strip
+  assign region = address.city | append: ' ' | append: address.province_code | append: ' ' | append: address.zip | strip
+-%}
+<p>
+  {%- if name != blank -%}{{ name | escape }}<br>{%- endif -%}
+  {%- if address.company != blank -%}{{ address.company | escape }}<br>{%- endif -%}
+  {%- if address.address1 != blank -%}{{ address.address1 | escape }}<br>{%- endif -%}
+  {%- if address.address2 != blank -%}{{ address.address2 | escape }}<br>{%- endif -%}
+  {%- if region != blank -%}{{ region | escape }}<br>{%- endif -%}
+  {{- address.country | escape -}}
+</p>
