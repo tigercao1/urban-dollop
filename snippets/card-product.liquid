@@ -294,7 +294,7 @@
                   >
                     <span>
                       {%- if card_product.selected_or_first_available_variant.available -%}
-                        {%- render 'add-to-cart-label', product: card_product -%}
+                        {%- comment -%} Same per-product text as the product page button. {%- endcomment -%}{%- render 'add-to-cart-label', product: card_product -%}
                       {%- else -%}
                         {{ 'products.product.sold_out' | t }}
                       {%- endif -%}

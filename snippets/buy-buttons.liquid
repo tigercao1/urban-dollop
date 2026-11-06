@@ -111,7 +111,7 @@
     </product-form>
     {%- if show_dynamic_checkout -%}
       <script>
-        // Buy it now skips the product form's submit event, so the required booking
+        // Shopify's Buy it now button skips the product form's submit event, so the required booking
         // fields (student details, bus pick-up stop / name / phone) would not be
         // checked. Block the click in the capture phase, before Shopify's button
         // handler runs, until every required field tied to this form is filled.
