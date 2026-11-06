@@ -1,4 +1,8 @@
-{%- comment -%} Title and body start at the page-width edge, like collection titles. {%- endcomment -%}
+{%- comment -%}
+  Layout setting:
+    start  (default) title and body start at the page-width edge, like collection titles
+    narrow the original Dawn look: centred narrow column with a large (h0) title
+{%- endcomment -%}
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -15,8 +19,15 @@
   }
 {%- endstyle -%}
 
-<div class="page-width page-width--start section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h1{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+{%- if section.settings.layout == 'narrow' -%}
+  {%- assign page_width_class = 'page-width--narrow' -%}
+  {%- assign title_size = 'h0' -%}
+{%- else -%}
+  {%- assign page_width_class = 'page-width--start' -%}
+  {%- assign title_size = 'h1' -%}
+{%- endif -%}
+<div class="page-width {{ page_width_class }} section-{{ section.id }}-padding">
+  <h1 class="main-page-title page-title {{ title_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -35,6 +46,16 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "start", "label": "Left, lined up with collection titles" },
+        { "value": "narrow", "label": "Centred narrow column, large title" }
+      ],
+      "default": "start"
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
