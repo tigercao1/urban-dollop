@@ -25,6 +25,9 @@
   font-size: calc(var(--font-size) * 1rem);
   line-height: 1;
   display: inline-block;
+  /* The ★ glyph is drawn by the font itself, so this family is a rendering
+     dependency, not a theme choice. Left as Times deliberately: the Alpine
+     body face renders the star at a different width and breaks --percent. */
   font-family: Times;
   margin: 0;
 }

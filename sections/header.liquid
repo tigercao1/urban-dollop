@@ -109,6 +109,30 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Alpine contour: .header MUST stay static. The mega menu
+     (.mega-menu__content) and the menu drawer (.menu-drawer, and the
+     menu-drawer summary::before scrim) are position:absolute/left:0/width:100%
+     and resolve against .header-wrapper for their full-bleed width. Letting
+     alpine-core's `.surface--contour > *` rule promote .header to relative
+     would move that containing block onto the page-width .header, breaking
+     both. The contour is layered with a negative z-index instead: inside the
+     wrapper's own stacking context it paints above the wrapper background but
+     below static in-flow content.
+
+     The `isolation: isolate` that .surface--contour adds is safe here:
+     .section-header above is already position:sticky (see the rule at the top
+     of this block) with z-index:3 from base.css, so it is already a stacking
+     context on every page, and .header-wrapper is its only child. Page-level
+     paint order for the drawer and mega menu is therefore unchanged. */
+  .header-wrapper.surface--contour > .header {
+    position: static;
+    z-index: auto;
+  }
+
+  .header-wrapper.surface--contour > .pattern-contour {
+    z-index: -1;
+  }
 {%- endstyle -%}
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -143,7 +167,8 @@
   endfor
 -%}
 
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient surface--contour{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  {% render 'pattern-contour' %}
   {%- liquid
     assign social_links = false
     assign localization_forms = false

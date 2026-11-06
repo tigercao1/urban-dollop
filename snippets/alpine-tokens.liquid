@@ -1,0 +1,77 @@
+{%- comment -%}
+  Alpine Precision — shared design tokens.
+
+  Rendered from layout/theme.liquid AFTER Dawn's {% style %} scheme loop so it
+  wins the cascade. Pure CSS custom properties (no Liquid interpolation) so this
+  block is portable verbatim to a Hydrogen root.css if the storefront migrates.
+
+  Palette source of truth: knowledge-base/ssnow-management-system-plan/PORTAL_UI_PLAN.md §3
+{%- endcomment -%}
+{% style %}
+  :root {
+    /* ---- Brand palette ---- */
+    --red: #d63e46;
+    --red-press: #b8333a;
+    --red-tint: #fbeaeb;
+    --navy: #28304c;
+    --navy-tint: #e7e9ef;
+    --ink: #1c2233;
+    --canvas: #f0f1f3;
+    --sunken: #f4f4f4;
+    --surface: #ffffff;
+    --slate: #75797f;
+    --grey: #abafb5;
+
+    /* ---- Status signal set ---- */
+    --status-pending: #c9882b;
+    --status-approved: #2f7d6b;
+    --status-rejected: var(--red);
+    --status-inactive: var(--slate);
+    --status-pending-tint: #fdf6ea;
+    --status-approved-tint: #eaf4f1;
+    --status-rejected-tint: var(--red-tint);
+    --status-inactive-tint: var(--sunken);
+
+    /* ---- Geometry ---- */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 14px;
+    --hairline: 1px solid var(--grey);
+    --shadow-card: 0 1px 2px rgba(40, 48, 76, 0.06), 0 8px 24px -12px rgba(40, 48, 76, 0.18);
+    --shadow-pop: 0 12px 40px -8px rgba(28, 34, 51, 0.28);
+
+    /* ---- Motion ---- */
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --dur: 220ms;
+
+    /* ---- Type aliases over Dawn's Shopify-driven font vars ----
+       --font-display  => Fraunces        (settings.type_header_font)
+       --font-body     => Schibsted Grotesk (settings.type_body_font)
+       Type voice is SPLIT: portal uses display for headings/counters,
+       storefront reserves it for wordmark + eyebrows only. */
+    --font-display: var(--font-heading-family);
+    --font-body: var(--font-body-family);
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* ---- CJK metrics ----
+       Han glyphs fill a full em box, so at a shared px size they read larger
+       and tighter than Latin. Applied where a run is known to be Chinese; NOT
+       global, because the storefront mixes scripts inside single sentences
+       ("26/27 Ikon Pass 团购"). */
+    --cjk-size-adjust: 0.94;
+    --cjk-leading: 1.75;
+  }
+
+  /* Never negative-track Han glyphs. Tight tracking is a Latin display
+     technique; on CJK it collides the strokes. Any tracking set on a display
+     face must be unset for Chinese runs. */
+  :lang(zh) {
+    letter-spacing: normal;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --dur: 1ms;
+    }
+  }
+{% endstyle %}
