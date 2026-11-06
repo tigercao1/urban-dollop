@@ -80,3 +80,25 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* Shuttle bus pick-up stop (snippets/bus-booking-fields.liquid). The label always
+   sits small at the top so the "Choose your stop" placeholder shows below it. */
+.bus-fields .select .field__label {
+  font-size: 1rem;
+  top: calc(var(--inputs-border-width) + 0.5rem);
+  letter-spacing: 0.04rem;
+}
+
+.bus-fields .select__select.field__input {
+  padding: 2.2rem 4rem 0.8rem 2rem;
+  height: auto;
+  min-height: 5.2rem;
+}
+
+.bus-fields .select__select:invalid {
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.bus-fields .select__select option {
+  color: rgb(var(--color-foreground));
+}
