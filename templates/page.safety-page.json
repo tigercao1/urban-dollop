@@ -16,7 +16,8 @@
       ],
       "settings": {
         "padding_top": 16,
-        "padding_bottom": 8
+        "padding_bottom": 8,
+        "layout": "narrow"
       }
     },
     "image_with_text_BTT3NB": {
