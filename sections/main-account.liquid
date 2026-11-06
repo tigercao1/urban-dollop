@@ -238,7 +238,7 @@
       <section class="acct-box">
         <h2 class="acct-section__title">{{ 'customer.account_page.default_address' | t }}</h2>
         {%- if customer.default_address -%}
-          <div class="acct-address">{{ customer.default_address | format_address }}</div>
+          <div class="acct-address">{% render 'customer-address', address: customer.default_address %}</div>
         {%- else -%}
           <p class="acct-muted">{{ 'customer.account_page.no_address' | t }}</p>
         {%- endif -%}
