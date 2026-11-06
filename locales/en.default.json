@@ -628,7 +628,9 @@
     },
     "product": {
       "waiver": "Waiver",
-      "sign_waiver": "All participants\/members\/guests must sign the waiver below as a condition of registration and participation"
+      "sign_waiver": "All participants\/members\/guests must sign the waiver below as a condition of registration and participation",
+      "sign_waiver_button": "Sign the waiver",
+      "sign_waiver_note": "You only need to sign once a year."
     },
     "lesson": {
       "lesson_only": "Private lesson booking is only available for members who had purchased private lessons"

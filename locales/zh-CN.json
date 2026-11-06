@@ -628,7 +628,9 @@
     },
     "product": {
       "waiver": "免责协议",
-      "sign_waiver": "作为注册和参与的条件，所有参与者\/会员\/嘉宾都必须签署以下免责协议"
+      "sign_waiver": "作为注册和参与的条件，所有参与者\/会员\/嘉宾都必须签署以下免责协议",
+      "sign_waiver_button": "签署免责协议",
+      "sign_waiver_note": "每年只需签署一次"
     },
     "lesson": {
       "lesson_only": "私课预定仅对购买了私课的会员开放"
