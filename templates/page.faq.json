@@ -24,7 +24,7 @@
           "settings": {
             "heading": "关于我们的俱乐部",
             "icon": "none",
-            "row_content": "<p><strong>Q: 我必须要签署一份免责协议吗？</strong></p><p>A: 是的，作为注册和参与的条件,所有参与者/会员/嘉宾都必须签署免责协议。点击<a href=\"https://form.jotform.com/242658653833264\" target=\"_blank\" title=\"Link to waiver\"><strong>此处</strong></a>查看免责协议。</p><p><strong>Q: 会员加入有什么条件？</strong></p><p>A: 您可以在官网上购买加入我们的会员。</p><p><strong>Q: 不加入会员可以参与活动or上课吗？</strong></p><p>A: 不加入会员一样可以上课哦，但是无法享受会员的折扣与福利，部分会员专属活动也需要会员身份才能参加。</p><p><strong>Q: S Snow有认证的保险吗？</strong></p><p>A: S Snow有高规格的行业保险支持俱乐部的运作。我们也非常紧密的与保险公司合作来降低每一步可能会出现的风险来保证我们会员和教练的安全。</p><p><strong>Q: 我们的教练团队是什么构造？</strong></p><p>A: 我们的教练团队单双板都由三级带头定期对教练展开教学及滑行培训。所有执教的教练都拥有二级以上的滑行和教学水平。</p><p></p>",
+            "row_content": "<p><strong>Q: 我必须要签署一份免责协议吗？</strong></p><p>A: 是的，作为注册和参与的条件,所有参与者/会员/嘉宾都必须签署免责协议。点击<a href=\"https://form.jotform.com/242658653833264\" target=\"_blank\" title=\"Link to waiver\"><strong>此处</strong></a>查看免责协议。</p><p><strong>Q: 怎么成为会员？</strong></p><p>A: 报名任意课程套餐（package）即赠送会员；也可以在官网直接购买会员。</p><p><strong>Q: 不是会员可以上课吗？</strong></p><p>A: 可以，所有人都能报名上课。报名课程套餐（package）还会赠送会员，享受会员折扣和福利。</p><p><strong>Q: S Snow有认证的保险吗？</strong></p><p>A: S Snow有高规格的行业保险支持俱乐部的运作。我们也非常紧密的与保险公司合作来降低每一步可能会出现的风险来保证我们会员和教练的安全。</p><p><strong>Q: 我们的教练团队是什么构造？</strong></p><p>A: 我们的教练团队单双板都由三级/四级教练带头，定期对教练展开教学及滑行培训。所有执教的教练都拥有二级以上的滑行和教学水平。认识我们的教练：<a href=\"/pages/our-team\">教练团队</a>。</p><p></p>",
             "page": ""
           }
         },
@@ -42,16 +42,7 @@
           "settings": {
             "heading": "关于我们的大巴",
             "icon": "none",
-            "row_content": "<p><strong>Q: 线路是什么？</strong></p><p>A: 我们的Bus暂定线路为 DT（Eaton/Union）→ Finch → Vaughan → MSL. 如后续有足够数量的需求也会酌情考虑增添新的线路。</p><p><strong>Q: Bus的好处是什么，有保障吗？</strong></p><p>A: 我们的Bus都是准时准点固定发车的，并且所有的行程都全程有保险cover，乘客只需要提前购票后在固定时间地点上车即可。</p><p><strong>Q: 每周时间是否固定？</strong></p><p>A: 每周发车时间根据实际需求会有所变动，但每周的发车信息都会在各个群以及社交媒体发布。</p>",
-            "page": ""
-          }
-        },
-        "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-4": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "关于我们的Happy Hour",
-            "icon": "none",
-            "row_content": "<p><strong>Q: Happy hour是什么？</strong></p><p>A: 我们每周末都会组织会员与教练同滑的活动，届时互相聊天增进友谊以及分享有趣的滑行经历。</p><p><strong>Q: 会员可以从happy hour中获得什么？</strong></p><p>A: Happy hour的初衷是建立会员与会员，教练与教练以及会员与教练之间的交流，更多的是提供一个互相接触，交友，并且分享经验和心得的平台。</p>",
+            "row_content": "<p><strong>Q: 大巴什么时候运行？</strong></p><p>A: 大巴在寒假期间运行。2026–27 雪季为 12月20日–23日、12月27日–30日，每天往返 Mount St. Louis Moonstone 雪场。</p><p><strong>Q: 有哪些上车点和时间？</strong></p><p>A: Line 1：Finch Station 7:30 → Fairview Mall 7:50 → Times Square Richmond Hill 8:10 → Vaughan / Hwy 7 Carpool 8:30。<br>西边路线：Oakville GO 7:30 → Mississauga Square One 8:00。<br>9:30 到达雪场，下午 4:00 前返程。请提前 10 分钟到上车点。完整路线、上车点照片和地图：<a href=\"https://docs.ssnow.club/bus\" target=\"_blank\">S Snow Bus 路线与时间</a>。</p><p><strong>Q: 不参加冬令营也可以坐吗？</strong></p><p>A: 可以，按天单独<a href=\"/collections/bus\">购买大巴票</a>即可，每天 $37。</p><p><strong>Q: 安全有保障吗？</strong></p><p>A: 大巴由有完整保险的第三方客运公司运营，每趟车都有我们的工作人员随车，每个座位都有安全带。</p>",
             "page": ""
           }
         },
@@ -60,7 +51,7 @@
           "settings": {
             "heading": "其他",
             "icon": "none",
-            "row_content": "<p><strong>Q: 会员除了上述福利外还有什么活动吗？</strong></p><p>A: 除了每周固定的Happy Hour以外，我们还会组织大山的trip，雪季中不定期的会员活动，以及雪季后的会员团建活动等。</p>",
+            "row_content": "<p><strong>Q: 会员除了上述福利外还有什么活动吗？</strong></p><p>A: 我们会组织大山的trip、雪季中不定期的会员活动，以及雪季后的会员团建活动等。</p>",
             "page": ""
           }
         }
@@ -69,7 +60,6 @@
         "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-1",
         "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-2",
         "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-3",
-        "template--20531901300758__39001418-fe7d-4499-8988-8da0e556e416-collapsible_row-4",
         "77570aa1-0a02-469c-8603-1f9ff6b5fe8d"
       ],
       "settings": {
