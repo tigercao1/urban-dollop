@@ -446,6 +446,7 @@
       "return": "Return to Account details"
     },
     "account_page": {
+      "log_out": "Log out",
       "welcome_html": "Welcome back, <em>{{ name }}</em>",
       "welcome_plain": "Welcome back",
       "orders": "Orders",

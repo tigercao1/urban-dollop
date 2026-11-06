@@ -446,6 +446,7 @@
       "return": "返回账户详细信息"
     },
     "account_page": {
+      "log_out": "退出登录",
       "welcome_html": "欢迎回来，<em>{{ name }}</em>",
       "welcome_plain": "欢迎回来",
       "orders": "订单",
