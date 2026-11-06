@@ -1,8 +1,7 @@
 {%- comment -%}
   Address block for the account pages. Shopify's format_address joins the
   last and first name with no space in Chinese, so the name line is built
-  here as "First Last". Company and country are left out: customers are
-  almost all in Canada.
+  here as "First Last". Company is left out.
   Accepts: address
 {%- endcomment -%}
 {%- liquid
@@ -13,5 +12,6 @@
   {%- if name != blank -%}{{ name | escape }}<br>{%- endif -%}
   {%- if address.address1 != blank -%}{{ address.address1 | escape }}<br>{%- endif -%}
   {%- if address.address2 != blank -%}{{ address.address2 | escape }}<br>{%- endif -%}
-  {%- if region != blank -%}{{ region | escape }}{%- endif -%}
+  {%- if region != blank -%}{{ region | escape }}<br>{%- endif -%}
+  {{- address.country | escape -}}
 </p>
