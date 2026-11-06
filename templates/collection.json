@@ -77,11 +77,47 @@
         "padding_top": 36,
         "padding_bottom": 60
       }
+    },
+    "crosslinks": {
+      "type": "collection-crosslink",
+      "blocks": {
+        "private-to-training": {
+          "type": "card",
+          "settings": {
+            "show_on": "private-packages",
+            "eyebrow": "更进一步",
+            "heading": "准备考证或专项提升？",
+            "text": "定制培训：CASI / CSIA 考前培训和综合培训，由三级、四级教练或合作顶级教练（JDS 等）授课。",
+            "button_label": "查看定制培训",
+            "button_link": "shopify://collections/customized-trainings"
+          }
+        },
+        "training-to-private": {
+          "type": "card",
+          "settings": {
+            "show_on": "customized-trainings",
+            "eyebrow": "也可以看看",
+            "heading": "需要针对性提升？",
+            "text": "小型私课：二级、三级教练一对一或小班教学，针对你的薄弱环节逐项提升，打好基础，为考证做好准备。",
+            "button_label": "查看小型私课",
+            "button_link": "shopify://collections/private-packages"
+          }
+        }
+      },
+      "block_order": [
+        "private-to-training",
+        "training-to-private"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
     "banner",
     "9f7f2b1b-121f-4fa0-a975-8ab7831e449f",
-    "product-grid"
+    "product-grid",
+    "crosslinks"
   ]
 }
