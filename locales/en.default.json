@@ -126,6 +126,7 @@
       "level_placeholder": "e.g. first time, can do green runs, linking turns on blue runs"
     },
     "product": {
+      "related_heading": "You may also like",
       "add_to_cart": "Register now",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",

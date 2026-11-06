@@ -71,9 +71,8 @@
     },
     "related-products": {
       "type": "related-products",
-      "disabled": true,
       "settings": {
-        "heading": "您可能还会感兴趣",
+        "heading": "",
         "heading_size": "h1",
         "products_to_show": 4,
         "columns_desktop": 4,

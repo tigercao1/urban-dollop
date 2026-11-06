@@ -126,6 +126,7 @@
       "level_placeholder": "例如：第一次滑、能滑绿道、蓝道可以连续转弯"
     },
     "product": {
+      "related_heading": "您可能还会感兴趣",
       "add_to_cart": "立即报名",
       "description": "描述",
       "on_sale": "促销",
