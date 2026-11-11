@@ -1,0 +1,267 @@
+{%- comment -%}
+  Safety guide: a short, scannable version of the safety page.
+  Each "Topic" block shows one safety_page metaobject (title, content, image),
+  so the wording and its English translation still live in the metaobject.
+    Layout "cards":   the numbered list in the content becomes a grid of cards.
+    Layout "summary": only the first paragraph is shown, then optional key points
+                      and up to three short cards; the full content sits in a
+                      "show more" panel underneath.
+  A row of jump links to each topic is shown at the top.
+  Uses the same centred narrow column as main-page "narrow".
+{%- endcomment -%}
+{{ 'section-safety-guide.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="safety-guide page-width page-width--narrow section-{{ section.id }}-padding">
+  {%- if section.settings.show_nav -%}
+    <nav class="safety-guide__nav" aria-label="{{ section.settings.nav_label | escape }}">
+      {%- for block in section.blocks -%}
+        {%- assign entry = metaobjects.safety_page[block.settings.handle] -%}
+        {%- if entry != blank -%}
+          <a class="safety-guide__chip" href="#safety-{{ block.id }}">
+            {%- if block.settings.icon != blank -%}
+              <span aria-hidden="true">{{ block.settings.icon }}</span>
+            {%- endif -%}
+            {{- entry.title.value | remove: '《' | remove: '》' | escape -}}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    {%- assign entry = metaobjects.safety_page[block.settings.handle] -%}
+    {%- if entry == blank -%}{%- continue -%}{%- endif -%}
+    {%- assign html = entry.content | metafield_tag -%}
+    <section
+      id="safety-{{ block.id }}"
+      class="safety-topic safety-topic--{{ block.settings.layout }}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="safety-topic__header">
+        {%- if block.settings.show_image and entry.image_1.value != blank -%}
+          {{
+            entry.image_1.value
+            | image_url: width: 240
+            | image_tag: class: 'safety-topic__image', loading: 'lazy', sizes: '96px', alt: entry.title.value
+          }}
+        {%- elsif block.settings.icon != blank -%}
+          <span class="safety-topic__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+        {%- endif -%}
+        <h2 class="safety-topic__title h2">{{ entry.title.value | escape }}</h2>
+      </div>
+
+      {%- if block.settings.layout == 'cards' -%}
+        <div class="safety-topic__cards rte">{{ html }}</div>
+      {%- else -%}
+        {%- comment -%}
+          metafield_tag wraps rich text in <div class="metafield-rich_text_field">.
+          If it starts with a paragraph, show that paragraph as the intro and
+          fold the rest (re-wrapped so the closing </div> stays balanced).
+        {%- endcomment -%}
+        {%- assign wrapper = '<div class="metafield-rich_text_field">' -%}
+        {%- assign rest = html -%}
+        {%- assign inner = html | remove_first: wrapper | strip -%}
+        {%- assign first_tag = inner | slice: 0, 3 -%}
+        {%- if first_tag == '<p>' and inner contains '</p>' -%}
+          {%- assign intro = inner | split: '</p>' | first | append: '</p>' -%}
+          {%- assign rest = inner | remove_first: intro | prepend: wrapper -%}
+          <div class="safety-topic__intro rte">{{ intro }}</div>
+        {%- endif -%}
+
+        {%- if block.settings.key_points != blank -%}
+          <div class="safety-topic__points rte">{{ block.settings.key_points }}</div>
+        {%- endif -%}
+
+        {%- if block.settings.card_1_title != blank
+          or block.settings.card_2_title != blank
+          or block.settings.card_3_title != blank
+        -%}
+          <div class="safety-topic__steps">
+            {%- for i in (1..3) -%}
+              {%- capture t_key %}card_{{ i }}_title{% endcapture -%}
+              {%- capture x_key %}card_{{ i }}_text{% endcapture -%}
+              {%- capture e_key %}card_{{ i }}_icon{% endcapture -%}
+              {%- if block.settings[t_key] != blank -%}
+                <div class="safety-step">
+                  <p class="safety-step__title">
+                    {%- if block.settings[e_key] != blank -%}
+                      <span class="safety-step__icon" aria-hidden="true">{{ block.settings[e_key] }}</span>
+                    {%- endif -%}
+                    {{- block.settings[t_key] | escape -}}
+                  </p>
+                  <div class="safety-step__text rte">{{ block.settings[x_key] }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if rest != blank -%}
+          <details class="safety-topic__more">
+            <summary>
+              <span class="safety-topic__more-open">{{ block.settings.more_label | escape }}</span>
+              <span class="safety-topic__more-close">{{ block.settings.less_label | escape }}</span>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </summary>
+            <div class="safety-topic__full rte">{{ rest }}</div>
+          </details>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if block.settings.button_label != blank -%}
+        {%- assign link = block.settings.button_link -%}
+        {%- if link == blank -%}{%- assign link = entry.url_1.value -%}{%- endif -%}
+        {%- if link != blank -%}
+          <a class="safety-topic__link" href="{{ link }}" target="_blank" rel="noopener">
+            {{- block.settings.button_label | escape -}}
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    </section>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Safety guide",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_nav",
+      "label": "Show jump links at the top",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "nav_label",
+      "label": "Jump links label (for screen readers)",
+      "default": "On this page"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "topic",
+      "name": "Topic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "safety_page metaobject handle",
+          "info": "Title, text and image come from this entry (Content > Metaobjects > Safety page)."
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout",
+          "options": [
+            { "value": "cards", "label": "Numbered list as cards" },
+            { "value": "summary", "label": "Summary, full text folded" }
+          ],
+          "default": "summary"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "info": "Shown in the jump link, and next to the title when there is no image."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image",
+          "label": "Show the entry's image next to the title",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Summary layout"
+        },
+        {
+          "type": "richtext",
+          "id": "key_points",
+          "label": "Key points"
+        },
+        { "type": "text", "id": "card_1_icon", "label": "Card 1 icon (emoji)" },
+        { "type": "text", "id": "card_1_title", "label": "Card 1 title" },
+        { "type": "richtext", "id": "card_1_text", "label": "Card 1 text" },
+        { "type": "text", "id": "card_2_icon", "label": "Card 2 icon (emoji)" },
+        { "type": "text", "id": "card_2_title", "label": "Card 2 title" },
+        { "type": "richtext", "id": "card_2_text", "label": "Card 2 text" },
+        { "type": "text", "id": "card_3_icon", "label": "Card 3 icon (emoji)" },
+        { "type": "text", "id": "card_3_title", "label": "Card 3 title" },
+        { "type": "richtext", "id": "card_3_text", "label": "Card 3 text" },
+        {
+          "type": "text",
+          "id": "more_label",
+          "label": "Show more label",
+          "default": "Show full details"
+        },
+        {
+          "type": "text",
+          "id": "less_label",
+          "label": "Show less label",
+          "default": "Hide details"
+        },
+        {
+          "type": "header",
+          "content": "Link"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link",
+          "info": "Leave empty to use the entry's url_1."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Safety guide"
+    }
+  ]
+}
+{% endschema %}
