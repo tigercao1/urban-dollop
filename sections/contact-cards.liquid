@@ -73,7 +73,7 @@
               <p class="contact-card__label">{{ label }}</p>
               <p class="contact-card__value">
                 {%- if b.method == 'whatsapp' -%}
-                  {%- comment -%}Non-breaking hyphen so the number never splits at the hyphen.{%- endcomment -%}
+                  {%- comment -%}Non-breaking hyphen so the number never splits at "558-".{%- endcomment -%}
                   {{ b.value | replace: '-', '‑' }}
                 {%- else -%}
                   {{ b.value }}
