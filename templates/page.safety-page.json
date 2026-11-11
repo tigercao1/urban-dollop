@@ -20,152 +20,69 @@
         "layout": "narrow"
       }
     },
-    "image_with_text_BTT3NB": {
-      "type": "image-with-text",
+    "safety_guide": {
+      "type": "safety-guide",
       "blocks": {
-        "heading_wFMiKm": {
-          "type": "heading",
+        "rules": {
+          "type": "topic",
           "settings": {
-            "heading": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].title.value }}",
-            "heading_size": "h1"
-          }
-        },
-        "text_NH3FUT": {
-          "type": "text",
-          "settings": {
-            "text": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].content | metafield_tag }}",
-            "text_style": "body"
-          }
-        },
-        "button_b7xrew": {
-          "type": "button",
-          "settings": {
+            "handle": "safety-page-cez5glmy",
+            "layout": "cards",
+            "icon": "⛷️",
+            "show_image": true,
             "button_label": "加拿大滑雪安全",
-            "button_link": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].url_1.value }}",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_wFMiKm",
-        "text_NH3FUT",
-        "button_b7xrew"
-      ],
-      "custom_css": [
-        "img {height: auto;}",
-        ".button {border-color: #da3831; outline: 2px solid #da3831; background: #fcec52; color: black; font-weight: 600;}"
-      ],
-      "settings": {
-        "image": "{{ metaobjects.safety_page[\"safety-page-cez5glmy\"].image_1.value }}",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "scheme-75fd9060-1077-43e8-bf69-70a4515b584b",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "image_banner_8wR8DN": {
-      "type": "image-banner",
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].image_1.value }}",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
-      }
-    },
-    "rich_text_T86bAk": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_grAGtb": {
-          "type": "heading",
-          "settings": {
-            "heading": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].title.value }}",
-            "heading_size": "h1"
+            "button_link": "https://skisafety.ca"
           }
         },
-        "text_a6tWDW": {
-          "type": "text",
+        "lift": {
+          "type": "topic",
           "settings": {
-            "text": "{{ metaobjects.safety_page[\"safety-page-x8yhnasc\"].content | metafield_tag }}"
+            "handle": "safety-page-x8yhnasc",
+            "layout": "summary",
+            "icon": "🚡",
+            "show_image": false,
+            "key_points": "<p>⚠️ 酒精或药物影响下，禁止乘坐缆车（《高山责任守则》第 9 条）</p>",
+            "card_1_icon": "🎒",
+            "card_1_title": "准备",
+            "card_1_text": "<ul><li>不熟悉缆车？先观察别人，或问工作人员</li><li>摘下雪杖腕带和耳机，背包取下放在腿上</li><li>在排队区前和同伴结好组</li><li>错过一张椅子没关系，等下一张</li></ul>",
+            "card_2_icon": "🚡",
+            "card_2_title": "上车",
+            "card_2_text": "<ul><li>到标线后回头看来椅，坐稳</li><li>先提醒同伴，再放下防护杆</li><li>不摇晃、不打闹；一个人坐中间</li><li>缆车停了也绝不跳下</li></ul>",
+            "card_3_icon": "🏁",
+            "card_3_title": "下车",
+            "card_3_text": "<ul><li>看到「Raise the bar」再抬杆</li><li>看到「Unload Here」站起滑下</li><li>下车后马上离开下车区</li><li>摔倒先低头，等工作人员协助</li></ul>",
+            "more_label": "展开完整缆车须知",
+            "less_label": "收起"
+          }
+        },
+        "helmet": {
+          "type": "topic",
+          "settings": {
+            "handle": "safety-page-krltza2k",
+            "layout": "summary",
+            "icon": "⛑️",
+            "show_image": false,
+            "key_points": "<ul><li>头盔不是盔甲：戴了也要控制速度，在能力范围内滑</li><li>用滑雪专用头盔，不要用自行车头盔代替</li><li>尺寸要合适，不要买“长大再戴”的</li><li>选有认证的头盔（如 ASTM、CEN、Snell）</li><li>买头盔时带上雪镜一起试戴</li></ul>",
+            "more_label": "展开威廉姆斯医生的完整建议",
+            "less_label": "收起"
           }
         }
       },
       "block_order": [
-        "heading_grAGtb",
-        "text_a6tWDW"
+        "rules",
+        "lift",
+        "helmet"
       ],
-      "custom_css": [],
-      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "left",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
+        "show_nav": true,
+        "nav_label": "本页内容",
+        "padding_top": 0,
         "padding_bottom": 52
-      }
-    },
-    "image_with_text_nQgUaV": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_hykMzg": {
-          "type": "heading",
-          "settings": {
-            "heading": "{{ metaobjects.safety_page[\"safety-page-krltza2k\"].title.value }}",
-            "heading_size": "h1"
-          }
-        },
-        "text_pHdEnz": {
-          "type": "text",
-          "settings": {
-            "text": "{{ metaobjects.safety_page[\"safety-page-krltza2k\"].content | metafield_tag }}",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "heading_hykMzg",
-        "text_pHdEnz"
-      ],
-      "custom_css": [
-        "img {height: auto;}"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "{{ metaobjects.safety_page[\"safety-page-krltza2k\"].image_1.value }}",
-        "height": "adapt",
-        "desktop_image_width": "small",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     }
   },
   "order": [
     "main",
-    "image_with_text_BTT3NB",
-    "image_banner_8wR8DN",
-    "rich_text_T86bAk",
-    "image_with_text_nQgUaV"
+    "safety_guide"
   ]
 }
