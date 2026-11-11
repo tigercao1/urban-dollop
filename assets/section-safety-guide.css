@@ -171,10 +171,13 @@
 }
 .safety-step__text ul {
   margin: 0;
-  padding-left: 1.8rem;
+  padding-left: 2rem;
+  /* Dawn's .rte uses inside bullets; outside keeps wrapped lines aligned */
+  list-style-position: outside;
 }
 .safety-step__text li {
   margin: 0.4rem 0;
+  padding-left: 0.2rem;
 }
 .safety-step__text p {
   margin: 0;
