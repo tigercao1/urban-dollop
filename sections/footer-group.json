@@ -56,7 +56,7 @@
         "enable_country_selector": true,
         "enable_language_selector": true,
         "payment_enable": false,
-        "show_policy": false,
+        "show_policy": true,
         "margin_top": 0,
         "padding_top": 44,
         "padding_bottom": 32
