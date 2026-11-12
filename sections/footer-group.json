@@ -14,6 +14,13 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "link_list_c4iFd3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "课程",
+            "menu": "footer"
+          }
+        },
         "90b0e951-daac-4463-bc6b-36984fd8125d": {
           "type": "link_list",
           "settings": {
@@ -43,6 +50,7 @@
         }
       },
       "block_order": [
+        "link_list_c4iFd3",
         "90b0e951-daac-4463-bc6b-36984fd8125d",
         "text_rJTRUp",
         "text_nzHdxL"
