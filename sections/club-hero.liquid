@@ -20,23 +20,69 @@
     {%- if section.settings.video != blank -%}
       {%- liquid
         if section.settings.image != blank
-          assign hero_poster = section.settings.image | image_url: width: 1920
+          assign hero_poster = section.settings.image | image_url: width: 1280
         else
-          assign hero_poster = section.settings.video.preview_image | image_url: width: 1920
+          assign hero_poster = section.settings.video.preview_image | image_url: width: 1280
+        endif
+
+        comment
+          Pick one MP4 rendition per screen size instead of always loading the
+          1080p file (about 19 MB). Phones get ~480p, tablets ~720p, desktop 1080p.
+        endcomment
+        assign hero_sd = blank
+        assign hero_hd = blank
+        assign hero_fhd = blank
+        for source in section.settings.video.sources
+          if source.format == 'mp4'
+            if source.height <= 540
+              assign hero_sd = source.url
+            elsif source.height <= 800
+              assign hero_hd = source.url
+            elsif source.height <= 1080
+              assign hero_fhd = source.url
+            endif
+          endif
+        endfor
+        if hero_fhd == blank
+          assign hero_fhd = hero_hd
+        endif
+        if hero_fhd == blank
+          assign hero_fhd = hero_sd
+        endif
+        if hero_hd == blank
+          assign hero_hd = hero_fhd
+        endif
+        if hero_sd == blank
+          assign hero_sd = hero_hd
         endif
       -%}
-      {{
-        section.settings.video
-        | video_tag:
-          poster: hero_poster,
-          autoplay: true,
-          loop: true,
-          muted: true,
-          controls: false,
-          playsinline: true
-      }}
+      {%- if hero_fhd != blank -%}
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          {% if hero_poster != blank %}poster="{{ hero_poster }}"{% endif %}
+        >
+          <source src="{{ hero_sd }}" type="video/mp4" media="(max-width: 749px)">
+          <source src="{{ hero_hd }}" type="video/mp4" media="(max-width: 1199px)">
+          <source src="{{ hero_fhd }}" type="video/mp4">
+        </video>
+      {%- else -%}
+        {{
+          section.settings.video
+          | video_tag:
+            poster: hero_poster,
+            autoplay: true,
+            loop: true,
+            muted: true,
+            controls: false,
+            playsinline: true
+        }}
+      {%- endif -%}
       {%- if hero_poster != blank -%}
-        <img class="club-hero__still" src="{{ hero_poster }}" alt="" width="1920" height="1080" loading="lazy">
+        <img class="club-hero__still" src="{{ hero_poster }}" alt="" width="1280" height="720" loading="lazy">
       {%- endif -%}
     {%- elsif section.settings.image != blank -%}
       {{
