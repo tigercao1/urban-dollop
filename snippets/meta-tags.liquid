@@ -122,6 +122,8 @@
 </script>
 
 {%- if request.page_type == 'index' -%}
+  {%- comment -%} Built with assign: a "}" inside an output tag's string breaks Shopify's Liquid parser. {%- endcomment -%}
+  {%- assign search_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" -%}
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -131,7 +133,7 @@
       "publisher": { "@id": {{ request.origin | append: '/#organization' | json }} },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "target": {{ search_target | json }},
         "query-input": "required name=search_term_string"
       }
     }
