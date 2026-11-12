@@ -41,7 +41,8 @@
 {%- comment -%}
   SEO structured data (JSON-LD). Lives here rather than in its own snippet so it only depends on
   files the store already has (snippets/seo-structured-data.liquid never synced, see #72).
-  - SportsOrganization: every page. Contact details and the two resorts where lessons run.
+  - SportsOrganization: every page. Brand aliases (SSnow / S Snow / Serendipity Snow), one-line description,
+    contact details and the two resorts where lessons run. Keep the description's numbers in sync with the site copy.
   - WebSite + SearchAction: home page only.
   - BreadcrumbList: products, collections, pages and metaobject pages (instructor profiles).
   FAQPage is rendered by sections/collapsible-content.liquid; Product JSON-LD by main-product.liquid.
@@ -53,6 +54,11 @@
   if routes.root_url == '/'
     assign home_url = request.origin
   endif
+  if request.locale.iso_code == 'en'
+    assign org_description = 'SSnow (Serendipity Snow) is a Toronto (GTA) ski and snowboard club with 80+ CSIA/CASI certified instructors, mostly Level 2 and 3. Private lessons, kids group lessons and camps at Mount St. Louis Moonstone and Blue Mountain, taught in Mandarin and English, with Cantonese-speaking instructors available.'
+  else
+    assign org_description = 'SSnow（Serendipity Snow）是多伦多（GTA）华人滑雪俱乐部，有 80 多位 CSIA/CASI 认证教练，以二级、三级为主。在 Mount St. Louis Moonstone 和 Blue Mountain 开设双板、单板私教课、少儿团课和冬令营，普通话、英文授课，也有会粤语的教练。'
+  endif
 -%}
 
 <script type="application/ld+json">
@@ -61,12 +67,15 @@
     "@type": "SportsOrganization",
     "@id": {{ request.origin | append: '/#organization' | json }},
     "name": {{ shop.name | json }},
-    "alternateName": "SSnow",
+    "alternateName": ["SSnow", "S Snow", "S Snow Club", "Serendipity Snow Club", "SSnow 多伦多滑雪俱乐部"],
+    "legalName": "Serendipity Snow Inc.",
+    "description": {{ org_description | json }},
     "url": {{ request.origin | json }},
     {%- if settings.logo != blank %}
       "logo": {{ org_logo | json }},
     {%- endif %}
     "sport": ["Skiing", "Snowboarding"],
+    "knowsLanguage": ["zh-Hans", "yue", "en"],
     "email": "info@ssnow.club",
     "telephone": "+1-647-806-9895",
     "contactPoint": [
