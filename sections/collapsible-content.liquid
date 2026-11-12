@@ -108,6 +108,36 @@
   </div>
 </div>
 
+{%- comment -%}
+  FAQPage structured data for the FAQ page (template suffix "faq").
+  Each question in a row is a paragraph starting with <strong>Q: ...</strong>;
+  the answer is the rest of the text until the next question (a leading "A:" is dropped).
+{%- endcomment -%}
+{%- if template.suffix == 'faq' -%}
+  {%- assign faq_count = 0 -%}
+  {%- capture faq_entities -%}
+    {%- for block in section.blocks -%}
+      {%- assign qa_parts = block.settings.row_content | split: '<strong>Q:' -%}
+      {%- for part in qa_parts offset: 1 -%}
+        {%- assign q_and_a = part | split: '</strong>' -%}
+        {%- assign question = q_and_a.first | strip_html | strip -%}
+        {%- assign answer = part | remove_first: q_and_a.first | strip_html | strip | remove_first: 'A:' | strip -%}
+        {%- if question != blank and answer != blank -%}
+          {%- if faq_count > 0 -%},{%- endif -%}
+          {"@type":"Question","name":{{ question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ answer | json }}}}
+          {%- assign faq_count = faq_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if faq_count > 0 -%}
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{{ faq_entities }}]}
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+
 {% schema %}
 {
   "name": "t:sections.collapsible_content.name",
