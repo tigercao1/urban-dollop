@@ -76,6 +76,13 @@
         "telephone": "+1-647-806-9895",
         "email": "info@ssnow.club",
         "availableLanguage": ["Chinese", "English"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "name": "WeChat",
+        "description": "WeChat ID: ssnowclub",
+        "availableLanguage": ["Chinese", "English"]
       }
     ],
     "areaServed": {
@@ -107,11 +114,16 @@
         }
       }
     ],
-    "sameAs": ["https://www.instagram.com/s_snow_club/"]
+    "sameAs": [
+      "https://www.instagram.com/s_snow_club/",
+      "https://www.xiaohongshu.com/user/profile/5f28c8c90000000001008ce3"
+    ]
   }
 </script>
 
 {%- if request.page_type == 'index' -%}
+  {%- comment -%} Built with assign: a "}" inside an output tag's string breaks Shopify's Liquid parser. {%- endcomment -%}
+  {%- assign search_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" -%}
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -121,7 +133,7 @@
       "publisher": { "@id": {{ request.origin | append: '/#organization' | json }} },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "target": {{ search_target | json }},
         "query-input": "required name=search_term_string"
       }
     }
