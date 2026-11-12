@@ -58,7 +58,7 @@
           {% case block.type %}
             {%- when 'heading' -%}
               {%- liquid
-                # Legacy instructor profiles (metaobject/our_team) show the instructor name here; make it the page h1.
+                # Legacy instructor profiles (metaobject/our_team) show the instructor name here, so it is the page h1.
                 assign heading_tag = 'h2'
                 if request.page_type == 'metaobject' and block.settings.heading_size == 'h1'
                   assign heading_tag = 'h1'
