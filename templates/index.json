@@ -319,20 +319,34 @@
             "image": "shopify://shop_images/ssnow-past-seasons-03.jpg"
           }
         },
+        "p23": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-23.jpg"
+          }
+        },
         "p4": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-04.jpg"
           }
         },
+        "p10": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-10.jpg"
+          }
+        },
         "p5": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-05.jpg"
           }
         },
         "p6": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-06.jpg"
           }
@@ -349,28 +363,29 @@
             "image": "shopify://shop_images/ssnow-past-seasons-08.jpg"
           }
         },
+        "p12": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/ssnow-past-seasons-12.jpg"
+          }
+        },
         "p9": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-09.jpg"
           }
         },
-        "p10": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/ssnow-past-seasons-10.jpg"
-          }
-        },
         "p11": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-11.jpg"
           }
         },
-        "p12": {
+        "p14": {
           "type": "photo",
           "settings": {
-            "image": "shopify://shop_images/ssnow-past-seasons-12.jpg"
+            "image": "shopify://shop_images/ssnow-past-seasons-14.jpg"
           }
         },
         "p13": {
@@ -379,10 +394,10 @@
             "image": "shopify://shop_images/ssnow-past-seasons-13.jpg"
           }
         },
-        "p14": {
+        "p24": {
           "type": "photo",
           "settings": {
-            "image": "shopify://shop_images/ssnow-past-seasons-14.jpg"
+            "image": "shopify://shop_images/ssnow-past-seasons-24.jpg"
           }
         },
         "p15": {
@@ -405,6 +420,7 @@
         },
         "p18": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-18.jpg"
           }
@@ -417,36 +433,28 @@
         },
         "p20": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-20.jpg"
           }
         },
         "p21": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-21.jpg"
           }
         },
         "p22": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-22.jpg"
           }
         },
-        "p23": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/ssnow-past-seasons-23.jpg"
-          }
-        },
-        "p24": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/ssnow-past-seasons-24.jpg"
-          }
-        },
         "p25": {
           "type": "photo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ssnow-past-seasons-25.jpg"
           }
@@ -456,17 +464,19 @@
         "p1",
         "p2",
         "p3",
+        "p23",
         "p4",
+        "p10",
         "p5",
         "p6",
         "p7",
         "p8",
-        "p9",
-        "p10",
-        "p11",
         "p12",
-        "p13",
+        "p9",
+        "p11",
         "p14",
+        "p13",
+        "p24",
         "p15",
         "p16",
         "p17",
@@ -475,8 +485,6 @@
         "p20",
         "p21",
         "p22",
-        "p23",
-        "p24",
         "p25"
       ],
       "settings": {
