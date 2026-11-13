@@ -627,6 +627,11 @@
   margin: 0 0 2.8rem;
 }
 
+/* No subheading: keep the same gap between the heading and the cards. */
+.club-picker__title + .club-picker__grid {
+  margin-top: 2.4rem;
+}
+
 .club-picker__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
