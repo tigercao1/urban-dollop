@@ -141,6 +141,21 @@
   align-items: center;
 }
 
+.club-hero__help {
+  display: inline-block;
+  margin-top: 1.6rem;
+  color: inherit;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+}
+
+.club-hero__help:hover,
+.club-hero__help:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
 /* --- next up strip --- */
 
 /* LITERAL ON PURPOSE: this strip is frosted glass sitting ON the hero media,
@@ -577,6 +592,123 @@
 @media screen and (max-width: 749px) {
   .club-faces__card {
     flex-basis: 44vw;
+  }
+}
+
+/* ------------------------------------------------------ lesson picker ---- */
+
+/* Quiet section between the stats band and the instructor rail: four cards,
+   one per kind of learner, each linking to the page that serves them. */
+
+.club-picker {
+  padding: 5.6rem 0 4.8rem;
+  scroll-margin-top: 8rem;
+}
+
+.club-picker__eyebrow {
+  font-family: var(--font-display, var(--font-heading-family));
+  font-size: 1.3rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin: 0 0 0.8rem;
+}
+
+.club-picker__title {
+  font-family: var(--font-body, var(--font-body-family));
+  font-size: clamp(2.6rem, 3.6vw, 3.6rem);
+  line-height: 1.2;
+  margin: 0 0 0.6rem;
+}
+
+.club-picker__sub {
+  font-size: 1.6rem;
+  opacity: 0.75;
+  margin: 0 0 2.8rem;
+}
+
+.club-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.club-picker__item {
+  display: flex;
+}
+
+.club-picker__card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.2rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  border-radius: 1.2rem;
+  background: rgb(var(--color-background));
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow var(--dur, var(--duration-default)) var(--ease, ease);
+}
+
+.club-picker__card:hover,
+.club-picker__card:focus-visible {
+  box-shadow: 0 6px 20px rgba(var(--color-foreground), 0.12);
+}
+
+.club-picker__card-title {
+  font-size: 2rem;
+  line-height: 1.3;
+  margin: 0 0 1rem;
+}
+
+.club-picker__card-text {
+  flex: 1;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0 0 1.6rem;
+}
+
+.club-picker__card-link {
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.club-picker__guide {
+  display: inline-block;
+  margin-top: 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 749px) {
+  .club-picker {
+    padding: 4rem 0 3.2rem;
+  }
+
+  .club-picker__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .club-picker__card {
+    padding: 1.4rem;
+  }
+
+  .club-picker__card-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .club-picker__card-text {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .club-picker__card-link {
+    font-size: 1.3rem;
   }
 }
 
