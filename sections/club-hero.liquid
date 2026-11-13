@@ -55,6 +55,18 @@
         if hero_sd == blank
           assign hero_sd = hero_hd
         endif
+        comment
+          The storefront only lists the 1080p MP4 in video.sources, but Shopify
+          also stores 480p and 720p files next to it with the standard names.
+          Derive them from the 1080p URL. If a file is missing, the browser
+          falls through to the last <source> (1080p).
+        endcomment
+        if hero_hd == hero_fhd and hero_fhd contains 'HD-1080p-7.2Mbps'
+          assign hero_hd = hero_fhd | replace: 'HD-1080p-7.2Mbps', 'HD-720p-4.5Mbps'
+        endif
+        if hero_sd == hero_fhd and hero_fhd contains 'HD-1080p-7.2Mbps'
+          assign hero_sd = hero_fhd | replace: 'HD-1080p-7.2Mbps', 'SD-480p-1.5Mbps'
+        endif
       -%}
       {%- if hero_fhd != blank -%}
         <video
