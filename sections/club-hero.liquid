@@ -152,6 +152,12 @@
         {%- endif -%}
       </div>
     {%- endif -%}
+
+    {%- if section.settings.help_label != blank -%}
+      <a href="{{ section.settings.help_link | default: '#lesson-picker' }}" class="club-hero__help">
+        {{- section.settings.help_label -}}
+      </a>
+    {%- endif -%}
   </div>
 
   {%- if section.blocks.size > 0 -%}
@@ -260,6 +266,19 @@
       "type": "url",
       "id": "button_link_2",
       "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "help_label",
+      "label": "Text link under the buttons",
+      "info": "e.g. 不知道选哪个课？30 秒帮你选 → Leave empty to hide."
+    },
+    {
+      "type": "text",
+      "id": "help_link",
+      "label": "Text link target",
+      "info": "#lesson-picker jumps to the lesson picker section on this page; a page path like /pages/... also works.",
+      "default": "#lesson-picker"
     }
   ],
   "blocks": [

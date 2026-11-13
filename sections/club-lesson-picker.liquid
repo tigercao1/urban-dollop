@@ -1,0 +1,144 @@
+{%- comment -%}
+  Lesson picker — "which lesson is right for you?" cards on the homepage.
+
+  First-time visitors land on the hero and have no idea where to start. Each
+  card is one kind of learner (adult, kids 7+, kids under 7, instructor
+  exams) pointing at the page that serves them, with a line to the full
+  choose-a-lesson guide underneath.
+
+  The wrapper carries id="lesson-picker" so the hero's "not sure which
+  lesson?" text link can jump straight here.
+
+  Chinese copy lives in templates/index.json; English is registered as theme
+  translations (Admin API translationsRegister), like the collection
+  cross-links.
+{%- endcomment -%}
+
+{{ 'club.css' | asset_url | stylesheet_tag }}
+
+<div id="lesson-picker" class="club-picker color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="club-picker__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="club-picker__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="club-picker__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="club-picker__grid list-unstyled" role="list">
+        {%- for block in section.blocks -%}
+          <li class="club-picker__item" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" class="club-picker__card">
+              <h3 class="club-picker__card-title">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p class="club-picker__card-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+              {%- if block.settings.link_label != blank -%}
+                <span class="club-picker__card-link">{{ block.settings.link_label }} →</span>
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.guide_label != blank -%}
+      <a href="{{ section.settings.guide_link | default: '#' }}" class="club-picker__guide link">
+        {{- section.settings.guide_label -}}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Club lesson picker",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Cards that send first-time visitors to the right lessons. Keep it to four."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small heading above",
+      "default": "选课指南"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "第一次来？先看哪种课适合你"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "guide_label",
+      "label": "Full guide link label"
+    },
+    {
+      "type": "url",
+      "id": "guide_link",
+      "label": "Full guide link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Who it is for",
+          "default": "成人"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Short description"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "查看课程"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Club lesson picker",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
