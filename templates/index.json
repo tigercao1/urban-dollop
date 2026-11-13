@@ -57,7 +57,9 @@
         "button_label_1": "26/27 报名开始",
         "button_link_1": "shopify://collections/private-packages",
         "button_label_2": "成为会员",
-        "button_link_2": "shopify://collections/join-us"
+        "button_link_2": "shopify://collections/join-us",
+        "help_label": "不知道怎么选课？30 秒帮你选 →",
+        "help_link": "#lesson-picker"
       }
     },
     "stats": {
@@ -102,6 +104,60 @@
       "settings": {
         "heading": "26/27 雪季",
         "color_scheme": "inverse"
+      }
+    },
+    "lesson_picker": {
+      "type": "club-lesson-picker",
+      "blocks": {
+        "adult": {
+          "type": "card",
+          "settings": {
+            "title": "成人：零基础到进阶",
+            "text": "一对一、一对二私课。零基础 2–3 次课能自己坐缆车；有基础的可以巩固基本功、针对性提升，以后去外地雪场滑也更自如。也可以指定三级教练。",
+            "link_label": "成人滑雪课",
+            "link": "shopify://pages/adult-ski-snowboard-lessons"
+          }
+        },
+        "kids_7_plus": {
+          "type": "card",
+          "settings": {
+            "title": "孩子 7 岁以上",
+            "text": "圣诞 / March Break 全托管冬令营，或周末团课。小班教学，家长不用陪。",
+            "link_label": "少儿课程与冬令营",
+            "link": "shopify://pages/kids-ski-snowboard-lessons"
+          }
+        },
+        "kids_under_7": {
+          "type": "card",
+          "settings": {
+            "title": "孩子 7 岁以下",
+            "text": "私课，一对一或和兄弟姐妹一起上。教练跟着孩子的状态调整，课时更短，更适合小朋友。",
+            "link_label": "小型私课",
+            "link": "shopify://collections/private-packages"
+          }
+        },
+        "advanced": {
+          "type": "card",
+          "settings": {
+            "title": "考教练证、参加训练营",
+            "text": "CSIA / CASI 一级、二级考前培训，Blue Mountain 四天精英营，也可以约三级教练一对一。",
+            "link_label": "滑雪进阶",
+            "link": "shopify://pages/advanced-ski-snowboard-training"
+          }
+        }
+      },
+      "block_order": [
+        "adult",
+        "kids_7_plus",
+        "kids_under_7",
+        "advanced"
+      ],
+      "settings": {
+        "eyebrow": "选课指南",
+        "heading": "第一次来？先看哪种课适合你",
+        "guide_label": "看完整选课指南：价格、雪场、私课还是团课 →",
+        "guide_link": "shopify://pages/how-to-choose-ski-lessons-toronto",
+        "color_scheme": "background-1"
       }
     },
     "instructors": {
@@ -501,6 +557,7 @@
   "order": [
     "hero",
     "stats",
+    "lesson_picker",
     "instructors",
     "season",
     "wall"
