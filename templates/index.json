@@ -113,7 +113,7 @@
           "type": "card",
           "settings": {
             "title": "成人：零基础到进阶",
-            "text": "一对一、一对二私课。零基础 2–3 次课能自己坐缆车；有基础的可以巩固基本功、针对性提升，以后去外地雪场滑也更自如。也可以指定三级教练。",
+            "text": "一对一、一对二私课。零基础 2–3 次课能坐缆车，有基础的巩固基本功、针对性提升，去大山旅游更自如。",
             "link_label": "成人滑雪课",
             "link": "shopify://pages/adult-ski-snowboard-lessons"
           }
@@ -155,6 +155,7 @@
       "settings": {
         "eyebrow": "选课指南",
         "heading": "第一次来？先看哪种课适合你",
+        "subheading": "",
         "guide_label": "看完整选课指南：价格、雪场、私课还是团课 →",
         "guide_link": "shopify://pages/how-to-choose-ski-lessons-toronto",
         "color_scheme": "background-1"
