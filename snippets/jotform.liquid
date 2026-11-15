@@ -1,12 +1,12 @@
 {%- comment -%}
   Waiver card: title, why it is needed, a full-width button that opens the
-  waiver page (/pages/waiver, which embeds the JotForm) in a new tab so the
+  waiver page (/pages/waiver, which embeds our signing form) in a new tab so the
   product form is kept, and a note that it is signed once a year.
   Used on product pages (main-product.liquid, above the buy buttons) and on pages
   with the custom.waiver_enforced metafield (main-page.liquid).
 {%- endcomment -%}
 {%- liquid
-  # The waiver page embeds the JotForm (English or Chinese form by language).
+  # The waiver page embeds our signing form (snippets/ssms-waiver.liquid).
   # routes.root_url is '/' for zh-CN and '/en' for English.
   if routes.root_url == '/'
     assign waiver_url = '/pages/waiver'
