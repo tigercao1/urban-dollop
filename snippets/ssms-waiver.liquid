@@ -1,0 +1,38 @@
+{%- liquid
+  assign sign_origin = 'https://sign.ssnow.club'
+  assign locale_prefix = request.locale.iso_code | slice: 0, 2
+  if locale_prefix == 'zh'
+    assign sign_lang = 'zh'
+  else
+    assign sign_lang = 'en'
+  endif
+  assign sign_src = sign_origin | append: '/w/waiver?lang=' | append: sign_lang
+  if customer
+    assign customer_email = customer.email | url_encode
+    assign customer_name = customer.name | url_encode
+    assign sign_src = sign_src | append: '&email=' | append: customer_email | append: '&name=' | append: customer_name
+  endif
+-%}
+<iframe
+  id="ssms-waiver-frame"
+  src="{{ sign_src | escape }}"
+  title="{{ 'custom_liquid.product.waiver' | t | escape }}"
+  scrolling="no"
+  style="display:block;width:100%;height:1600px;border:0"
+></iframe>
+<script>
+  (function () {
+    var signOrigin = {{ sign_origin | json }};
+    var frame = document.getElementById('ssms-waiver-frame');
+    var last = 0;
+    window.addEventListener('message', function (event) {
+      if (event.origin !== signOrigin || event.source !== frame.contentWindow) return;
+      var data = event.data;
+      if (!data || data.type !== 'ssnow-sign-height' || !Number.isFinite(data.height)) return;
+      var height = Math.min(8000, Math.max(400, Math.ceil(data.height)));
+      frame.style.height = height + 'px';
+      if (height < last - 200 && frame.getBoundingClientRect().top < 0) frame.scrollIntoView({ block: 'start' });
+      last = height;
+    });
+  })();
+</script>
