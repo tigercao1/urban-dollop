@@ -28,8 +28,8 @@
     window.addEventListener('message', function (event) {
       if (event.origin !== signOrigin || event.source !== frame.contentWindow) return;
       var data = event.data;
-      if (!data || data.type !== 'ssnow-sign-height' || typeof data.height !== 'number') return;
-      var height = Math.max(200, Math.ceil(data.height));
+      if (!data || data.type !== 'ssnow-sign-height' || !Number.isFinite(data.height)) return;
+      var height = Math.min(8000, Math.max(400, Math.ceil(data.height)));
       frame.style.height = height + 'px';
       if (height < last - 200 && frame.getBoundingClientRect().top < 0) frame.scrollIntoView({ block: 'start' });
       last = height;
