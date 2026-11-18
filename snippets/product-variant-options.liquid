@@ -6,6 +6,11 @@
   - option: {Object} current product_option object.
   - block: {Object} block object.
 
+  SSnow: a value whose variants all have the variant metafield
+  booking.contact_only = true is shown greyed out with
+  "请联系我们购买 / Contact us to book" and links to the contact page
+  instead of being selectable (e.g. 三级教练单板).
+
 
   Usage:
   {% render 'product-variant-options',
@@ -21,6 +26,12 @@
   assign variants_option3_arr = product.variants | map: 'option3'
 
   assign product_form_id = 'product-form-' | append: section.id
+
+  if routes.root_url == '/'
+    assign contact_url = '/pages/contact-us'
+  else
+    assign contact_url = routes.root_url | append: '/pages/contact-us'
+  endif
 -%}
 
 {%- for value in option.values -%}
@@ -43,9 +54,44 @@
           endif
       endcase
     endfor
+
+    assign option_contact_only = false
+    assign option_key = 'option' | append: option.position
+    assign value_variants = product.variants | where: option_key, value
+    if value_variants.size > 0
+      assign option_contact_only = true
+      for v in value_variants
+        unless v.metafields.booking.contact_only.value == true
+          assign option_contact_only = false
+        endunless
+      endfor
+    endif
   -%}
 
   {%- if block.settings.picker_type == 'button' -%}
+    {%- if option_contact_only -%}
+      <input
+        type="radio"
+        id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+        name="{{ option.name }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        {% if option.selected_value == value %}
+          checked
+        {% endif %}
+        class="disabled variant-contact-only"
+        disabled
+      >
+      <label
+        for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+        class="variant-contact-only__label"
+      >
+        <a href="{{ contact_url }}" class="variant-contact-only__link">
+          {{- value }} · <span>{{ 'products.product.contact_to_book' | t }}</span></a
+        >
+      </label>
+      {%- continue -%}
+    {%- endif -%}
     <input
       type="radio"
       id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
@@ -69,8 +115,13 @@
       {% if option.selected_value == value %}
         selected="selected"
       {% endif %}
+      {% if option_contact_only %}
+        disabled
+      {% endif %}
     >
-      {% if option_disabled -%}
+      {% if option_contact_only -%}
+        {{- value }} · {{ 'products.product.contact_to_book' | t -}}
+      {%- elsif option_disabled -%}
         {{- 'products.product.value_unavailable' | t: option_value: value -}}
       {%- else -%}
         {{- value -}}
