@@ -129,6 +129,7 @@
       },
       "share": "分享產品",
       "sold_out": "售罄",
+      "contact_to_book": "請聯絡我們購買",
       "unavailable": "無法供貨",
       "vendor": "廠商",
       "video_exit_message": "{{ title }} 在同一視窗開啟全螢幕影片。",
