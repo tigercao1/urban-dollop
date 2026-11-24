@@ -1598,3 +1598,30 @@ a.product__text {
     border: none;
   }
 }
+
+/* SSnow: option value that can only be booked by contacting us (variant metafield booking.contact_only) */
+.product-form__input input[type='radio'].variant-contact-only + label.variant-contact-only__label {
+  padding: 0;
+  border-style: dashed;
+  border-color: rgba(var(--color-foreground), 0.25);
+  background-color: rgba(var(--color-foreground), 0.04);
+  color: rgba(var(--color-foreground), 0.55);
+  text-decoration: none;
+}
+
+.variant-contact-only__link {
+  display: inline-block;
+  padding: 1rem 2rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.variant-contact-only__link span {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.variant-contact-only__link:hover span,
+.variant-contact-only__link:focus-visible span {
+  color: rgb(var(--color-foreground));
+}
