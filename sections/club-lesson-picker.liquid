@@ -12,12 +12,22 @@
   Chinese copy lives in templates/index.json; English is registered as theme
   translations (Admin API translationsRegister), like the collection
   cross-links.
+
+  Width "Narrow" uses the same column as the Contact page's cards and form
+  (page-width--narrow) and puts the cards two per row on desktop.
 {%- endcomment -%}
 
 {{ 'club.css' | asset_url | stylesheet_tag }}
 
-<div id="lesson-picker" class="club-picker color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width">
+{%- liquid
+  assign narrow = false
+  if section.settings.width == 'narrow'
+    assign narrow = true
+  endif
+-%}
+
+<div id="lesson-picker" class="club-picker{% if narrow %} club-picker--narrow{% endif %} color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width{% if narrow %} page-width--narrow{% endif %}">
     {%- if section.settings.eyebrow != blank -%}
       <p class="club-picker__eyebrow">{{ section.settings.eyebrow }}</p>
     {%- endif -%}
@@ -90,6 +100,17 @@
       "type": "url",
       "id": "guide_link",
       "label": "Full guide link"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        { "value": "page", "label": "Full page, four per row" },
+        { "value": "narrow", "label": "Narrow, two per row (Contact page)" }
+      ],
+      "default": "page",
+      "info": "Narrow lines the cards up with the Contact page's cards and form."
     },
     {
       "type": "color_scheme",

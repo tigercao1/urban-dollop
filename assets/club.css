@@ -688,6 +688,11 @@
   font-weight: 600;
 }
 
+/* Width "Narrow": same column as the Contact page cards and form, two per row. */
+.club-picker--narrow .club-picker__grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 @media screen and (max-width: 749px) {
   .club-picker {
     padding: 4rem 0 3.2rem;
