@@ -427,38 +427,8 @@
             {%- when 'bus_fields' -%}
               {% render 'bus-booking-fields', product: product, product_form_id: product_form_id, block: block %}
             {%- when 'buy_buttons' -%}
-              {% if customer %}
-                {% if product.type contains 'Membership' %}
-                  {% if customer.metafields.status.twnetyfive_member == true %}
-                    <p style="text-align: center;">{{ 'custom_liquid.membership.thank_you_message' | t }}</p>
-                  {% else %}
-                    {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
-                  {% endif %}
-                {% elsif product.tags contains 'PrivateLessonBooking' %}
-                  {% if customer.tags contains 'PrivateLessonPurchased' and customer.tags contains '1to1' %}
-                    {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
-                  {% else %}
-                    <p style="text-align: center;">{{ "custom_liquid.lesson.lesson_only" | t }}</p>
-                  {% endif %}
-                {% else %}
-                  {% if customer.metafields.status.twnetyfive_member == true or product.tags contains 'Public' %}
-                    {% render 'jotform' %}
-                    {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
-                  {% else %}
-                    {% liquid
-                      assign membership_link = routes.root_url
-                      if request.locale.iso_code == 'zh-CN'
-                        assign membership_link = routes.root_url | append: "products/membership"
-                      else
-                        assign membership_link = routes.root_url | append: "/products/membership"
-                      endif
-                    %}
-                    <p style="text-align: center;">{{ "custom_liquid.membership.member_only_message_html" | t: link: membership_link }}</p>
-                  {% endif %}
-                {% endif %}
-              {% else %}
-                <p style="text-align: center;">{{ "custom_liquid.membership.login_message_html" | t: link: routes.account_login_url }}</p>
-              {% endif %}
+              {% render 'jotform' %}
+              {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
             {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}
                 {% liquid
