@@ -622,19 +622,13 @@
   "custom_liquid": {
     "membership": {
       "active_status": "会员已激活 💚",
-      "inactive_status": "非会员 🔴",
-      "thank_you_message": "感谢您的加入！",
-      "member_only_message_html": "会员专享，点击<a href=\"{{ link }}\">此处<\/a>购买会员",
-      "login_message_html": "请先<a href=\"{{ link }}\">登录<\/a>再购买"
+      "inactive_status": "非会员 🔴"
     },
     "product": {
       "waiver": "免责协议",
       "sign_waiver": "作为注册和参与的条件，所有参与者\/会员\/嘉宾都必须签署以下免责协议",
       "sign_waiver_button": "签署免责协议",
       "sign_waiver_note": "每年只需签署一次"
-    },
-    "lesson": {
-      "lesson_only": "私课预定仅对购买了私课的会员开放"
     }
   },
   "shopify": {
