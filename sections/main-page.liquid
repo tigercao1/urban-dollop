@@ -31,12 +31,16 @@
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {% if page.metafields.custom.waiver_enforced == true %}
-      <div style="margin-bottom: 40px;">
-        {% render 'jotform' %}
-      </div>
+    {% if page.handle == 'waiver' %}
+      {% render 'ssms-waiver' %}
+    {% else %}
+      {% if page.metafields.custom.waiver_enforced == true %}
+        <div style="margin-bottom: 40px;">
+          {% render 'jotform' %}
+        </div>
+      {% endif %}
+      {{ page.content }}
     {% endif %}
-    {{ page.content }}
   </div>
 </div>
 
