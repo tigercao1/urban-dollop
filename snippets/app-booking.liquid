@@ -42,7 +42,7 @@
     <span>{%- if is_en -%}Scan to download{%- else -%}扫码下载 App{%- endif -%}</span>
   </div>
   <div class="app-booking__stores">
-    <a class="app-booking__store" href="{{ ios_url }}" target="_blank" rel="noopener">
+    <a class="app-booking__store" data-app-store href="{{ ios_url }}" target="_blank" rel="noopener">
       <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.9 1.15 9.15.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.77-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.67ZM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28Z"/></svg>
       <span><small>{%- if is_en -%}Download on the{%- else -%}iPhone 下载{%- endif -%}</small>App Store</span>
     </a>
@@ -51,7 +51,37 @@
       <span><small>{%- if is_en -%}Get it on{%- else -%}安卓下载{%- endif -%}</small>Google Play</span>
     </a>
   </div>
+  <div class="app-booking__wx" data-wx-tip hidden>
+    <svg class="app-booking__wx-arrow" aria-hidden="true" viewBox="0 0 60 60" width="60" height="60" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 54C22 44 38 30 50 10"/><path d="M36 12l14-2 1 14"/></svg>
+    <p>
+      {%- if is_en -%}
+        WeChat can't open the App Store.<br>Tap <b>···</b> at the top right and choose <b>Open in Safari</b>.
+      {%- else -%}
+        微信里无法直接打开 App Store<br>请点右上角 <b>···</b>，选择<b>「在 Safari 中打开」</b>
+      {%- endif -%}
+    </p>
+  </div>
 </div>
+<script>
+  (() => {
+    if (!/MicroMessenger/i.test(navigator.userAgent)) return;
+    // WeChat's in-app browser blocks apps.apple.com links, so the button does nothing.
+    // Show how to reopen the page in Safari instead.
+    document.querySelectorAll('[data-app-store]').forEach((link) => {
+      const tip = link.closest('.app-booking').querySelector('[data-wx-tip]');
+      // The product info column is transformed (scroll animation), which would trap a
+      // position: fixed overlay inside it, so hang the overlay off <body>.
+      document.body.appendChild(tip);
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        tip.hidden = false;
+      });
+      tip.addEventListener('click', () => {
+        tip.hidden = true;
+      });
+    });
+  })();
+</script>
 <style>
   .app-booking {
     display: flex;
@@ -117,6 +147,18 @@
     background: #fff;
     border-radius: 0.8rem;
   }
+  .app-booking__wx {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    text-align: right;
+    padding: 1rem 2rem;
+  }
+  .app-booking__wx[hidden] { display: none; }
+  .app-booking__wx-arrow { display: block; margin-left: auto; }
+  .app-booking__wx p { margin: 1rem 0 0; font-size: 1.7rem; line-height: 1.6; }
   /* Seats are sold in the app, so Shopify's own stock status is meaningless here. */
   .product__info-container .price__badge-sold-out,
   .product__info-container .price--sold-out .price__badge-sold-out {
