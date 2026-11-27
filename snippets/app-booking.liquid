@@ -1,0 +1,130 @@
+{% comment %}
+  "Book in the SnowRide App" box for products that are shown on the site but
+  sold only in the app (used by templates/product.bus-app-only.json through a
+  Custom Liquid block, so main-product.liquid needs no new block type).
+
+  Two store buttons (App Store / Google Play). The QR code
+  (assets/snowride-qr.svg) points to https://snowride.app/download, which
+  sends each phone to its own store; it is shown on desktop only.
+
+  Usage:
+  {% render 'app-booking', product: product %}
+{% endcomment %}
+{%- liquid
+  assign ios_url = 'https://apps.apple.com/app/id6830885164'
+  assign android_url = 'https://play.google.com/store/apps/details?id=app.snowride.carpool&referrer=utm_source%3Dssnow_club'
+  assign is_en = false
+  if request.locale.iso_code contains 'en'
+    assign is_en = true
+  endif
+-%}
+<div class="app-booking">
+  <div class="app-booking__text">
+    <p class="app-booking__title">
+      {%- if is_en -%}Book your seat in the SnowRide App{%- else -%}请在 SnowRide App 预订座位{%- endif -%}
+    </p>
+    <p class="app-booking__body">
+      {%- if is_en -%}
+        Pick your date and pick-up stop, pay, and get your e-ticket in the app.
+      {%- else -%}
+        在 App 里选择日期和上车站点、付款，电子车票会直接发到 App。
+      {%- endif -%}
+    </p>
+  </div>
+  <div class="app-booking__qr">
+    <img
+      src="{{ 'snowride-qr.svg' | asset_url }}"
+      alt="{% if is_en %}Scan to download SnowRide{% else %}扫码下载 SnowRide{% endif %}"
+      width="96"
+      height="96"
+      loading="lazy"
+    >
+    <span>{%- if is_en -%}Scan to download{%- else -%}扫码下载 App{%- endif -%}</span>
+  </div>
+  <div class="app-booking__stores">
+    <a class="app-booking__store" href="{{ ios_url }}" target="_blank" rel="noopener">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.9 1.15 9.15.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.77-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.67ZM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28Z"/></svg>
+      <span><small>{%- if is_en -%}Download on the{%- else -%}iPhone 下载{%- endif -%}</small>App Store</span>
+    </a>
+    <a class="app-booking__store" href="{{ android_url }}" target="_blank" rel="noopener">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path fill="#00d7fe" d="M3.6 2.2c-.3.3-.4.7-.4 1.2v17.2c0 .5.1.9.4 1.2l.1.1 9.6-9.6v-.6L3.7 2.1l-.1.1Z"/><path fill="#ffce00" d="m16.5 15.5-3.2-3.2v-.6l3.2-3.2.1.1 3.8 2.2c1.1.6 1.1 1.6 0 2.3l-3.8 2.2-.1.2Z"/><path fill="#ff3a44" d="m16.6 15.4-3.3-3.3-9.7 9.7c.4.4 1 .4 1.7.1l11.3-6.5"/><path fill="#00f076" d="M16.6 8.6 5.3 2.2c-.7-.4-1.3-.3-1.7.1l9.7 9.7 3.3-3.4Z"/></svg>
+      <span><small>{%- if is_en -%}Get it on{%- else -%}安卓下载{%- endif -%}</small>Google Play</span>
+    </a>
+  </div>
+</div>
+<style>
+  .app-booking {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem 2rem;
+    align-items: center;
+    margin: 1.5rem 0 0.5rem;
+    padding: 2rem;
+    border-radius: 1.2rem;
+    background: rgba(var(--color-foreground), 0.04);
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  .app-booking__text { flex: 1; min-width: 0; }
+  .app-booking__title {
+    margin: 0 0 0.6rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .app-booking__body {
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+  .app-booking__stores {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .app-booking__store {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    min-height: 5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 1rem;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.1;
+    transition: background 0.15s;
+  }
+  .app-booking__store:hover { background: #333; }
+  .app-booking__store span { display: flex; flex-direction: column; text-align: left; white-space: nowrap; }
+  .app-booking__store small { font-size: 1.05rem; font-weight: 400; opacity: 0.85; }
+  .app-booking__qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+  .app-booking__qr img {
+    width: 9.6rem;
+    height: 9.6rem;
+    padding: 0.6rem;
+    background: #fff;
+    border-radius: 0.8rem;
+  }
+  /* Seats are sold in the app, so Shopify's own stock status is meaningless here. */
+  .product__info-container .price__badge-sold-out,
+  .product__info-container .price--sold-out .price__badge-sold-out {
+    display: none;
+  }
+  @media screen and (max-width: 749px) {
+    .app-booking { padding: 1.6rem; }
+    .app-booking__qr { display: none; }
+    .app-booking__store { padding: 0.6rem 0.8rem; gap: 0.6rem; font-size: 1.5rem; }
+  }
+</style>
